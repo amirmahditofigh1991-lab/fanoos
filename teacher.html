@@ -1,0 +1,3162 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>میز اساتید | فانوس یادگاری</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="config.js"></script>
+  <style>
+    :root {
+      --bg-deep: #060b16;
+      --bg-main: #0b1324;
+      --bg-card: #111c33;
+      --bg-card-elevated: #162442;
+      --bg-input: #0a1120;
+      --border-subtle: rgba(148, 163, 184, 0.14);
+      --border-focus: rgba(45, 212, 191, 0.55);
+      --gold: #eab308;
+      --gold-soft: #fde047;
+      --gold-dim: rgba(234, 179, 8, 0.14);
+      --teal: #14b8a6;
+      --teal-bright: #2dd4bf;
+      --teal-dim: rgba(20, 184, 166, 0.14);
+      --cyan: #06b6d4;
+      --rose: #f43f5e;
+      --rose-dim: rgba(244, 63, 94, 0.14);
+      --emerald: #10b981;
+      --emerald-dim: rgba(16, 185, 129, 0.15);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-card: 0 12px 32px rgba(2, 6, 23, 0.45);
+      --shadow-glow-gold: 0 0 24px rgba(234, 179, 8, 0.18);
+      --shadow-glow-teal: 0 0 24px rgba(20, 184, 166, 0.18);
+      --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 85% -10%, rgba(20, 184, 166, 0.12), transparent 60%),
+        radial-gradient(ellipse 70% 45% at 15% 0%, rgba(234, 179, 8, 0.09), transparent 55%),
+        linear-gradient(180deg, #070d1a 0%, #0b1324 55%, #060b16 100%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 14px 48px;
+    }
+
+    @media (min-width: 640px) {
+      .app-shell {
+        padding: 24px 22px 64px;
+      }
+    }
+
+    /* Brand Topbar (Auth View) */
+    .brand-hero {
+      text-align: center;
+      margin: 12px auto 26px;
+      max-width: 560px;
+    }
+
+    .brand-emblem {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(20, 184, 166, 0.18));
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-glow-gold);
+    }
+
+    .brand-hero h1 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      background: linear-gradient(90deg, var(--gold-soft), #fff 50%, var(--teal-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .brand-hero p {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    /* Card Surface */
+    .card {
+      background: linear-gradient(180deg, rgba(22, 36, 66, 0.72), rgba(17, 28, 51, 0.92));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 20px 16px;
+    }
+
+    @media (min-width: 640px) {
+      .card {
+        padding: 26px 26px;
+      }
+    }
+
+    .auth-container {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Segmented Tabs */
+    .segmented-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 5px;
+      margin-bottom: 22px;
+    }
+
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 11px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .seg-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .seg-btn.active {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(20, 184, 166, 0.22));
+      color: #fff;
+      border: 1px solid rgba(234, 179, 8, 0.32);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Form Controls */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .form-grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field label {
+      font-size: 0.87rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .field-hint {
+      font-size: 0.77rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .input, .select, .textarea {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      font-size: 0.94rem;
+      color: var(--text-primary);
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .input:focus, .select:focus, .textarea:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.16);
+    }
+
+    .input::placeholder, .textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    .input-ltr {
+      direction: ltr;
+      text-align: left;
+      font-family: ui-monospace, 'Vazirmatn', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    .textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.85;
+    }
+
+    .select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 12px center;
+      padding-left: 36px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      padding: 11px 18px;
+      font-size: 0.93rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d97706, #eab308);
+      color: #0b1324;
+      box-shadow: 0 6px 20px rgba(234, 179, 8, 0.25);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-teal {
+      background: linear-gradient(135deg, #0d9488, #06b6d4);
+      color: #04101c;
+      box-shadow: 0 6px 20px rgba(20, 184, 166, 0.25);
+    }
+
+    .btn-teal:hover:not(:disabled) {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: rgba(148, 163, 184, 0.08);
+      border-color: var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .btn-ghost:hover:not(:disabled) {
+      background: rgba(148, 163, 184, 0.16);
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    .btn-danger {
+      background: var(--rose-dim);
+      border-color: rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: rgba(244, 63, 94, 0.24);
+      color: #fff;
+    }
+
+    .btn-sm {
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      border-radius: 8px;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Success Card after Class Creation */
+    .congrats-card {
+      text-align: center;
+      border: 1px solid rgba(20, 184, 166, 0.4);
+      background: linear-gradient(160deg, rgba(20, 184, 166, 0.14), rgba(17, 28, 51, 0.96) 55%, rgba(234, 179, 8, 0.1));
+    }
+
+    .congrats-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: var(--teal-dim);
+      border: 1px solid rgba(45, 212, 191, 0.45);
+      color: var(--teal-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .congrats-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--gold-soft);
+      margin-bottom: 6px;
+    }
+
+    .info-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-top: 14px;
+      text-align: right;
+    }
+
+    .info-box-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+    }
+
+    .code-display {
+      font-family: ui-monospace, 'Vazirmatn', monospace;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--gold-soft);
+      letter-spacing: 0.08em;
+      direction: ltr;
+      text-align: center;
+      padding: 6px 0;
+    }
+
+    .link-display {
+      font-family: ui-monospace, sans-serif;
+      font-size: 0.82rem;
+      color: var(--teal-bright);
+      direction: ltr;
+      text-align: left;
+      word-break: break-all;
+      background: rgba(6, 182, 212, 0.07);
+      padding: 9px 11px;
+      border-radius: 8px;
+      border: 1px dashed rgba(45, 212, 191, 0.3);
+    }
+
+    .congrats-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    @media (min-width: 480px) {
+      .congrats-actions {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Dashboard Header */
+    .dash-header {
+      background: linear-gradient(135deg, rgba(22, 36, 66, 0.9), rgba(12, 20, 38, 0.96));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .dash-header {
+        padding: 20px 24px;
+      }
+    }
+
+    .dash-header-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .dash-title-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dash-class-name {
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .badge-gold {
+      background: var(--gold-dim);
+      border: 1px solid rgba(234, 179, 8, 0.4);
+      color: var(--gold-soft);
+    }
+
+    .badge-teal {
+      background: var(--teal-dim);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      color: var(--teal-bright);
+    }
+
+    .badge-rose {
+      background: var(--rose-dim);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      color: #fda4af;
+    }
+
+    .badge-slate {
+      background: rgba(148, 163, 184, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      color: #cbd5e1;
+    }
+
+    .badge-master {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(245, 158, 11, 0.12));
+      border: 1px solid rgba(250, 204, 21, 0.55);
+      color: #fef08a;
+      box-shadow: 0 0 14px rgba(234, 179, 8, 0.2);
+    }
+
+    .dash-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dash-link-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(6, 11, 22, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+    }
+
+    .dash-link-info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .dash-link-url {
+      font-family: ui-monospace, sans-serif;
+      font-size: 0.82rem;
+      color: var(--teal-bright);
+      direction: ltr;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    /* Main 4-Tab Navigation */
+    .panel-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px 10px;
+      margin-bottom: 14px;
+      scrollbar-width: none;
+    }
+
+    .panel-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-tab {
+      flex: 1 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(17, 28, 51, 0.78);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-tab:hover {
+      color: #fff;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    .nav-tab.active {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(234, 179, 8, 0.16));
+      border-color: rgba(45, 212, 191, 0.5);
+      color: #fff;
+      box-shadow: var(--shadow-glow-teal);
+    }
+
+    /* Toolbar inside Tabs */
+    .tab-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .toolbar-select-wrap {
+      flex: 1 1 240px;
+      max-width: 380px;
+    }
+
+    .toolbar-search-wrap {
+      flex: 1 1 200px;
+      max-width: 300px;
+    }
+
+    /* Summary Stat Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+    }
+
+    .stat-card {
+      background: rgba(10, 17, 32, 0.72);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .stat-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .stat-value.gold { color: var(--gold-soft); }
+    .stat-value.teal { color: var(--teal-bright); }
+    .stat-value.rose { color: #fb7185; }
+
+    .stat-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Student Progress Cards / Rows */
+    .student-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .student-row {
+      background: rgba(10, 17, 32, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      transition: var(--transition);
+    }
+
+    .student-row:hover {
+      border-color: rgba(45, 212, 191, 0.28);
+      background: rgba(15, 25, 46, 0.82);
+    }
+
+    @media (min-width: 820px) {
+      .student-row {
+        grid-template-columns: minmax(170px, 1.3fr) minmax(180px, 1.4fr) auto;
+        align-items: center;
+      }
+    }
+
+    .student-identity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .student-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.22), rgba(234, 179, 8, 0.15));
+      border: 1px solid rgba(45, 212, 191, 0.25);
+      color: var(--teal-bright);
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .student-avatar.guest {
+      background: var(--rose-dim);
+      border-color: rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+    }
+
+    .student-name-wrap {
+      min-width: 0;
+    }
+
+    .student-name {
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: #f8fafc;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .student-last-seen {
+      font-size: 0.77rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .progress-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.12);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      transition: width 0.5s ease;
+    }
+
+    .student-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      justify-content: flex-start;
+    }
+
+    @media (min-width: 820px) {
+      .student-metrics {
+        justify-content: flex-end;
+      }
+    }
+
+    .metric-pill {
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9px;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .metric-pill strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Section Headings inside Tabs */
+    .section-title {
+      font-size: 1.04rem;
+      font-weight: 800;
+      color: var(--gold-soft);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 24px 0;
+    }
+
+    /* Mistake Bar Chart */
+    .chart-box {
+      background: rgba(10, 17, 32, 0.72);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 14px 14px;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 210px;
+      padding-top: 26px;
+      overflow-x: auto;
+    }
+
+    @media (min-width: 640px) {
+      .bar-chart {
+        gap: 12px;
+        height: 230px;
+      }
+    }
+
+    .bar-col {
+      flex: 1 0 42px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .bar-track {
+      width: 100%;
+      max-width: 44px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      background: rgba(148, 163, 184, 0.06);
+      border-radius: 10px 10px 4px 4px;
+      position: relative;
+      padding-top: 4px;
+    }
+
+    .bar-fill {
+      width: 100%;
+      border-radius: 8px 8px 3px 3px;
+      transition: height 0.45s ease;
+      min-height: 4px;
+      position: relative;
+    }
+
+    .bar-fill.low {
+      background: linear-gradient(180deg, #2dd4bf, #0d9488);
+    }
+
+    .bar-fill.mid {
+      background: linear-gradient(180deg, #facc15, #d97706);
+    }
+
+    .bar-fill.high {
+      background: linear-gradient(180deg, #fb7185, #e11d48);
+      box-shadow: 0 0 16px rgba(244, 63, 94, 0.35);
+    }
+
+    .bar-fill.zero {
+      background: rgba(148, 163, 184, 0.18);
+      height: 4px !important;
+    }
+
+    .bar-count {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+
+    .bar-count.muted {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .bar-label {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .analytics-two-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 860px) {
+      .analytics-two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .sub-panel {
+      background: rgba(10, 17, 32, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .rank-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.09);
+    }
+
+    .rank-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .rank-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--rose-dim);
+      color: #fda4af;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Teacher Answers Summary */
+    .ta-card {
+      background: rgba(17, 28, 51, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .ta-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .ta-q-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 6px;
+    }
+
+    .ta-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.79rem;
+      margin-bottom: 8px;
+    }
+
+    .ta-students-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .ta-chip {
+      font-size: 0.74rem;
+      padding: 3px 8px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+    }
+
+    .ta-chip.ok {
+      background: var(--emerald-dim);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+    }
+
+    .ta-chip.bad {
+      background: var(--rose-dim);
+      border-color: rgba(244, 63, 94, 0.35);
+      color: #fda4af;
+    }
+
+    /* Question Chest Form & List */
+    .options-editor {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .options-editor {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      transition: var(--transition);
+    }
+
+    .option-row.is-correct {
+      border-color: rgba(16, 185, 129, 0.65);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .option-radio {
+      accent-color: var(--emerald);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .option-row input[type="text"] {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      padding: 5px 2px;
+    }
+
+    .question-item {
+      background: rgba(10, 17, 32, 0.68);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .question-item-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .question-text {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 12px;
+    }
+
+    .question-opts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 7px;
+    }
+
+    @media (min-width: 580px) {
+      .question-opts-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .q-opt {
+      font-size: 0.85rem;
+      padding: 8px 11px;
+      border-radius: 9px;
+      background: rgba(148, 163, 184, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .q-opt.correct {
+      background: var(--emerald-dim);
+      border-color: rgba(16, 185, 129, 0.45);
+      color: #a7f3d0;
+      font-weight: 700;
+    }
+
+    /* Settings Roster & Switches */
+    .roster-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 360px;
+      overflow-y: auto;
+      padding-left: 4px;
+    }
+
+    .roster-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+    }
+
+    .roster-idx {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      min-width: 24px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .roster-item input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      padding: 4px;
+    }
+
+    .roster-add-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .games-toggle-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .games-toggle-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .game-toggle-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 13px 15px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .game-toggle-card:hover {
+      border-color: rgba(45, 212, 191, 0.35);
+    }
+
+    .game-toggle-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .game-toggle-name {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #f8fafc;
+    }
+
+    .game-toggle-desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(148, 163, 184, 0.25);
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      right: 3px;
+      bottom: 3px;
+      background-color: #fff;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .switch input:checked + .slider {
+      background: linear-gradient(135deg, var(--teal), var(--cyan));
+    }
+
+    .switch input:checked + .slider::before {
+      transform: translateX(-20px);
+    }
+
+    /* Empty States */
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--text-secondary);
+      border: 1px dashed rgba(148, 163, 184, 0.2);
+      border-radius: var(--radius-md);
+      background: rgba(10, 17, 32, 0.35);
+    }
+
+    .empty-state p {
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    /* Toast Notifications */
+    .toast-stack {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: calc(100% - 28px);
+      max-width: 420px;
+      pointer-events: none;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background: #0f1b33;
+      border: 1px solid rgba(45, 212, 191, 0.45);
+      color: #f8fafc;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastIn 0.25s ease forwards;
+    }
+
+    .toast.error {
+      border-color: rgba(244, 63, 94, 0.6);
+      background: #23111c;
+      color: #fecdd3;
+    }
+
+    .toast.success {
+      border-color: rgba(16, 185, 129, 0.55);
+      background: #0c2320;
+      color: #d1fae5;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Confirm Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.76);
+      backdrop-filter: blur(6px);
+      z-index: 9990;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 400px;
+      background: var(--bg-card);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .modal-body {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+      line-height: 1.75;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 17px;
+      height: 17px;
+      border: 2.5px solid rgba(255, 255, 255, 0.25);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .spin-icon {
+      animation: spin 0.85s linear infinite;
+    }
+
+    .inline-alert {
+      background: rgba(234, 179, 8, 0.1);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      color: #fef08a;
+      border-radius: var(--radius-md);
+      padding: 11px 14px;
+      font-size: 0.84rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- ==================== AUTH VIEW ==================== -->
+    <section id="authView">
+      <header class="brand-hero">
+        <div class="brand-emblem" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18h6"/>
+            <path d="M10 22h4"/>
+            <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+          </svg>
+        </div>
+        <h1 id="platformHeading">میز اساتید فانوس یادگاری</h1>
+        <p>مدیریت هوشمند کلاس‌ها، پایش پیشرفت دانش‌آموزان و تحلیل خطاهای یادگیری</p>
+      </header>
+
+      <div class="auth-container">
+        <div id="authCard" class="card">
+          <div class="segmented-tabs" role="tablist">
+            <button type="button" class="seg-btn active" id="authTabLoginBtn" data-auth-tab="login" role="tab" aria-selected="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              ورود به پنل کلاس من
+            </button>
+            <button type="button" class="seg-btn" id="authTabCreateBtn" data-auth-tab="create" role="tab" aria-selected="false">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              ساخت کلاس جدید
+            </button>
+          </div>
+
+          <!-- Login Form -->
+          <form id="loginForm" class="form-grid" novalidate>
+            <div class="field">
+              <label for="loginClassId">کد کلاس</label>
+              <input id="loginClassId" class="input input-ltr" type="text" placeholder="مثلاً CLS-4821" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="loginPin">
+                <span>رمز اختصاصی معلم</span>
+                <span class="field-hint">پشتیبانی از اعداد فارسی و انگلیسی</span>
+              </label>
+              <input id="loginPin" class="input input-ltr" type="password" inputmode="numeric" placeholder="••••" autocomplete="current-password" required>
+            </div>
+            <button type="submit" id="loginSubmitBtn" class="btn btn-teal btn-block">
+              <span>ورود به میز اساتید</span>
+            </button>
+          </form>
+
+          <!-- Create Class Form -->
+          <form id="createForm" class="form-grid hidden" novalidate>
+            <div class="form-grid form-grid-2">
+              <div class="field">
+                <label for="createInviteCode">کد دعوت اساتید</label>
+                <input id="createInviteCode" class="input input-ltr" type="text" placeholder="کد دعوت معتبر" autocomplete="off" required>
+              </div>
+              <div class="field">
+                <label for="createClassName">نام کلاس</label>
+                <input id="createClassName" class="input" type="text" placeholder="مثلاً هفتم ب - دبیرستان علامه" required>
+              </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+              <div class="field">
+                <label for="createAgeGroup">رده سنی دانش‌آموزان</label>
+                <select id="createAgeGroup" class="select">
+                  <option value="12-13">۱۲ تا ۱۳ سال (ششم و هفتم)</option>
+                  <option value="14-15">۱۴ تا ۱۵ سال (هشتم و نهم)</option>
+                  <option value="12-15" selected>۱۲ تا ۱۵ سال (ترکیبی)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="createTeacherPin">
+                  <span>رمز اختصاصی معلم</span>
+                  <span class="field-hint">حداقل ۴ رقم</span>
+                </label>
+                <input id="createTeacherPin" class="input input-ltr" type="password" inputmode="numeric" placeholder="حداقل ۴ رقم" autocomplete="new-password" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="createStudents">
+                <span>اسامی دانش‌آموزان کلاس</span>
+                <span class="field-hint">هر نام در یک خط جداگانه</span>
+              </label>
+              <textarea id="createStudents" class="textarea" placeholder="امیرعلی رضایی&#10;پارسا محمدی&#10;زهرا کریمی&#10;نازنین احمدی"></textarea>
+            </div>
+
+            <button type="submit" id="createSubmitBtn" class="btn btn-primary btn-block">
+              <span>ساخت کلاس و دریافت لینک اختصاصی</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Congratulation Card after Creation -->
+        <div id="congratsCard" class="card congrats-card hidden">
+          <div class="congrats-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 class="congrats-title">کلاس شما با موفقیت ساخته شد!</h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">لینک اختصاصی زیر را در گروه کلاس برای دانش‌آموزان ارسال کنید.</p>
+
+          <div class="info-box">
+            <div class="info-box-label">کد کلاس</div>
+            <div id="createdClassIdDisplay" class="code-display"></div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-label">لینک اختصاصی دانش‌آموزان</div>
+            <div id="createdStudentLinkDisplay" class="link-display"></div>
+          </div>
+
+          <div class="congrats-actions">
+            <button type="button" id="copyCreatedLinkBtn" class="btn btn-ghost">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              کپی لینک دانش‌آموزان
+            </button>
+            <button type="button" id="enterCreatedPanelBtn" class="btn btn-teal">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              ورود مستقیم به پنل
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== DASHBOARD VIEW ==================== -->
+    <section id="dashboardView" class="hidden">
+      <header class="dash-header">
+        <div class="dash-header-top">
+          <div class="dash-title-group">
+            <h1 id="headerClassName" class="dash-class-name">—</h1>
+            <span id="headerClassCode" class="badge badge-gold" style="direction: ltr;"></span>
+            <span id="headerAgeBadge" class="badge badge-slate"></span>
+            <span id="masterBadge" class="badge badge-master hidden">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              دسترسی مدیر مرجع
+            </span>
+          </div>
+
+          <div class="dash-actions">
+            <button type="button" id="refreshLiveBtn" class="btn btn-ghost btn-sm">
+              <svg id="refreshIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              بروزرسانی زنده
+            </button>
+            <button type="button" id="logoutBtn" class="btn btn-danger btn-sm">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              خروج
+            </button>
+          </div>
+        </div>
+
+        <div class="dash-link-bar">
+          <div class="dash-link-info">
+            <span class="badge badge-teal">لینک دانش‌آموزان</span>
+            <span id="headerStudentLink" class="dash-link-url"></span>
+          </div>
+          <button type="button" id="copyHeaderLinkBtn" class="btn btn-teal btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            کپی سریع لینک
+          </button>
+        </div>
+      </header>
+
+      <!-- 4 Dashboard Tabs -->
+      <nav class="panel-nav" role="tablist">
+        <button type="button" class="nav-tab active" data-panel-tab="progress" role="tab">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          تابلوی پیشرفت کلاس
+        </button>
+        <button type="button" class="nav-tab" data-panel-tab="radar" role="tab">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          رادار اشتباهات و آنالیز
+        </button>
+        <button type="button" class="nav-tab" data-panel-tab="questions" role="tab">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          صندوقچه سوال استاد
+        </button>
+        <button type="button" class="nav-tab" data-panel-tab="settings" role="tab">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          تنظیمات کلاس
+        </button>
+      </nav>
+
+      <!-- TAB 1: PROGRESS -->
+      <div id="tab-progress" class="card">
+        <div class="tab-toolbar">
+          <div class="field toolbar-select-wrap">
+            <label for="progressGameSelect">انتخاب بازی</label>
+            <select id="progressGameSelect" class="select"></select>
+          </div>
+          <div class="field toolbar-search-wrap">
+            <label for="progressSearchInput">جستجوی دانش‌آموز</label>
+            <input id="progressSearchInput" class="input" type="search" placeholder="نام دانش‌آموز...">
+          </div>
+        </div>
+
+        <div id="progressStats" class="stats-grid"></div>
+        <div id="progressStudentList" class="student-list"></div>
+      </div>
+
+      <!-- TAB 2: MISTAKE RADAR & ANALYTICS -->
+      <div id="tab-radar" class="card hidden">
+        <div class="tab-toolbar">
+          <div class="field toolbar-select-wrap">
+            <label for="radarGameSelect">انتخاب بازی برای تحلیل</label>
+            <select id="radarGameSelect" class="select"></select>
+          </div>
+          <div id="radarTopInsight" class="badge badge-gold" style="padding: 8px 13px; font-size: 0.82rem;"></div>
+        </div>
+
+        <h3 class="section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          توزیع خطاهای کلاس در ایستگاه‌های بازی
+        </h3>
+        <div class="chart-box">
+          <div id="mistakeBarChart" class="bar-chart"></div>
+        </div>
+
+        <div class="analytics-two-col">
+          <div class="sub-panel">
+            <h3 class="section-title" style="color: #fda4af;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              دانش‌آموزان با بیشترین خطا
+            </h3>
+            <div id="topMistakeStudents"></div>
+          </div>
+
+          <div class="sub-panel">
+            <h3 class="section-title" style="color: var(--teal-bright);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              خلاصه پاسخ‌ها به سوالات اختصاصی استاد
+            </h3>
+            <div id="teacherAnswersSummary"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: TEACHER QUESTION CHEST -->
+      <div id="tab-questions" class="card hidden">
+        <h3 class="section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          افزودن سوال چهارگزینه‌ای جدید
+        </h3>
+
+        <form id="questionForm" class="form-grid" novalidate>
+          <div class="form-grid form-grid-2">
+            <div class="field">
+              <label for="qGameSelect">بازی هدف</label>
+              <select id="qGameSelect" class="select"></select>
+            </div>
+            <div class="field">
+              <label for="qStationSelect">شماره ایستگاه</label>
+              <select id="qStationSelect" class="select"></select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="qText">متن سوال</label>
+            <textarea id="qText" class="textarea" style="min-height: 82px;" placeholder="سوال آموزشی خود را برای این ایستگاه بنویسید..." required></textarea>
+          </div>
+
+          <div class="field">
+            <label>
+              <span>گزینه‌ها</span>
+              <span class="field-hint">دایره کنار گزینه صحیح را انتخاب کنید</span>
+            </label>
+            <div class="options-editor" id="optionsEditor">
+              <label class="option-row is-correct" data-opt-wrap="0">
+                <input type="radio" class="option-radio" name="correctOption" value="0" checked>
+                <input type="text" id="qOpt0" placeholder="گزینه اول" required>
+              </label>
+              <label class="option-row" data-opt-wrap="1">
+                <input type="radio" class="option-radio" name="correctOption" value="1">
+                <input type="text" id="qOpt1" placeholder="گزینه دوم" required>
+              </label>
+              <label class="option-row" data-opt-wrap="2">
+                <input type="radio" class="option-radio" name="correctOption" value="2">
+                <input type="text" id="qOpt2" placeholder="گزینه سوم" required>
+              </label>
+              <label class="option-row" data-opt-wrap="3">
+                <input type="radio" class="option-radio" name="correctOption" value="3">
+                <input type="text" id="qOpt3" placeholder="گزینه چهارم" required>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" id="saveQuestionBtn" class="btn btn-primary">
+              <span>ثبت سوال در صندوقچه کلاس</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="section-divider"></div>
+
+        <div class="tab-toolbar" style="margin-bottom: 14px;">
+          <h3 class="section-title" style="margin-bottom: 0;">سوالات ثبت‌شده کلاس</h3>
+          <div style="min-width: 200px;">
+            <select id="qFilterGameSelect" class="select"></select>
+          </div>
+        </div>
+        <div id="questionsList"></div>
+      </div>
+
+      <!-- TAB 4: CLASS SETTINGS -->
+      <div id="tab-settings" class="card hidden">
+        <form id="settingsForm" class="form-grid" novalidate>
+          <div class="form-grid form-grid-2">
+            <div class="field">
+              <label for="setClassName">نام کلاس</label>
+              <input id="setClassName" class="input" type="text" required>
+            </div>
+            <div class="field">
+              <label for="setAgeGroup">رده سنی</label>
+              <select id="setAgeGroup" class="select">
+                <option value="12-13">۱۲ تا ۱۳ سال (ششم و هفتم)</option>
+                <option value="14-15">۱۴ تا ۱۵ سال (هشتم و نهم)</option>
+                <option value="12-15">۱۲ تا ۱۵ سال (ترکیبی)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="section-divider" style="margin: 8px 0;"></div>
+
+          <div class="field">
+            <label>
+              <span>فهرست رسمی دانش‌آموزان کلاس</span>
+              <span id="rosterCountBadge" class="badge badge-teal">۰ نفر</span>
+            </label>
+            <div id="settingsRosterList" class="roster-list"></div>
+            <div class="roster-add-row">
+              <input id="newStudentInput" class="input" type="text" placeholder="نام دانش‌آموز جدید را وارد کنید...">
+              <button type="button" id="addStudentBtn" class="btn btn-teal">افزودن</button>
+            </div>
+          </div>
+
+          <div class="section-divider" style="margin: 8px 0;"></div>
+
+          <div class="field">
+            <label>
+              <span>مدیریت بازی‌های فعال کلاس</span>
+              <span class="field-hint">نمایش یا مخفی کردن هر بازی برای دانش‌آموزان این کلاس</span>
+            </label>
+            <div id="enabledGamesGrid" class="games-toggle-grid"></div>
+          </div>
+
+          <div class="section-divider" style="margin: 8px 0;"></div>
+
+          <div class="field" style="max-width: 360px;">
+            <label for="setNewPin">
+              <span>تغییر رمز اختصاصی معلم (اختیاری)</span>
+              <span class="field-hint">حداقل ۴ رقم</span>
+            </label>
+            <input id="setNewPin" class="input input-ltr" type="password" inputmode="numeric" placeholder="در صورت عدم تغییر خالی بگذارید" autocomplete="new-password">
+          </div>
+
+          <div style="margin-top: 6px;">
+            <button type="submit" id="saveSettingsBtn" class="btn btn-primary">
+              <span>ذخیره تنظیمات کلاس</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast Stack -->
+  <div id="toastStack" class="toast-stack" aria-live="polite"></div>
+
+  <!-- Confirm Modal -->
+  <div id="confirmModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <h3 id="confirmTitle" class="modal-title">تایید عملیات</h3>
+      <p id="confirmMessage" class="modal-body"></p>
+      <div class="modal-actions">
+        <button type="button" id="confirmCancelBtn" class="btn btn-ghost btn-sm">انصراف</button>
+        <button type="button" id="confirmOkBtn" class="btn btn-danger btn-sm">تایید و حذف</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const SESSION_KEY = 'fanoos_teacher_session_v1';
+
+      const FA_DIGITS = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+      function toFaNum(val) {
+        if (val === null || val === undefined) return '۰';
+        return String(val).replace(/\d/g, d => FA_DIGITS[Number(d)]);
+      }
+
+      function toEnNum(val) {
+        if (val === null || val === undefined) return '';
+        return String(val)
+          .replace(/[۰-۹]/g, ch => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(ch)))
+          .replace(/[٠-٩]/g, ch => String('٠١٢٣٤٥٦٧٨٩'.indexOf(ch)));
+      }
+
+      function escapeHtml(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function getConfig() {
+        return window.FANOOS_CONFIG || {
+          apiUrl: '',
+          platformName: 'فانوس یادگاری',
+          games: []
+        };
+      }
+
+      function getGamesList() {
+        const raw = getConfig().games;
+        if (!raw) return [];
+        if (Array.isArray(raw)) {
+          return raw.map((g, idx) => {
+            if (typeof g === 'string') {
+              return { id: g, title: g, totalStations: 10, totalCards: 10, description: '' };
+            }
+            return {
+              id: String(g.id || g.gameId || g.slug || ('game_' + (idx + 1))),
+              title: String(g.title || g.name || g.id || ('بازی ' + toFaNum(idx + 1))),
+              totalStations: Number(g.totalStations || g.stationsCount || g.stations || 10),
+              totalCards: Number(g.totalCards || g.cardsCount || g.cards || 10),
+              description: String(g.description || g.subtitle || '')
+            };
+          });
+        }
+        if (typeof raw === 'object') {
+          return Object.keys(raw).map(key => {
+            const g = raw[key] || {};
+            return {
+              id: String(g.id || key),
+              title: String(g.title || g.name || key),
+              totalStations: Number(g.totalStations || g.stationsCount || g.stations || 10),
+              totalCards: Number(g.totalCards || g.cardsCount || g.cards || 10),
+              description: String(g.description || g.subtitle || '')
+            };
+          });
+        }
+        return [];
+      }
+
+      function getGameById(gameId) {
+        return getGamesList().find(g => g.id === gameId) || {
+          id: gameId,
+          title: gameId || 'بازی',
+          totalStations: 10,
+          totalCards: 10,
+          description: ''
+        };
+      }
+
+      function getAgeGroupLabel(code) {
+        if (code === '12-13') return 'ششم و هفتم (۱۲ تا ۱۳ سال)';
+        if (code === '14-15') return 'هشتم و نهم (۱۴ تا ۱۵ سال)';
+        return 'ترکیبی (۱۲ تا ۱۵ سال)';
+      }
+
+      function buildStudentLink(classId) {
+        return new URL('./?class=' + encodeURIComponent(classId), window.location.href).href;
+      }
+
+      function safeJsonParse(val, fallback) {
+        if (val && typeof val === 'object') return val;
+        if (typeof val !== 'string') return fallback;
+        try {
+          return JSON.parse(val);
+        } catch (_) {
+          return fallback;
+        }
+      }
+
+      function formatLastSeen(ts) {
+        if (!ts) return 'هنوز فعالیتی ثبت نشده';
+        let d;
+        if (typeof ts === 'number') {
+          d = new Date(ts < 1e12 ? ts * 1000 : ts);
+        } else {
+          d = new Date(ts);
+        }
+        if (isNaN(d.getTime())) return toFaNum(String(ts));
+        const diffSec = Math.floor((Date.now() - d.getTime()) / 1000);
+        if (diffSec >= 0 && diffSec < 60) return 'لحظاتی پیش';
+        if (diffSec >= 60 && diffSec < 3600) return toFaNum(Math.floor(diffSec / 60)) + ' دقیقه پیش';
+        if (diffSec >= 3600 && diffSec < 86400) return toFaNum(Math.floor(diffSec / 3600)) + ' ساعت پیش';
+        try {
+          const formatted = new Intl.DateTimeFormat('fa-IR', {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          }).format(d);
+          return toFaNum(formatted);
+        } catch (_) {
+          return toFaNum(d.toLocaleDateString());
+        }
+      }
+
+      /* -------------------- UI Feedback -------------------- */
+      function showToast(message, type = 'info') {
+        const stack = document.getElementById('toastStack');
+        const el = document.createElement('div');
+        el.className = 'toast ' + (type === 'error' ? 'error' : type === 'success' ? 'success' : '');
+        el.textContent = toFaNum(message);
+        stack.appendChild(el);
+        setTimeout(() => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(8px)';
+          el.style.transition = '0.25s ease';
+          setTimeout(() => el.remove(), 260);
+        }, 3600);
+      }
+
+      async function copyText(text, successMsg) {
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+          }
+          showToast(successMsg || 'با موفقیت کپی شد.', 'success');
+        } catch (_) {
+          showToast('کپی خودکار انجام نشد؛ لطفاً متن را دستی کپی کنید.', 'error');
+        }
+      }
+
+      let confirmResolver = null;
+      function askConfirm(title, message, okText = 'تایید و حذف') {
+        return new Promise(resolve => {
+          confirmResolver = resolve;
+          document.getElementById('confirmTitle').textContent = title;
+          document.getElementById('confirmMessage').textContent = message;
+          document.getElementById('confirmOkBtn').textContent = okText;
+          document.getElementById('confirmModal').classList.remove('hidden');
+        });
+      }
+
+      function closeConfirm(result) {
+        document.getElementById('confirmModal').classList.add('hidden');
+        if (confirmResolver) {
+          const fn = confirmResolver;
+          confirmResolver = null;
+          fn(result);
+        }
+      }
+
+      function setButtonLoading(btn, loading, idleHtml) {
+        if (loading) {
+          btn.dataset.idleHtml = btn.innerHTML;
+          btn.disabled = true;
+          btn.innerHTML = '<span class="spinner"></span><span>در حال پردازش...</span>';
+        } else {
+          btn.disabled = false;
+          btn.innerHTML = idleHtml || btn.dataset.idleHtml || btn.innerHTML;
+        }
+      }
+
+      /* -------------------- API Layer -------------------- */
+      async function apiPost(payload) {
+        const apiUrl = getConfig().apiUrl;
+        if (!apiUrl) {
+          throw new Error('نشانی سرور (apiUrl) در فایل config.js تعریف نشده است.');
+        }
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        if (!response.ok) {
+          throw new Error('خطا در پاسخ سرور (کد ' + toFaNum(response.status) + ')');
+        }
+        const rawText = await response.text();
+        let data;
+        try {
+          data = JSON.parse(rawText);
+        } catch (_) {
+          throw new Error('پاسخ دریافتی از سرور معتبر نیست.');
+        }
+        if (data && (data.ok === false || data.success === false || data.error)) {
+          throw new Error(data.error || data.message || 'درخواست با خطا مواجه شد.');
+        }
+        return data;
+      }
+
+      /* -------------------- App State -------------------- */
+      const appState = {
+        classId: '',
+        pin: '',
+        isMaster: false,
+        classInfo: {
+          classId: '',
+          className: '',
+          ageGroup: '12-15',
+          students: [],
+          enabledGames: []
+        },
+        progressRecords: [],
+        teacherQuestions: [],
+        selectedGameId: '',
+        activePanelTab: 'progress',
+        settingsRoster: [],
+        createdCache: null
+      };
+
+      function normalizeStudentsArray(raw) {
+        if (!Array.isArray(raw)) return [];
+        return raw
+          .map(item => {
+            if (typeof item === 'string') {
+              const name = item.trim();
+              return name ? { id: '', name } : null;
+            }
+            if (item && typeof item === 'object') {
+              const name = String(item.name || item.studentName || '').trim();
+              const id = String(item.id || item.studentId || '').trim();
+              return name ? { id, name } : null;
+            }
+            return null;
+          })
+          .filter(Boolean);
+      }
+
+      function normalizeProgressRecords(raw, defaultGameId) {
+        const list = [];
+        if (!raw) return list;
+
+        const pushItem = (rec, fallbackGameId, fallbackStudentId) => {
+          if (!rec || typeof rec !== 'object') return;
+          const parsedState = safeJsonParse(rec.state ?? rec.progressState ?? rec.data, {});
+          const gameId = String(rec.gameId || rec.game || parsedState.gameId || fallbackGameId || defaultGameId || '');
+          const studentId = String(rec.studentId || rec.playerId || rec.id || fallbackStudentId || '').trim();
+          const studentName = String(rec.studentName || rec.playerName || rec.name || parsedState.studentName || '').trim();
+          const updatedAt = rec.updatedAt || rec.lastActive || rec.lastSeen || rec.timestamp || parsedState.updatedAt || '';
+          const isGuestFlag = rec.isGuest === true || rec.guest === true;
+
+          list.push({
+            studentId,
+            studentName,
+            gameId,
+            updatedAt,
+            isGuestFlag,
+            state: (parsedState && typeof parsedState === 'object') ? parsedState : {},
+            raw: rec
+          });
+        };
+
+        if (Array.isArray(raw)) {
+          raw.forEach(item => pushItem(item, '', ''));
+        } else if (typeof raw === 'object') {
+          Object.entries(raw).forEach(([k, v]) => {
+            if (Array.isArray(v)) {
+              v.forEach(item => pushItem(item, k, ''));
+            } else if (v && typeof v === 'object') {
+              if ('state' in v || 'studentName' in v || 'studentId' in v || 'completedStations' in v || 'mistakes' in v) {
+                pushItem(v, '', k);
+              } else {
+                Object.entries(v).forEach(([subK, subV]) => {
+                  if (subV && typeof subV === 'object') {
+                    pushItem(subV, k, subK);
+                  }
+                });
+              }
+            }
+          });
+        }
+        return list;
+      }
+
+      function normalizeQuestions(raw) {
+        if (!Array.isArray(raw)) return [];
+        return raw.map((q, idx) => {
+          const opts = Array.isArray(q.options)
+            ? q.options
+            : [q.option1 || q.opt1 || '', q.option2 || q.opt2 || '', q.option3 || q.opt3 || '', q.option4 || q.opt4 || ''];
+          return {
+            id: String(q.id || q.questionId || ('q_' + idx)),
+            gameId: String(q.gameId || q.game || ''),
+            station: Number(q.station || q.stationNumber || 1),
+            question: String(q.question || q.text || ''),
+            options: opts.map(o => String(o ?? '')),
+            correctIndex: Number(q.correctIndex ?? q.correct ?? q.answerIndex ?? 0)
+          };
+        });
+      }
+
+      function applyDashboardPayload(res) {
+        const root = (res && res.data && typeof res.data === 'object' && !Array.isArray(res.data)) ? res.data : (res || {});
+        const info = root.classInfo || root.classData || root.class || root;
+        const games = getGamesList();
+        const allGameIds = games.map(g => g.id);
+
+        appState.isMaster = Boolean(res.isMaster || root.isMaster || info.isMaster);
+
+        let enabledGames = info.enabledGames;
+        if (typeof enabledGames === 'string') {
+          enabledGames = safeJsonParse(enabledGames, null);
+        }
+        if (enabledGames && !Array.isArray(enabledGames) && typeof enabledGames === 'object') {
+          enabledGames = Object.keys(enabledGames).filter(k => Boolean(enabledGames[k]));
+        }
+        if (!Array.isArray(enabledGames)) {
+          enabledGames = allGameIds.slice();
+        }
+
+        const students = normalizeStudentsArray(info.students || root.students || res.students || []);
+
+        appState.classInfo = {
+          classId: String(info.classId || info.id || appState.classId),
+          className: String(info.className || info.name || 'کلاس بدون نام'),
+          ageGroup: String(info.ageGroup || '12-15'),
+          students,
+          enabledGames
+        };
+        appState.classId = appState.classInfo.classId;
+
+        const rawProgress = root.progress || root.records || root.players || root.states || root.studentProgress || res.progress || res.records || [];
+        const defaultGameId = allGameIds[0] || '';
+        appState.progressRecords = normalizeProgressRecords(rawProgress, defaultGameId);
+
+        const rawQuestions = root.teacherQuestions || root.questions || info.teacherQuestions || info.questions || res.teacherQuestions || res.questions || [];
+        appState.teacherQuestions = normalizeQuestions(rawQuestions);
+
+        if (!appState.selectedGameId || !allGameIds.includes(appState.selectedGameId)) {
+          appState.selectedGameId = allGameIds[0] || '';
+        }
+
+        appState.settingsRoster = appState.classInfo.students.map(s => ({ id: s.id, name: s.name }));
+      }
+
+      /* -------------------- Extract Metrics from Student State -------------------- */
+      function extractCompletedStationsCount(st) {
+        if (!st || typeof st !== 'object') return 0;
+        if (Array.isArray(st.completedStations)) return st.completedStations.length;
+        if (Array.isArray(st.solvedStations)) return st.solvedStations.length;
+        if (Array.isArray(st.completed)) return st.completed.length;
+        if (typeof st.completedStations === 'number') return st.completedStations;
+        if (typeof st.stationsCompleted === 'number') return st.stationsCompleted;
+        if (st.stations && typeof st.stations === 'object') {
+          return Object.values(st.stations).filter(v => v === true || (v && (v.completed || v.solved))).length;
+        }
+        if (typeof st.currentStation === 'number' && st.currentStation > 1) return st.currentStation - 1;
+        return 0;
+      }
+
+      function extractCardsCount(st) {
+        if (!st || typeof st !== 'object') return 0;
+        if (Array.isArray(st.cards)) return st.cards.length;
+        if (Array.isArray(st.collectedCards)) return st.collectedCards.length;
+        if (Array.isArray(st.unlockedCards)) return st.unlockedCards.length;
+        if (Array.isArray(st.relics)) return st.relics.length;
+        if (typeof st.cards === 'number') return st.cards;
+        if (typeof st.cardsCount === 'number') return st.cardsCount;
+        if (st.cards && typeof st.cards === 'object') return Object.keys(st.cards).length;
+        return 0;
+      }
+
+      function getGameProgressRows(gameId) {
+        const game = getGameById(gameId);
+        const totalStations = Math.max(1, game.totalStations || 10);
+        const officialStudents = appState.classInfo.students || [];
+
+        const gameRecords = appState.progressRecords.filter(r => !r.gameId || r.gameId === gameId);
+
+        const officialById = new Map();
+        const officialByName = new Map();
+        officialStudents.forEach(s => {
+          if (s.id) officialById.set(s.id, s);
+          if (s.name) officialByName.set(s.name.trim(), s);
+        });
+
+        const matchedRecordMap = new Map();
+        const guestRows = [];
+
+        gameRecords.forEach(rec => {
+          let official = null;
+          if (rec.studentId && officialById.has(rec.studentId)) {
+            official = officialById.get(rec.studentId);
+          } else if (rec.studentName && officialByName.has(rec.studentName.trim())) {
+            official = officialByName.get(rec.studentName.trim());
+          }
+
+          if (official && !rec.isGuestFlag) {
+            const key = official.id || official.name;
+            matchedRecordMap.set(key, rec);
+          } else {
+            const completed = extractCompletedStationsCount(rec.state);
+            const cards = extractCardsCount(rec.state);
+            const pct = Math.min(100, Math.round((completed / totalStations) * 100));
+            guestRows.push({
+              studentId: rec.studentId,
+              name: rec.studentName || rec.studentId || 'دانش‌آموز مهمان',
+              isGuest: true,
+              completed,
+              totalStations,
+              cards,
+              pct,
+              updatedAt: rec.updatedAt,
+              state: rec.state || {}
+            });
+          }
+        });
+
+        const officialRows = officialStudents.map(s => {
+          const key = s.id || s.name;
+          const rec = matchedRecordMap.get(key);
+          const st = rec ? rec.state : {};
+          const completed = extractCompletedStationsCount(st);
+          const cards = extractCardsCount(st);
+          const pct = Math.min(100, Math.round((completed / totalStations) * 100));
+          return {
+            studentId: s.id,
+            name: s.name,
+            isGuest: false,
+            completed,
+            totalStations,
+            cards,
+            pct,
+            updatedAt: rec ? rec.updatedAt : '',
+            state: st
+          };
+        });
+
+        return [...officialRows, ...guestRows];
+      }
+
+      /* -------------------- Renderers -------------------- */
+      function populateGameSelectors() {
+        const games = getGamesList();
+        const selects = [
+          document.getElementById('progressGameSelect'),
+          document.getElementById('radarGameSelect'),
+          document.getElementById('qGameSelect')
+        ];
+
+        selects.forEach(sel => {
+          const prev = sel.value;
+          sel.innerHTML = '';
+          if (games.length === 0) {
+            const opt = document.createElement('option');
+            opt.value = '';
+            opt.textContent = 'هیچ بازی در config.js تعریف نشده';
+            sel.appendChild(opt);
+            return;
+          }
+          games.forEach(g => {
+            const opt = document.createElement('option');
+            opt.value = g.id;
+            opt.textContent = g.title;
+            sel.appendChild(opt);
+          });
+          if (appState.selectedGameId && games.some(g => g.id === appState.selectedGameId)) {
+            sel.value = appState.selectedGameId;
+          } else if (prev && games.some(g => g.id === prev)) {
+            sel.value = prev;
+          }
+        });
+
+        const filterSel = document.getElementById('qFilterGameSelect');
+        const prevFilter = filterSel.value;
+        filterSel.innerHTML = '<option value="ALL">همه بازی‌ها</option>';
+        games.forEach(g => {
+          const opt = document.createElement('option');
+          opt.value = g.id;
+          opt.textContent = g.title;
+          filterSel.appendChild(opt);
+        });
+        if (prevFilter && (prevFilter === 'ALL' || games.some(g => g.id === prevFilter))) {
+          filterSel.value = prevFilter;
+        }
+      }
+
+      function renderHeader() {
+        document.getElementById('headerClassName').textContent = appState.classInfo.className;
+        document.getElementById('headerClassCode').textContent = 'کد: ' + appState.classInfo.classId;
+        document.getElementById('headerAgeBadge').textContent = getAgeGroupLabel(appState.classInfo.ageGroup);
+        document.getElementById('masterBadge').classList.toggle('hidden', !appState.isMaster);
+        document.getElementById('headerStudentLink').textContent = buildStudentLink(appState.classInfo.classId);
+      }
+
+      function renderProgressTab() {
+        const gameId = document.getElementById('progressGameSelect').value || appState.selectedGameId;
+        const query = (document.getElementById('progressSearchInput').value || '').trim().toLowerCase();
+        const rows = getGameProgressRows(gameId);
+
+        const totalStudents = rows.filter(r => !r.isGuest).length;
+        const guestCount = rows.filter(r => r.isGuest).length;
+        const activeCount = rows.filter(r => r.completed > 0 || r.cards > 0 || Boolean(r.updatedAt)).length;
+        const avgPct = rows.length ? Math.round(rows.reduce((sum, r) => sum + r.pct, 0) / rows.length) : 0;
+        const totalCards = rows.reduce((sum, r) => sum + r.cards, 0);
+
+        document.getElementById('progressStats').innerHTML = `
+          <div class="stat-card">
+            <span class="stat-label">دانش‌آموزان فعال</span>
+            <span class="stat-value teal">${toFaNum(activeCount)} <span style="font-size:0.88rem;color:var(--text-muted);font-weight:500;">از ${toFaNum(rows.length)}</span></span>
+            <span class="stat-sub">${toFaNum(totalStudents)} رسمی${guestCount ? ' + ' + toFaNum(guestCount) + ' مهمان' : ''}</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">میانگین پیشرفت کلاس</span>
+            <span class="stat-value gold">${toFaNum(avgPct)}٪</span>
+            <span class="stat-sub">در بازی انتخاب‌شده</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">مجموع کارت‌های کسب‌شده</span>
+            <span class="stat-value">${toFaNum(totalCards)}</span>
+            <span class="stat-sub">کارت یادگاری</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">دانش‌آموزان مهمان</span>
+            <span class="stat-value ${guestCount ? 'rose' : ''}">${toFaNum(guestCount)}</span>
+            <span class="stat-sub">خارج از لیست رسمی کلاس</span>
+          </div>
+        `;
+
+        const filtered = rows
+          .filter(r => !query || r.name.toLowerCase().includes(query))
+          .sort((a, b) => (b.pct - a.pct) || (b.cards - a.cards) || a.name.localeCompare(b.name, 'fa'));
+
+        const container = document.getElementById('progressStudentList');
+        if (!filtered.length) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <p>${query ? 'هیچ دانش‌آموزی با این نام یافت نشد.' : 'هنوز دانش‌آموزی برای این کلاس ثبت یا فعال نشده است.'}</p>
+            </div>`;
+          return;
+        }
+
+        container.innerHTML = filtered.map(r => {
+          const initial = (r.name || '؟').trim().charAt(0);
+          return `
+            <div class="student-row">
+              <div class="student-identity">
+                <div class="student-avatar ${r.isGuest ? 'guest' : ''}">${escapeHtml(initial)}</div>
+                <div class="student-name-wrap">
+                  <div class="student-name">
+                    <span>${escapeHtml(r.name)}</span>
+                    ${r.isGuest ? '<span class="badge badge-rose">مهمان</span>' : ''}
+                  </div>
+                  <div class="student-last-seen">آخرین فعالیت: ${escapeHtml(formatLastSeen(r.updatedAt))}</div>
+                </div>
+              </div>
+
+              <div class="progress-col">
+                <div class="progress-meta">
+                  <span>پیشرفت بازی</span>
+                  <strong style="color: var(--teal-bright);">${toFaNum(r.pct)}٪</strong>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-fill" style="width: ${r.pct}%;"></div>
+                </div>
+              </div>
+
+              <div class="student-metrics">
+                <span class="metric-pill">ایستگاه: <strong>${toFaNum(r.completed)} / ${toFaNum(r.totalStations)}</strong></span>
+                <span class="metric-pill">کارت: <strong>${toFaNum(r.cards)}</strong></span>
+                ${r.isGuest ? `
+                  <button type="button" class="btn btn-danger btn-sm delete-guest-btn"
+                    data-guest-id="${escapeHtml(r.studentId)}"
+                    data-guest-name="${escapeHtml(r.name)}"
+                    data-game-id="${escapeHtml(gameId)}">
+                    حذف
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderRadarTab() {
+        const gameId = document.getElementById('radarGameSelect').value || appState.selectedGameId;
+        const game = getGameById(gameId);
+        const totalStations = Math.max(10, game.totalStations || 10);
+        const rows = getGameProgressRows(gameId);
+
+        const stationMistakes = {};
+        for (let i = 1; i <= totalStations; i++) {
+          stationMistakes[String(i)] = 0;
+        }
+
+        const studentMistakeSummary = [];
+        const teacherAnswersAgg = new Map();
+
+        const gameQuestions = appState.teacherQuestions.filter(q => !q.gameId || q.gameId === gameId);
+        const questionById = new Map();
+        const questionByStation = new Map();
+        gameQuestions.forEach(q => {
+          questionById.set(q.id, q);
+          if (!questionByStation.has(String(q.station))) {
+            questionByStation.set(String(q.station), q);
+          }
+        });
+
+        rows.forEach(r => {
+          const st = r.state || {};
+          const mistakes = st.mistakes && typeof st.mistakes === 'object' ? st.mistakes : {};
+          let studentTotal = 0;
+          const studentHotStations = [];
+
+          Object.entries(mistakes).forEach(([k, v]) => {
+            const count = Number(v) || 0;
+            if (count <= 0) return;
+            const numMatch = toEnNum(k).match(/\d+/);
+            const stationKey = numMatch ? String(Number(numMatch[0])) : String(k);
+            stationMistakes[stationKey] = (stationMistakes[stationKey] || 0) + count;
+            studentTotal += count;
+            studentHotStations.push({ station: stationKey, count });
+          });
+
+          if (studentTotal > 0) {
+            studentHotStations.sort((a, b) => b.count - a.count);
+            studentMistakeSummary.push({
+              name: r.name,
+              isGuest: r.isGuest,
+              total: studentTotal,
+              topStations: studentHotStations.slice(0, 3)
+            });
+          }
+
+          // Parse state.teacherAnswers (supports both object map and array)
+          const ta = st.teacherAnswers;
+          if (ta) {
+            const entries = Array.isArray(ta)
+              ? ta.map((item, i) => [String(item?.questionId || item?.station || i), item])
+              : (typeof ta === 'object' ? Object.entries(ta) : []);
+
+            entries.forEach(([key, val]) => {
+              if (val === null || val === undefined) return;
+              const obj = (typeof val === 'object') ? val : { isCorrect: Boolean(val) };
+              const qId = String(obj.questionId || key);
+              const qMeta = questionById.get(qId) || questionByStation.get(toEnNum(String(obj.station || key)));
+              const aggKey = qMeta ? qMeta.id : qId;
+              const stationNum = obj.station || (qMeta ? qMeta.station : (toEnNum(key).match(/\d+/)?.[0] || ''));
+              const qTitle = obj.question || (qMeta ? qMeta.question : ('سوال ایستگاه ' + toFaNum(stationNum || key)));
+
+              let isCorrect = false;
+              if (typeof obj.isCorrect === 'boolean') {
+                isCorrect = obj.isCorrect;
+              } else if (typeof obj.correct === 'boolean') {
+                isCorrect = obj.correct;
+              } else if (qMeta && obj.selectedIndex !== undefined) {
+                isCorrect = Number(obj.selectedIndex) === Number(qMeta.correctIndex);
+              } else if (typeof val === 'boolean') {
+                isCorrect = val;
+              }
+
+              if (!teacherAnswersAgg.has(aggKey)) {
+                teacherAnswersAgg.set(aggKey, {
+                  title: qTitle,
+                  station: stationNum,
+                  correctCount: 0,
+                  wrongCount: 0,
+                  responses: []
+                });
+              }
+              const bucket = teacherAnswersAgg.get(aggKey);
+              if (isCorrect) bucket.correctCount++;
+              else bucket.wrongCount++;
+              bucket.responses.push({ studentName: r.name, isCorrect });
+            });
+          }
+        });
+
+        // Render Bar Chart
+        const stationKeys = Object.keys(stationMistakes).sort((a, b) => {
+          const na = Number(a), nb = Number(b);
+          if (!isNaN(na) && !isNaN(nb)) return na - nb;
+          return a.localeCompare(b);
+        });
+        const maxVal = Math.max(0, ...stationKeys.map(k => stationMistakes[k]));
+        const totalMistakesAll = stationKeys.reduce((acc, k) => acc + stationMistakes[k], 0);
+
+        const insightEl = document.getElementById('radarTopInsight');
+        if (totalMistakesAll === 0) {
+          insightEl.textContent = 'هنوز خطایی در این بازی ثبت نشده است';
+        } else {
+          const hardest = stationKeys.reduce((best, k) => stationMistakes[k] > stationMistakes[best] ? k : best, stationKeys[0]);
+          insightEl.textContent = 'پراشتباه‌ترین ایستگاه: ایستگاه ' + toFaNum(hardest) + ' (' + toFaNum(stationMistakes[hardest]) + ' خطا)';
+        }
+
+        const chartEl = document.getElementById('mistakeBarChart');
+        chartEl.innerHTML = stationKeys.map(k => {
+          const count = stationMistakes[k];
+          const heightPct = maxVal > 0 ? Math.max(8, Math.round((count / maxVal) * 100)) : 0;
+          let tone = 'zero';
+          if (count > 0) {
+            const ratio = count / maxVal;
+            tone = ratio >= 0.7 ? 'high' : ratio >= 0.35 ? 'mid' : 'low';
+          }
+          return `
+            <div class="bar-col" title="ایستگاه ${toFaNum(k)}: ${toFaNum(count)} خطا">
+              <div class="bar-track">
+                <span class="bar-count ${count === 0 ? 'muted' : ''}">${toFaNum(count)}</span>
+                <div class="bar-fill ${tone}" style="height: ${count === 0 ? 4 : heightPct}%;"></div>
+              </div>
+              <span class="bar-label">ایستگاه ${toFaNum(k)}</span>
+            </div>
+          `;
+        }).join('');
+
+        // Render Top Mistake Students
+        studentMistakeSummary.sort((a, b) => b.total - a.total);
+        const topStudentsEl = document.getElementById('topMistakeStudents');
+        if (!studentMistakeSummary.length) {
+          topStudentsEl.innerHTML = '<div class="empty-state"><p>تا این لحظه هیچ خطایی برای دانش‌آموزان ثبت نشده است.</p></div>';
+        } else {
+          topStudentsEl.innerHTML = studentMistakeSummary.slice(0, 10).map((item, idx) => `
+            <div class="rank-item">
+              <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+                <span class="rank-num">${toFaNum(idx + 1)}</span>
+                <div style="min-width:0;">
+                  <div style="font-weight:700;font-size:0.9rem;color:#f8fafc;">
+                    ${escapeHtml(item.name)}
+                    ${item.isGuest ? '<span class="badge badge-rose" style="margin-right:4px;">مهمان</span>' : ''}
+                  </div>
+                  <div style="font-size:0.76rem;color:var(--text-muted);">
+                    بیشترین خطا در: ${item.topStations.map(s => 'ایستگاه ' + toFaNum(s.station) + ' (' + toFaNum(s.count) + ')').join('، ')}
+                  </div>
+                </div>
+              </div>
+              <span class="badge badge-rose">${toFaNum(item.total)} خطا</span>
+            </div>
+          `).join('');
+        }
+
+        // Render Teacher Answers Summary
+        const taEl = document.getElementById('teacherAnswersSummary');
+        const taList = Array.from(teacherAnswersAgg.values());
+        if (!taList.length) {
+          taEl.innerHTML = '<div class="empty-state"><p>هنوز پاسخی به سوالات اختصاصی استاد در این بازی ثبت نشده است.</p></div>';
+        } else {
+          taEl.innerHTML = taList.map(item => {
+            const total = item.correctCount + item.wrongCount;
+            const acc = total ? Math.round((item.correctCount / total) * 100) : 0;
+            return `
+              <div class="ta-card">
+                <div class="ta-q-title">
+                  ${item.station ? '<span class="badge badge-gold" style="margin-left:6px;">ایستگاه ' + toFaNum(item.station) + '</span>' : ''}
+                  ${escapeHtml(item.title)}
+                </div>
+                <div class="ta-stats-row">
+                  <span style="color:#6ee7b7;">پاسخ درست: <strong>${toFaNum(item.correctCount)}</strong></span>
+                  <span style="color:#fda4af;">پاسخ نادرست: <strong>${toFaNum(item.wrongCount)}</strong></span>
+                  <span style="color:var(--teal-bright);">دقت کلاس: <strong>${toFaNum(acc)}٪</strong></span>
+                </div>
+                <div class="progress-track" style="height:6px;">
+                  <div class="progress-fill" style="width:${acc}%;"></div>
+                </div>
+                <div class="ta-students-chips">
+                  ${item.responses.map(resp => `
+                    <span class="ta-chip ${resp.isCorrect ? 'ok' : 'bad'}">
+                      ${escapeHtml(resp.studentName)} ${resp.isCorrect ? '✓' : '✕'}
+                    </span>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      function renderQuestionsTab() {
+        const filterGame = document.getElementById('qFilterGameSelect').value || 'ALL';
+        const listEl = document.getElementById('questionsList');
+        const filtered = appState.teacherQuestions.filter(q => filterGame === 'ALL' || q.gameId === filterGame);
+
+        if (!filtered.length) {
+          listEl.innerHTML = `
+            <div class="empty-state">
+              <p>هنوز سوالی در صندوقچه ثبت نشده است. از فرم بالا اولین سوال اختصاصی خود را اضافه کنید.</p>
+            </div>`;
+          return;
+        }
+
+        const sorted = [...filtered].sort((a, b) => a.gameId.localeCompare(b.gameId) || (a.station - b.station));
+        const optLetters = ['الف', 'ب', 'ج', 'د'];
+
+        listEl.innerHTML = sorted.map(q => {
+          const game = getGameById(q.gameId);
+          return `
+            <div class="question-item">
+              <div class="question-item-head">
+                <div style="display:flex;flex-wrap:wrap;gap:7px;align-items:center;">
+                  <span class="badge badge-teal">${escapeHtml(game.title)}</span>
+                  <span class="badge badge-gold">ایستگاه ${toFaNum(q.station)}</span>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm delete-question-btn"
+                  data-q-id="${escapeHtml(q.id)}"
+                  data-q-game="${escapeHtml(q.gameId)}"
+                  data-q-station="${escapeHtml(q.station)}">
+                  حذف سوال
+                </button>
+              </div>
+              <div class="question-text">${escapeHtml(q.question)}</div>
+              <div class="question-opts-grid">
+                ${q.options.map((opt, i) => `
+                  <div class="q-opt ${i === q.correctIndex ? 'correct' : ''}">
+                    <span>${optLetters[i] || toFaNum(i + 1)})</span>
+                    <span>${escapeHtml(opt)}</span>
+                    ${i === q.correctIndex ? '<span style="margin-right:auto;font-size:0.75rem;">✓ صحیح</span>' : ''}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderSettingsRoster() {
+        const listEl = document.getElementById('settingsRosterList');
+        document.getElementById('rosterCountBadge').textContent = toFaNum(appState.settingsRoster.length) + ' نفر';
+
+        if (!appState.settingsRoster.length) {
+          listEl.innerHTML = '<div class="empty-state" style="padding:18px;"><p>فهرست دانش‌آموزان خالی است.</p></div>';
+          return;
+        }
+
+        listEl.innerHTML = appState.settingsRoster.map((s, idx) => `
+          <div class="roster-item" data-roster-idx="${idx}">
+            <span class="roster-idx">${toFaNum(idx + 1)}</span>
+            <input type="text" class="roster-name-input" data-roster-idx="${idx}" value="${escapeHtml(s.name)}" placeholder="نام دانش‌آموز">
+            <button type="button" class="btn btn-danger btn-sm remove-roster-btn" data-roster-idx="${idx}" title="حذف از کلاس">حذف</button>
+          </div>
+        `).join('');
+      }
+
+      function renderSettingsTab() {
+        document.getElementById('setClassName').value = appState.classInfo.className || '';
+        document.getElementById('setAgeGroup').value = appState.classInfo.ageGroup || '12-15';
+        document.getElementById('setNewPin').value = '';
+        renderSettingsRoster();
+
+        const games = getGamesList();
+        const enabledSet = new Set(appState.classInfo.enabledGames || games.map(g => g.id));
+        const gridEl = document.getElementById('enabledGamesGrid');
+
+        if (!games.length) {
+          gridEl.innerHTML = '<div class="empty-state" style="padding:18px;"><p>بازی‌ای در تنظیمات پلتفرم یافت نشد.</p></div>';
+          return;
+        }
+
+        gridEl.innerHTML = games.map(g => `
+          <label class="game-toggle-card">
+            <div class="game-toggle-info">
+              <span class="game-toggle-name">${escapeHtml(g.title)}</span>
+              <span class="game-toggle-desc">${escapeHtml(g.description || ('شناسه: ' + g.id))}</span>
+            </div>
+            <span class="switch">
+              <input type="checkbox" class="enabled-game-checkbox" value="${escapeHtml(g.id)}" ${enabledSet.has(g.id) ? 'checked' : ''}>
+              <span class="slider"></span>
+            </span>
+          </label>
+        `).join('');
+      }
+
+      function renderAllDashboard() {
+        populateGameSelectors();
+        renderHeader();
+        renderProgressTab();
+        renderRadarTab();
+        renderQuestionsTab();
+        renderSettingsTab();
+      }
+
+      /* -------------------- Navigation & Auth Flows -------------------- */
+      function switchAuthTab(tabName) {
+        const isLogin = tabName === 'login';
+        document.getElementById('authTabLoginBtn').classList.toggle('active', isLogin);
+        document.getElementById('authTabLoginBtn').setAttribute('aria-selected', String(isLogin));
+        document.getElementById('authTabCreateBtn').classList.toggle('active', !isLogin);
+        document.getElementById('authTabCreateBtn').setAttribute('aria-selected', String(!isLogin));
+
+        document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
+        document.getElementById('createForm').classList.toggle('hidden', isLogin);
+      }
+
+      function switchPanelTab(tabName) {
+        appState.activePanelTab = tabName;
+        document.querySelectorAll('.nav-tab').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.panelTab === tabName);
+        });
+        ['progress', 'radar', 'questions', 'settings'].forEach(id => {
+          document.getElementById('tab-' + id).classList.toggle('hidden', id !== tabName);
+        });
+      }
+
+      function showDashboardView() {
+        document.getElementById('authView').classList.add('hidden');
+        document.getElementById('dashboardView').classList.remove('hidden');
+        renderAllDashboard();
+        switchPanelTab(appState.activePanelTab || 'progress');
+      }
+
+      function showAuthView() {
+        document.getElementById('dashboardView').classList.add('hidden');
+        document.getElementById('authView').classList.remove('hidden');
+        document.getElementById('congratsCard').classList.add('hidden');
+        document.getElementById('authCard').classList.remove('hidden');
+      }
+
+      function saveSession() {
+        try {
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+            classId: appState.classId,
+            pin: appState.pin
+          }));
+        } catch (_) {}
+      }
+
+      function clearSession() {
+        try {
+          sessionStorage.removeItem(SESSION_KEY);
+        } catch (_) {}
+      }
+
+      async function verifyAndLoadClass(classId, pin, silent = false) {
+        const normalizedPin = toEnNum(pin).trim();
+        const cleanClassId = toEnNum(classId).trim();
+        const res = await apiPost({
+          action: 'verifyTeacher',
+          classId: cleanClassId,
+          pin: normalizedPin,
+          teacherPin: normalizedPin
+        });
+        appState.classId = cleanClassId;
+        appState.pin = normalizedPin;
+        applyDashboardPayload(res);
+        saveSession();
+        showDashboardView();
+        if (!silent) {
+          showToast('اطلاعات کلاس با موفقیت بارگذاری شد.', 'success');
+        }
+      }
+
+      /* -------------------- Event Handlers -------------------- */
+      function initEvents() {
+        // Platform title from config
+        const cfg = getConfig();
+        if (cfg.platformName) {
+          document.title = 'میز اساتید | ' + cfg.platformName;
+          document.getElementById('platformHeading').textContent = 'میز اساتید ' + cfg.platformName;
+        }
+
+        // Populate station dropdown 1..10
+        const stationSel = document.getElementById('qStationSelect');
+        for (let i = 1; i <= 10; i++) {
+          const opt = document.createElement('option');
+          opt.value = String(i);
+          opt.textContent = 'ایستگاه ' + toFaNum(i);
+          stationSel.appendChild(opt);
+        }
+
+        // Auth tab switch
+        document.querySelectorAll('[data-auth-tab]').forEach(btn => {
+          btn.addEventListener('click', () => switchAuthTab(btn.dataset.authTab));
+        });
+
+        // Login Submit
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const classId = toEnNum(document.getElementById('loginClassId').value).trim();
+          const pin = toEnNum(document.getElementById('loginPin').value).trim();
+          if (!classId) {
+            showToast('لطفاً کد کلاس را وارد کنید.', 'error');
+            return;
+          }
+          if (pin.length < 4) {
+            showToast('رمز اختصاصی معلم باید حداقل ۴ رقم باشد.', 'error');
+            return;
+          }
+          const btn = document.getElementById('loginSubmitBtn');
+          setButtonLoading(btn, true);
+          try {
+            await verifyAndLoadClass(classId, pin, false);
+          } catch (err) {
+            showToast(err.message || 'ورود ناموفق بود. کد کلاس یا رمز را بررسی کنید.', 'error');
+          } finally {
+            setButtonLoading(btn, false);
+          }
+        });
+
+        // Create Class Submit
+        document.getElementById('createForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const inviteCode = toEnNum(document.getElementById('createInviteCode').value).trim();
+          const className = document.getElementById('createClassName').value.trim();
+          const ageGroup = document.getElementById('createAgeGroup').value;
+          const teacherPin = toEnNum(document.getElementById('createTeacherPin').value).trim();
+          const students = document.getElementById('createStudents').value
+            .split(/\r?\n/)
+            .map(s => s.trim())
+            .filter(Boolean);
+
+          if (!inviteCode) {
+            showToast('لطفاً کد دعوت اساتید را وارد کنید.', 'error');
+            return;
+          }
+          if (!className) {
+            showToast('لطفاً نام کلاس را وارد کنید.', 'error');
+            return;
+          }
+          if (!/^\d{4,}$/.test(teacherPin)) {
+            showToast('رمز اختصاصی معلم باید حداقل ۴ رقم عددی باشد.', 'error');
+            return;
+          }
+
+          const btn = document.getElementById('createSubmitBtn');
+          setButtonLoading(btn, true);
+          try {
+            const res = await apiPost({
+              action: 'createClass',
+              inviteCode,
+              className,
+              ageGroup,
+              teacherPin,
+              students
+            });
+            const newClassId = String(res.classId || res.data?.classId || res.classInfo?.classId || '');
+            if (!newClassId) {
+              throw new Error('کد کلاس از سرور دریافت نشد.');
+            }
+            const studentLink = buildStudentLink(newClassId);
+            appState.createdCache = { classId: newClassId, pin: teacherPin, link: studentLink };
+
+            document.getElementById('createdClassIdDisplay').textContent = newClassId;
+            document.getElementById('createdStudentLinkDisplay').textContent = studentLink;
+            document.getElementById('authCard').classList.add('hidden');
+            document.getElementById('congratsCard').classList.remove('hidden');
+            showToast('کلاس جدید با موفقیت ساخته شد.', 'success');
+          } catch (err) {
+            showToast(err.message || 'خطا در ساخت کلاس جدید.', 'error');
+          } finally {
+            setButtonLoading(btn, false);
+          }
+        });
+
+        // Congrats Card Buttons
+        document.getElementById('copyCreatedLinkBtn').addEventListener('click', () => {
+          if (appState.createdCache) {
+            copyText(appState.createdCache.link, 'لینک اختصاصی دانش‌آموزان کپی شد.');
+          }
+        });
+
+        document.getElementById('enterCreatedPanelBtn').addEventListener('click', async () => {
+          if (!appState.createdCache) return;
+          const btn = document.getElementById('enterCreatedPanelBtn');
+          setButtonLoading(btn, true);
+          try {
+            await verifyAndLoadClass(appState.createdCache.classId, appState.createdCache.pin, false);
+          } catch (err) {
+            showToast(err.message || 'خطا در ورود مستقیم به پنل.', 'error');
+          } finally {
+            setButtonLoading(btn, false);
+          }
+        });
+
+        // Header Controls
+        document.getElementById('copyHeaderLinkBtn').addEventListener('click', () => {
+          copyText(buildStudentLink(appState.classInfo.classId), 'لینک اختصاصی دانش‌آموزان کپی شد.');
+        });
+
+        document.getElementById('refreshLiveBtn').addEventListener('click', async () => {
+          const icon = document.getElementById('refreshIcon');
+          const btn = document.getElementById('refreshLiveBtn');
+          icon.classList.add('spin-icon');
+          btn.disabled = true;
+          try {
+            await verifyAndLoadClass(appState.classId, appState.pin, true);
+            showToast('داده‌های کلاس بروزرسانی شد.', 'success');
+          } catch (err) {
+            showToast(err.message || 'خطا در بروزرسانی اطلاعات.', 'error');
+          } finally {
+            icon.classList.remove('spin-icon');
+            btn.disabled = false;
+          }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+          clearSession();
+          appState.classId = '';
+          appState.pin = '';
+          appState.isMaster = false;
+          document.getElementById('loginPin').value = '';
+          showAuthView();
+          switchAuthTab('login');
+          showToast('از پنل کلاس خارج شدید.');
+        });
+
+        // Panel Tabs
+        document.querySelectorAll('.nav-tab').forEach(btn => {
+          btn.addEventListener('click', () => switchPanelTab(btn.dataset.panelTab));
+        });
+
+        // Synced Game Selectors (Tab 1 & Tab 2)
+        document.getElementById('progressGameSelect').addEventListener('change', (e) => {
+          appState.selectedGameId = e.target.value;
+          document.getElementById('radarGameSelect').value = appState.selectedGameId;
+          renderProgressTab();
+          renderRadarTab();
+        });
+
+        document.getElementById('radarGameSelect').addEventListener('change', (e) => {
+          appState.selectedGameId = e.target.value;
+          document.getElementById('progressGameSelect').value = appState.selectedGameId;
+          renderRadarTab();
+          renderProgressTab();
+        });
+
+        document.getElementById('progressSearchInput').addEventListener('input', renderProgressTab);
+
+        // Delete Guest (Event Delegation)
+        document.getElementById('progressStudentList').addEventListener('click', async (e) => {
+          const btn = e.target.closest('.delete-guest-btn');
+          if (!btn) return;
+          const guestId = btn.dataset.guestId || '';
+          const guestName = btn.dataset.guestName || 'مهمان';
+          const gameId = btn.dataset.gameId || appState.selectedGameId;
+
+          const ok = await askConfirm(
+            'حذف دانش‌آموز مهمان',
+            'آیا از حذف رکورد «' + guestName + '» مطمئن هستید؟ این عمل قابل بازگشت نیست.',
+            'حذف مهمان'
+          );
+          if (!ok) return;
+
+          btn.disabled = true;
+          try {
+            await apiPost({
+              action: 'deleteGuest',
+              classId: appState.classId,
+              pin: appState.pin,
+              teacherPin: appState.pin,
+              gameId,
+              studentId: guestId,
+              studentName: guestName
+            });
+            showToast('دانش‌آموز مهمان با موفقیت حذف شد.', 'success');
+            await verifyAndLoadClass(appState.classId, appState.pin, true);
+          } catch (err) {
+            showToast(err.message || 'خطا در حذف دانش‌آموز مهمان.', 'error');
+            btn.disabled = false;
+          }
+        });
+
+        // Question Chest: Highlight Selected Correct Option
+        document.getElementById('optionsEditor').addEventListener('change', (e) => {
+          if (e.target.name !== 'correctOption') return;
+          document.querySelectorAll('#optionsEditor .option-row').forEach(row => {
+            row.classList.toggle('is-correct', row.dataset.optWrap === e.target.value);
+          });
+        });
+
+        // Question Chest: Save Question
+        document.getElementById('questionForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const gameId = document.getElementById('qGameSelect').value;
+          const station = Number(document.getElementById('qStationSelect').value || 1);
+          const question = document.getElementById('qText').value.trim();
+          const options = [
+            document.getElementById('qOpt0').value.trim(),
+            document.getElementById('qOpt1').value.trim(),
+            document.getElementById('qOpt2').value.trim(),
+            document.getElementById('qOpt3').value.trim()
+          ];
+          const checkedRadio = document.querySelector('input[name="correctOption"]:checked');
+          const correctIndex = checkedRadio ? Number(checkedRadio.value) : 0;
+
+          if (!gameId) {
+            showToast('لطفاً یک بازی انتخاب کنید.', 'error');
+            return;
+          }
+          if (!question) {
+            showToast('لطفاً متن سوال را وارد کنید.', 'error');
+            return;
+          }
+          if (options.some(o => !o)) {
+            showToast('لطفاً هر ۴ گزینه را تکمیل کنید.', 'error');
+            return;
+          }
+
+          const btn = document.getElementById('saveQuestionBtn');
+          setButtonLoading(btn, true);
+          try {
+            await apiPost({
+              action: 'saveTeacherQuestion',
+              classId: appState.classId,
+              pin: appState.pin,
+              teacherPin: appState.pin,
+              gameId,
+              station,
+              question,
+              options,
+              correctIndex
+            });
+            document.getElementById('qText').value = '';
+            ['qOpt0', 'qOpt1', 'qOpt2', 'qOpt3'].forEach(id => {
+              document.getElementById(id).value = '';
+            });
+            showToast('سوال جدید با موفقیت در صندوقچه ثبت شد.', 'success');
+            await verifyAndLoadClass(appState.classId, appState.pin, true);
+          } catch (err) {
+            showToast(err.message || 'خطا در ذخیره سوال.', 'error');
+          } finally {
+            setButtonLoading(btn, false);
+          }
+        });
+
+        document.getElementById('qFilterGameSelect').addEventListener('change', renderQuestionsTab);
+
+        // Delete Teacher Question
+        document.getElementById('questionsList').addEventListener('click', async (e) => {
+          const btn = e.target.closest('.delete-question-btn');
+          if (!btn) return;
+          const qId = btn.dataset.qId;
+          const gameId = btn.dataset.qGame;
+          const station = Number(btn.dataset.qStation || 1);
+
+          const ok = await askConfirm(
+            'حذف سوال اختصاصی',
+            'آیا از حذف این سوال از صندوقچه کلاس اطمینان دارید؟',
+            'حذف سوال'
+          );
+          if (!ok) return;
+
+          btn.disabled = true;
+          try {
+            await apiPost({
+              action: 'deleteTeacherQuestion',
+              classId: appState.classId,
+              pin: appState.pin,
+              teacherPin: appState.pin,
+              questionId: qId,
+              id: qId,
+              gameId,
+              station
+            });
+            showToast('سوال با موفقیت حذف شد.', 'success');
+            await verifyAndLoadClass(appState.classId, appState.pin, true);
+          } catch (err) {
+            showToast(err.message || 'خطا در حذف سوال.', 'error');
+            btn.disabled = false;
+          }
+        });
+
+        // Settings Roster Handlers
+        document.getElementById('settingsRosterList').addEventListener('input', (e) => {
+          if (!e.target.classList.contains('roster-name-input')) return;
+          const idx = Number(e.target.dataset.rosterIdx);
+          if (appState.settingsRoster[idx]) {
+            appState.settingsRoster[idx].name = e.target.value;
+          }
+        });
+
+        document.getElementById('settingsRosterList').addEventListener('click', (e) => {
+          const btn = e.target.closest('.remove-roster-btn');
+          if (!btn) return;
+          const idx = Number(btn.dataset.rosterIdx);
+          appState.settingsRoster.splice(idx, 1);
+          renderSettingsRoster();
+        });
+
+        function addNewStudentToRoster() {
+          const input = document.getElementById('newStudentInput');
+          const name = input.value.trim();
+          if (!name) return;
+          appState.settingsRoster.push({ id: '', name });
+          input.value = '';
+          renderSettingsRoster();
+          const list = document.getElementById('settingsRosterList');
+          list.scrollTop = list.scrollHeight;
+        }
+
+        document.getElementById('addStudentBtn').addEventListener('click', addNewStudentToRoster);
+        document.getElementById('newStudentInput').addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            addNewStudentToRoster();
+          }
+        });
+
+        // Save Settings Submit
+        document.getElementById('settingsForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const className = document.getElementById('setClassName').value.trim();
+          const ageGroup = document.getElementById('setAgeGroup').value;
+          const newPin = toEnNum(document.getElementById('setNewPin').value).trim();
+
+          if (!className) {
+            showToast('نام کلاس نمی‌تواند خالی باشد.', 'error');
+            return;
+          }
+          if (newPin && !/^\d{4,}$/.test(newPin)) {
+            showToast('رمز جدید معلم باید حداقل ۴ رقم عددی باشد.', 'error');
+            return;
+          }
+
+          const students = appState.settingsRoster
+            .map(s => {
+              const cleanName = String(s.name || '').trim();
+              if (!cleanName) return null;
+              return s.id ? { id: s.id, name: cleanName } : { name: cleanName };
+            })
+            .filter(Boolean);
+
+          const enabledGames = Array.from(document.querySelectorAll('.enabled-game-checkbox:checked'))
+            .map(cb => cb.value);
+
+          const payload = {
+            action: 'updateClass',
+            classId: appState.classId,
+            pin: appState.pin,
+            teacherPin: appState.pin,
+            className,
+            ageGroup,
+            students,
+            enabledGames
+          };
+          if (newPin) {
+            payload.newPin = newPin;
+          }
+
+          const btn = document.getElementById('saveSettingsBtn');
+          setButtonLoading(btn, true);
+          try {
+            await apiPost(payload);
+            if (newPin) {
+              appState.pin = newPin;
+              saveSession();
+            }
+            showToast('تنظیمات کلاس با موفقیت ذخیره شد.', 'success');
+            await verifyAndLoadClass(appState.classId, appState.pin, true);
+          } catch (err) {
+            showToast(err.message || 'خطا در ذخیره تنظیمات کلاس.', 'error');
+          } finally {
+            setButtonLoading(btn, false);
+          }
+        });
+
+        // Confirm Modal Events
+        document.getElementById('confirmCancelBtn').addEventListener('click', () => closeConfirm(false));
+        document.getElementById('confirmOkBtn').addEventListener('click', () => closeConfirm(true));
+        document.getElementById('confirmModal').addEventListener('click', (e) => {
+          if (e.target.id === 'confirmModal') closeConfirm(false);
+        });
+      }
+
+      /* -------------------- Bootstrap -------------------- */
+      async function bootstrap() {
+        initEvents();
+
+        const params = new URLSearchParams(window.location.search);
+        const urlClass = params.get('class');
+        if (urlClass) {
+          document.getElementById('loginClassId').value = urlClass.trim();
+          switchAuthTab('login');
+        }
+
+        // Restore active session if present (and matches URL ?class= if provided)
+        try {
+          const saved = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+          if (saved && saved.classId && saved.pin && (!urlClass || urlClass.trim() === saved.classId)) {
+            await verifyAndLoadClass(saved.classId, saved.pin, true);
+          }
+        } catch (_) {
+          clearSession();
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', bootstrap);
+    })();
+  </script>
+</body>
+</html>
