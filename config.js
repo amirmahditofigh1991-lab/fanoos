@@ -1,6 +1,6 @@
 window.FANOOS_CONFIG = {
   apiUrl: "https://script.google.com/macros/s/AKfycbwboCEekU4zGr72srK-QyXyIc_MOwqdnE_a7px05KCMfj3lBSjCGp3LtDB2lheXkoo/exec",
-  platformName: "فانوس یادگاری",
+  platformName: "فانوس یادگیری",
   platformSubtitle: "پلتفرم بازی‌های داستانی، قرآنی و مهارتی",
   games: [
     {
