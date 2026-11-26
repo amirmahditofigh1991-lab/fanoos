@@ -1,409 +1,1289 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>سفر در زمان: حضرت صالح (ع) | فانوس یادگیری</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800;900&display=swap" rel="stylesheet">
-<script src="../../config.js"></script>
-<style>
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0; width: 100%; height: 100%;
-    font-family: 'Vazirmatn', Tahoma, sans-serif;
-    background: radial-gradient(circle at 50% 25%, #162c56 0%, #0a1428 70%, #060d1b 100%);
-    color: #fdf6e3; display: flex; align-items: center; justify-content: center; padding: 18px;
-  }
-  .f-card {
-    width: 100%; max-width: 440px; text-align: center;
-    background: linear-gradient(180deg, rgba(18,34,68,.96) 0%, rgba(11,22,46,.98) 100%);
-    border: 2px solid #d49a2a; border-radius: 22px; padding: 28px 22px;
-    box-shadow: 0 22px 60px rgba(0,0,0,.55), inset 0 0 28px rgba(212,154,42,.14);
-  }
-  .f-orb {
-    width: 66px; height: 66px; margin: 0 auto 14px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #fff6cc 0%, #e6ab32 62%, #a86c10 100%);
-    border: 3px solid #fff5cf; box-shadow: 0 0 26px rgba(245,207,110,.45);
-    display: flex; align-items: center; justify-content: center; font-size: 30px;
-  }
-  .f-title { margin: 0 0 8px; font-size: 20px; font-weight: 900; color: #ffe394; }
-  .f-desc { margin: 0 0 18px; font-size: 13.5px; line-height: 1.85; color: #d6e4fa; }
-  .f-spinner {
-    width: 38px; height: 38px; margin: 4px auto 12px; border-radius: 50%;
-    border: 3.5px solid rgba(248,216,120,.22); border-top-color: #f8d878;
-    animation: fSpin .85s linear infinite;
-  }
-  @keyframes fSpin { to { transform: rotate(360deg); } }
-  .f-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    text-decoration: none; border: 2px solid #fff0b8; cursor: pointer; font-family: inherit;
-    background: linear-gradient(135deg, #df9f28 0%, #b37312 100%); color: #fffdf5;
-    font-size: 14.5px; font-weight: 900; padding: 11px 22px; border-radius: 13px;
-    box-shadow: 0 8px 22px rgba(212,154,42,.35); transition: transform .15s ease;
-  }
-  .f-btn:hover { transform: translateY(-2px); }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>سفر در زمان: حضرت صالح (ع) | فانوس یادگیری</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- پیکربندی سراسری پلتفرم فانوس یادگیری -->
+  <script src="../../config.js"></script>
+  <style>
+    :root {
+      --bg-deep: #0b162c;
+      --bg-mid: #142a4d;
+      --parchment: #fdf7e9;
+      --parchment-2: #f4e4c2;
+      --gold: #d49a2a;
+      --gold-soft: #f8d878;
+      --turquoise: #1d7a78;
+      --turquoise-dark: #125655;
+      --ink: #2c1e12;
+      --ink-soft: #5c4632;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Vazirmatn', 'Tahoma', system-ui, sans-serif;
+      background: radial-gradient(circle at 50% 25%, #1d3c6a 0%, var(--bg-mid) 45%, var(--bg-deep) 100%);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .gate-card {
+      width: 100%;
+      max-width: 460px;
+      background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-2) 100%);
+      border: 3px solid var(--gold);
+      border-radius: 24px;
+      padding: 26px 22px 22px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), inset 0 0 36px rgba(212, 154, 42, 0.16);
+      animation: cardIn 0.35s ease;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .lantern-orb {
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%, #fff9db 0%, #eab038 60%, #a86c10 100%);
+      border: 3px solid #fff8e2;
+      box-shadow: 0 0 0 3px #c98f22, 0 0 28px rgba(248, 216, 120, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--turquoise), var(--turquoise-dark));
+      color: #fff9e6;
+      border: 1.5px solid var(--gold-soft);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 14px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    p {
+      margin: 0 auto 18px;
+      font-size: 13.8px;
+      line-height: 1.85;
+      color: var(--ink-soft);
+      max-width: 390px;
+    }
+
+    .spinner-track {
+      width: 100%;
+      max-width: 280px;
+      height: 10px;
+      margin: 8px auto 12px;
+      background: #e3cfa8;
+      border: 1.5px solid #c59b52;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .spinner-bar {
+      position: absolute;
+      inset: 0;
+      width: 45%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--turquoise), #e6a92e, var(--turquoise));
+      animation: slideLoad 1.25s ease-in-out infinite;
+    }
+
+    @keyframes slideLoad {
+      0% { transform: translateX(120%); }
+      100% { transform: translateX(-230%); }
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 11px 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--turquoise), var(--turquoise-dark));
+      color: #fffef6;
+      border: 2px solid var(--gold-soft);
+      box-shadow: 0 8px 20px rgba(18, 86, 85, 0.32);
+    }
+
+    .btn-secondary {
+      background: #fffaf0;
+      color: var(--ink);
+      border: 2px solid #c9a66b;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .sub-note {
+      margin-top: 14px;
+      font-size: 11.8px;
+      color: #7c6343;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
-<div class="f-card" id="fanoos-boot">
-  <div class="f-orb">🏮</div>
-  <h1 class="f-title">سفر در زمان: حضرت صالح (ع)</h1>
-  <div class="f-spinner"></div>
-  <p class="f-desc" id="fanoos-status">در حال اتصال به تالار فانوس یادگیری و آماده‌سازی سرزمین ثمود...</p>
-</div>
-<script>
-(async function () {
-  const bootEl = document.getElementById('fanoos-boot');
-  const params = new URLSearchParams(window.location.search);
-  const classId = (params.get('class') || '').trim();
-  const sid = (params.get('sid') || '').trim();
-  let sname = (params.get('sname') || '').trim();
-  const gid = (params.get('gid') || 'saleh').trim() || 'saleh';
-  const age = (params.get('age') || '').trim();
-  const hallHome = '../../index.html';
-  const hallBack = hallHome + (classId ? '?class=' + encodeURIComponent(classId) : '');
+  <main id="fanoos-boot-root" class="gate-card" role="status" aria-live="polite">
+    <div class="lantern-orb">🏮</div>
+    <div class="brand-badge">✨ پلتفرم فانوس یادگیری</div>
+    <h1>سفر در زمان به سرزمین ثمود</h1>
+    <p>در حال آماده‌سازی سفر در زمان به سرزمین ثمود...</p>
+    <div class="spinner-track"><div class="spinner-bar"></div></div>
+    <div class="sub-note">لطفاً چند لحظه صبر کن تا نقشه و پیشرفت تو بارگذاری شود</div>
+  </main>
 
-  const showGate = (title, desc, btnText, href) => {
-    bootEl.innerHTML =
-      '<div class="f-orb">🏮</div>' +
-      '<h1 class="f-title">' + title + '</h1>' +
-      '<p class="f-desc">' + desc + '</p>' +
-      '<a class="f-btn" href="' + href + '">' + btnText + '</a>';
-  };
+  <script>
+  (function () {
+    'use strict';
 
-  if (!classId || !sid) {
-    showGate(
-      'فانوس یادگیری',
-      'برای ورود به بازی، ذخیره خودکار پیشرفت و دریافت صندوقچه سوالات استاد، لطفاً از طریق تالار فانوس یادگیری وارد شوید.',
-      'ورود از طریق تالار فانوس یادگیری',
-      hallHome
-    );
-    return;
-  }
+    /* =========================================================
+       1. خواندن پارامترهای آدرس و بررسی اعتبار ورود
+       ========================================================= */
+    var rootEl = document.getElementById('fanoos-boot-root');
+    var params = new URLSearchParams(window.location.search);
+    var classId = (params.get('class') || '').trim();
+    var sid = (params.get('sid') || '').trim();
+    var snameParam = (params.get('sname') || '').trim();
+    var gid = (params.get('gid') || 'saleh').trim() || 'saleh';
+    var age = (params.get('age') || '').trim();
 
-  const apiUrl = (window.FANOOS_CONFIG && window.FANOOS_CONFIG.apiUrl)
-    ? String(window.FANOOS_CONFIG.apiUrl).trim() : '';
-
-  const safeParse = (v) => {
-    if (!v) return null;
-    if (typeof v === 'object') return v;
-    try { return JSON.parse(v); } catch { return null; }
-  };
-
-  const fetchClassData = async () => {
-    if (!apiUrl) return null;
-    try {
-      const url = apiUrl + '?action=getClass&classId=' + encodeURIComponent(classId) + '&t=' + Date.now();
-      const res = await fetch(url, { method: 'GET' });
-      return res.ok ? await res.json() : null;
-    } catch { return null; }
-  };
-
-  const fetchCoreHtml = async () => {
-    const res = await fetch('./core.html');
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    return await res.text();
-  };
-
-  let classRes = null, coreHtml = '';
-  try {
-    [classRes, coreHtml] = await Promise.all([fetchClassData(), fetchCoreHtml()]);
-  } catch {
-    showGate(
-      'خطا در بارگذاری بازی',
-      'فایل اصلی بازی در دسترس نبود. لطفاً اتصال اینترنت را بررسی کرده و دوباره از تالار وارد شوید.',
-      'بازگشت به تالار فانوس یادگیری',
-      hallBack
-    );
-    return;
-  }
-
-  const root = (classRes && classRes.data && typeof classRes.data === 'object' && !Array.isArray(classRes.data))
-    ? classRes.data : (classRes || {});
-
-  let serverState = null;
-  const pools = [root.progress, root.records, classRes && classRes.progress, classRes && classRes.records];
-  for (const list of pools) {
-    if (!Array.isArray(list)) continue;
-    const hit = list.find(r => r &&
-      String(r.studentId ?? r.sid ?? r.id ?? '') === sid &&
-      ((!r.gameId && !r.gid) || String(r.gameId ?? r.gid) === gid));
-    if (hit) {
-      serverState = safeParse(hit.state) || (hit.highestUnlocked ? hit : null);
-      if (!sname && (hit.studentName || hit.name || hit.sname)) sname = String(hit.studentName || hit.name || hit.sname).trim();
-      break;
+    function escapeHtml(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
-  }
-  if (Array.isArray(root.students)) {
-    const stRec = root.students.find(s => s && String(s.studentId ?? s.sid ?? s.id ?? '') === sid);
-    if (stRec) {
-      if (!sname) sname = String(stRec.studentName || stRec.name || stRec.sname || '').trim();
-      if (!serverState && stRec.progress && stRec.progress[gid]) serverState = safeParse(stRec.progress[gid]);
+
+    function showEntryGate() {
+      rootEl.innerHTML =
+        '<div class="lantern-orb">🏮</div>' +
+        '<div class="brand-badge">✨ پلتفرم فانوس یادگیری</div>' +
+        '<h1>ورود از طریق تالار فانوس یادگیری</h1>' +
+        '<p>برای شروع ماجراجویی <strong>حضرت صالح (ع)</strong> و ذخیره خودکار پیشرفتت در کلاس، لطفاً از طریق تالار اصلی فانوس یادگیری وارد شو.</p>' +
+        '<div class="btn-row">' +
+          '<a class="btn btn-primary" href="../../index.html">🏠 ورود به تالار فانوس یادگیری</a>' +
+        '</div>' +
+        '<div class="sub-note">اطلاعات کلاس یا شناسه مسافر در آدرس یافت نشد</div>';
     }
-  }
-  if (!sname) sname = 'مسافر ' + sid;
 
-  const rawQuestions = Array.isArray(root.questions) ? root.questions
-    : (classRes && Array.isArray(classRes.questions) ? classRes.questions : []);
-  const questions = rawQuestions
-    .filter(q => q && (!q.gameId || String(q.gameId) === gid))
-    .map((q, idx) => {
-      let opts = q.options ?? q.choices;
-      if (typeof opts === 'string') opts = safeParse(opts) || [];
-      if (!Array.isArray(opts)) opts = [q.opt1, q.opt2, q.opt3, q.opt4].filter(v => v != null && String(v) !== '');
-      return {
-        id: String(q.id || q.qId || q.questionId || ('tq_' + idx)),
-        stationId: Number(q.stationId ?? q.station ?? 0),
-        question: String(q.question || q.text || q.title || ''),
-        options: opts.map(String),
-        correctIndex: Number(q.correctIndex ?? q.correct ?? q.answerIndex ?? 0)
-      };
-    })
-    .filter(q => q.stationId > 0 && q.question && q.options.length >= 2);
-
-  const buildStatePayload = (st) => {
-    const s = st && typeof st === 'object' ? st : {};
-    const m = {};
-    if (s.mistakes && typeof s.mistakes === 'object') {
-      Object.keys(s.mistakes).forEach(k => { m[String(k)] = Number(s.mistakes[k]) || 0; });
-    }
-    const ta = (s.teacherAnswers && typeof s.teacherAnswers === 'object') ? { ...s.teacherAnswers } : {};
-    return {
-      highestUnlocked: Math.max(1, Math.min(10, Number(s.highestUnlocked || 1))),
-      completedStations: Array.isArray(s.completedStations) ? Array.from(new Set(s.completedStations.map(Number).filter(n => n >= 1 && n <= 10))) : [],
-      collectedCards: Array.isArray(s.collectedCards) ? Array.from(new Set(s.collectedCards)) : [],
-      discoveredSecrets: Array.isArray(s.discoveredSecrets) ? Array.from(new Set(s.discoveredSecrets)) : [],
-      mistakes: m,
-      teacherAnswers: ta,
-      pledgeChoices: Array.isArray(s.pledgeChoices) ? [...s.pledgeChoices] : [],
-      personalNote: typeof s.personalNote === 'string' ? s.personalNote : '',
-      finishedGame: Boolean(s.finishedGame),
-      seenGuide: Boolean(s.seenGuide)
-    };
-  };
-
-  const mergeStates = (loc, srv) => {
-    const a = buildStatePayload(loc), b = buildStatePayload(srv);
-    const mistakes = { ...a.mistakes };
-    Object.keys(b.mistakes).forEach(k => { mistakes[k] = Math.max(mistakes[k] || 0, b.mistakes[k] || 0); });
-    const merged = buildStatePayload({
-      highestUnlocked: Math.max(a.highestUnlocked, b.highestUnlocked),
-      completedStations: [...a.completedStations, ...b.completedStations],
-      collectedCards: [...a.collectedCards, ...b.collectedCards],
-      discoveredSecrets: [...a.discoveredSecrets, ...b.discoveredSecrets],
-      mistakes,
-      teacherAnswers: { ...a.teacherAnswers, ...b.teacherAnswers },
-      pledgeChoices: b.pledgeChoices.length ? b.pledgeChoices : a.pledgeChoices,
-      personalNote: b.personalNote.trim() ? b.personalNote : a.personalNote,
-      finishedGame: a.finishedGame || b.finishedGame,
-      seenGuide: a.seenGuide || b.seenGuide
-    });
-    if (merged.completedStations.includes(9) && merged.highestUnlocked < 10) merged.highestUnlocked = 10;
-    return merged;
-  };
-
-  let saveTimer = null, lastSentJson = '', chestOpen = false;
-  const postState = (st, force) => {
-    if (!apiUrl) return;
-    const body = JSON.stringify({
-      action: 'saveProgress', classId, studentId: sid, studentName: sname, gameId: gid,
-      state: buildStatePayload(st)
-    });
-    if (!force && body === lastSentJson) return;
-    lastSentJson = body;
-    fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body })
-      .catch(() => { lastSentJson = ''; });
-  };
-
-  const openTeacherChest = (stationId, stateObj, onSave, playSfx) => {
-    if (chestOpen || !stateObj) return false;
-    if (!stateObj.teacherAnswers || typeof stateObj.teacherAnswers !== 'object') stateObj.teacherAnswers = {};
-    const pending = questions.filter(q => q.stationId === Number(stationId) && !stateObj.teacherAnswers[q.id]);
-    if (!pending.length) return false;
-    chestOpen = true;
-
-    let overlay = document.getElementById('fanoos-chest-modal');
-    if (!overlay) { overlay = document.createElement('div'); overlay.id = 'fanoos-chest-modal'; document.body.appendChild(overlay); }
-    let qIdx = 0;
-    const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    const fa = (n) => String(n).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
-
-    const renderQ = () => {
-      const q = pending[qIdx];
-      const tag = pending.length > 1 ? ' (' + fa(qIdx + 1) + ' از ' + fa(pending.length) + ')' : '';
-      overlay.innerHTML =
-        '<div class="fc-box">' +
-          '<div class="fc-head"><span class="fc-badge">ایستگاه ' + fa(stationId) + tag + '</span><h3>🎁 صندوقچه سوال استاد</h3></div>' +
-          '<div class="fc-q">' + esc(q.question) + '</div>' +
-          '<div class="fc-opts">' + q.options.slice(0, 4).map((opt, i) =>
-            '<button type="button" class="fc-opt" data-idx="' + i + '"><span class="fc-num">' + fa(i + 1) + '</span><span>' + esc(opt) + '</span></button>'
-          ).join('') + '</div>' +
-          '<div class="fc-fb" id="fc-fb"></div>' +
-          '<div class="fc-foot"><button type="button" class="fc-next" id="fc-next" style="display:none;">' +
-            (qIdx + 1 < pending.length ? 'سوال بعدی صندوقچه ◀' : 'ثبت و ادامه مسیر ◀') +
-          '</button></div>' +
+    function showLoadError(detail) {
+      rootEl.innerHTML =
+        '<div class="lantern-orb">⚠️</div>' +
+        '<div class="brand-badge">✨ پلتفرم فانوس یادگیری</div>' +
+        '<h1>خطا در بارگذاری بازی</h1>' +
+        '<p>متأسفانه فایل اصلی بازی در دسترس نبود. اتصال اینترنت را بررسی کن و دوباره تلاش کن.</p>' +
+        (detail ? '<div class="sub-note" style="margin:0 0 14px;">' + escapeHtml(detail) + '</div>' : '') +
+        '<div class="btn-row">' +
+          '<button type="button" class="btn btn-primary" onclick="window.location.reload()">🔄 تلاش مجدد</button>' +
+          '<a class="btn btn-secondary" href="../../index.html' + (classId ? '?class=' + encodeURIComponent(classId) : '') + '">🏠 بازگشت به تالار</a>' +
         '</div>';
-      overlay.classList.add('open');
-      document.body.classList.add('fanoos-modal-open');
-
-      const optBtns = overlay.querySelectorAll('.fc-opt');
-      const fbEl = overlay.querySelector('#fc-fb');
-      const nextBtn = overlay.querySelector('#fc-next');
-      optBtns.forEach(btn => btn.addEventListener('click', () => {
-        const chosenIndex = Number(btn.getAttribute('data-idx'));
-        const isCorrect = chosenIndex === q.correctIndex;
-        optBtns.forEach((b, i) => {
-          b.disabled = true;
-          if (i === q.correctIndex) b.classList.add('fc-ok');
-          else if (i === chosenIndex && !isCorrect) b.classList.add('fc-bad');
-        });
-        if (typeof playSfx === 'function') playSfx(isCorrect ? 'correct' : 'hint');
-        stateObj.teacherAnswers[q.id] = { chosenIndex, isCorrect, stationId: Number(stationId) };
-        if (typeof onSave === 'function') onSave(true);
-        fbEl.className = 'fc-fb show ' + (isCorrect ? 'ok' : 'bad');
-        fbEl.textContent = isCorrect
-          ? '✅ آفرین! پاسخ تو کاملاً درست بود و در کارنامه استاد ثبت شد.'
-          : '❌ پاسخ نادرست بود! گزینه درست با رنگ سبز مشخص شد و نتیجه ثبت گردید.';
-        nextBtn.style.display = 'inline-flex';
-      }));
-      nextBtn.addEventListener('click', () => {
-        if (qIdx + 1 < pending.length) { qIdx++; renderQ(); }
-        else {
-          overlay.classList.remove('open');
-          chestOpen = false;
-          document.body.classList.toggle('fanoos-modal-open', !!document.querySelector('.modal-overlay.open'));
-        }
-      });
-    };
-    renderQ();
-    return true;
-  };
-
-  window.__FANOOS_BRIDGE__ = {
-    apiUrl, classId, sid, sname, gid, age, hallBack, serverState, questions,
-    storageKey: 'fanoos_' + classId + '_' + gid + '_' + sid,
-    buildStatePayload, mergeStates, openTeacherChest,
-    saveToServer: (st, immediate, force) => {
-      if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
-      if (immediate) postState(st, Boolean(force));
-      else saveTimer = setTimeout(() => { saveTimer = null; postState(st, false); }, 250);
     }
-  };
 
-  const injectedStyle =
-    '<style id="fanoos-bridge-css">' +
-    '#splash-screen,#modal-welcome,#btn-leaderboard,#modal-leaderboard,#modal-confirm-delete-guest,#teacher-mode-pill,#teacher-quick-nav,[onclick*="openLeaderboardModal"],[onclick*="openWelcomeModal"]{display:none!important;}' +
-    '#fanoos-hall-btn{position:fixed;top:10px;left:12px;z-index:30;min-height:40px;display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:13px;text-decoration:none;font-family:Vazirmatn,Tahoma,sans-serif;font-size:12px;font-weight:800;background:rgba(251,244,228,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink);border:2px solid var(--parchment-border);box-shadow:0 5px 16px rgba(15,10,5,.22);transition:background .9s ease,border-color .9s ease,color .9s ease,box-shadow .9s ease,opacity .2s ease,transform .15s ease;}' +
-    '#fanoos-hall-btn:hover{background:var(--parchment);border-color:var(--gold);transform:translateY(-1px);}' +
-    'body.night-ui #fanoos-hall-btn{background:rgba(14,24,48,.82);border-color:rgba(235,192,96,.62);color:#fff4d4;box-shadow:0 10px 26px rgba(3,6,16,.5);}' +
-    'body.night-ui #fanoos-hall-btn:hover{background:rgba(38,62,110,.92);border-color:var(--gold-light);}' +
-    'body.dawn-ui #fanoos-hall-btn{background:rgba(22,36,62,.82);border-color:rgba(248,206,112,.85);color:#fff6dc;box-shadow:0 10px 28px rgba(242,178,86,.26);}' +
-    'body.dawn-ui #fanoos-hall-btn:hover{background:rgba(36,56,92,.92);border-color:var(--gold-light);}' +
-    'body.fanoos-modal-open #fanoos-hall-btn,body:has(.modal-overlay.open) #fanoos-hall-btn,body:has(#fanoos-chest-modal.open) #fanoos-hall-btn{opacity:0!important;pointer-events:none!important;visibility:hidden!important;}' +
-    '@media(max-width:1160px){.ui-layer>div:first-child{padding-left:92px;}}' +
-    '@media(max-width:640px){#fanoos-hall-btn{top:7px;left:8px;min-height:36px;padding:4px 9px;border-radius:12px;font-size:11.5px;}.ui-layer>div:first-child{padding-left:80px;}}' +
-    '#fanoos-chest-modal{position:fixed;inset:0;z-index:2600;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(7,14,30,.72);backdrop-filter:blur(4px);direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;}' +
-    '#fanoos-chest-modal.open{display:flex;}' +
-    '#fanoos-chest-modal .fc-box{width:100%;max-width:520px;background:linear-gradient(180deg,#132447 0%,#0b162e 100%);border:2.5px solid #e5b249;border-radius:20px;padding:18px 16px;color:#fdf6e3;box-shadow:0 24px 60px rgba(0,0,0,.62);}' +
-    '#fanoos-chest-modal .fc-head{text-align:center;padding-bottom:10px;margin-bottom:12px;border-bottom:1.5px dashed rgba(248,216,120,.38);}' +
-    '#fanoos-chest-modal .fc-head h3{margin:6px 0 0;font-size:18px;font-weight:900;color:#ffe28a;}' +
-    '#fanoos-chest-modal .fc-badge{display:inline-block;padding:3px 11px;border-radius:999px;background:rgba(212,154,42,.2);border:1px solid #e5b249;color:#ffe7a3;font-size:11.5px;font-weight:800;}' +
-    '#fanoos-chest-modal .fc-q{font-size:14.5px;font-weight:800;line-height:1.85;margin-bottom:12px;color:#fff9ea;}' +
-    '#fanoos-chest-modal .fc-opts{display:flex;flex-direction:column;gap:8px;}' +
-    '#fanoos-chest-modal .fc-opt{width:100%;text-align:right;display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:12px;border:1.8px solid #3f5e96;background:#1a305c;color:#f9f1de;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .16s ease;}' +
-    '#fanoos-chest-modal .fc-opt:hover:not(:disabled){border-color:#f8d878;background:#223e75;}' +
-    '#fanoos-chest-modal .fc-num{width:24px;height:24px;border-radius:8px;background:#d49a2a;color:#0b162e;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}' +
-    '#fanoos-chest-modal .fc-opt.fc-ok{background:#165239;border-color:#49cf86;color:#e4ffef;}' +
-    '#fanoos-chest-modal .fc-opt.fc-bad{background:#5c2020;border-color:#e56b6b;color:#ffe5e5;}' +
-    '#fanoos-chest-modal .fc-fb{display:none;margin-top:11px;padding:9px 12px;border-radius:11px;font-size:13px;font-weight:800;line-height:1.75;}' +
-    '#fanoos-chest-modal .fc-fb.show{display:block;}' +
-    '#fanoos-chest-modal .fc-fb.ok{background:rgba(42,157,96,.22);border:1.5px solid #49cf86;color:#d6ffea;}' +
-    '#fanoos-chest-modal .fc-fb.bad{background:rgba(217,76,76,.22);border:1.5px solid #e56b6b;color:#ffe0e0;}' +
-    '#fanoos-chest-modal .fc-foot{text-align:center;margin-top:12px;}' +
-    '#fanoos-chest-modal .fc-next{border:2px solid #fff2ba;background:linear-gradient(135deg,#df9f28,#b37312);color:#fff;font-family:inherit;font-size:13.8px;font-weight:900;padding:9px 20px;border-radius:11px;cursor:pointer;}' +
-    '</style>';
+    if (!classId || !sid) {
+      showEntryGate();
+      return;
+    }
 
-  const injectedHook =
-    '\n;(function () {\n' +
-    '  const B = window.__FANOOS_BRIDGE__; if (!B) return;\n' +
-    '  const bootBridge = () => {\n' +
-    '    teacherMode = false;\n' +
-    '    getStudentStorageKey = () => B.storageKey;\n' +
-    '    getDefaultStudentState = () => ({ highestUnlocked: 1, completedStations: [], collectedCards: [], discoveredSecrets: [], mistakes: {}, teacherAnswers: {}, pledgeChoices: [], personalNote: "", finishedGame: false, seenGuide: false });\n' +
-    '    saveCurrentStudentState = (opts = {}) => {\n' +
-    '      if (!currentStudent || !state) return;\n' +
-    '      const clean = B.buildStatePayload(state); Object.assign(state, clean);\n' +
-    '      try { localStorage.setItem(B.storageKey, JSON.stringify(clean)); } catch {}\n' +
-    '      B.saveToServer(clean, Boolean(opts.immediate || opts.isReset || clean.finishedGame), Boolean(opts.isReset));\n' +
-    '      updateHudAndDock();\n' +
-    '    };\n' +
-    '    const _origSyncBg = syncBgThrottle;\n' +
-    '    syncBgThrottle = function () {\n' +
-    '      document.body.classList.toggle("fanoos-modal-open", !!document.querySelector(".modal-overlay.open, #fanoos-chest-modal.open"));\n' +
-    '      return _origSyncBg.apply(this, arguments);\n' +
-    '    };\n' +
-    '    openWelcomeModal = openLeaderboardModal = enterFromSplash = submitTeacherLogin = selectStudent = enterPreviewGuestMode = () => {};\n' +
-    '    document.querySelectorAll("#modal-settings .setting-row").forEach(r => { const h = r.innerHTML || ""; if (h.includes("openLeaderboardModal") || h.includes("openWelcomeModal")) r.style.display = "none"; });\n' +
-    '    const recMistake = (n) => {\n' +
-    '      if (!state) return; if (!state.mistakes || typeof state.mistakes !== "object") state.mistakes = {};\n' +
-    '      const k = String(n); state.mistakes[k] = (Number(state.mistakes[k]) || 0) + 1;\n' +
-    '      saveCurrentStudentState({ immediate: true });\n' +
-    '    };\n' +
-    '    const wrapBool = (fn, n) => function (a, ok) { if (!ok) recMistake(n); return fn.apply(this, arguments); };\n' +
-    '    checkS1Quiz = wrapBool(checkS1Quiz, 1); checkS2Quiz = wrapBool(checkS2Quiz, 2);\n' +
-    '    toggleS3Trait = wrapBool(toggleS3Trait, 3); checkS3Quiz = wrapBool(checkS3Quiz, 3);\n' +
-    '    const _s4 = checkS4; checkS4 = function (b, ch) { if (ch !== "truth") recMistake(4); return _s4.apply(this, arguments); };\n' +
-    '    checkS5 = wrapBool(checkS5, 5);\n' +
-    '    const _s6 = pickS6; pickS6 = function (r, p, c) { if (p !== c) recMistake(6); return _s6.apply(this, arguments); };\n' +
-    '    checkS7Quiz = wrapBool(checkS7Quiz, 7);\n' +
-    '    const _s8o = checkSurahOrder; checkSurahOrder = function () { if (s8Order.length === 5 && !s8Order.every((v, i) => v === i + 1)) recMistake(8); return _s8o.apply(this, arguments); };\n' +
-    '    checkS8Quiz = wrapBool(checkS8Quiz, 8);\n' +
-    '    const _origComp = completeStation;\n' +
-    '    completeStation = function (stId) {\n' +
-    '      const out = _origComp.apply(this, arguments);\n' +
-    '      saveCurrentStudentState({ immediate: true });\n' +
-    '      setTimeout(() => B.openTeacherChest(stId, state, () => saveCurrentStudentState({ immediate: true }), (sfx) => AudioEngine.playSfx(sfx)), 420);\n' +
-    '      return out;\n' +
-    '    };\n' +
-    '    if (!document.getElementById("fanoos-hall-btn")) {\n' +
-    '      const a = document.createElement("a"); a.id = "fanoos-hall-btn"; a.className = "no-print"; a.href = B.hallBack; a.textContent = "🏠 تالار";\n' +
-    '      document.body.appendChild(a);\n' +
-    '    }\n' +
-    '    let localSt = null; try { localSt = JSON.parse(localStorage.getItem(B.storageKey) || "null"); } catch {}\n' +
-    '    currentStudent = { id: B.sid, name: B.sname, classId: B.classId, isTeacher: false, isPreview: false };\n' +
-    '    state = B.mergeStates(localSt, B.serverState);\n' +
-    '    try { localStorage.setItem(B.storageKey, JSON.stringify(state)); } catch {}\n' +
-    '    const sp = document.getElementById("splash-screen"); if (sp) sp.classList.add("hidden");\n' +
-    '    const wm = document.getElementById("modal-welcome"); if (wm) wm.classList.remove("open");\n' +
-    '    const startPos = state.finishedGame ? TOTAL_STATIONS : Math.max(1, Math.min(TOTAL_STATIONS, state.highestUnlocked || 1));\n' +
-    '    World3D.setSplashPan(false); World3D.resetWildlife(); World3D.jumpImmediate(startPos, true);\n' +
-    '    syncAtmosphereUI(startPos, true); updateHudAndDock(); syncBgThrottle(); showOneTimeOnboardTip();\n' +
-    '    const unlockAudio = () => { AudioEngine.initOnFirstGesture(); document.removeEventListener("pointerdown", unlockAudio); };\n' +
-    '    document.addEventListener("pointerdown", unlockAudio, { passive: true });\n' +
-    '  };\n' +
-    '  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootBridge, { once: true });\n' +
-    '  else bootBridge();\n' +
-    '})();\n';
+    /* =========================================================
+       2. توابع استخراج امن اطلاعات از پاسخ سرور فانوس
+       ========================================================= */
+    function parseJsonSafe(val) {
+      if (typeof val !== 'string') return val;
+      try { return JSON.parse(val); } catch (e) { return null; }
+    }
 
-  let patchedHtml = coreHtml.replace(
-    /const\s+CLOUD_API_URL\s*=\s*['"][^'"]*['"]\s*;/,
-    "const CLOUD_API_URL = '';"
-  );
-  patchedHtml = patchedHtml.replace('</head>', injectedStyle + '\n</head>');
-  const closeScriptTag = '<' + '/script>';
-  const lastScriptIdx = patchedHtml.lastIndexOf(closeScriptTag);
-  if (lastScriptIdx !== -1) {
-    patchedHtml = patchedHtml.slice(0, lastScriptIdx) + injectedHook + patchedHtml.slice(lastScriptIdx);
-  } else {
-    patchedHtml = patchedHtml.replace('</body>', '<' + 'script>' + injectedHook + closeScriptTag + '</body>');
-  }
+    function looksLikeState(obj) {
+      if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return false;
+      return (
+        'highestUnlocked' in obj ||
+        'completedStations' in obj ||
+        'collectedCards' in obj ||
+        'discoveredSecrets' in obj ||
+        'mistakes' in obj ||
+        'teacherAnswers' in obj ||
+        'finishedGame' in obj ||
+        'seenGuide' in obj
+      );
+    }
 
-  document.open();
-  document.write(patchedHtml);
-  document.close();
-})();
-</script>
+    function extractStateFromEntry(entry, targetGid) {
+      if (!entry) return null;
+      var parsed = parseJsonSafe(entry);
+      if (!parsed || typeof parsed !== 'object') return null;
+
+      if (parsed.state != null) {
+        var st = parseJsonSafe(parsed.state);
+        if (st && typeof st === 'object') return st;
+      }
+      if (parsed.progress && typeof parsed.progress === 'object' && !Array.isArray(parsed.progress)) {
+        if (parsed.progress[targetGid]) {
+          var pg = parseJsonSafe(parsed.progress[targetGid]);
+          if (pg && typeof pg === 'object') return pg.state ? parseJsonSafe(pg.state) : pg;
+        }
+        if (looksLikeState(parsed.progress)) return parsed.progress;
+      }
+      if (parsed.games && typeof parsed.games === 'object' && parsed.games[targetGid]) {
+        var gm = parseJsonSafe(parsed.games[targetGid]);
+        if (gm && typeof gm === 'object') return gm.state ? parseJsonSafe(gm.state) : gm;
+      }
+      if (parsed.states && typeof parsed.states === 'object' && parsed.states[targetGid]) {
+        var sm = parseJsonSafe(parsed.states[targetGid]);
+        if (sm && typeof sm === 'object') return sm.state ? parseJsonSafe(sm.state) : sm;
+      }
+      if (looksLikeState(parsed)) return parsed;
+      return null;
+    }
+
+    function extractApiBundle(raw) {
+      var result = {
+        className: '',
+        studentName: snameParam,
+        serverState: null,
+        teacherQuestions: []
+      };
+
+      if (!raw || typeof raw !== 'object') {
+        if (!result.studentName) result.studentName = 'مسافر عزیز';
+        return result;
+      }
+
+      var data = (raw.data && typeof raw.data === 'object') ? raw.data : raw;
+      var clsObj = (data.class && typeof data.class === 'object')
+        ? data.class
+        : ((raw.class && typeof raw.class === 'object') ? raw.class : {});
+
+      result.className = String(
+        data.className ||
+        raw.className ||
+        clsObj.className ||
+        clsObj.name ||
+        data.name ||
+        raw.name ||
+        ''
+      ).trim();
+
+      var listPools = [
+        data.progress, raw.progress, clsObj.progress,
+        data.records, raw.records,
+        data.students, raw.students, clsObj.students
+      ];
+
+      // استخراج نام دانش‌آموز از فهرست کلاس در صورت نبود sname در آدرس
+      if (!result.studentName) {
+        for (var p = 0; p < listPools.length && !result.studentName; p++) {
+          var pool = parseJsonSafe(listPools[p]);
+          if (Array.isArray(pool)) {
+            for (var i = 0; i < pool.length; i++) {
+              var item = pool[i];
+              if (!item || typeof item !== 'object') continue;
+              var itemSid = String(item.studentId || item.sid || item.id || '').trim();
+              if (itemSid === sid) {
+                var nm = String(item.studentName || item.sname || item.name || item.fullName || '').trim();
+                if (nm) { result.studentName = nm; break; }
+              }
+            }
+          } else if (pool && typeof pool === 'object' && pool[sid] && typeof pool[sid] === 'object') {
+            var nmObj = String(pool[sid].studentName || pool[sid].name || '').trim();
+            if (nmObj) result.studentName = nmObj;
+          }
+        }
+      }
+      if (!result.studentName) result.studentName = 'مسافر عزیز';
+
+      // جست‌وجوی پیشرفت ذخیره‌شده این دانش‌آموز برای بازی gid
+      var fallbackState = null;
+      for (var k = 0; k < listPools.length && !result.serverState; k++) {
+        var src = parseJsonSafe(listPools[k]);
+        if (!src) continue;
+
+        if (Array.isArray(src)) {
+          for (var j = 0; j < src.length; j++) {
+            var rec = src[j];
+            if (!rec || typeof rec !== 'object') continue;
+            var recSid = String(rec.studentId || rec.sid || rec.id || '').trim();
+            if (recSid !== sid) continue;
+            var recGid = String(rec.gameId || rec.gid || '').trim();
+            if (recGid && recGid !== gid) continue;
+            var st = extractStateFromEntry(rec, gid);
+            if (st) {
+              if (recGid === gid) { result.serverState = st; break; }
+              if (!fallbackState) fallbackState = st;
+            }
+          }
+        } else if (typeof src === 'object') {
+          var directCandidates = [
+            src[sid + '_' + gid],
+            src[gid + '_' + sid],
+            src[sid] && src[sid][gid],
+            src[gid] && src[gid][sid],
+            src[sid]
+          ];
+          for (var c = 0; c < directCandidates.length; c++) {
+            var cand = extractStateFromEntry(directCandidates[c], gid);
+            if (cand) { result.serverState = cand; break; }
+          }
+        }
+      }
+      if (!result.serverState && fallbackState) {
+        result.serverState = fallbackState;
+      }
+
+      // فیلتر سوالات اختصاصی معلم دقیقاً برای gameId === gid
+      var rawQuestions = parseJsonSafe(
+        data.questions || raw.questions || clsObj.questions || []
+      );
+      if (Array.isArray(rawQuestions)) {
+        result.teacherQuestions = rawQuestions.filter(function (q) {
+          return q && typeof q === 'object' && String(q.gameId || '').trim() === gid;
+        });
+      }
+
+      return result;
+    }
+
+    function safeJsonForInlineScript(obj) {
+      return JSON.stringify(obj)
+        .replace(/</g, '\\u003c')
+        .replace(/>/g, '\\u003e')
+        .replace(/\u2028/g, '\\u2028')
+        .replace(/\u2029/g, '\\u2029');
+    }
+
+    /* =========================================================
+       3. ساخت استایل و اسکریپت پل ارتباطی تزریقی داخل patchedHtml
+       ========================================================= */
+    function buildBridgeStyle() {
+      return (
+        '<style id="fanoos-bridge-style">\n' +
+        '  /* مخفی‌سازی صفحه ورود، تابلوی کلاس و پنل معلم قدیمی بدون حذف از DOM */\n' +
+        '  #splash-screen,\n' +
+        '  #modal-welcome,\n' +
+        '  #btn-leaderboard,\n' +
+        '  #modal-leaderboard,\n' +
+        '  #modal-confirm-delete-guest,\n' +
+        '  button[onclick*="openLeaderboardModal"],\n' +
+        '  .fanoos-hidden {\n' +
+        '    display: none !important;\n' +
+        '  }\n' +
+        '  /* پاکسازی ردیف‌ها و کارت تماس در پنجره تنظیمات */\n' +
+        '  #modal-settings .settings-section:has(.contact-box),\n' +
+        '  #modal-settings .setting-row:has(button[onclick*="openWelcomeModal"]),\n' +
+        '  #modal-settings .setting-row:has(button[onclick*="openLeaderboardModal"]) {\n' +
+        '    display: none !important;\n' +
+        '  }\n' +
+        '  /* دکمه تالار متصل به متغیرهای رنگی و تم پویای نوار بالای بازی */\n' +
+        '  #fanoos-hall-btn {\n' +
+        '    text-decoration: none;\n' +
+        '    border: 1.5px solid var(--parchment-border);\n' +
+        '    background: #fffaf0;\n' +
+        '    color: var(--ink);\n' +
+        '    transition: opacity 0.2s ease, background 0.2s ease, transform 0.14s ease, border-color 0.6s ease, color 0.6s ease;\n' +
+        '  }\n' +
+        '  #fanoos-hall-btn:hover {\n' +
+        '    background: #f5e6c8;\n' +
+        '    border-color: var(--gold);\n' +
+        '    transform: translateY(-1px);\n' +
+        '  }\n' +
+        '  body.night-ui #fanoos-hall-btn {\n' +
+        '    background: rgba(24, 42, 78, 0.92);\n' +
+        '    color: #fff4d4;\n' +
+        '    border-color: rgba(235, 192, 96, 0.55);\n' +
+        '  }\n' +
+        '  body.night-ui #fanoos-hall-btn:hover {\n' +
+        '    background: rgba(38, 62, 110, 0.96);\n' +
+        '  }\n' +
+        '  body.dawn-ui #fanoos-hall-btn {\n' +
+        '    background: rgba(28, 48, 82, 0.94);\n' +
+        '    color: #fff5d8;\n' +
+        '    border-color: rgba(248, 206, 112, 0.85);\n' +
+        '  }\n' +
+        '  /* مخفی شدن دکمه تالار هنگام باز بودن هر مودال تا روی دکمه بستن نیفتد */\n' +
+        '  body.fanoos-modal-open #fanoos-hall-btn {\n' +
+        '    opacity: 0 !important;\n' +
+        '    pointer-events: none !important;\n' +
+        '    visibility: hidden !important;\n' +
+        '  }\n' +
+        '  /* پیام ظریف ۲ ثانیه‌ای ذخیره ابری پایین صفحه */\n' +
+        '  #fanoos-save-pill {\n' +
+        '    position: fixed;\n' +
+        '    bottom: 14px;\n' +
+        '    left: 50%;\n' +
+        '    transform: translateX(-50%) translateY(14px);\n' +
+        '    opacity: 0;\n' +
+        '    visibility: hidden;\n' +
+        '    z-index: 1350;\n' +
+        '    pointer-events: none;\n' +
+        '    background: rgba(18, 86, 85, 0.94);\n' +
+        '    color: #fff8e2;\n' +
+        '    border: 1.5px solid var(--gold-light);\n' +
+        '    border-radius: 999px;\n' +
+        '    padding: 5px 14px;\n' +
+        '    font-size: 12px;\n' +
+        '    font-weight: 800;\n' +
+        '    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34);\n' +
+        '    transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;\n' +
+        '    white-space: nowrap;\n' +
+        '  }\n' +
+        '  #fanoos-save-pill.show {\n' +
+        '    opacity: 1;\n' +
+        '    visibility: visible;\n' +
+        '    transform: translateX(-50%) translateY(0);\n' +
+        '  }\n' +
+        '  body.night-ui #fanoos-save-pill {\n' +
+        '    background: rgba(14, 28, 56, 0.95);\n' +
+        '    border-color: rgba(248, 216, 120, 0.78);\n' +
+        '  }\n' +
+        '  /* مودال صندوقچه سوال استاد */\n' +
+        '  #fanoos-teacher-modal {\n' +
+        '    z-index: 1200;\n' +
+        '  }\n' +
+        '  .ftq-meta-row {\n' +
+        '    display: flex;\n' +
+        '    align-items: center;\n' +
+        '    justify-content: space-between;\n' +
+        '    gap: 8px;\n' +
+        '    margin-bottom: 10px;\n' +
+        '    flex-wrap: wrap;\n' +
+        '  }\n' +
+        '  .ftq-counter {\n' +
+        '    font-size: 12px;\n' +
+        '    font-weight: 800;\n' +
+        '    color: var(--turquoise-dark);\n' +
+        '    background: rgba(29, 122, 120, 0.12);\n' +
+        '    padding: 3px 10px;\n' +
+        '    border-radius: 999px;\n' +
+        '  }\n' +
+        '  body.night-ui .ftq-counter {\n' +
+        '    color: #82e6df;\n' +
+        '    background: rgba(82, 207, 199, 0.16);\n' +
+        '  }\n' +
+        '  .ftq-question-text {\n' +
+        '    font-size: 15px;\n' +
+        '    font-weight: 800;\n' +
+        '    line-height: 1.8;\n' +
+        '    margin: 0 0 12px;\n' +
+        '  }\n' +
+        '  .ftq-footer {\n' +
+        '    margin-top: 14px;\n' +
+        '    display: flex;\n' +
+        '    justify-content: flex-end;\n' +
+        '    gap: 8px;\n' +
+        '  }\n' +
+        '</style>\n'
+      );
+    }
+
+    function buildBridgeScript(payloadObj) {
+      var serialized = safeJsonForInlineScript(payloadObj);
+
+      /* کد پل ارتباطی به‌صورت یک تابع مستقل که پس از سریال‌سازی داخل patchedHtml تزریق می‌شود */
+      function injectedBridgeMain(CFG) {
+        'use strict';
+
+        if (window.__FANOOS_SALEH_BOOTED__) return;
+        window.__FANOOS_SALEH_BOOTED__ = true;
+
+        var LOCAL_KEY = 'fanoos_state_' + CFG.classId + '_' + CFG.gid + '_' + CFG.sid;
+        var displayClass = CFG.className
+          ? (/^کلاس\s/.test(CFG.className) ? CFG.className : 'کلاس ' + CFG.className)
+          : '';
+        var certSubtitle = displayClass || 'فانوس یادگیری';
+        var certSignature = displayClass ? (displayClass + ' • فانوس یادگیری') : 'فانوس یادگیری';
+
+        /* ---- نرمال‌سازی و ادغام state با ۱۰ کلید استاندارد ---- */
+        function sanitizeMistakes(raw) {
+          var out = {};
+          if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out;
+          Object.keys(raw).forEach(function (k) {
+            var n = Math.max(0, Math.floor(Number(raw[k]) || 0));
+            if (n > 0) out[String(k)] = n;
+          });
+          return out;
+        }
+
+        function sanitizeTeacherAnswers(raw) {
+          var out = {};
+          if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out;
+          Object.keys(raw).forEach(function (k) {
+            var item = raw[k];
+            if (!item || typeof item !== 'object') return;
+            out[String(k)] = {
+              chosenIndex: Number(item.chosenIndex),
+              isCorrect: Boolean(item.isCorrect),
+              stationId: Number(item.stationId || 0)
+            };
+          });
+          return out;
+        }
+
+        function buildStandardState(src) {
+          var r = (src && typeof src === 'object') ? src : {};
+          var completed = Array.isArray(r.completedStations)
+            ? Array.from(new Set(r.completedStations.map(Number).filter(function (n) { return n >= 1 && n <= 10; })))
+            : [];
+          var highest = Math.max(1, Math.min(10, Number(r.highestUnlocked || 1)));
+          if (completed.indexOf(9) !== -1 && highest < 10) highest = 10;
+          completed.forEach(function (n) {
+            if (n < 10 && highest <= n) highest = n + 1;
+          });
+          var cards = Array.isArray(r.collectedCards) ? Array.from(new Set(r.collectedCards.map(String))) : [];
+          var secrets = Array.isArray(r.discoveredSecrets) ? Array.from(new Set(r.discoveredSecrets.map(String))) : [];
+          var pledges = Array.isArray(r.pledgeChoices)
+            ? Array.from(new Set(r.pledgeChoices.map(Number).filter(function (n) { return !isNaN(n); })))
+            : [];
+
+          return {
+            highestUnlocked: highest,
+            completedStations: completed,
+            collectedCards: cards,
+            discoveredSecrets: secrets,
+            mistakes: sanitizeMistakes(r.mistakes),
+            teacherAnswers: sanitizeTeacherAnswers(r.teacherAnswers),
+            pledgeChoices: pledges,
+            personalNote: typeof r.personalNote === 'string' ? r.personalNote : '',
+            finishedGame: Boolean(r.finishedGame || completed.indexOf(10) !== -1),
+            seenGuide: Boolean(r.seenGuide)
+          };
+        }
+
+        function mergeStandardStates(localRaw, serverRaw) {
+          var a = buildStandardState(localRaw);
+          var b = buildStandardState(serverRaw);
+          var mergedMistakes = {};
+          Object.keys(a.mistakes).forEach(function (k) { mergedMistakes[k] = a.mistakes[k]; });
+          Object.keys(b.mistakes).forEach(function (k) {
+            mergedMistakes[k] = Math.max(mergedMistakes[k] || 0, b.mistakes[k]);
+          });
+          var mergedAnswers = {};
+          Object.keys(a.teacherAnswers).forEach(function (k) { mergedAnswers[k] = a.teacherAnswers[k]; });
+          Object.keys(b.teacherAnswers).forEach(function (k) { mergedAnswers[k] = b.teacherAnswers[k]; });
+
+          return buildStandardState({
+            highestUnlocked: Math.max(a.highestUnlocked, b.highestUnlocked),
+            completedStations: a.completedStations.concat(b.completedStations),
+            collectedCards: a.collectedCards.concat(b.collectedCards),
+            discoveredSecrets: a.discoveredSecrets.concat(b.discoveredSecrets),
+            mistakes: mergedMistakes,
+            teacherAnswers: mergedAnswers,
+            pledgeChoices: b.pledgeChoices.length ? b.pledgeChoices : a.pledgeChoices,
+            personalNote: b.personalNote.trim() ? b.personalNote : a.personalNote,
+            finishedGame: a.finishedGame || b.finishedGame,
+            seenGuide: a.seenGuide || b.seenGuide
+          });
+        }
+
+        function readLocalBackup() {
+          try {
+            var raw = localStorage.getItem(LOCAL_KEY);
+            return raw ? JSON.parse(raw) : null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function writeLocalBackup(stdState) {
+          try {
+            localStorage.setItem(LOCAL_KEY, JSON.stringify(stdState));
+          } catch (e) {}
+        }
+
+        /* ---- پیام ظریف ۲ ثانیه‌ای ذخیره ---- */
+        var savePillEl = null;
+        var savePillTimer = null;
+        function ensureSavePill() {
+          if (savePillEl && document.body.contains(savePillEl)) return savePillEl;
+          savePillEl = document.createElement('div');
+          savePillEl.id = 'fanoos-save-pill';
+          savePillEl.textContent = '☁️ ذخیره شد';
+          document.body.appendChild(savePillEl);
+          return savePillEl;
+        }
+        function showSavePill() {
+          var el = ensureSavePill();
+          el.classList.add('show');
+          clearTimeout(savePillTimer);
+          savePillTimer = setTimeout(function () {
+            el.classList.remove('show');
+          }, 2000);
+        }
+
+        /* ---- همگام‌سازی زنده با سرور (POST + keepalive) ---- */
+        var saveTimer = null;
+        var hasDirtySave = false;
+
+        function postProgressNow(stdState) {
+          hasDirtySave = false;
+          if (!CFG.apiUrl) {
+            showSavePill();
+            return;
+          }
+          var bodyStr = JSON.stringify({
+            action: 'saveProgress',
+            classId: CFG.classId,
+            studentId: CFG.sid,
+            studentName: CFG.sname,
+            gameId: CFG.gid,
+            state: stdState
+          });
+          try {
+            fetch(CFG.apiUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              keepalive: true,
+              body: bodyStr
+            }).then(function () {
+              showSavePill();
+            }).catch(function () {});
+          } catch (e) {}
+        }
+
+        function flushPendingSave() {
+          if (saveTimer) {
+            clearTimeout(saveTimer);
+            saveTimer = null;
+          }
+          if (!hasDirtySave || !state) return;
+          var stdState = buildStandardState(state);
+          writeLocalBackup(stdState);
+          postProgressNow(stdState);
+        }
+
+        document.addEventListener('visibilitychange', function () {
+          if (document.visibilityState === 'hidden') flushPendingSave();
+        });
+        window.addEventListener('pagehide', flushPendingSave);
+
+        /* ---- بازنویسی توابع ذخیره و ریست و غیرفعال‌سازی ورود/لیدربرد قدیمی ---- */
+        enterFromSplash = window.enterFromSplash = function () {};
+        openWelcomeModal = window.openWelcomeModal = function () {};
+        openLeaderboardModal = window.openLeaderboardModal = function () {};
+
+        saveCurrentStudentState = window.saveCurrentStudentState = function (opts) {
+          if (!state) return;
+          var stdState = buildStandardState(state);
+          state = stdState;
+          writeLocalBackup(stdState);
+          try { updateHudAndDock(); } catch (e) {}
+
+          hasDirtySave = true;
+          if (saveTimer) {
+            clearTimeout(saveTimer);
+            saveTimer = null;
+          }
+          if (opts && (opts.immediate || opts.isReset)) {
+            postProgressNow(stdState);
+          } else {
+            saveTimer = setTimeout(function () {
+              saveTimer = null;
+              postProgressNow(buildStandardState(state));
+            }, 300);
+          }
+        };
+
+        if (typeof executeResetCurrentStudent === 'function') {
+          var origExecuteReset = executeResetCurrentStudent;
+          executeResetCurrentStudent = window.executeResetCurrentStudent = function () {
+            origExecuteReset();
+            state = buildStandardState({
+              highestUnlocked: 1,
+              completedStations: [],
+              collectedCards: [],
+              discoveredSecrets: [],
+              mistakes: {},
+              teacherAnswers: {},
+              pledgeChoices: [],
+              personalNote: '',
+              finishedGame: false,
+              seenGuide: true
+            });
+            saveCurrentStudentState({ immediate: true, isReset: true });
+          };
+        }
+
+        /* ---- رادار اشتباهات هر ایستگاه در state.mistakes[String(N)] ---- */
+        var inGoToCard = false;
+        var lastHintMistakeAt = 0;
+
+        function recordStationMistake(stId) {
+          var n = Number(stId || 0);
+          if (!state || n < 1 || n > 10) return;
+          var key = String(n);
+          if (!state.mistakes || typeof state.mistakes !== 'object') state.mistakes = {};
+          state.mistakes[key] = (Number(state.mistakes[key]) || 0) + 1;
+          saveCurrentStudentState();
+        }
+
+        if (typeof goToStationCard === 'function') {
+          var origGoToStationCard = goToStationCard;
+          goToStationCard = window.goToStationCard = function () {
+            inGoToCard = true;
+            try {
+              return origGoToStationCard.apply(this, arguments);
+            } finally {
+              inGoToCard = false;
+            }
+          };
+        }
+
+        if (typeof AudioEngine !== 'undefined' && AudioEngine && typeof AudioEngine.playSfx === 'function') {
+          var origPlaySfx = AudioEngine.playSfx;
+          AudioEngine.playSfx = function (type) {
+            var stModal = document.getElementById('modal-station');
+            var tqModal = document.getElementById('fanoos-teacher-modal');
+            var stationOpen = stModal && stModal.classList.contains('open');
+            var tqOpen = tqModal && tqModal.classList.contains('open');
+            if (type === 'hint' && stationOpen && !tqOpen && !inGoToCard) {
+              lastHintMistakeAt = Date.now();
+              recordStationMistake(typeof activeStationId !== 'undefined' ? activeStationId : 1);
+            }
+            return origPlaySfx.apply(this, arguments);
+          };
+        }
+
+        /* پشتیبان سبک برای ثبت خطا در صورت افزوده‌شدن کلاس nudge یا chosen-warn */
+        document.addEventListener('click', function (ev) {
+          var content = document.getElementById('station-modal-content');
+          var stModal = document.getElementById('modal-station');
+          var tqModal = document.getElementById('fanoos-teacher-modal');
+          if (!content || !stModal || !stModal.classList.contains('open')) return;
+          if (tqModal && tqModal.classList.contains('open')) return;
+          var btn = ev.target && ev.target.closest ? ev.target.closest('button') : null;
+          if (!btn || !content.contains(btn)) return;
+          var hadWarn = btn.classList.contains('nudge') || btn.classList.contains('chosen-warn');
+          setTimeout(function () {
+            if (Date.now() - lastHintMistakeAt <= 120) return;
+            var hasWarnNow = btn.classList.contains('nudge') || btn.classList.contains('chosen-warn');
+            if (hasWarnNow && !hadWarn) {
+              lastHintMistakeAt = Date.now();
+              recordStationMistake(typeof activeStationId !== 'undefined' ? activeStationId : 1);
+            }
+          }, 40);
+        }, true);
+
+        /* ---- مودال «🎁 صندوقچه سوال استاد» پس از تکمیل هر ایستگاه ---- */
+        var tqQueue = [];
+        var tqIndex = 0;
+        var tqStationId = 0;
+
+        function getQuestionId(q, fallbackIdx) {
+          return String(q.id || q.qId || q.questionId || ('q_' + (q.stationId || 0) + '_' + fallbackIdx));
+        }
+
+        function ensureTeacherModal() {
+          var el = document.getElementById('fanoos-teacher-modal');
+          if (el) return el;
+          el = document.createElement('div');
+          el.id = 'fanoos-teacher-modal';
+          el.className = 'modal-overlay';
+          el.innerHTML = '<div class="parchment-modal" style="max-width:560px;" id="fanoos-teacher-card"></div>';
+          document.body.appendChild(el);
+          return el;
+        }
+
+        function closeTeacherModal() {
+          var el = document.getElementById('fanoos-teacher-modal');
+          if (el) el.classList.remove('open');
+          try { if (typeof syncBgThrottle === 'function') syncBgThrottle(); } catch (e) {}
+          syncModalOpenClass();
+        }
+
+        function renderTeacherQuestionStep() {
+          var modal = ensureTeacherModal();
+          var card = document.getElementById('fanoos-teacher-card');
+          var item = tqQueue[tqIndex];
+          if (!item || !card) {
+            closeTeacherModal();
+            return;
+          }
+
+          var q = item.q;
+          var qId = item.qId;
+          var qText = String(q.question || q.text || q.prompt || 'سوال اختصاصی استاد:');
+          var options = Array.isArray(q.options) ? q.options : (Array.isArray(q.choices) ? q.choices : []);
+          var correctIdx = Number(
+            q.correctIndex !== undefined ? q.correctIndex :
+            (q.answerIndex !== undefined ? q.answerIndex :
+            (q.correct !== undefined ? q.correct : 0))
+          );
+          var explanation = String(q.explanation || q.feedback || '').trim();
+          var faNum = typeof toFaNum === 'function' ? toFaNum : function (v) { return String(v); };
+
+          var optsHtml = options.map(function (optText, idx) {
+            return '<button type="button" class="opt-btn ftq-opt" data-idx="' + idx + '">' +
+              faNum(idx + 1) + '. ' + String(optText).replace(/</g, '&lt;').replace(/>/g, '&gt;') +
+            '</button>';
+          }).join('');
+
+          card.innerHTML =
+            '<div class="modal-head">' +
+              '<h3>🎁 صندوقچه سوال استاد</h3>' +
+              '<button type="button" class="modal-close" id="ftq-close-x" title="بستن">×</button>' +
+            '</div>' +
+            '<div class="ftq-meta-row">' +
+              '<span class="station-badge" style="margin:0;">ایستگاه ' + faNum(tqStationId) + '</span>' +
+              '<span class="ftq-counter">سوال ' + faNum(tqIndex + 1) + ' از ' + faNum(tqQueue.length) + '</span>' +
+            '</div>' +
+            '<div class="challenge-box" style="margin-bottom:0;">' +
+              '<div class="ftq-question-text">' + qText.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>' +
+              '<div class="options-list" id="ftq-options">' + optsHtml + '</div>' +
+              '<div id="ftq-fb" class="feedback-box"></div>' +
+            '</div>' +
+            '<div class="ftq-footer">' +
+              '<button type="button" class="primary-btn hidden" id="ftq-next-btn">' +
+                (tqIndex + 1 < tqQueue.length ? 'سوال بعدی ◀' : 'ادامه سفر ✨') +
+              '</button>' +
+            '</div>';
+
+          var closeBtn = document.getElementById('ftq-close-x');
+          if (closeBtn) closeBtn.addEventListener('click', closeTeacherModal);
+
+          var nextBtn = document.getElementById('ftq-next-btn');
+          if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+              if (tqIndex + 1 < tqQueue.length) {
+                tqIndex++;
+                renderTeacherQuestionStep();
+              } else {
+                closeTeacherModal();
+              }
+            });
+          }
+
+          var optBtns = card.querySelectorAll('.ftq-opt');
+          optBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var chosenIdx = Number(btn.getAttribute('data-idx'));
+              var isCorrect = chosenIdx === correctIdx;
+
+              optBtns.forEach(function (b) {
+                b.disabled = true;
+                var bIdx = Number(b.getAttribute('data-idx'));
+                if (bIdx === correctIdx) b.classList.add('correct');
+              });
+              if (!isCorrect) btn.classList.add('nudge');
+
+              try {
+                if (typeof AudioEngine !== 'undefined' && AudioEngine.playSfx) {
+                  AudioEngine.playSfx(isCorrect ? 'correct' : 'hint');
+                }
+              } catch (e) {}
+
+              if (!state.teacherAnswers || typeof state.teacherAnswers !== 'object') {
+                state.teacherAnswers = {};
+              }
+              state.teacherAnswers[qId] = {
+                chosenIndex: chosenIdx,
+                isCorrect: isCorrect,
+                stationId: Number(tqStationId)
+              };
+              saveCurrentStudentState({ immediate: true });
+
+              var fb = document.getElementById('ftq-fb');
+              if (fb) {
+                fb.className = 'feedback-box show ' + (isCorrect ? 'success' : 'hint');
+                fb.innerHTML =
+                  (isCorrect
+                    ? '<strong>🌟 آفرین! پاسخ درست بود و برای معلمت ثبت شد.</strong>'
+                    : '<strong>💡 پاسخ تو ثبت شد؛ گزینه درست با رنگ سبز مشخص شده است.</strong>') +
+                  (explanation ? '<div style="margin-top:6px;">' + explanation.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>' : '');
+              }
+              if (nextBtn) nextBtn.classList.remove('hidden');
+            });
+          });
+
+          modal.classList.add('open');
+          try { if (typeof syncBgThrottle === 'function') syncBgThrottle(); } catch (e) {}
+          syncModalOpenClass();
+        }
+
+        function checkTeacherQuestionsForStation(stationId) {
+          var qs = Array.isArray(CFG.teacherQuestions) ? CFG.teacherQuestions : [];
+          if (!qs.length || !state) return;
+          var answers = (state.teacherAnswers && typeof state.teacherAnswers === 'object') ? state.teacherAnswers : {};
+          var pending = [];
+
+          for (var i = 0; i < qs.length; i++) {
+            var q = qs[i];
+            if (Number(q.stationId) !== Number(stationId)) continue;
+            var qId = getQuestionId(q, i);
+            if (!answers[qId]) {
+              pending.push({ q: q, qId: qId });
+            }
+          }
+
+          if (!pending.length) return;
+          tqQueue = pending;
+          tqIndex = 0;
+          tqStationId = Number(stationId);
+          setTimeout(function () {
+            renderTeacherQuestionStep();
+          }, 520);
+        }
+
+        if (typeof completeStation === 'function') {
+          var origCompleteStation = completeStation;
+          completeStation = window.completeStation = function (stationId) {
+            var res = origCompleteStation.apply(this, arguments);
+            checkTeacherQuestionsForStation(stationId);
+            return res;
+          };
+        }
+
+        /* ---- دکمه «🏠 تالار» متصل به تم پویای HUD و مخفی هنگام باز بودن مودال ---- */
+        function injectHallButton() {
+          var hudControls = document.querySelector('#hud-bar .hud-controls');
+          if (!hudControls || document.getElementById('fanoos-hall-btn')) return;
+          var a = document.createElement('a');
+          a.id = 'fanoos-hall-btn';
+          a.className = 'hud-btn fanoos-hall-btn';
+          a.href = '../../index.html?class=' + encodeURIComponent(CFG.classId);
+          a.title = 'بازگشت به تالار فانوس یادگیری';
+          a.innerHTML = '🏠 <span>تالار</span>';
+          hudControls.insertBefore(a, hudControls.firstChild);
+        }
+
+        function syncModalOpenClass() {
+          var anyModalOpen = !!document.querySelector('.modal-overlay.open');
+          document.body.classList.toggle('fanoos-modal-open', anyModalOpen);
+        }
+
+        function watchModalsForHallButton() {
+          var observer = new MutationObserver(syncModalOpenClass);
+          observer.observe(document.body, {
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['class'],
+            childList: true
+          });
+          syncModalOpenClass();
+        }
+
+        /* ---- پاکسازی ظاهری: تنظیمات، ستاره آسمان، تیتراژ و لوح تقدیر ---- */
+        function cleanupSettingsModal() {
+          var modal = document.getElementById('modal-settings');
+          if (!modal) return;
+          var h3 = modal.querySelector('.modal-head h3');
+          if (h3) h3.textContent = '⚙️ تنظیمات بازی';
+
+          var contactBox = modal.querySelector('.contact-box');
+          if (contactBox) {
+            var contactSection = contactBox.closest('.settings-section');
+            if (contactSection) contactSection.classList.add('fanoos-hidden');
+          }
+
+          var rows = modal.querySelectorAll('.setting-row');
+          rows.forEach(function (row) {
+            var txt = row.textContent || '';
+            var html = row.innerHTML || '';
+            if (
+              html.indexOf('openWelcomeModal') !== -1 ||
+              html.indexOf('openLeaderboardModal') !== -1 ||
+              txt.indexOf('تغییر نام مسافر') !== -1 ||
+              txt.indexOf('تابلوی') !== -1
+            ) {
+              row.classList.add('fanoos-hidden');
+            }
+          });
+        }
+
+        function cleanupSkyStarAndModal() {
+          var starEl = document.getElementById('creator-star');
+          if (starEl) {
+            starEl.setAttribute('aria-label', 'ستاره فانوس یادگیری (برای مشاهده پیام ضربه بزنید)');
+            var hint = starEl.querySelector('.star-hint-badge');
+            if (hint) hint.textContent = 'ستاره فانوس ✦ بزن';
+          }
+
+          if (typeof SECRET_META !== 'undefined' && SECRET_META && SECRET_META.star) {
+            SECRET_META.star.title = 'راز ستاره فانوس یادگیری';
+            SECRET_META.star.toast = 'ستاره درخشان فانوس یادگیری رو پیدا کردی!';
+          }
+
+          var creatorsModal = document.querySelector('#modal-creators .parchment-modal');
+          if (creatorsModal) {
+            creatorsModal.innerHTML =
+              '<div class="modal-head">' +
+                '<h3>✨ ستاره فانوس یادگیری</h3>' +
+                '<button class="modal-close" onclick="closeModal(\'modal-creators\')">×</button>' +
+              '</div>' +
+              '<div style="font-size:42px; margin:6px 0;">🌟</div>' +
+              '<p style="font-size:14.2px; line-height:1.95; color:var(--ink-soft); margin:8px auto 16px; max-width:410px;">' +
+                'این ماجراجویی با عشق به یادگیری عمیق داستان‌های قرآنی در پلتفرم فانوس یادگیری طراحی شده است. این ستاره در تمام طول مسیر همراه و روشن‌کننده راه توست!' +
+              '</p>' +
+              '<button class="primary-btn" onclick="closeModal(\'modal-creators\')">بستن</button>';
+          }
+        }
+
+        function patchCertificateAndEndingDom() {
+          var container = document.getElementById('station-modal-content');
+          if (!container) return;
+
+          var cert = container.querySelector('.certificate-frame');
+          if (cert && cert.getAttribute('data-fanoos-cert') !== '1') {
+            cert.setAttribute('data-fanoos-cert', '1');
+            var divs = cert.querySelectorAll('div');
+            var updatedFooter = false;
+            divs.forEach(function (d) {
+              if (d.children.length === 0 && d.textContent.indexOf('کلاس ششم') !== -1) {
+                d.textContent = 'سفر در زمان به سرزمین ثمود • ' + certSubtitle;
+              }
+              if (d.textContent.indexOf('کد تایید:') !== -1 && d.querySelector('span')) {
+                var codeSpan = d.querySelector('span');
+                d.innerHTML = '<strong>' + certSignature.replace(/</g, '&lt;') + '</strong> &nbsp;•&nbsp; ' + codeSpan.outerHTML;
+                updatedFooter = true;
+              }
+            });
+            if (!updatedFooter) {
+              var footer = document.createElement('div');
+              footer.style.cssText = 'margin-top:8px; font-size:12.5px; font-weight:800; color:#6b5234;';
+              footer.textContent = certSignature;
+              cert.appendChild(footer);
+            }
+          }
+
+          var credits = container.querySelector('.ending-credits-box');
+          if (credits && credits.getAttribute('data-fanoos-credits') !== '1') {
+            credits.setAttribute('data-fanoos-credits', '1');
+            credits.innerHTML =
+              '<div style="font-weight:900; color:#ffe28a; font-size:13.5px;">✨ تیتراژ پایانی ✨</div>' +
+              '<div style="font-size:12.8px; margin-top:3px;">ارائه‌شده در پلتفرم آموزشی</div>' +
+              '<div style="font-size:15.5px; font-weight:900; color:#fff7d6; margin-top:2px;">🏮 ' +
+                certSignature.replace(/</g, '&lt;') +
+              '</div>';
+          }
+        }
+
+        function watchStationModalContent() {
+          var content = document.getElementById('station-modal-content');
+          if (!content) return;
+          var obs = new MutationObserver(patchCertificateAndEndingDom);
+          obs.observe(content, { childList: true, subtree: true });
+          patchCertificateAndEndingDom();
+        }
+
+        if (typeof openStationModal === 'function') {
+          var origOpenStationModal = openStationModal;
+          openStationModal = window.openStationModal = function () {
+            var res = origOpenStationModal.apply(this, arguments);
+            patchCertificateAndEndingDom();
+            syncModalOpenClass();
+            return res;
+          };
+        }
+
+        /* ---- رهگیری fillText فقط برای بوم‌های غیر از دنیای بازی (خروجی PNG لوح تقدیر) ---- */
+        if (window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype.fillText) {
+          var origFillText = CanvasRenderingContext2D.prototype.fillText;
+          CanvasRenderingContext2D.prototype.fillText = function (text, x, y, maxWidth) {
+            var cvs = this.canvas;
+            if (cvs && cvs.id !== 'world-canvas' && cvs.id !== 'celebration-canvas') {
+              var s = String(text == null ? '' : text);
+              if (s.indexOf('پایه ششم') !== -1 || s.indexOf('کلاس ششم') !== -1) {
+                s = s.replace(/پایه ششم|کلاس ششم/g, certSubtitle);
+              } else if (cvs.width === 1200 && cvs.height === 900 && Math.abs(Number(y) - 814) < 6 && s.trim() === '') {
+                s = certSignature;
+              }
+              return arguments.length >= 4
+                ? origFillText.call(this, s, x, y, maxWidth)
+                : origFillText.call(this, s, x, y);
+            }
+            return origFillText.apply(this, arguments);
+          };
+        }
+
+        /* ---- ورود خودکار و راه‌اندازی کامل دنیای بازی ---- */
+        var autoLoggedIn = false;
+        function bootAutoLogin() {
+          injectHallButton();
+          cleanupSettingsModal();
+          cleanupSkyStarAndModal();
+          ensureSavePill();
+
+          if (autoLoggedIn) return;
+          autoLoggedIn = true;
+
+          teacherMode = false;
+          currentStudent = {
+            id: CFG.sid,
+            name: CFG.sname,
+            classId: CFG.classId,
+            isTeacher: false,
+            isPreview: false,
+            isGuest: false
+          };
+
+          var merged = mergeStandardStates(readLocalBackup(), CFG.serverState);
+          state = merged;
+          writeLocalBackup(merged);
+
+          var splash = document.getElementById('splash-screen');
+          if (splash) splash.classList.add('hidden');
+          var wm = document.getElementById('modal-welcome');
+          if (wm) wm.classList.remove('open');
+
+          var startPos = state.finishedGame ? 10 : state.highestUnlocked;
+          try {
+            if (typeof World3D !== 'undefined' && World3D) {
+              World3D.setSplashPan(false);
+              World3D.resetWildlife();
+              World3D.jumpImmediate(startPos, true);
+            }
+            if (typeof syncAtmosphereUI === 'function') syncAtmosphereUI(startPos, true);
+            if (typeof updateHudAndDock === 'function') updateHudAndDock();
+            if (!state.seenGuide && typeof showOneTimeOnboardTip === 'function') {
+              showOneTimeOnboardTip();
+            }
+          } catch (e) {}
+
+          watchModalsForHallButton();
+          watchStationModalContent();
+        }
+
+        bootAutoLogin();
+        document.addEventListener('DOMContentLoaded', bootAutoLogin);
+        setTimeout(function () {
+          injectHallButton();
+          cleanupSettingsModal();
+          cleanupSkyStarAndModal();
+          try { if (typeof updateHudAndDock === 'function') updateHudAndDock(); } catch (e) {}
+          syncModalOpenClass();
+        }, 250);
+      }
+
+      return (
+        '<script id="fanoos-bridge-script">\n' +
+        '(' + injectedBridgeMain.toString() + ')(' + serialized + ');\n' +
+        '<' + '/script>\n'
+      );
+    }
+
+    /* =========================================================
+       4. واکشی هم‌زمان core.html و اطلاعات کلاس از API فانوس
+       ========================================================= */
+    var apiUrl = (window.FANOOS_CONFIG && window.FANOOS_CONFIG.apiUrl)
+      ? String(window.FANOOS_CONFIG.apiUrl).trim()
+      : '';
+
+    var corePromise = fetch('./core.html', { cache: 'no-store' }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.text();
+    });
+
+    var apiPromise = apiUrl
+      ? fetch(
+          apiUrl +
+          '?action=getClass&classId=' + encodeURIComponent(classId) +
+          '&t=' + Date.now()
+        ).then(function (res) {
+          if (!res.ok) return null;
+          return res.json();
+        }).catch(function () {
+          return null;
+        })
+      : Promise.resolve(null);
+
+    Promise.all([corePromise, apiPromise]).then(function (results) {
+      var coreHtml = results[0];
+      var apiRaw = results[1];
+      var bundle = extractApiBundle(apiRaw);
+
+      // خنثی‌سازی آدرس قدیمی Google Apps Script در core.html
+      var patchedHtml = coreHtml.replace(
+        /const\s+CLOUD_API_URL\s*=\s*['"][^'"]*['"]\s*;/,
+        "const CLOUD_API_URL = '';"
+      );
+
+      var headCloseTag = '<' + '/head>';
+      var bodyCloseTag = '<' + '/body>';
+      var styleBlock = buildBridgeStyle();
+      var scriptBlock = buildBridgeScript({
+        classId: classId,
+        className: bundle.className,
+        sid: sid,
+        sname: bundle.studentName,
+        gid: gid,
+        age: age,
+        apiUrl: apiUrl,
+        serverState: bundle.serverState,
+        teacherQuestions: bundle.teacherQuestions
+      });
+
+      if (patchedHtml.indexOf(headCloseTag) !== -1) {
+        patchedHtml = patchedHtml.replace(headCloseTag, styleBlock + headCloseTag);
+      } else {
+        patchedHtml = styleBlock + patchedHtml;
+      }
+
+      if (patchedHtml.indexOf(bodyCloseTag) !== -1) {
+        patchedHtml = patchedHtml.replace(bodyCloseTag, scriptBlock + bodyCloseTag);
+      } else {
+        patchedHtml = patchedHtml + scriptBlock;
+      }
+
+      document.open();
+      document.write(patchedHtml);
+      document.close();
+    }).catch(function (err) {
+      showLoadError(err && err.message ? err.message : '');
+    });
+  })();
+  </script>
 </body>
 </html>
