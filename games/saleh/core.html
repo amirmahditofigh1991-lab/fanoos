@@ -2029,7 +2029,7 @@
     </button>
 
     <div class="splash-credits">
-      طراحی و ساخت: امیرمهدی توفیق نوبری اول و امیرعلی رحیمیان
+       
     </div>
   </div>
 </div>
@@ -2047,7 +2047,7 @@
         <button class="hud-btn lb-hud-pill" id="btn-leaderboard" onclick="openLeaderboardModal()" title="تابلوی زنده پیشرفت کلاس">🏆<span class="hud-lbl"> پیشرفت کلاس</span></button>
         <button class="hud-btn card-counter-pill hidden" id="btn-deck" onclick="openDeckModal()" title="کلکسیون کارت‌ها">🃏 <span id="deck-count">۰</span>/۱۱</button>
         <button class="hud-btn cam-reset-pill hidden" id="btn-reset-cam" onclick="resetCameraToStandard()" title="بازگشت دوربین به نمای استاندارد">🔍<span class="hud-lbl"> نمای استاندارد</span></button>
-        <button class="hud-btn" id="btn-settings" onclick="openSettingsModal()" title="تنظیمات، صدا، نوسازی و ارتباط با ما">⚙️<span class="hud-lbl"> تنظیمات</span></button>
+        <button class="hud-btn" id="btn-settings" onclick="openSettingsModal()" title="تنظیمات، صدا، نوسازی و ">⚙️<span class="hud-lbl"> تنظیمات</span></button>
       </div>
     </header>
     <div class="sky-phase-bar">
@@ -2173,10 +2173,10 @@
     </p>
     <div style="background:#fffdf7; border:2px solid var(--gold); border-radius:15px; padding:14px; margin-bottom:12px;">
       <div style="font-size:18px; font-weight:900; color:var(--turquoise-dark); margin-bottom:8px;">
-        ✦ امیرمهدی توفیق نوبری اول
+        ✦ 
       </div>
       <div style="font-size:18px; font-weight:900; color:var(--turquoise-dark);">
-        ✦ امیرعلی رحیمیان
+        ✦ 
       </div>
     </div>
     <p style="font-size:12.5px; color:#776045; margin-bottom:12px;">
@@ -2225,7 +2225,7 @@
 <div id="modal-settings" class="modal-overlay" onclick="if(event.target===this) closeModal('modal-settings')">
   <div class="parchment-modal" style="max-width:520px;">
     <div class="modal-head">
-      <h3>⚙️ تنظیمات و ارتباط با ما</h3>
+      <h3>⚙️ تنظیمات و </h3>
       <button class="modal-close" onclick="closeModal('modal-settings')">×</button>
     </div>
 
@@ -2265,19 +2265,19 @@
 
     <!-- Contact Us & Designers Section -->
     <div class="settings-section" style="margin-bottom:4px;">
-      <div class="settings-section-title">📞 ارتباط با ما و طراحان بازی</div>
+      <div class="settings-section-title">📞  و طراحان بازی</div>
       <div class="contact-box">
         <div><strong>طراحان و سازندگان این بازی:</strong></div>
         <div style="color:var(--turquoise-dark); font-weight:900; margin:2px 0;">
-          ✦ امیرمهدی توفیق نوبری اول &nbsp;•&nbsp; ✦ امیرعلی رحیمیان
+          ✦  &nbsp;•&nbsp; ✦ 
         </div>
         <div style="font-size:12.5px; color:var(--ink-soft);">
           برای ارسال عکس لوح «نشان اهل یقین»، پرسش درسی یا پیشنهاد درباره بازی می‌توانید با ما در ارتباط باشید:
         </div>
         <div class="phone-row">
-          <span class="phone-num-badge">۰۹۳۷۶۵۸۴۳۸۰</span>
+          <span class="phone-num-badge"></span>
           <div style="display:flex; gap:6px;">
-            <a href="tel:09376584380" class="primary-btn" style="padding:6px 12px; font-size:12.5px; text-decoration:none;">📞 تماس</a>
+            <a href="" class="primary-btn" style="padding:6px 12px; font-size:12.5px; text-decoration:none;">📞 تماس</a>
             <button class="secondary-btn" style="padding:6px 11px; font-size:12.5px;" onclick="copyTeacherPhone()">📋 کپی شماره</button>
           </div>
         </div>
@@ -2710,8 +2710,8 @@ function toEnDigits(str) {
 const GAME_CONFIG = {
   title: 'سفر در زمان به سرزمین ثمود',
   subtitle: 'دنیای سه‌بعدی زندگی حضرت صالح (ع)',
-  creators: ['امیرمهدی توفیق نوبری اول', 'امیرعلی رحیمیان'],
-  contactPhone: '09376584380',
+  creators: ['', ''],
+  contactPhone: '',
   storagePrefix: 'salih_quest_v1'
 };
 
@@ -6426,12 +6426,12 @@ function resetCurrentStudentFromSettings() {
 
 function copyTeacherPhone() {
   AudioEngine.playSfx('click');
-  const num = '09376584380';
+  const num = '';
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(num).then(() => showToast('📋 شماره ۰۹۳۷۶۵۸۴۳۸۰ کپی شد!'))
-      .catch(() => showToast('شماره تماس: ۰۹۳۷۶۵۸۴۳۸۰'));
+    navigator.clipboard.writeText(num).then(() => showToast('📋 شماره  کپی شد!'))
+      .catch(() => showToast('شماره تماس: '));
   } else {
-    showToast('شماره تماس: ۰۹۳۷۶۵۸۴۳۸۰');
+    showToast('شماره تماس: ');
   }
 }
 
@@ -8385,7 +8385,7 @@ function renderStation10(step = 1) {
           <div style="font-weight:900; color:#ffe28a; font-size:13.5px;">✨ تیتراژ پایانی ✨</div>
           <div style="font-size:12.5px;">طراحی، سناریو و ساخت دنیای سه‌بعدی:</div>
           <div style="font-size:15px; font-weight:900; color:#fff7d6; margin-top:2px;">
-            ✦ امیرمهدی توفیق نوبری اول &nbsp;•&nbsp; ✦ امیرعلی رحیمیان
+            ✦  &nbsp;•&nbsp; ✦ 
           </div>
         </div>
 
@@ -8543,7 +8543,7 @@ function generateCertificateDataUrl() {
   // Creators Footer & Subtle Verification Code
   ctx.fillStyle = '#6b5234';
   ctx.font = `700 19px ${fontFam}`;
-  ctx.fillText('طراحی و ساخت: امیرمهدی توفیق نوبری اول و امیرعلی رحیمیان', W/2, H - 86);
+  ctx.fillText(' ', W/2, H - 86);
 
   ctx.fillStyle = '#8b6f47';
   ctx.font = `700 16px ${fontFam}`;
@@ -8586,7 +8586,7 @@ function buildCertificateHtml() {
         <span style="color:#ffe28a; font-size:16.5px;">✦ اللَّهُمَّ عَجِّلْ لِوَلِيِّكَ الْفَرَجَ ✦</span>
       </div>
       <div style="margin-top:8px; font-size:12px; color:#6b5234;">
-        طراحی و ساخت: امیرمهدی توفیق نوبری اول و امیرعلی رحیمیان • <span>کد تایید: ${code}</span>
+          • <span>کد تایید: ${code}</span>
       </div>
 
       <div class="no-print" style="margin-top:16px;">
