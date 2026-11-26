@@ -837,13 +837,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.8rem;
+      gap: 8px;
+      font-size: 0.79rem;
       margin-bottom: 8px;
+      flex-wrap: wrap;
     }
 
     .progress-meta .label {
       color: var(--text-muted);
       font-weight: 600;
+    }
+
+    .progress-meta .badges-inline {
+      color: var(--gold-bright);
+      font-weight: 700;
     }
 
     .progress-meta .count {
@@ -1577,7 +1584,10 @@
         progress: [],
         questions: [],
         student: null,
-        isRefreshingLb: false
+        isRefreshingLb: false,
+        isSilentRefreshing: false,
+        hasLoadedClass: false,
+        lastFetchAt: 0
       };
 
       // DOM References
@@ -1671,17 +1681,27 @@
         return 'fanoos_student_' + classId;
       }
 
+      function makeStudentObj(id, name, isDemo) {
+        const cleanId = String(id ?? '').trim();
+        const cleanName = String(name ?? '').trim();
+        return {
+          id: cleanId,
+          name: cleanName,
+          studentId: cleanId,
+          studentName: cleanName,
+          isDemo: Boolean(isDemo)
+        };
+      }
+
       function loadSavedStudent(classId) {
         try {
           const raw = localStorage.getItem(storageKey(classId));
           if (!raw) return null;
           const parsed = JSON.parse(raw);
-          if (parsed && parsed.studentId && parsed.studentName) {
-            return {
-              studentId: String(parsed.studentId),
-              studentName: String(parsed.studentName),
-              isDemo: false
-            };
+          const sid = String(parsed.studentId ?? parsed.id ?? '').trim();
+          const sname = String(parsed.studentName ?? parsed.name ?? '').trim();
+          if (sid && sname) {
+            return makeStudentObj(sid, sname, false);
           }
         } catch (_) {}
         return null;
@@ -1707,17 +1727,43 @@
             if (typeof item === 'string') {
               const trimmed = item.trim();
               if (!trimmed) return null;
-              return { id: 's_' + (idx + 1) + '_' + trimmed, name: trimmed };
+              return { id: 's' + (idx + 1), name: trimmed };
             }
             if (item && typeof item === 'object') {
               const name = String(item.name || item.studentName || item.fullName || '').trim();
-              const id = String(item.id || item.studentId || item.sid || ('s_' + (idx + 1))).trim();
+              const id = String(item.id || item.studentId || item.sid || ('s' + (idx + 1))).trim();
               if (!name) return null;
               return { id, name };
             }
             return null;
           })
           .filter(Boolean);
+      }
+
+      function reconcileSavedStudent(saved, classInfo) {
+        if (!saved || saved.isDemo) return saved;
+        const roster = normalizeStudents(classInfo && classInfo.students);
+        if (roster.length === 0) return saved;
+
+        const matchedById = roster.find(
+          (st) => String(st.id).trim() === String(saved.id).trim()
+        );
+        if (matchedById) {
+          return makeStudentObj(matchedById.id, matchedById.name || saved.name, false);
+        }
+
+        if (!String(saved.id).startsWith('g_')) {
+          const matchedByName = roster.find(
+            (st) => String(st.name).trim() === String(saved.name).trim()
+          );
+          if (matchedByName) {
+            const updated = makeStudentObj(matchedByName.id, matchedByName.name, false);
+            saveStudent(state.classId, updated);
+            return updated;
+          }
+        }
+
+        return saved;
       }
 
       function normalizeEnabledGames(rawEnabled) {
@@ -1763,40 +1809,23 @@
         return false;
       }
 
-      function parseListOrCount(val) {
-        if (val == null || val === '') return { count: 0, items: [] };
-        if (typeof val === 'number' && Number.isFinite(val)) {
-          return { count: Math.max(0, Math.floor(val)), items: [] };
-        }
-        if (Array.isArray(val)) {
-          const clean = val.map((v) => String(v).trim()).filter(Boolean);
-          return { count: clean.length, items: clean };
-        }
-        if (typeof val === 'string') {
-          const trimmed = val.trim();
-          if (!trimmed) return { count: 0, items: [] };
-          if (/^\d+$/.test(trimmed)) {
-            return { count: Number(trimmed), items: [] };
+      function parseRowState(row) {
+        if (!row || typeof row !== 'object') return {};
+        const sources = [row.state, row.stateJson];
+        for (const src of sources) {
+          if (src === undefined || src === null || src === '') continue;
+          if (typeof src === 'string') {
+            const trimmed = src.trim();
+            if (!trimmed) continue;
+            try {
+              const parsed = JSON.parse(trimmed);
+              if (parsed && typeof parsed === 'object') return parsed;
+            } catch (_) {}
+          } else if (typeof src === 'object') {
+            return src;
           }
-          try {
-            const parsed = JSON.parse(trimmed);
-            if (Array.isArray(parsed)) {
-              const clean = parsed.map((v) => String(v).trim()).filter(Boolean);
-              return { count: clean.length, items: clean };
-            }
-            if (parsed && typeof parsed === 'object') {
-              const keys = Object.keys(parsed).filter((k) => Boolean(parsed[k]));
-              return { count: keys.length, items: keys };
-            }
-          } catch (_) {}
-          const parts = trimmed.split(',').map((s) => s.trim()).filter(Boolean);
-          return { count: parts.length, items: parts };
         }
-        if (typeof val === 'object') {
-          const keys = Object.keys(val).filter((k) => Boolean(val[k]));
-          return { count: keys.length, items: keys };
-        }
-        return { count: 0, items: [] };
+        return {};
       }
 
       function extractRowStudentId(row) {
@@ -1811,98 +1840,124 @@
         return String(row.gameId ?? row.gid ?? row.game ?? '').trim();
       }
 
-      function computeStudentGameStats(studentId, game) {
-        const gid = String(game.id);
+      function getArrayLen(val) {
+        if (Array.isArray(val)) return val.length;
+        if (typeof val === 'string') {
+          const trimmed = val.trim();
+          if (!trimmed) return 0;
+          try {
+            const parsed = JSON.parse(trimmed);
+            if (Array.isArray(parsed)) return parsed.length;
+          } catch (_) {}
+        }
+        if (typeof val === 'number' && Number.isFinite(val)) {
+          return Math.max(0, Math.floor(val));
+        }
+        return 0;
+      }
+
+      function computeStudentGameStats(student, game) {
+        const currentId = String((student && (student.id ?? student.studentId)) ?? '').trim();
+        const currentName = String((student && (student.name ?? student.studentName)) ?? '').trim();
+        const gid = String(game.id ?? '').trim();
         const stationsTotal = Math.max(0, Number(game.stationsCount || game.stations || 0));
-        const rows = (Array.isArray(state.progress) ? state.progress : []).filter((row) => {
-          if (!row || typeof row !== 'object') return false;
-          return extractRowStudentId(row) === String(studentId) && extractRowGameId(row) === gid;
+
+        const allRows = Array.isArray(state.progress) ? state.progress : [];
+        const rowsForGame = allRows.filter((p) => {
+          if (!p || typeof p !== 'object') return false;
+          return extractRowGameId(p) === gid;
         });
 
-        let maxStationsNum = 0;
-        const stationSet = new Set();
-        let maxCardsNum = 0;
-        const cardSet = new Set();
+        let matchedRows = [];
+        if (currentId) {
+          matchedRows = rowsForGame.filter((p) => {
+            const pSid = extractRowStudentId(p);
+            return pSid !== '' && pSid === currentId;
+          });
+        }
+
+        if (matchedRows.length === 0 && currentName) {
+          matchedRows = rowsForGame.filter((p) => {
+            const pSid = extractRowStudentId(p);
+            const pName = extractRowStudentName(p);
+            if (!pName || pName !== currentName) return false;
+            return !currentId || !pSid || pSid === currentId;
+          });
+        }
+
+        let completedStations = 0;
+        let collectedCardsCount = 0;
+        let discoveredSecretsCount = 0;
         let finishedGame = false;
 
-        for (const row of rows) {
-          if (
-            parseTruthyBool(row.finishedGame) ||
-            parseTruthyBool(row.isFinished) ||
-            parseTruthyBool(row.completedGame) ||
-            parseTruthyBool(row.finished)
-          ) {
-            finishedGame = true;
-          }
+        if (matchedRows.length > 0) {
+          const sorted = matchedRows.slice().sort((a, b) => {
+            const ta = Date.parse(a.updatedAt || '') || 0;
+            const tb = Date.parse(b.updatedAt || '') || 0;
+            return tb - ta;
+          });
 
-          const rawStations =
-            row.completedStations ??
-            row.stationsCompleted ??
-            row.stationsDone ??
-            row.completedCount ??
-            row.stations;
+          for (const p of sorted) {
+            const parsedState = parseRowState(p);
 
-          if (rawStations !== undefined && rawStations !== null && rawStations !== '') {
-            const parsed = parseListOrCount(rawStations);
-            if (parsed.items.length > 0) {
-              parsed.items.forEach((item) => stationSet.add(item));
+            if (
+              parseTruthyBool(parsedState.finishedGame) ||
+              parseTruthyBool(parsedState.isFinished) ||
+              parseTruthyBool(parsedState.completedGame) ||
+              parseTruthyBool(parsedState.finished) ||
+              parseTruthyBool(p.finishedGame)
+            ) {
+              finishedGame = true;
             }
-            if (parsed.count > maxStationsNum) {
-              maxStationsNum = parsed.count;
-            }
-          } else if (row.stationId != null || row.station != null || row.stationIndex != null) {
-            const stKey = String(row.stationId ?? row.station ?? row.stationIndex).trim();
-            if (stKey) stationSet.add(stKey);
-          }
 
-          const rawCards =
-            row.cards ??
-            row.earnedCards ??
-            row.cardsCount ??
-            row.badges ??
-            row.badgesCount;
-
-          if (rawCards !== undefined && rawCards !== null && rawCards !== '') {
-            const parsedCards = parseListOrCount(rawCards);
-            if (parsedCards.items.length > 0) {
-              parsedCards.items.forEach((item) => cardSet.add(item));
+            const stCount = getArrayLen(parsedState.completedStations);
+            if (stCount > completedStations) {
+              completedStations = stCount;
             }
-            if (parsedCards.count > maxCardsNum) {
-              maxCardsNum = parsedCards.count;
+
+            const cardsLen = getArrayLen(parsedState.collectedCards);
+            if (cardsLen > collectedCardsCount) {
+              collectedCardsCount = cardsLen;
+            }
+
+            const secretsLen = getArrayLen(parsedState.discoveredSecrets);
+            if (secretsLen > discoveredSecretsCount) {
+              discoveredSecretsCount = secretsLen;
             }
           }
         }
 
-        let completedStations = Math.max(maxStationsNum, stationSet.size);
         if (stationsTotal > 0 && completedStations >= stationsTotal) {
           completedStations = stationsTotal;
           finishedGame = true;
         }
 
-        const cardsCount = Math.max(maxCardsNum, cardSet.size);
-        const badgesTotal = cardsCount + (finishedGame ? 1 : 0);
+        const badgesTotal = collectedCardsCount + discoveredSecretsCount;
 
         return {
           completedStations,
           stationsTotal,
-          cardsCount,
+          collectedCardsCount,
+          discoveredSecretsCount,
           finishedGame,
           badgesTotal
         };
       }
 
-      function computeStudentAggregate(studentId, activeGames) {
+      function computeStudentAggregate(student, activeGames) {
         let totalStations = 0;
         let possibleStations = 0;
         let totalCards = 0;
+        let totalSecrets = 0;
         let totalBadges = 0;
         let finishedGamesCount = 0;
 
         for (const game of activeGames) {
-          const stats = computeStudentGameStats(studentId, game);
+          const stats = computeStudentGameStats(student, game);
           totalStations += stats.completedStations;
           possibleStations += stats.stationsTotal;
-          totalCards += stats.cardsCount;
+          totalCards += stats.collectedCardsCount;
+          totalSecrets += stats.discoveredSecretsCount;
           totalBadges += stats.badgesTotal;
           if (stats.finishedGame) finishedGamesCount += 1;
         }
@@ -1914,6 +1969,7 @@
           totalStations,
           possibleStations,
           totalCards,
+          totalSecrets,
           totalBadges,
           finishedGamesCount,
           overallPct
@@ -1947,7 +2003,7 @@
           '&t=' +
           Date.now();
 
-        const response = await fetch(url);
+        const response = await fetch(url, { cache: 'no-store' });
         if (!response.ok) {
           throw new Error('سرور با خطای شماره ' + toFa(response.status) + ' پاسخ داد.');
         }
@@ -1970,6 +2026,8 @@
           throw new Error('اطلاعات این کلاس یافت نشد. لطفاً کد کلاس را بررسی کنید.');
         }
 
+        state.lastFetchAt = Date.now();
+
         return {
           classInfo,
           progress: Array.isArray(payload.progress) ? payload.progress : [],
@@ -1979,6 +2037,7 @@
 
       async function loadClass(classId) {
         state.classId = classId;
+        state.hasLoadedClass = false;
         closeLeaderboardModal();
         closeStudentPickerModal();
 
@@ -1990,8 +2049,9 @@
           state.classInfo = result.classInfo;
           state.progress = result.progress;
           state.questions = result.questions;
+          state.hasLoadedClass = true;
 
-          const saved = loadSavedStudent(classId);
+          const saved = reconcileSavedStudent(loadSavedStudent(classId), state.classInfo);
           if (saved) {
             state.student = saved;
             renderHall();
@@ -2007,6 +2067,29 @@
           els.errorMessage.textContent =
             err && err.message ? err.message : 'ارتباط با سرور برقرار نشد. لطفاً دوباره تلاش کنید.';
           showView('error');
+        }
+      }
+
+      async function refreshClassSilently(force) {
+        if (!state.classId || !state.hasLoadedClass || state.isSilentRefreshing) return;
+        if (!force && Date.now() - state.lastFetchAt < 1500) return;
+
+        state.isSilentRefreshing = true;
+        try {
+          const fresh = await fetchClassData(state.classId);
+          state.classInfo = fresh.classInfo;
+          state.progress = fresh.progress;
+          state.questions = fresh.questions;
+          if (state.student) {
+            state.student = reconcileSavedStudent(state.student, state.classInfo);
+            renderHall();
+            if (!els.leaderboardModal.classList.contains('hidden')) {
+              renderLeaderboard();
+            }
+          }
+        } catch (_) {
+        } finally {
+          state.isSilentRefreshing = false;
         }
       }
 
@@ -2040,7 +2123,7 @@
 
         const visibleGames = getVisibleGames();
         const activeGames = visibleGames.filter((g) => g.status === 'active');
-        const agg = computeStudentAggregate(state.student.studentId, activeGames);
+        const agg = computeStudentAggregate(state.student, activeGames);
 
         els.statStations.textContent =
           agg.possibleStations > 0
@@ -2085,7 +2168,7 @@
             }
 
             if (game.status === 'active') {
-              const stats = computeStudentGameStats(state.student.studentId, game);
+              const stats = computeStudentGameStats(state.student, game);
               const pct =
                 stats.stationsTotal > 0
                   ? Math.min(100, Math.round((stats.completedStations / stats.stationsTotal) * 100))
@@ -2121,15 +2204,14 @@
 
                   <div class="game-progress-wrap" style="${hasTeacherQ ? 'margin-top: 12px;' : ''}">
                     <div class="progress-meta">
-                      <span class="label">پیشرفت شما</span>
                       <span class="count">
                         ${
                           stats.stationsTotal > 0
                             ? toFa(stats.completedStations) + ' از ' + toFa(stats.stationsTotal) + ' ایستگاه'
                             : toFa(stats.completedStations) + ' ایستگاه'
                         }
-                        ${stats.cardsCount > 0 ? ' • ' + toFa(stats.cardsCount) + ' کارت' : ''}
                       </span>
+                      <span class="badges-inline">🏅 ${toFa(stats.badgesTotal)} نشان/کارت</span>
                     </div>
                     <div class="progress-track" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100">
                       <div class="progress-fill" style="width: ${pct}%;"></div>
@@ -2189,9 +2271,13 @@
       }
 
       function selectStudent(studentObj) {
-        state.student = studentObj;
-        if (!studentObj.isDemo) {
-          saveStudent(state.classId, studentObj);
+        state.student = makeStudentObj(
+          studentObj.id ?? studentObj.studentId,
+          studentObj.name ?? studentObj.studentName,
+          studentObj.isDemo
+        );
+        if (!state.student.isDemo) {
+          saveStudent(state.classId, state.student);
         }
         closeStudentPickerModal();
         renderHall();
@@ -2216,10 +2302,18 @@
         for (const row of Array.isArray(state.progress) ? state.progress : []) {
           if (!row || typeof row !== 'object') continue;
           const sid = extractRowStudentId(row);
-          if (!sid || sid.startsWith('demo_')) continue;
-          if (!rosterMap.has(sid)) {
-            const sname = extractRowStudentName(row) || 'مسافر مهمان';
-            rosterMap.set(sid, { id: sid, name: sname });
+          const sname = extractRowStudentName(row);
+          if (sid.startsWith('demo_')) continue;
+
+          if (sid) {
+            if (!rosterMap.has(sid)) {
+              rosterMap.set(sid, { id: sid, name: sname || 'مسافر مهمان' });
+            }
+          } else if (sname) {
+            const existsByName = Array.from(rosterMap.values()).some((item) => item.name === sname);
+            if (!existsByName) {
+              rosterMap.set('name_' + sname, { id: '', name: sname });
+            }
           }
         }
 
@@ -2232,13 +2326,12 @@
         }
 
         const entries = Array.from(rosterMap.values()).map((st) => {
-          const agg = computeStudentAggregate(st.id, activeGames);
+          const agg = computeStudentAggregate(st, activeGames);
           return {
             id: st.id,
             name: st.name,
             totalStations: agg.totalStations,
             possibleStations: agg.possibleStations,
-            totalCards: agg.totalCards,
             totalBadges: agg.totalBadges,
             finishedGamesCount: agg.finishedGamesCount,
             overallPct: agg.overallPct
@@ -2248,7 +2341,6 @@
         entries.sort((a, b) => {
           if (b.totalStations !== a.totalStations) return b.totalStations - a.totalStations;
           if (b.totalBadges !== a.totalBadges) return b.totalBadges - a.totalBadges;
-          if (b.totalCards !== a.totalCards) return b.totalCards - a.totalCards;
           if (b.finishedGamesCount !== a.finishedGamesCount) return b.finishedGamesCount - a.finishedGamesCount;
           return a.name.localeCompare(b.name, 'fa');
         });
@@ -2268,7 +2360,11 @@
           .map((item, index) => {
             const rankNum = index + 1;
             const rankDisplay = rankNum <= 3 ? medals[rankNum - 1] : toFa(rankNum);
-            const isMe = state.student && String(state.student.studentId) === String(item.id);
+            const isMe = Boolean(
+              state.student &&
+                ((item.id && String(state.student.id).trim() === String(item.id).trim()) ||
+                  (!item.id && String(state.student.name).trim() === String(item.name).trim()))
+            );
             const rankClass = rankNum <= 3 ? 'rank-' + rankNum : '';
 
             return `
@@ -2288,9 +2384,9 @@
                     <strong>${toFa(item.totalStations)}</strong>
                     <span>ایستگاه</span>
                   </div>
-                  <div class="lb-pill cards" title="کارت‌ها و نشان‌ها">
+                  <div class="lb-pill cards" title="نشان‌ها و کارت‌ها">
                     <strong>${toFa(item.totalBadges)}</strong>
-                    <span>کارت/نشان</span>
+                    <span>نشان/کارت</span>
                   </div>
                 </div>
               </div>
@@ -2340,6 +2436,7 @@
         state.progress = [];
         state.questions = [];
         state.student = null;
+        state.hasLoadedClass = false;
         els.classCodeInput.value = '';
         els.classCodeError.textContent = '';
         showView('entry');
@@ -2442,6 +2539,22 @@
           loadClass(code);
         } else {
           showView('entry');
+        }
+      });
+
+      // Auto-refresh when returning from game (bfcache / mobile tab resume)
+      window.addEventListener('pageshow', (event) => {
+        if (!state.classId) return;
+        if (event.persisted) {
+          refreshClassSilently(true);
+        } else if (state.hasLoadedClass) {
+          refreshClassSilently(false);
+        }
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && state.classId && state.hasLoadedClass) {
+          refreshClassSilently(false);
         }
       });
 
