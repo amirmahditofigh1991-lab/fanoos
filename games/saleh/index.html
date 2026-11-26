@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>سفر در زمان: حضرت صالح (ع) | فانوس یادگیری</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800;900&display=swap" rel="stylesheet">
+<script src="../../config.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    background: radial-gradient(circle at 50% 25%, #162c56 0%, #0a1428 70%, #060d1b 100%);
+    color: #fdf6e3; display: flex; align-items: center; justify-content: center; padding: 18px;
+  }
+  .f-card {
+    width: 100%; max-width: 440px; text-align: center;
+    background: linear-gradient(180deg, rgba(18,34,68,.96) 0%, rgba(11,22,46,.98) 100%);
+    border: 2px solid #d49a2a; border-radius: 22px; padding: 28px 22px;
+    box-shadow: 0 22px 60px rgba(0,0,0,.55), inset 0 0 28px rgba(212,154,42,.14);
+  }
+  .f-orb {
+    width: 66px; height: 66px; margin: 0 auto 14px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff6cc 0%, #e6ab32 62%, #a86c10 100%);
+    border: 3px solid #fff5cf; box-shadow: 0 0 26px rgba(245,207,110,.45);
+    display: flex; align-items: center; justify-content: center; font-size: 30px;
+  }
+  .f-title { margin: 0 0 8px; font-size: 20px; font-weight: 900; color: #ffe394; }
+  .f-desc { margin: 0 0 18px; font-size: 13.5px; line-height: 1.85; color: #d6e4fa; }
+  .f-spinner {
+    width: 38px; height: 38px; margin: 4px auto 12px; border-radius: 50%;
+    border: 3.5px solid rgba(248,216,120,.22); border-top-color: #f8d878;
+    animation: fSpin .85s linear infinite;
+  }
+  @keyframes fSpin { to { transform: rotate(360deg); } }
+  .f-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none; border: 2px solid #fff0b8; cursor: pointer; font-family: inherit;
+    background: linear-gradient(135deg, #df9f28 0%, #b37312 100%); color: #fffdf5;
+    font-size: 14.5px; font-weight: 900; padding: 11px 22px; border-radius: 13px;
+    box-shadow: 0 8px 22px rgba(212,154,42,.35); transition: transform .15s ease;
+  }
+  .f-btn:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body>
+<div class="f-card" id="fanoos-boot">
+  <div class="f-orb">🏮</div>
+  <h1 class="f-title">سفر در زمان: حضرت صالح (ع)</h1>
+  <div class="f-spinner"></div>
+  <p class="f-desc" id="fanoos-status">در حال اتصال به تالار فانوس یادگیری و آماده‌سازی سرزمین ثمود...</p>
+</div>
+<script>
+(async function () {
+  const bootEl = document.getElementById('fanoos-boot');
+  const params = new URLSearchParams(window.location.search);
+  const classId = (params.get('class') || '').trim();
+  const sid = (params.get('sid') || '').trim();
+  let sname = (params.get('sname') || '').trim();
+  const gid = (params.get('gid') || 'saleh').trim() || 'saleh';
+  const age = (params.get('age') || '').trim();
+  const hallHome = '../../index.html';
+  const hallBack = hallHome + (classId ? '?class=' + encodeURIComponent(classId) : '');
+
+  const showGate = (title, desc, btnText, href) => {
+    bootEl.innerHTML =
+      '<div class="f-orb">🏮</div>' +
+      '<h1 class="f-title">' + title + '</h1>' +
+      '<p class="f-desc">' + desc + '</p>' +
+      '<a class="f-btn" href="' + href + '">' + btnText + '</a>';
+  };
+
+  if (!classId || !sid) {
+    showGate(
+      'فانوس یادگیری',
+      'برای ورود به بازی، ذخیره خودکار پیشرفت و دریافت صندوقچه سوالات استاد، لطفاً از طریق تالار فانوس یادگیری وارد شوید.',
+      'ورود از طریق تالار فانوس یادگیری',
+      hallHome
+    );
+    return;
+  }
+
+  const apiUrl = (window.FANOOS_CONFIG && window.FANOOS_CONFIG.apiUrl)
+    ? String(window.FANOOS_CONFIG.apiUrl).trim() : '';
+
+  const safeParse = (v) => {
+    if (!v) return null;
+    if (typeof v === 'object') return v;
+    try { return JSON.parse(v); } catch { return null; }
+  };
+
+  const fetchClassData = async () => {
+    if (!apiUrl) return null;
+    try {
+      const url = apiUrl + '?action=getClass&classId=' + encodeURIComponent(classId) + '&t=' + Date.now();
+      const res = await fetch(url, { method: 'GET' });
+      return res.ok ? await res.json() : null;
+    } catch { return null; }
+  };
+
+  const fetchCoreHtml = async () => {
+    const res = await fetch('./core.html');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.text();
+  };
+
+  let classRes = null, coreHtml = '';
+  try {
+    [classRes, coreHtml] = await Promise.all([fetchClassData(), fetchCoreHtml()]);
+  } catch {
+    showGate(
+      'خطا در بارگذاری بازی',
+      'فایل اصلی بازی در دسترس نبود. لطفاً اتصال اینترنت را بررسی کرده و دوباره از تالار وارد شوید.',
+      'بازگشت به تالار فانوس یادگیری',
+      hallBack
+    );
+    return;
+  }
+
+  const root = (classRes && classRes.data && typeof classRes.data === 'object' && !Array.isArray(classRes.data))
+    ? classRes.data : (classRes || {});
+
+  let serverState = null;
+  const pools = [root.progress, root.records, classRes && classRes.progress, classRes && classRes.records];
+  for (const list of pools) {
+    if (!Array.isArray(list)) continue;
+    const hit = list.find(r => r &&
+      String(r.studentId ?? r.sid ?? r.id ?? '') === sid &&
+      ((!r.gameId && !r.gid) || String(r.gameId ?? r.gid) === gid));
+    if (hit) {
+      serverState = safeParse(hit.state) || (hit.highestUnlocked ? hit : null);
+      if (!sname && (hit.studentName || hit.name || hit.sname)) sname = String(hit.studentName || hit.name || hit.sname).trim();
+      break;
+    }
+  }
+  if (Array.isArray(root.students)) {
+    const stRec = root.students.find(s => s && String(s.studentId ?? s.sid ?? s.id ?? '') === sid);
+    if (stRec) {
+      if (!sname) sname = String(stRec.studentName || stRec.name || stRec.sname || '').trim();
+      if (!serverState && stRec.progress && stRec.progress[gid]) serverState = safeParse(stRec.progress[gid]);
+    }
+  }
+  if (!sname) sname = 'مسافر ' + sid;
+
+  const rawQuestions = Array.isArray(root.questions) ? root.questions
+    : (classRes && Array.isArray(classRes.questions) ? classRes.questions : []);
+  const questions = rawQuestions
+    .filter(q => q && (!q.gameId || String(q.gameId) === gid))
+    .map((q, idx) => {
+      let opts = q.options ?? q.choices;
+      if (typeof opts === 'string') opts = safeParse(opts) || [];
+      if (!Array.isArray(opts)) opts = [q.opt1, q.opt2, q.opt3, q.opt4].filter(v => v != null && String(v) !== '');
+      return {
+        id: String(q.id || q.qId || q.questionId || ('tq_' + idx)),
+        stationId: Number(q.stationId ?? q.station ?? 0),
+        question: String(q.question || q.text || q.title || ''),
+        options: opts.map(String),
+        correctIndex: Number(q.correctIndex ?? q.correct ?? q.answerIndex ?? 0)
+      };
+    })
+    .filter(q => q.stationId > 0 && q.question && q.options.length >= 2);
+
+  const buildStatePayload = (st) => {
+    const s = st && typeof st === 'object' ? st : {};
+    const m = {};
+    if (s.mistakes && typeof s.mistakes === 'object') {
+      Object.keys(s.mistakes).forEach(k => { m[String(k)] = Number(s.mistakes[k]) || 0; });
+    }
+    const ta = (s.teacherAnswers && typeof s.teacherAnswers === 'object') ? { ...s.teacherAnswers } : {};
+    return {
+      highestUnlocked: Math.max(1, Math.min(10, Number(s.highestUnlocked || 1))),
+      completedStations: Array.isArray(s.completedStations) ? Array.from(new Set(s.completedStations.map(Number).filter(n => n >= 1 && n <= 10))) : [],
+      collectedCards: Array.isArray(s.collectedCards) ? Array.from(new Set(s.collectedCards)) : [],
+      discoveredSecrets: Array.isArray(s.discoveredSecrets) ? Array.from(new Set(s.discoveredSecrets)) : [],
+      mistakes: m,
+      teacherAnswers: ta,
+      pledgeChoices: Array.isArray(s.pledgeChoices) ? [...s.pledgeChoices] : [],
+      personalNote: typeof s.personalNote === 'string' ? s.personalNote : '',
+      finishedGame: Boolean(s.finishedGame),
+      seenGuide: Boolean(s.seenGuide)
+    };
+  };
+
+  const mergeStates = (loc, srv) => {
+    const a = buildStatePayload(loc), b = buildStatePayload(srv);
+    const mistakes = { ...a.mistakes };
+    Object.keys(b.mistakes).forEach(k => { mistakes[k] = Math.max(mistakes[k] || 0, b.mistakes[k] || 0); });
+    const merged = buildStatePayload({
+      highestUnlocked: Math.max(a.highestUnlocked, b.highestUnlocked),
+      completedStations: [...a.completedStations, ...b.completedStations],
+      collectedCards: [...a.collectedCards, ...b.collectedCards],
+      discoveredSecrets: [...a.discoveredSecrets, ...b.discoveredSecrets],
+      mistakes,
+      teacherAnswers: { ...a.teacherAnswers, ...b.teacherAnswers },
+      pledgeChoices: b.pledgeChoices.length ? b.pledgeChoices : a.pledgeChoices,
+      personalNote: b.personalNote.trim() ? b.personalNote : a.personalNote,
+      finishedGame: a.finishedGame || b.finishedGame,
+      seenGuide: a.seenGuide || b.seenGuide
+    });
+    if (merged.completedStations.includes(9) && merged.highestUnlocked < 10) merged.highestUnlocked = 10;
+    return merged;
+  };
+
+  let saveTimer = null, lastSentJson = '', chestOpen = false;
+  const postState = (st, force) => {
+    if (!apiUrl) return;
+    const body = JSON.stringify({
+      action: 'saveProgress', classId, studentId: sid, studentName: sname, gameId: gid,
+      state: buildStatePayload(st)
+    });
+    if (!force && body === lastSentJson) return;
+    lastSentJson = body;
+    fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body })
+      .catch(() => { lastSentJson = ''; });
+  };
+
+  const openTeacherChest = (stationId, stateObj, onSave, playSfx) => {
+    if (chestOpen || !stateObj) return false;
+    if (!stateObj.teacherAnswers || typeof stateObj.teacherAnswers !== 'object') stateObj.teacherAnswers = {};
+    const pending = questions.filter(q => q.stationId === Number(stationId) && !stateObj.teacherAnswers[q.id]);
+    if (!pending.length) return false;
+    chestOpen = true;
+
+    let overlay = document.getElementById('fanoos-chest-modal');
+    if (!overlay) { overlay = document.createElement('div'); overlay.id = 'fanoos-chest-modal'; document.body.appendChild(overlay); }
+    let qIdx = 0;
+    const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const fa = (n) => String(n).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
+
+    const renderQ = () => {
+      const q = pending[qIdx];
+      const tag = pending.length > 1 ? ' (' + fa(qIdx + 1) + ' از ' + fa(pending.length) + ')' : '';
+      overlay.innerHTML =
+        '<div class="fc-box">' +
+          '<div class="fc-head"><span class="fc-badge">ایستگاه ' + fa(stationId) + tag + '</span><h3>🎁 صندوقچه سوال استاد</h3></div>' +
+          '<div class="fc-q">' + esc(q.question) + '</div>' +
+          '<div class="fc-opts">' + q.options.slice(0, 4).map((opt, i) =>
+            '<button type="button" class="fc-opt" data-idx="' + i + '"><span class="fc-num">' + fa(i + 1) + '</span><span>' + esc(opt) + '</span></button>'
+          ).join('') + '</div>' +
+          '<div class="fc-fb" id="fc-fb"></div>' +
+          '<div class="fc-foot"><button type="button" class="fc-next" id="fc-next" style="display:none;">' +
+            (qIdx + 1 < pending.length ? 'سوال بعدی صندوقچه ◀' : 'ثبت و ادامه مسیر ◀') +
+          '</button></div>' +
+        '</div>';
+      overlay.classList.add('open');
+
+      const optBtns = overlay.querySelectorAll('.fc-opt');
+      const fbEl = overlay.querySelector('#fc-fb');
+      const nextBtn = overlay.querySelector('#fc-next');
+      optBtns.forEach(btn => btn.addEventListener('click', () => {
+        const chosenIndex = Number(btn.getAttribute('data-idx'));
+        const isCorrect = chosenIndex === q.correctIndex;
+        optBtns.forEach((b, i) => {
+          b.disabled = true;
+          if (i === q.correctIndex) b.classList.add('fc-ok');
+          else if (i === chosenIndex && !isCorrect) b.classList.add('fc-bad');
+        });
+        if (typeof playSfx === 'function') playSfx(isCorrect ? 'correct' : 'hint');
+        stateObj.teacherAnswers[q.id] = { chosenIndex, isCorrect, stationId: Number(stationId) };
+        if (typeof onSave === 'function') onSave(true);
+        fbEl.className = 'fc-fb show ' + (isCorrect ? 'ok' : 'bad');
+        fbEl.textContent = isCorrect
+          ? '✅ آفرین! پاسخ تو کاملاً درست بود و در کارنامه استاد ثبت شد.'
+          : '❌ پاسخ نادرست بود! گزینه درست با رنگ سبز مشخص شد و نتیجه ثبت گردید.';
+        nextBtn.style.display = 'inline-flex';
+      }));
+      nextBtn.addEventListener('click', () => {
+        if (qIdx + 1 < pending.length) { qIdx++; renderQ(); }
+        else { overlay.classList.remove('open'); chestOpen = false; }
+      });
+    };
+    renderQ();
+    return true;
+  };
+
+  window.__FANOOS_BRIDGE__ = {
+    apiUrl, classId, sid, sname, gid, age, hallBack, serverState, questions,
+    storageKey: 'fanoos_' + classId + '_' + gid + '_' + sid,
+    buildStatePayload, mergeStates, openTeacherChest,
+    saveToServer: (st, immediate, force) => {
+      if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
+      if (immediate) postState(st, Boolean(force));
+      else saveTimer = setTimeout(() => { saveTimer = null; postState(st, false); }, 250);
+    }
+  };
+
+  const injectedStyle =
+    '<style id="fanoos-bridge-css">' +
+    '#splash-screen,#modal-welcome,#btn-leaderboard,#modal-leaderboard,#modal-confirm-delete-guest,#teacher-mode-pill,#teacher-quick-nav,[onclick*="openLeaderboardModal"],[onclick*="openWelcomeModal"]{display:none!important;}' +
+    '#fanoos-hall-btn{position:fixed;top:10px;left:10px;z-index:1600;display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:11px;text-decoration:none;font-family:Vazirmatn,Tahoma,sans-serif;font-size:12px;font-weight:900;background:linear-gradient(135deg,#13284f,#0b1936);color:#ffe494;border:1.8px solid #d49a2a;box-shadow:0 4px 14px rgba(5,12,28,.42);transition:transform .15s ease;}' +
+    '#fanoos-hall-btn:hover{transform:translateY(-1px);background:linear-gradient(135deg,#1c386b,#102349);}' +
+    '@media(max-width:1160px){.ui-layer>div:first-child{padding-left:88px;}}' +
+    '@media(max-width:640px){#fanoos-hall-btn{top:7px;left:8px;padding:5px 9px;font-size:11.5px;}.ui-layer>div:first-child{padding-left:78px;}}' +
+    '#fanoos-chest-modal{position:fixed;inset:0;z-index:2600;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(7,14,30,.72);backdrop-filter:blur(4px);direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;}' +
+    '#fanoos-chest-modal.open{display:flex;}' +
+    '#fanoos-chest-modal .fc-box{width:100%;max-width:520px;background:linear-gradient(180deg,#132447 0%,#0b162e 100%);border:2.5px solid #e5b249;border-radius:20px;padding:18px 16px;color:#fdf6e3;box-shadow:0 24px 60px rgba(0,0,0,.62);}' +
+    '#fanoos-chest-modal .fc-head{text-align:center;padding-bottom:10px;margin-bottom:12px;border-bottom:1.5px dashed rgba(248,216,120,.38);}' +
+    '#fanoos-chest-modal .fc-head h3{margin:6px 0 0;font-size:18px;font-weight:900;color:#ffe28a;}' +
+    '#fanoos-chest-modal .fc-badge{display:inline-block;padding:3px 11px;border-radius:999px;background:rgba(212,154,42,.2);border:1px solid #e5b249;color:#ffe7a3;font-size:11.5px;font-weight:800;}' +
+    '#fanoos-chest-modal .fc-q{font-size:14.5px;font-weight:800;line-height:1.85;margin-bottom:12px;color:#fff9ea;}' +
+    '#fanoos-chest-modal .fc-opts{display:flex;flex-direction:column;gap:8px;}' +
+    '#fanoos-chest-modal .fc-opt{width:100%;text-align:right;display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:12px;border:1.8px solid #3f5e96;background:#1a305c;color:#f9f1de;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .16s ease;}' +
+    '#fanoos-chest-modal .fc-opt:hover:not(:disabled){border-color:#f8d878;background:#223e75;}' +
+    '#fanoos-chest-modal .fc-num{width:24px;height:24px;border-radius:8px;background:#d49a2a;color:#0b162e;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}' +
+    '#fanoos-chest-modal .fc-opt.fc-ok{background:#165239;border-color:#49cf86;color:#e4ffef;}' +
+    '#fanoos-chest-modal .fc-opt.fc-bad{background:#5c2020;border-color:#e56b6b;color:#ffe5e5;}' +
+    '#fanoos-chest-modal .fc-fb{display:none;margin-top:11px;padding:9px 12px;border-radius:11px;font-size:13px;font-weight:800;line-height:1.75;}' +
+    '#fanoos-chest-modal .fc-fb.show{display:block;}' +
+    '#fanoos-chest-modal .fc-fb.ok{background:rgba(42,157,96,.22);border:1.5px solid #49cf86;color:#d6ffea;}' +
+    '#fanoos-chest-modal .fc-fb.bad{background:rgba(217,76,76,.22);border:1.5px solid #e56b6b;color:#ffe0e0;}' +
+    '#fanoos-chest-modal .fc-foot{text-align:center;margin-top:12px;}' +
+    '#fanoos-chest-modal .fc-next{border:2px solid #fff2ba;background:linear-gradient(135deg,#df9f28,#b37312);color:#fff;font-family:inherit;font-size:13.8px;font-weight:900;padding:9px 20px;border-radius:11px;cursor:pointer;}' +
+    '</style>';
+
+  const injectedHook =
+    '\n;(function () {\n' +
+    '  const B = window.__FANOOS_BRIDGE__; if (!B) return;\n' +
+    '  const bootBridge = () => {\n' +
+    '    teacherMode = false;\n' +
+    '    getStudentStorageKey = () => B.storageKey;\n' +
+    '    getDefaultStudentState = () => ({ highestUnlocked: 1, completedStations: [], collectedCards: [], discoveredSecrets: [], mistakes: {}, teacherAnswers: {}, pledgeChoices: [], personalNote: "", finishedGame: false, seenGuide: false });\n' +
+    '    saveCurrentStudentState = (opts = {}) => {\n' +
+    '      if (!currentStudent || !state) return;\n' +
+    '      const clean = B.buildStatePayload(state); Object.assign(state, clean);\n' +
+    '      try { localStorage.setItem(B.storageKey, JSON.stringify(clean)); } catch {}\n' +
+    '      B.saveToServer(clean, Boolean(opts.immediate || opts.isReset || clean.finishedGame), Boolean(opts.isReset));\n' +
+    '      updateHudAndDock();\n' +
+    '    };\n' +
+    '    openWelcomeModal = openLeaderboardModal = enterFromSplash = submitTeacherLogin = selectStudent = enterPreviewGuestMode = () => {};\n' +
+    '    document.querySelectorAll("#modal-settings .setting-row").forEach(r => { const h = r.innerHTML || ""; if (h.includes("openLeaderboardModal") || h.includes("openWelcomeModal")) r.style.display = "none"; });\n' +
+    '    const recMistake = (n) => {\n' +
+    '      if (!state) return; if (!state.mistakes || typeof state.mistakes !== "object") state.mistakes = {};\n' +
+    '      const k = String(n); state.mistakes[k] = (Number(state.mistakes[k]) || 0) + 1;\n' +
+    '      saveCurrentStudentState({ immediate: true });\n' +
+    '    };\n' +
+    '    const wrapBool = (fn, n) => function (a, ok) { if (!ok) recMistake(n); return fn.apply(this, arguments); };\n' +
+    '    checkS1Quiz = wrapBool(checkS1Quiz, 1); checkS2Quiz = wrapBool(checkS2Quiz, 2);\n' +
+    '    toggleS3Trait = wrapBool(toggleS3Trait, 3); checkS3Quiz = wrapBool(checkS3Quiz, 3);\n' +
+    '    const _s4 = checkS4; checkS4 = function (b, ch) { if (ch !== "truth") recMistake(4); return _s4.apply(this, arguments); };\n' +
+    '    checkS5 = wrapBool(checkS5, 5);\n' +
+    '    const _s6 = pickS6; pickS6 = function (r, p, c) { if (p !== c) recMistake(6); return _s6.apply(this, arguments); };\n' +
+    '    checkS7Quiz = wrapBool(checkS7Quiz, 7);\n' +
+    '    const _s8o = checkSurahOrder; checkSurahOrder = function () { if (s8Order.length === 5 && !s8Order.every((v, i) => v === i + 1)) recMistake(8); return _s8o.apply(this, arguments); };\n' +
+    '    checkS8Quiz = wrapBool(checkS8Quiz, 8);\n' +
+    '    const _origComp = completeStation;\n' +
+    '    completeStation = function (stId) {\n' +
+    '      const out = _origComp.apply(this, arguments);\n' +
+    '      saveCurrentStudentState({ immediate: true });\n' +
+    '      setTimeout(() => B.openTeacherChest(stId, state, () => saveCurrentStudentState({ immediate: true }), (sfx) => AudioEngine.playSfx(sfx)), 420);\n' +
+    '      return out;\n' +
+    '    };\n' +
+    '    if (!document.getElementById("fanoos-hall-btn")) {\n' +
+    '      const a = document.createElement("a"); a.id = "fanoos-hall-btn"; a.className = "no-print"; a.href = B.hallBack; a.textContent = "🏠 تالار";\n' +
+    '      document.body.appendChild(a);\n' +
+    '    }\n' +
+    '    let localSt = null; try { localSt = JSON.parse(localStorage.getItem(B.storageKey) || "null"); } catch {}\n' +
+    '    currentStudent = { id: B.sid, name: B.sname, classId: B.classId, isTeacher: false, isPreview: false };\n' +
+    '    state = B.mergeStates(localSt, B.serverState);\n' +
+    '    try { localStorage.setItem(B.storageKey, JSON.stringify(state)); } catch {}\n' +
+    '    const sp = document.getElementById("splash-screen"); if (sp) sp.classList.add("hidden");\n' +
+    '    const wm = document.getElementById("modal-welcome"); if (wm) wm.classList.remove("open");\n' +
+    '    const startPos = state.finishedGame ? TOTAL_STATIONS : Math.max(1, Math.min(TOTAL_STATIONS, state.highestUnlocked || 1));\n' +
+    '    World3D.setSplashPan(false); World3D.resetWildlife(); World3D.jumpImmediate(startPos, true);\n' +
+    '    syncAtmosphereUI(startPos, true); updateHudAndDock(); syncBgThrottle(); showOneTimeOnboardTip();\n' +
+    '    const unlockAudio = () => { AudioEngine.initOnFirstGesture(); document.removeEventListener("pointerdown", unlockAudio); };\n' +
+    '    document.addEventListener("pointerdown", unlockAudio, { passive: true });\n' +
+    '  };\n' +
+    '  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootBridge, { once: true });\n' +
+    '  else bootBridge();\n' +
+    '})();\n';
+
+  let patchedHtml = coreHtml.replace(
+    /const\s+CLOUD_API_URL\s*=\s*['"][^'"]*['"]\s*;/,
+    "const CLOUD_API_URL = '';"
+  );
+  patchedHtml = patchedHtml.replace('</head>', injectedStyle + '\n</head>');
+  const closeScriptTag = '<' + '/script>';
+  const lastScriptIdx = patchedHtml.lastIndexOf(closeScriptTag);
+  if (lastScriptIdx !== -1) {
+    patchedHtml = patchedHtml.slice(0, lastScriptIdx) + injectedHook + patchedHtml.slice(lastScriptIdx);
+  } else {
+    patchedHtml = patchedHtml.replace('</body>', '<' + 'script>' + injectedHook + closeScriptTag + '</body>');
+  }
+
+  document.open();
+  document.write(patchedHtml);
+  document.close();
+})();
+</script>
+</body>
+</html>
