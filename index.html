@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -844,4 +845,2255 @@
       align-items: center;
       gap: 6px;
       padding: 5px 11px;
-      border-radius:
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .live-pill.gold {
+      background: var(--gold-soft);
+      color: var(--gold-light);
+      border: 1px solid rgba(245, 158, 11, 0.28);
+    }
+
+    .live-pill.teal {
+      background: var(--teal-soft);
+      color: var(--teal-light);
+      border: 1px solid rgba(20, 184, 166, 0.28);
+    }
+
+    .live-pill.neutral {
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-secondary);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .live-pill.emerald {
+      background: rgba(52, 211, 153, 0.14);
+      color: var(--emerald);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+
+    /* ============ Inner Folder Navigation Bar ============ */
+    .folder-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 7px 14px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: background var(--ease), border-color var(--ease), transform var(--ease);
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-strong);
+    }
+
+    .back-btn:active {
+      transform: scale(0.97);
+    }
+
+    .folder-view-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .folder-view-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.45rem;
+      flex-shrink: 0;
+    }
+
+    .folder-view-icon.gold {
+      background: var(--gold-soft);
+      border: 1px solid var(--gold-border);
+    }
+
+    .folder-view-icon.teal {
+      background: var(--teal-soft);
+      border: 1px solid var(--teal-border);
+    }
+
+    .folder-view-title {
+      font-size: 1.18rem;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .folder-view-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* ============ Games Inner View ============ */
+    .games-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .game-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: transform var(--ease), border-color var(--ease);
+    }
+
+    .game-card.active-game::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      inset-inline: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+
+    .game-card.completed-game {
+      border-color: rgba(245, 158, 11, 0.42);
+    }
+
+    .game-card.completed-game::before {
+      background: linear-gradient(90deg, var(--emerald), var(--gold-light));
+    }
+
+    .game-card.active-game:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-border);
+    }
+
+    .game-card.soon-game {
+      background: rgba(15, 23, 42, 0.56);
+      border-style: dashed;
+      opacity: 0.82;
+    }
+
+    .game-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .game-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(245, 158, 11, 0.18), rgba(20, 184, 166, 0.1));
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      display: grid;
+      place-items: center;
+      font-size: 1.55rem;
+      flex-shrink: 0;
+    }
+
+    .soon-game .game-icon {
+      background: rgba(148, 163, 184, 0.08);
+      border-color: rgba(148, 163, 184, 0.18);
+      filter: grayscale(0.5);
+    }
+
+    .game-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .cat-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      background: rgba(148, 163, 184, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .done-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      background: var(--gold-soft);
+      color: var(--gold-light);
+      border: 1px solid var(--gold-border);
+    }
+
+    .game-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+      color: var(--text-main);
+    }
+
+    .game-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .teacher-challenge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      align-self: flex-start;
+      margin-bottom: 12px;
+      padding: 3px 9px;
+      border-radius: 8px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #a7f3d0;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+
+    .game-progress-box {
+      padding: 11px 12px;
+      border-radius: var(--radius-md);
+      background: rgba(11, 17, 32, 0.6);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 14px;
+    }
+
+    .progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+    }
+
+    .progress-count {
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .progress-pct {
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.16);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .completed-game .progress-fill {
+      background: linear-gradient(90deg, var(--teal), var(--emerald));
+    }
+
+    .soon-locked-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 44px;
+      border-radius: var(--radius-md);
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    /* ============ Checklist Inner View ============ */
+    .checklist-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mission-summary-card {
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-summary-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      inset-inline: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    }
+
+    .mission-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .mission-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .mission-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .save-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: opacity var(--ease), background var(--ease), color var(--ease);
+    }
+
+    .save-status-pill.idle {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .save-status-pill.saving {
+      opacity: 1;
+      background: rgba(245, 158, 11, 0.14);
+      color: var(--gold-light);
+      border-color: rgba(245, 158, 11, 0.28);
+    }
+
+    .save-status-pill.saved {
+      opacity: 1;
+      background: rgba(20, 184, 166, 0.16);
+      color: var(--teal-light);
+      border-color: rgba(20, 184, 166, 0.32);
+    }
+
+    .save-status-pill.error {
+      opacity: 1;
+      background: var(--rose-soft);
+      color: var(--rose);
+      border-color: rgba(251, 113, 133, 0.32);
+    }
+
+    .mission-progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      margin-bottom: 8px;
+    }
+
+    .mission-progress-label {
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+
+    .mission-progress-pct {
+      color: var(--teal-light);
+      font-weight: 800;
+    }
+
+    .mission-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--teal), var(--emerald));
+      transition: width 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .all-done-banner {
+      padding: 16px 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.18), rgba(52, 211, 153, 0.12));
+      border: 1px solid rgba(45, 212, 191, 0.38);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeSlide 0.3s ease;
+    }
+
+    .all-done-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(45, 212, 191, 0.18);
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .all-done-text strong {
+      display: block;
+      font-size: 0.96rem;
+      color: #ccfbf1;
+    }
+
+    .all-done-text span {
+      font-size: 0.83rem;
+      color: #99f6e4;
+    }
+
+    .checklist-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .check-card {
+      width: 100%;
+      min-height: 64px;
+      padding: 15px 16px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: right;
+      transition: transform var(--ease), background var(--ease), border-color var(--ease);
+    }
+
+    .check-card:hover {
+      border-color: rgba(20, 184, 166, 0.32);
+      background: rgba(17, 24, 39, 0.88);
+    }
+
+    .check-card:active {
+      transform: scale(0.99);
+    }
+
+    .check-card.is-checked {
+      background: rgba(20, 184, 166, 0.11);
+      border-color: rgba(20, 184, 166, 0.4);
+    }
+
+    .check-box {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid rgba(148, 163, 184, 0.45);
+      background: rgba(11, 17, 32, 0.65);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: background var(--ease), border-color var(--ease), transform var(--ease);
+    }
+
+    .check-card.is-checked .check-box {
+      background: linear-gradient(135deg, var(--teal), var(--emerald));
+      border-color: transparent;
+      transform: scale(1.04);
+    }
+
+    .check-box svg {
+      width: 15px;
+      height: 15px;
+      stroke: #042f2e;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 0.18s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .check-card.is-checked .check-box svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .check-text {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.55;
+      transition: color var(--ease);
+    }
+
+    .check-card.is-checked .check-text {
+      color: var(--text-muted);
+      text-decoration: line-through;
+      text-decoration-color: rgba(45, 212, 191, 0.55);
+    }
+
+    .empty-state-card {
+      padding: 40px 22px;
+      text-align: center;
+    }
+
+    .empty-state-icon {
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      background: var(--teal-soft);
+      border: 1px solid var(--teal-border);
+      display: grid;
+      place-items: center;
+      font-size: 1.7rem;
+    }
+
+    .empty-state-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      max-width: 380px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ============ Footer ============ */
+    .hall-footer {
+      padding: 16px 0 24px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(148, 163, 184, 0.08);
+    }
+
+    .hall-footer-links {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hall-footer a,
+    .hall-footer button {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      transition: color var(--ease);
+    }
+
+    .hall-footer a:hover,
+    .hall-footer button:hover {
+      color: var(--gold-light);
+    }
+
+    /* ============ Toast Notification ============ */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      z-index: 80;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #1e293b;
+      border: 1px solid var(--border-strong);
+      color: var(--text-main);
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      max-width: calc(100vw - 32px);
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast.error {
+      border-color: rgba(251, 113, 133, 0.45);
+      background: #2b1620;
+      color: #fecdd3;
+    }
+
+    /* ============ Responsive ============ */
+    @media (min-width: 640px) {
+      .container {
+        padding: 0 22px;
+      }
+
+      .folders-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .games-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .students-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .entry-card {
+        padding: 36px 32px 28px;
+      }
+
+      .identity-card {
+        padding: 30px 26px 26px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .students-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .guest-form {
+        flex-direction: column;
+      }
+
+      .header-brand {
+        flex-basis: 100%;
+      }
+
+      .header-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .student-badge {
+        flex: 1 1 auto;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- 1. Class Code Entry Screen -->
+    <section id="viewEntry" class="center-screen hidden" aria-label="ورود با کد کلاس">
+      <div class="glass-card entry-card fade-in">
+        <div class="lantern-badge" aria-hidden="true">🏮</div>
+        <h1 class="entry-title" id="entryPlatformName">فانوس یادگیری</h1>
+        <p class="entry-subtitle" id="entryPlatformSubtitle">تالار یادگیری و ماجراجویی کلاس</p>
+
+        <form id="classCodeForm" class="entry-form" novalidate>
+          <div>
+            <label for="classCodeInput" class="field-label">کد کلاس</label>
+            <input
+              id="classCodeInput"
+              class="input-field code-input"
+              type="text"
+              inputmode="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="مثلاً k5742"
+              required
+            />
+          </div>
+          <div id="classCodeError" class="form-error" role="alert"></div>
+          <button type="submit" class="btn btn-gold">
+            <span>ورود به کلاس</span>
+            <span aria-hidden="true">←</span>
+          </button>
+        </form>
+      </div>
+
+      <a href="teacher.html" class="teacher-subtle-link">ورود مربی به میز معلم</a>
+    </section>
+
+    <!-- Loading Screen -->
+    <section id="viewLoading" class="center-screen hidden" aria-live="polite">
+      <div class="glass-card state-card fade-in">
+        <div class="loader-ring" aria-hidden="true"><span>🏮</span></div>
+        <h2 class="state-title">در حال اتصال به کلاس...</h2>
+        <p class="state-desc" id="loadingMessage">در حال دریافت اطلاعات تالار</p>
+      </div>
+    </section>
+
+    <!-- Network Error Screen -->
+    <section id="viewError" class="center-screen hidden" role="alert">
+      <div class="glass-card state-card fade-in">
+        <div style="font-size: 2rem; margin-bottom: 10px;" aria-hidden="true">⚠️</div>
+        <h2 class="state-title" id="errorTitle">اتصال برقرار نشد</h2>
+        <p class="state-desc" id="errorMessage">لطفاً اتصال اینترنت را بررسی کن و دوباره تلاش کن.</p>
+        <div class="state-actions">
+          <button type="button" id="retryBtn" class="btn btn-gold">تلاش مجدد</button>
+          <button type="button" id="changeClassFromErrorBtn" class="btn btn-ghost">تغییر کد کلاس</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Student Identity Picker Screen -->
+    <section id="viewIdentity" class="center-screen hidden" aria-label="انتخاب هویت دانش‌آموز">
+      <div class="glass-card identity-card fade-in">
+        <div class="identity-head">
+          <div>
+            <h1 class="identity-class-title" id="identityClassName">کلاس</h1>
+            <p class="identity-teacher hidden" id="identityTeacherName"></p>
+          </div>
+          <button type="button" id="cancelIdentityBtn" class="btn btn-ghost btn-sm hidden">انصراف</button>
+        </div>
+
+        <p class="identity-prompt">نام خود را انتخاب کن تا وارد تالار کلاس شوی:</p>
+
+        <div id="studentsListGrid" class="students-grid"></div>
+
+        <div class="guest-section">
+          <div class="guest-toggle-row">
+            <button type="button" id="toggleGuestBtn" class="btn btn-ghost btn-sm">
+              <span>ورود به‌عنوان مهمان</span>
+            </button>
+            <button type="button" id="switchClassFromIdentityBtn" class="btn btn-ghost btn-sm">
+              تغییر کد کلاس
+            </button>
+          </div>
+
+          <div id="guestPanel" class="guest-panel hidden">
+            <form id="guestForm" class="guest-form" novalidate>
+              <input
+                id="guestNameInput"
+                class="input-field teal-focus"
+                type="text"
+                maxlength="40"
+                autocomplete="name"
+                placeholder="نام و نام خانوادگی خود را بنویس..."
+              />
+              <button type="submit" class="btn btn-teal">ورود</button>
+            </form>
+            <div id="guestError" class="guest-error" role="alert"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 & 4. Main Hall & Inner Folder Views -->
+    <div id="viewHall" class="hidden" style="flex: 1; display: flex; flex-direction: column;">
+      <header class="hall-header">
+        <div class="container header-row">
+          <div class="header-brand">
+            <div class="header-logo" aria-hidden="true">🏮</div>
+            <div class="header-class-wrap">
+              <div class="header-class-name" id="headerClassName">کلاس</div>
+              <div class="header-platform-sub" id="headerPlatformName">فانوس یادگیری</div>
+            </div>
+          </div>
+
+          <div class="header-controls">
+            <div class="student-badge" title="نام دانش‌آموز">
+              <span class="student-badge-dot" aria-hidden="true"></span>
+              <span class="student-badge-name" id="headerStudentName">—</span>
+            </div>
+            <button type="button" id="changeNameBtn" class="btn btn-ghost btn-sm">تغییر نام</button>
+            <button
+              type="button"
+              id="refreshHallBtn"
+              class="btn btn-ghost btn-icon"
+              title="بروزرسانی اطلاعات"
+              aria-label="بروزرسانی اطلاعات"
+            >
+              <span id="refreshIcon" aria-hidden="true">↻</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="hall-main">
+        <div class="container">
+          <!-- Home Hub (Folders) -->
+          <section id="sectionHub" class="fade-in" aria-label="تالار اصلی">
+            <div class="greeting-block">
+              <h1 class="greeting-title">
+                سلام <span class="name-highlight" id="greetingStudentName">دوست من</span> 👋 | کدام بخش را باز کنیم؟
+              </h1>
+              <p class="greeting-sub hidden" id="greetingTeacherLine"></p>
+            </div>
+
+            <div id="foldersGrid" class="folders-grid"></div>
+          </section>
+
+          <!-- Games Folder Inner View -->
+          <section id="sectionGames" class="hidden fade-in" aria-label="بازی‌ها و داستان‌ها">
+            <div class="folder-nav-bar">
+              <button type="button" class="back-btn" data-back-to="hub">
+                <span aria-hidden="true">→</span>
+                <span>بازگشت به تالار</span>
+              </button>
+              <span class="live-pill gold" id="gamesInnerCountPill">۰ بازی فعال</span>
+            </div>
+
+            <div class="folder-view-head">
+              <div class="folder-view-icon gold" id="gamesInnerIcon" aria-hidden="true">🎮</div>
+              <div>
+                <h2 class="folder-view-title" id="gamesInnerTitle">بازی‌ها و داستان‌ها</h2>
+                <p class="folder-view-desc" id="gamesInnerDesc">مسیرت را انتخاب کن و ایستگاه‌ها را کامل کن</p>
+              </div>
+            </div>
+
+            <div id="gamesGrid" class="games-grid"></div>
+          </section>
+
+          <!-- Checklist Folder Inner View -->
+          <section id="sectionChecklist" class="hidden fade-in" aria-label="چک‌لیست و مأموریت هفته">
+            <div class="folder-nav-bar">
+              <button type="button" class="back-btn" data-back-to="hub">
+                <span aria-hidden="true">→</span>
+                <span>بازگشت به تالار</span>
+              </button>
+              <span id="checklistSavePill" class="save-status-pill idle" aria-live="polite"></span>
+            </div>
+
+            <div class="folder-view-head">
+              <div class="folder-view-icon teal" id="checklistInnerIcon" aria-hidden="true">✅</div>
+              <div>
+                <h2 class="folder-view-title" id="checklistInnerTitle">چک‌لیست و مأموریت هفته</h2>
+                <p class="folder-view-desc" id="checklistInnerDesc">کارهایی که انجام می‌دهی را تیک بزن تا ثبت شوند</p>
+              </div>
+            </div>
+
+            <div id="checklistBody" class="checklist-shell"></div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="hall-footer">
+        <div class="container">
+          <div class="hall-footer-links">
+            <span id="footerPlatformName">فانوس یادگیری</span>
+            <span>•</span>
+            <button type="button" id="switchClassFooterBtn">تغییر کد کلاس</button>
+            <span>•</span>
+            <a id="footerTeacherLink" href="teacher.html">میز معلم</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const FA_DIGITS = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+      const DEFAULT_MODULES = [
+        {
+          id: 'games',
+          title: 'بازی‌ها و داستان‌ها',
+          subtitle: 'ماجراجویی‌های تعاملی و ایستگاه‌های یادگیری کلاس',
+          icon: '🎮'
+        },
+        {
+          id: 'checklist',
+          title: 'چک‌لیست و مأموریت هفته',
+          subtitle: 'مأموریت‌های هفتگی و ثبت کارهای انجام‌شده',
+          icon: '📋'
+        }
+      ];
+
+      function toFa(val) {
+        return String(val ?? '').replace(/\d/g, (d) => FA_DIGITS[Number(d)]);
+      }
+
+      function normalizeCodeInput(raw) {
+        return String(raw ?? '')
+          .replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 0x06f0))
+          .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 0x0660))
+          .replace(/\s+/g, '')
+          .trim();
+      }
+
+      function escapeHtml(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function normalizeModulesConfig(rawModules) {
+        if (Array.isArray(rawModules) && rawModules.length > 0) {
+          return rawModules
+            .filter((m) => m && m.id)
+            .map((m) => {
+              const fallback = DEFAULT_MODULES.find((d) => d.id === String(m.id)) || {};
+              return {
+                id: String(m.id),
+                title: m.title || m.name || fallback.title || String(m.id),
+                subtitle: m.subtitle || m.description || m.desc || fallback.subtitle || '',
+                icon: m.icon || fallback.icon || '📁'
+              };
+            });
+        }
+        if (rawModules && typeof rawModules === 'object') {
+          const entries = Object.keys(rawModules).map((key) => {
+            const m = rawModules[key] || {};
+            const fallback = DEFAULT_MODULES.find((d) => d.id === key) || {};
+            return {
+              id: String(m.id || key),
+              title: m.title || m.name || fallback.title || key,
+              subtitle: m.subtitle || m.description || m.desc || fallback.subtitle || '',
+              icon: m.icon || fallback.icon || '📁'
+            };
+          });
+          if (entries.length > 0) return entries;
+        }
+        return DEFAULT_MODULES.slice();
+      }
+
+      function getConfig() {
+        const raw = window.FANOOS_CONFIG || {};
+        return {
+          platformName: raw.platformName || raw.name || raw.title || 'فانوس یادگیری',
+          subtitle: raw.subtitle || raw.tagline || raw.description || 'تالار یادگیری و ماجراجویی کلاس',
+          apiUrl: raw.apiUrl || raw.API_URL || '',
+          games: Array.isArray(raw.games) ? raw.games : [],
+          modules: normalizeModulesConfig(raw.modules)
+        };
+      }
+
+      const CONFIG = getConfig();
+
+      const state = {
+        classId: '',
+        classInfo: null,
+        progress: [],
+        questions: [],
+        checklist: null,
+        checklistProgress: [],
+        student: null,
+        activeFolder: 'hub', // 'hub' | 'games' | 'checklist'
+        hasLoadedClass: false,
+        isRefreshing: false,
+        lastFetchAt: 0,
+        // Checklist Optimistic UI state
+        checkedIds: [],
+        lastConfirmedCheckedIds: [],
+        checklistSaveVersion: 0,
+        savePillTimer: null
+      };
+
+      const els = {
+        viewEntry: document.getElementById('viewEntry'),
+        viewLoading: document.getElementById('viewLoading'),
+        viewError: document.getElementById('viewError'),
+        viewIdentity: document.getElementById('viewIdentity'),
+        viewHall: document.getElementById('viewHall'),
+
+        entryPlatformName: document.getElementById('entryPlatformName'),
+        entryPlatformSubtitle: document.getElementById('entryPlatformSubtitle'),
+        classCodeForm: document.getElementById('classCodeForm'),
+        classCodeInput: document.getElementById('classCodeInput'),
+        classCodeError: document.getElementById('classCodeError'),
+
+        loadingMessage: document.getElementById('loadingMessage'),
+        errorTitle: document.getElementById('errorTitle'),
+        errorMessage: document.getElementById('errorMessage'),
+        retryBtn: document.getElementById('retryBtn'),
+        changeClassFromErrorBtn: document.getElementById('changeClassFromErrorBtn'),
+
+        identityClassName: document.getElementById('identityClassName'),
+        identityTeacherName: document.getElementById('identityTeacherName'),
+        cancelIdentityBtn: document.getElementById('cancelIdentityBtn'),
+        studentsListGrid: document.getElementById('studentsListGrid'),
+        toggleGuestBtn: document.getElementById('toggleGuestBtn'),
+        switchClassFromIdentityBtn: document.getElementById('switchClassFromIdentityBtn'),
+        guestPanel: document.getElementById('guestPanel'),
+        guestForm: document.getElementById('guestForm'),
+        guestNameInput: document.getElementById('guestNameInput'),
+        guestError: document.getElementById('guestError'),
+
+        headerClassName: document.getElementById('headerClassName'),
+        headerPlatformName: document.getElementById('headerPlatformName'),
+        headerStudentName: document.getElementById('headerStudentName'),
+        changeNameBtn: document.getElementById('changeNameBtn'),
+        refreshHallBtn: document.getElementById('refreshHallBtn'),
+        refreshIcon: document.getElementById('refreshIcon'),
+
+        sectionHub: document.getElementById('sectionHub'),
+        sectionGames: document.getElementById('sectionGames'),
+        sectionChecklist: document.getElementById('sectionChecklist'),
+
+        greetingStudentName: document.getElementById('greetingStudentName'),
+        greetingTeacherLine: document.getElementById('greetingTeacherLine'),
+        foldersGrid: document.getElementById('foldersGrid'),
+
+        gamesInnerCountPill: document.getElementById('gamesInnerCountPill'),
+        gamesInnerIcon: document.getElementById('gamesInnerIcon'),
+        gamesInnerTitle: document.getElementById('gamesInnerTitle'),
+        gamesInnerDesc: document.getElementById('gamesInnerDesc'),
+        gamesGrid: document.getElementById('gamesGrid'),
+
+        checklistSavePill: document.getElementById('checklistSavePill'),
+        checklistInnerIcon: document.getElementById('checklistInnerIcon'),
+        checklistInnerTitle: document.getElementById('checklistInnerTitle'),
+        checklistInnerDesc: document.getElementById('checklistInnerDesc'),
+        checklistBody: document.getElementById('checklistBody'),
+
+        footerPlatformName: document.getElementById('footerPlatformName'),
+        footerTeacherLink: document.getElementById('footerTeacherLink'),
+        switchClassFooterBtn: document.getElementById('switchClassFooterBtn'),
+        toast: document.getElementById('toast')
+      };
+
+      let toastTimer = null;
+      function showToast(message, isError) {
+        if (!message) return;
+        clearTimeout(toastTimer);
+        els.toast.textContent = message;
+        els.toast.className = 'toast show' + (isError ? ' error' : '');
+        toastTimer = setTimeout(() => {
+          els.toast.classList.remove('show');
+        }, 3000);
+      }
+
+      function applyBranding() {
+        document.title = CONFIG.platformName + ' | تالار دانش‌آموز';
+        els.entryPlatformName.textContent = CONFIG.platformName;
+        els.entryPlatformSubtitle.textContent = CONFIG.subtitle;
+        els.headerPlatformName.textContent = CONFIG.platformName;
+        els.footerPlatformName.textContent = CONFIG.platformName;
+      }
+
+      function showView(viewName) {
+        els.viewEntry.classList.toggle('hidden', viewName !== 'entry');
+        els.viewLoading.classList.toggle('hidden', viewName !== 'loading');
+        els.viewError.classList.toggle('hidden', viewName !== 'error');
+        els.viewIdentity.classList.toggle('hidden', viewName !== 'identity');
+        els.viewHall.classList.toggle('hidden', viewName !== 'hall');
+      }
+
+      function getClassIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const raw = params.get('class') || params.get('c') || params.get('classId') || '';
+        return normalizeCodeInput(raw);
+      }
+
+      function setUrlClassParam(code) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('c');
+        url.searchParams.delete('classId');
+        if (code) {
+          url.searchParams.set('class', code);
+        } else {
+          url.searchParams.delete('class');
+        }
+        window.history.pushState({ classId: code || '' }, '', url.toString());
+      }
+
+      /* ============ LocalStorage Identity (100% Compatible) ============ */
+      function storageKey(classId) {
+        return 'fanoos_student_' + classId;
+      }
+
+      function makeStudentObj(id, name) {
+        const cleanId = String(id ?? '').trim();
+        const cleanName = String(name ?? '').trim();
+        return {
+          id: cleanId,
+          name: cleanName,
+          studentId: cleanId,
+          studentName: cleanName
+        };
+      }
+
+      function loadSavedStudent(classId) {
+        try {
+          const raw = localStorage.getItem(storageKey(classId));
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          const sid = String(parsed.studentId ?? parsed.id ?? '').trim();
+          const sname = String(parsed.studentName ?? parsed.name ?? '').trim();
+          if (sid && sname) {
+            return makeStudentObj(sid, sname);
+          }
+        } catch (_) {}
+        return null;
+      }
+
+      function saveStudent(classId, student) {
+        if (!student || !student.studentId || !student.studentName) return;
+        try {
+          localStorage.setItem(
+            storageKey(classId),
+            JSON.stringify({
+              studentId: student.studentId,
+              studentName: student.studentName
+            })
+          );
+        } catch (_) {}
+      }
+
+      function normalizeStudents(rawStudents) {
+        if (!Array.isArray(rawStudents)) return [];
+        return rawStudents
+          .map((item, idx) => {
+            if (typeof item === 'string') {
+              const trimmed = item.trim();
+              if (!trimmed) return null;
+              return { id: 's' + (idx + 1), name: trimmed };
+            }
+            if (item && typeof item === 'object') {
+              if (item.active === false || item.isActive === false) return null;
+              const status = String(item.status || '').trim().toLowerCase();
+              if (status === 'inactive' || status === 'removed') return null;
+              const name = String(item.name || item.studentName || item.fullName || '').trim();
+              const id = String(item.id || item.studentId || item.sid || ('s' + (idx + 1))).trim();
+              if (!name) return null;
+              return { id, name };
+            }
+            return null;
+          })
+          .filter(Boolean);
+      }
+
+      function reconcileSavedStudent(saved, classInfo) {
+        if (!saved) return null;
+        const roster = normalizeStudents(classInfo && classInfo.students);
+        if (roster.length === 0) return saved;
+
+        const byId = roster.find((st) => String(st.id).trim() === String(saved.id).trim());
+        if (byId) {
+          return makeStudentObj(byId.id, byId.name || saved.name);
+        }
+
+        if (!String(saved.id).startsWith('g_')) {
+          const byName = roster.find((st) => String(st.name).trim() === String(saved.name).trim());
+          if (byName) {
+            const updated = makeStudentObj(byName.id, byName.name);
+            saveStudent(state.classId, updated);
+            return updated;
+          }
+        }
+        return saved;
+      }
+
+      /* ============ Parsing Helpers (Games & Modules) ============ */
+      function normalizeStringList(rawValue, fallbackList) {
+        if (rawValue == null) return fallbackList;
+        if (Array.isArray(rawValue)) {
+          const cleaned = rawValue.map((x) => String(x).trim()).filter(Boolean);
+          return cleaned.length > 0 ? cleaned : fallbackList;
+        }
+        if (typeof rawValue === 'string') {
+          const trimmed = rawValue.trim();
+          if (!trimmed) return fallbackList;
+          try {
+            const parsed = JSON.parse(trimmed);
+            if (Array.isArray(parsed)) {
+              const cleaned = parsed.map((x) => String(x).trim()).filter(Boolean);
+              return cleaned.length > 0 ? cleaned : fallbackList;
+            }
+          } catch (_) {}
+          const parts = trimmed.split(',').map((x) => x.trim()).filter(Boolean);
+          return parts.length > 0 ? parts : fallbackList;
+        }
+        return fallbackList;
+      }
+
+      function getEnabledModules() {
+        const enabledIds = normalizeStringList(
+          state.classInfo && state.classInfo.enabledModules,
+          ['ALL']
+        );
+        const allowAll = enabledIds.some((x) => x.toUpperCase() === 'ALL');
+        return CONFIG.modules.filter((mod) => allowAll || enabledIds.includes(mod.id));
+      }
+
+      function getVisibleGames() {
+        const enabled = normalizeStringList(
+          state.classInfo && state.classInfo.enabledGames,
+          ['ALL']
+        );
+        const allowAll = enabled.some((item) => item.toUpperCase() === 'ALL');
+        return CONFIG.games.filter((game) => {
+          if (!game || !game.id) return false;
+          if (game.status === 'soon') return allowAll || enabled.includes(String(game.id));
+          if (allowAll) return true;
+          return enabled.includes(String(game.id));
+        });
+      }
+
+      function getActiveVisibleGames() {
+        return getVisibleGames().filter((g) => g.status !== 'soon' && g.status !== 'disabled');
+      }
+
+      function parseTruthyBool(val) {
+        if (val === true || val === 1) return true;
+        if (typeof val === 'string') {
+          const s = val.trim().toLowerCase();
+          return s === 'true' || s === '1' || s === 'yes' || s === 'done' || s === 'finished';
+        }
+        return false;
+      }
+
+      function parseRowState(row) {
+        if (!row || typeof row !== 'object') return {};
+        const sources = [row.state, row.stateJson];
+        for (const src of sources) {
+          if (src === undefined || src === null || src === '') continue;
+          if (typeof src === 'string') {
+            const trimmed = src.trim();
+            if (!trimmed) continue;
+            try {
+              const parsed = JSON.parse(trimmed);
+              if (parsed && typeof parsed === 'object') return parsed;
+            } catch (_) {}
+          } else if (typeof src === 'object') {
+            return src;
+          }
+        }
+        return {};
+      }
+
+      function extractRowStudentId(row) {
+        return String(row.studentId ?? row.sid ?? row.userId ?? '').trim();
+      }
+
+      function extractRowStudentName(row) {
+        return String(row.studentName ?? row.sname ?? row.name ?? '').trim();
+      }
+
+      function extractRowGameId(row) {
+        return String(row.gameId ?? row.gid ?? row.game ?? '').trim();
+      }
+
+      function getArrayLen(val) {
+        if (Array.isArray(val)) return val.length;
+        if (typeof val === 'string') {
+          const trimmed = val.trim();
+          if (!trimmed) return 0;
+          try {
+            const parsed = JSON.parse(trimmed);
+            if (Array.isArray(parsed)) return parsed.length;
+          } catch (_) {}
+        }
+        if (typeof val === 'number' && Number.isFinite(val)) {
+          return Math.max(0, Math.floor(val));
+        }
+        return 0;
+      }
+
+      function computeStudentGameStats(student, game) {
+        const currentId = String((student && (student.id ?? student.studentId)) ?? '').trim();
+        const currentName = String((student && (student.name ?? student.studentName)) ?? '').trim();
+        const gid = String(game.id ?? '').trim();
+        const totalUnits = Math.max(
+          0,
+          Number(game.totalUnits || game.totalStations || game.stationsCount || game.stations || 0)
+        );
+        const unitLabel = String(game.unitLabel || 'ایستگاه').trim();
+
+        const allRows = Array.isArray(state.progress) ? state.progress : [];
+        const rowsForGame = allRows.filter((p) => p && typeof p === 'object' && extractRowGameId(p) === gid);
+
+        let matchedRows = [];
+        if (currentId) {
+          matchedRows = rowsForGame.filter((p) => {
+            const pSid = extractRowStudentId(p);
+            return pSid !== '' && pSid === currentId;
+          });
+        }
+        if (matchedRows.length === 0 && currentName) {
+          matchedRows = rowsForGame.filter((p) => {
+            const pSid = extractRowStudentId(p);
+            const pName = extractRowStudentName(p);
+            if (!pName || pName !== currentName) return false;
+            return !currentId || !pSid || pSid === currentId;
+          });
+        }
+
+        let completedStations = 0;
+        let finishedGame = false;
+
+        if (matchedRows.length > 0) {
+          const sorted = matchedRows.slice().sort((a, b) => {
+            const ta = Date.parse(a.updatedAt || '') || 0;
+            const tb = Date.parse(b.updatedAt || '') || 0;
+            return tb - ta;
+          });
+
+          for (const p of sorted) {
+            const parsedState = parseRowState(p);
+            if (
+              parseTruthyBool(parsedState.finishedGame) ||
+              parseTruthyBool(parsedState.isFinished) ||
+              parseTruthyBool(parsedState.completedGame) ||
+              parseTruthyBool(parsedState.finished) ||
+              parseTruthyBool(p.finishedGame)
+            ) {
+              finishedGame = true;
+            }
+            const stCount = Math.max(
+              getArrayLen(parsedState.completedStations),
+              getArrayLen(parsedState.completedUnits),
+              getArrayLen(p.completedStations)
+            );
+            if (stCount > completedStations) {
+              completedStations = stCount;
+            }
+          }
+        }
+
+        if (totalUnits > 0 && completedStations >= totalUnits) {
+          completedStations = totalUnits;
+          finishedGame = true;
+        }
+
+        const pct =
+          totalUnits > 0
+            ? Math.min(100, Math.round((completedStations / totalUnits) * 100))
+            : finishedGame
+            ? 100
+            : 0;
+
+        return {
+          completedStations,
+          totalUnits,
+          unitLabel,
+          finishedGame,
+          pct
+        };
+      }
+
+      function hasCustomQuestionsForGame(gameId) {
+        const q = state.questions;
+        if (!q) return false;
+        if (Array.isArray(q)) {
+          return q.some((item) => item && String(item.gameId ?? item.gid ?? '') === String(gameId));
+        }
+        if (typeof q === 'object') {
+          const entry = q[gameId];
+          return Array.isArray(entry) ? entry.length > 0 : Boolean(entry);
+        }
+        return false;
+      }
+
+      /* ============ Checklist Helpers ============ */
+      function normalizeChecklist(rawChecklist) {
+        if (!rawChecklist || typeof rawChecklist !== 'object') return null;
+        const rawItems = Array.isArray(rawChecklist.items)
+          ? rawChecklist.items
+          : Array.isArray(rawChecklist.tasks)
+          ? rawChecklist.tasks
+          : [];
+
+        const items = rawItems
+          .map((item, idx) => {
+            if (typeof item === 'string') {
+              const text = item.trim();
+              if (!text) return null;
+              return { id: 'item_' + (idx + 1), text };
+            }
+            if (item && typeof item === 'object') {
+              const text = String(item.text || item.title || item.label || '').trim();
+              const id = String(item.id ?? item.itemId ?? ('item_' + (idx + 1))).trim();
+              if (!text) return null;
+              return { id, text };
+            }
+            return null;
+          })
+          .filter(Boolean);
+
+        if (items.length === 0) return null;
+
+        return {
+          missionId: String(rawChecklist.missionId || rawChecklist.id || '').trim(),
+          title: String(rawChecklist.title || rawChecklist.name || 'مأموریت این هفته').trim(),
+          description: String(rawChecklist.description || rawChecklist.subtitle || '').trim(),
+          items
+        };
+      }
+
+      function parseCheckedIdsArray(rawVal) {
+        if (Array.isArray(rawVal)) {
+          return rawVal.map((x) => String(x).trim()).filter(Boolean);
+        }
+        if (typeof rawVal === 'string') {
+          const trimmed = rawVal.trim();
+          if (!trimmed) return [];
+          try {
+            const parsed = JSON.parse(trimmed);
+            if (Array.isArray(parsed)) {
+              return parsed.map((x) => String(x).trim()).filter(Boolean);
+            }
+          } catch (_) {}
+          return trimmed.split(',').map((x) => x.trim()).filter(Boolean);
+        }
+        return [];
+      }
+
+      function extractStudentCheckedIds(student, checklist, checklistProgress) {
+        if (!student || !checklist) return [];
+        const sid = String(student.studentId || student.id || '').trim();
+        const sname = String(student.studentName || student.name || '').trim();
+        const mid = checklist.missionId;
+        const validIds = new Set(checklist.items.map((i) => i.id));
+
+        let rawIds = [];
+
+        if (Array.isArray(checklistProgress)) {
+          let rows = checklistProgress.filter((r) => r && typeof r === 'object');
+          if (mid) {
+            const missionMatched = rows.filter((r) => {
+              const rMid = String(r.missionId ?? r.checklistId ?? '').trim();
+              return !rMid || rMid === mid;
+            });
+            rows = missionMatched;
+          }
+
+          let studentRows = rows.filter((r) => extractRowStudentId(r) === sid);
+          if (studentRows.length === 0 && sname) {
+            studentRows = rows.filter((r) => {
+              const rSid = extractRowStudentId(r);
+              return !rSid && extractRowStudentName(r) === sname;
+            });
+          }
+
+          if (studentRows.length > 0) {
+            studentRows.sort((a, b) => (Date.parse(b.updatedAt || '') || 0) - (Date.parse(a.updatedAt || '') || 0));
+            const latest = studentRows[0];
+            rawIds = parseCheckedIdsArray(latest.checkedIds ?? latest.completedIds ?? latest.items);
+          }
+        } else if (checklistProgress && typeof checklistProgress === 'object') {
+          const entry = checklistProgress[sid];
+          if (entry) {
+            if (Array.isArray(entry) || typeof entry === 'string') {
+              rawIds = parseCheckedIdsArray(entry);
+            } else if (typeof entry === 'object') {
+              rawIds = parseCheckedIdsArray(entry.checkedIds ?? entry.completedIds ?? entry.items);
+            }
+          }
+        }
+
+        // Deduplicate & keep only valid item IDs of current checklist
+        const unique = [];
+        for (const id of rawIds) {
+          if (validIds.has(id) && !unique.includes(id)) {
+            unique.push(id);
+          }
+        }
+        return unique;
+      }
+
+      function syncStudentChecklistState() {
+        const ids = extractStudentCheckedIds(state.student, state.checklist, state.checklistProgress);
+        state.checkedIds = ids.slice();
+        state.lastConfirmedCheckedIds = ids.slice();
+      }
+
+      /* ============ API Calls ============ */
+      async function fetchClassData(classId) {
+        if (!CONFIG.apiUrl) {
+          throw new Error('آدرس سرور در فایل config.js تنظیم نشده است.');
+        }
+
+        const sep = CONFIG.apiUrl.includes('?') ? '&' : '?';
+        const url =
+          CONFIG.apiUrl +
+          sep +
+          'action=getClass&classId=' +
+          encodeURIComponent(classId) +
+          '&t=' +
+          Date.now();
+
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) {
+          throw new Error('خطا در پاسخ سرور (کد ' + toFa(res.status) + ')');
+        }
+
+        let data;
+        try {
+          data = await res.json();
+        } catch (_) {
+          throw new Error('پاسخ دریافتی از سرور معتبر نیست.');
+        }
+
+        if (!data || data.ok === false || data.success === false || data.error) {
+          const err = new Error(data && data.error ? String(data.error) : 'کلاسی با این کد پیدا نشد.');
+          err.notFound = true;
+          throw err;
+        }
+
+        const payload = data.data && typeof data.data === 'object' ? data.data : data;
+        const classInfo = payload.classInfo || payload.class || null;
+
+        if (!classInfo) {
+          const err = new Error('کلاسی با این کد پیدا نشد.');
+          err.notFound = true;
+          throw err;
+        }
+
+        state.lastFetchAt = Date.now();
+
+        return {
+          classInfo,
+          progress: Array.isArray(payload.progress) ? payload.progress : [],
+          questions: payload.questions || [],
+          checklist: normalizeChecklist(payload.checklist ?? payload.activeChecklist ?? null),
+          checklistProgress: payload.checklistProgress ?? []
+        };
+      }
+
+      async function saveChecklistToServer(checkedIdsToSave) {
+        if (!CONFIG.apiUrl || !state.classId || !state.student || !state.checklist) {
+          throw new Error('اطلاعات لازم برای ذخیره کامل نیست.');
+        }
+
+        const payload = {
+          action: 'saveChecklistProgress',
+          classId: state.classId,
+          missionId: state.checklist.missionId,
+          studentId: state.student.studentId,
+          studentName: state.student.studentName,
+          checkedIds: checkedIdsToSave
+        };
+
+        const res = await fetch(CONFIG.apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          throw new Error('خطای سرور هنگام ذخیره');
+        }
+
+        let data = null;
+        try {
+          data = await res.json();
+        } catch (_) {
+          // Some GAS responses may return plain text OK
+        }
+
+        if (data && (data.ok === false || data.success === false || data.error)) {
+          throw new Error(data.error ? String(data.error) : 'ذخیره انجام نشد.');
+        }
+
+        return data;
+      }
+
+      function updateLocalChecklistCache(checkedIds) {
+        if (!state.student || !state.checklist) return;
+        const sid = state.student.studentId;
+        const sname = state.student.studentName;
+        const mid = state.checklist.missionId;
+
+        if (Array.isArray(state.checklistProgress)) {
+          const idx = state.checklistProgress.findIndex((r) => {
+            if (!r || typeof r !== 'object') return false;
+            const rMid = String(r.missionId ?? r.checklistId ?? '').trim();
+            return extractRowStudentId(r) === sid && (!mid || !rMid || rMid === mid);
+          });
+          const updatedRow = {
+            classId: state.classId,
+            missionId: mid,
+            studentId: sid,
+            studentName: sname,
+            checkedIds: checkedIds.slice(),
+            updatedAt: new Date().toISOString()
+          };
+          if (idx >= 0) {
+            state.checklistProgress[idx] = updatedRow;
+          } else {
+            state.checklistProgress.push(updatedRow);
+          }
+        } else if (state.checklistProgress && typeof state.checklistProgress === 'object') {
+          state.checklistProgress[sid] = {
+            missionId: mid,
+            studentId: sid,
+            studentName: sname,
+            checkedIds: checkedIds.slice(),
+            updatedAt: new Date().toISOString()
+          };
+        }
+      }
+
+      /* ============ Flow & Rendering ============ */
+      async function loadClass(classId) {
+        const cleanCode = normalizeCodeInput(classId);
+        if (!cleanCode) {
+          showEntryScreen('');
+          return;
+        }
+
+        state.classId = cleanCode;
+        state.hasLoadedClass = false;
+        state.activeFolder = 'hub';
+        els.loadingMessage.textContent = 'در حال دریافت اطلاعات کلاس ' + cleanCode + '...';
+        showView('loading');
+
+        try {
+          const result = await fetchClassData(cleanCode);
+          state.classInfo = result.classInfo;
+          state.progress = result.progress;
+          state.questions = result.questions;
+          state.checklist = result.checklist;
+          state.checklistProgress = result.checklistProgress;
+          state.hasLoadedClass = true;
+
+          const saved = reconcileSavedStudent(loadSavedStudent(cleanCode), state.classInfo);
+          if (saved) {
+            state.student = saved;
+            syncStudentChecklistState();
+            renderHallAll();
+            openFolder('hub');
+            showView('hall');
+          } else {
+            state.student = null;
+            openIdentityScreen(false);
+          }
+        } catch (err) {
+          if (err && err.notFound) {
+            showEntryScreen(err.message || 'کلاسی با این کد پیدا نشد.', cleanCode);
+          } else {
+            els.errorTitle.textContent = 'اتصال به کلاس برقرار نشد';
+            els.errorMessage.textContent =
+              err && err.message ? err.message : 'لطفاً اینترنت خود را بررسی کن و دوباره تلاش کن.';
+            showView('error');
+          }
+        }
+      }
+
+      async function refreshHallData(isManual) {
+        if (!state.classId || !state.hasLoadedClass || state.isRefreshing) return;
+        if (!isManual && Date.now() - state.lastFetchAt < 1800) return;
+
+        state.isRefreshing = true;
+        els.refreshHallBtn.disabled = true;
+        els.refreshIcon.classList.add('spinning');
+
+        try {
+          const fresh = await fetchClassData(state.classId);
+          state.classInfo = fresh.classInfo;
+          state.progress = fresh.progress;
+          state.questions = fresh.questions;
+          state.checklist = fresh.checklist;
+          state.checklistProgress = fresh.checklistProgress;
+
+          if (state.student) {
+            state.student = reconcileSavedStudent(state.student, state.classInfo);
+            syncStudentChecklistState();
+            renderHallAll();
+          }
+          if (isManual) {
+            showToast('اطلاعات تالار بروزرسانی شد ✓', false);
+          }
+        } catch (_) {
+          if (isManual) {
+            showToast('بروزرسانی انجام نشد؛ اینترنت را بررسی کن.', true);
+          }
+        } finally {
+          state.isRefreshing = false;
+          els.refreshHallBtn.disabled = false;
+          els.refreshIcon.classList.remove('spinning');
+        }
+      }
+
+      function showEntryScreen(errorMsg, prefillCode) {
+        state.classId = '';
+        state.classInfo = null;
+        state.progress = [];
+        state.questions = [];
+        state.checklist = null;
+        state.checklistProgress = [];
+        state.student = null;
+        state.hasLoadedClass = false;
+
+        els.classCodeInput.value = prefillCode || '';
+        els.classCodeError.textContent = errorMsg || '';
+        showView('entry');
+        setTimeout(() => els.classCodeInput.focus(), 60);
+      }
+
+      function openIdentityScreen(allowCancel) {
+        const className = (state.classInfo && (state.classInfo.className || state.classInfo.name)) || state.classId;
+        const teacherName = String((state.classInfo && state.classInfo.teacherName) || '').trim();
+
+        els.identityClassName.textContent = className;
+        if (teacherName) {
+          els.identityTeacherName.textContent = 'با همراهی ' + teacherName;
+          els.identityTeacherName.classList.remove('hidden');
+        } else {
+          els.identityTeacherName.classList.add('hidden');
+        }
+
+        els.cancelIdentityBtn.classList.toggle('hidden', !allowCancel);
+        els.guestPanel.classList.add('hidden');
+        els.guestNameInput.value = '';
+        els.guestError.textContent = '';
+
+        const students = normalizeStudents(state.classInfo && state.classInfo.students);
+        if (students.length === 0) {
+          els.studentsListGrid.innerHTML =
+            '<div class="empty-roster-note">نام دانش‌آموزان هنوز ثبت نشده است. می‌توانی از «ورود به‌عنوان مهمان» استفاده کنی.</div>';
+          els.guestPanel.classList.remove('hidden');
+        } else {
+          els.studentsListGrid.innerHTML = students
+            .map((st) => {
+              const initial = escapeHtml(st.name.charAt(0) || 'د');
+              return `
+                <button
+                  type="button"
+                  class="student-tile"
+                  data-sid="${escapeHtml(st.id)}"
+                  data-sname="${escapeHtml(st.name)}"
+                >
+                  <span class="student-avatar" aria-hidden="true">${initial}</span>
+                  <span class="student-tile-name">${escapeHtml(st.name)}</span>
+                </button>
+              `;
+            })
+            .join('');
+        }
+
+        showView('identity');
+      }
+
+      function selectStudent(studentId, studentName) {
+        state.student = makeStudentObj(studentId, studentName);
+        saveStudent(state.classId, state.student);
+        syncStudentChecklistState();
+        renderHallAll();
+        openFolder('hub');
+        showView('hall');
+      }
+
+      function openFolder(folderName) {
+        state.activeFolder = folderName;
+        els.sectionHub.classList.toggle('hidden', folderName !== 'hub');
+        els.sectionGames.classList.toggle('hidden', folderName !== 'games');
+        els.sectionChecklist.classList.toggle('hidden', folderName !== 'checklist');
+
+        if (folderName === 'hub') {
+          renderFoldersGrid();
+        } else if (folderName === 'games') {
+          renderGamesFolder();
+        } else if (folderName === 'checklist') {
+          renderChecklistFolder();
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function renderHallAll() {
+        if (!state.classInfo || !state.student) return;
+
+        const className = state.classInfo.className || state.classInfo.name || state.classId;
+        const teacherName = String(state.classInfo.teacherName || '').trim();
+        const teacherHref = 'teacher.html?class=' + encodeURIComponent(state.classId);
+
+        els.headerClassName.textContent = className;
+        els.headerStudentName.textContent = state.student.studentName;
+        els.greetingStudentName.textContent = state.student.studentName;
+        els.footerTeacherLink.href = teacherHref;
+
+        if (teacherName) {
+          els.greetingTeacherLine.textContent = 'با همراهی ' + teacherName;
+          els.greetingTeacherLine.classList.remove('hidden');
+        } else {
+          els.greetingTeacherLine.classList.add('hidden');
+        }
+
+        renderFoldersGrid();
+        renderGamesFolder();
+        renderChecklistFolder();
+      }
+
+      function renderFoldersGrid() {
+        const modules = getEnabledModules();
+        const activeGames = getActiveVisibleGames();
+
+        // Compute Games live summary
+        let completedStationsSum = 0;
+        let totalUnitsSum = 0;
+        for (const g of activeGames) {
+          const st = computeStudentGameStats(state.student, g);
+          completedStationsSum += st.completedStations;
+          totalUnitsSum += st.totalUnits;
+        }
+
+        // Compute Checklist live summary
+        const hasChecklist = Boolean(state.checklist && state.checklist.items.length > 0);
+        const totalChecklistItems = hasChecklist ? state.checklist.items.length : 0;
+        const checkedCount = hasChecklist ? state.checkedIds.length : 0;
+
+        if (modules.length === 0) {
+          els.foldersGrid.innerHTML =
+            '<div class="glass-card empty-state-card" style="grid-column: 1 / -1;"><p class="empty-state-title">هنوز بخشی برای این کلاس فعال نشده است.</p></div>';
+          return;
+        }
+
+        els.foldersGrid.innerHTML = modules
+          .map((mod) => {
+            if (mod.id === 'games') {
+              const stationsBadge =
+                totalUnitsSum > 0
+                  ? `${toFa(completedStationsSum)} از ${toFa(totalUnitsSum)} ایستگاه تکمیل‌شده`
+                  : `${toFa(completedStationsSum)} ایستگاه تکمیل‌شده`;
+
+              return `
+                <button type="button" class="folder-card theme-games" data-open-folder="games">
+                  <div class="folder-top">
+                    <div class="folder-icon" aria-hidden="true">${escapeHtml(mod.icon)}</div>
+                    <div class="folder-arrow" aria-hidden="true">←</div>
+                  </div>
+                  <h2 class="folder-title">${escapeHtml(mod.title)}</h2>
+                  <p class="folder-subtitle">${escapeHtml(mod.subtitle)}</p>
+                  <div class="folder-badges">
+                    <span class="live-pill gold">${toFa(activeGames.length)} بازی فعال</span>
+                    <span class="live-pill neutral">${stationsBadge}</span>
+                  </div>
+                </button>
+              `;
+            }
+
+            if (mod.id === 'checklist') {
+              let statusPillHtml = '<span class="live-pill neutral">بدون مأموریت فعال</span>';
+              let secondaryPillHtml = '';
+
+              if (hasChecklist) {
+                if (checkedCount === 0) {
+                  statusPillHtml = '<span class="live-pill teal">مأموریت جدید دارد ✨</span>';
+                  secondaryPillHtml = `<span class="live-pill neutral">${toFa(totalChecklistItems)} مورد</span>`;
+                } else if (checkedCount >= totalChecklistItems) {
+                  statusPillHtml = `<span class="live-pill emerald">${toFa(checkedCount)} از ${toFa(totalChecklistItems)} انجام شد ✓</span>`;
+                } else {
+                  statusPillHtml = `<span class="live-pill teal">${toFa(checkedCount)} از ${toFa(totalChecklistItems)} انجام شد</span>`;
+                }
+              }
+
+              return `
+                <button type="button" class="folder-card theme-checklist" data-open-folder="checklist">
+                  <div class="folder-top">
+                    <div class="folder-icon" aria-hidden="true">${escapeHtml(mod.icon)}</div>
+                    <div class="folder-arrow" aria-hidden="true">←</div>
+                  </div>
+                  <h2 class="folder-title">${escapeHtml(mod.title)}</h2>
+                  <p class="folder-subtitle">${escapeHtml(mod.subtitle)}</p>
+                  <div class="folder-badges">
+                    ${statusPillHtml}
+                    ${secondaryPillHtml}
+                  </div>
+                </button>
+              `;
+            }
+
+            return '';
+          })
+          .join('');
+      }
+
+      function renderGamesFolder() {
+        const gamesMod = CONFIG.modules.find((m) => m.id === 'games') || DEFAULT_MODULES[0];
+        els.gamesInnerIcon.textContent = gamesMod.icon;
+        els.gamesInnerTitle.textContent = gamesMod.title;
+        els.gamesInnerDesc.textContent = gamesMod.subtitle;
+
+        const visibleGames = getVisibleGames();
+        const activeGames = getActiveVisibleGames();
+        const ageGroup = (state.classInfo && state.classInfo.ageGroup) || '12-15';
+
+        els.gamesInnerCountPill.textContent = toFa(activeGames.length) + ' بازی فعال';
+
+        if (visibleGames.length === 0) {
+          els.gamesGrid.innerHTML =
+            '<div class="glass-card empty-state-card" style="grid-column: 1 / -1;"><div class="empty-state-icon" style="background: var(--gold-soft); border-color: var(--gold-border);">🎮</div><p class="empty-state-title">هنوز بازی فعالی برای این کلاس باز نشده است.</p></div>';
+          return;
+        }
+
+        els.gamesGrid.innerHTML = visibleGames
+          .map((game) => {
+            const title = escapeHtml(game.title || game.name || 'بازی');
+            const desc = escapeHtml(game.description || game.desc || '');
+            const category = escapeHtml(game.category || 'داستان تعاملی');
+            const icon = escapeHtml(game.icon || (game.status === 'soon' ? '🔒' : '🧭'));
+
+            if (game.status === 'soon') {
+              return `
+                <article class="game-card soon-game" aria-disabled="true">
+                  <div class="game-top">
+                    <div class="game-icon" aria-hidden="true">${icon}</div>
+                    <div class="game-badges">
+                      <span class="cat-tag">${category}</span>
+                    </div>
+                  </div>
+                  <h3 class="game-title">${title}</h3>
+                  <p class="game-desc">${desc || 'این بخش به‌زودی برای کلاس شما فعال می‌شود.'}</p>
+                  <div class="soon-locked-pill">🔒 به‌زودی باز می‌شود</div>
+                </article>
+              `;
+            }
+
+            const stats = computeStudentGameStats(state.student, game);
+            const hasTeacherQ = hasCustomQuestionsForGame(game.id);
+
+            // Exact URL structure preserved for 100% compatibility with games/saleh & games/noah
+            const gameUrl =
+              String(game.path || '#') +
+              '?class=' + encodeURIComponent(state.classId) +
+              '&sid=' + encodeURIComponent(state.student.studentId) +
+              '&sname=' + encodeURIComponent(state.student.studentName) +
+              '&gid=' + encodeURIComponent(game.id) +
+              '&age=' + encodeURIComponent(ageGroup);
+
+            const countText =
+              stats.totalUnits > 0
+                ? `${toFa(stats.completedStations)} از ${toFa(stats.totalUnits)} ${escapeHtml(stats.unitLabel)}`
+                : `${toFa(stats.completedStations)} ${escapeHtml(stats.unitLabel)}`;
+
+            const ctaText = stats.finishedGame
+              ? 'مرور دوباره بازی'
+              : stats.completedStations > 0
+              ? 'ادامه بازی ←'
+              : 'شروع بازی ←';
+
+            const ctaClass = stats.finishedGame ? 'btn-teal' : 'btn-gold';
+
+            return `
+              <article class="game-card active-game ${stats.finishedGame ? 'completed-game' : ''}">
+                <div class="game-top">
+                  <div class="game-icon" aria-hidden="true">${icon}</div>
+                  <div class="game-badges">
+                    <span class="cat-tag">${category}</span>
+                    ${stats.finishedGame ? '<span class="done-tag">تکمیل شد 🏆</span>' : ''}
+                  </div>
+                </div>
+
+                <h3 class="game-title">${title}</h3>
+                <p class="game-desc">${desc}</p>
+                ${hasTeacherQ ? '<div class="teacher-challenge-tag">✨ همراه با پرسش اختصاصی مربی</div>' : ''}
+
+                <div class="game-progress-box">
+                  <div class="progress-header">
+                    <span class="progress-count">${countText}</span>
+                    <span class="progress-pct">${toFa(stats.pct)}٪</span>
+                  </div>
+                  <div class="progress-track" role="progressbar" aria-valuenow="${stats.pct}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-fill" style="width: ${stats.pct}%;"></div>
+                  </div>
+                </div>
+
+                <a href="${escapeHtml(gameUrl)}" class="btn ${ctaClass}" style="width: 100%;">
+                  ${ctaText}
+                </a>
+              </article>
+            `;
+          })
+          .join('');
+      }
+
+      function setSaveStatusPill(mode, text) {
+        clearTimeout(state.savePillTimer);
+        els.checklistSavePill.className = 'save-status-pill ' + mode;
+        els.checklistSavePill.textContent = text || '';
+        if (mode === 'saved') {
+          state.savePillTimer = setTimeout(() => {
+            els.checklistSavePill.className = 'save-status-pill idle';
+          }, 2600);
+        }
+      }
+
+      function renderChecklistFolder() {
+        const checklistMod = CONFIG.modules.find((m) => m.id === 'checklist') || DEFAULT_MODULES[1];
+        els.checklistInnerIcon.textContent = checklistMod.icon;
+        els.checklistInnerTitle.textContent = checklistMod.title;
+        els.checklistInnerDesc.textContent = checklistMod.subtitle;
+
+        if (!state.checklist || state.checklist.items.length === 0) {
+          els.checklistBody.innerHTML = `
+            <div class="glass-card empty-state-card">
+              <div class="empty-state-icon" aria-hidden="true">✨</div>
+              <p class="empty-state-title">هنوز مأموریتی برای این هفته ثبت نشده است؛ به‌زودی اینجا قرار می‌گیرد ✨</p>
+            </div>
+          `;
+          return;
+        }
+
+        const total = state.checklist.items.length;
+        const checkedSet = new Set(state.checkedIds);
+        const doneCount = state.checklist.items.filter((item) => checkedSet.has(item.id)).length;
+        const pct = total > 0 ? Math.round((doneCount / total) * 100) : 0;
+        const allDone = total > 0 && doneCount === total;
+
+        const itemsHtml = state.checklist.items
+          .map((item) => {
+            const isChecked = checkedSet.has(item.id);
+            return `
+              <button
+                type="button"
+                class="check-card ${isChecked ? 'is-checked' : ''}"
+                role="checkbox"
+                aria-checked="${isChecked ? 'true' : 'false'}"
+                data-item-id="${escapeHtml(item.id)}"
+              >
+                <span class="check-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+                <span class="check-text">${escapeHtml(item.text)}</span>
+              </button>
+            `;
+          })
+          .join('');
+
+        els.checklistBody.innerHTML = `
+          <div class="glass-card mission-summary-card">
+            <div class="mission-title-row">
+              <div>
+                <h3 class="mission-title">${escapeHtml(state.checklist.title)}</h3>
+                ${state.checklist.description ? `<p class="mission-desc">${escapeHtml(state.checklist.description)}</p>` : ''}
+              </div>
+            </div>
+
+            <div class="mission-progress-meta">
+              <span class="mission-progress-label">${toFa(doneCount)} از ${toFa(total)} مورد انجام شد</span>
+              <span class="mission-progress-pct">${toFa(pct)}٪</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100">
+              <div class="mission-progress-fill" style="width: ${pct}%;"></div>
+            </div>
+          </div>
+
+          ${
+            allDone
+              ? `
+            <div class="all-done-banner" role="status">
+              <div class="all-done-icon" aria-hidden="true">🌟</div>
+              <div class="all-done-text">
+                <strong>آفرین! تمام موارد مأموریت این هفته را با موفقیت انجام دادی.</strong>
+                <span>پیشرفتت برای مربی ثبت شد؛ همین مسیر عالی را ادامه بده.</span>
+              </div>
+            </div>
+          `
+              : ''
+          }
+
+          <div class="checklist-items">
+            ${itemsHtml}
+          </div>
+        `;
+      }
+
+      async function handleChecklistToggle(itemId) {
+        if (!state.checklist || !state.student) return;
+
+        const exists = state.checkedIds.includes(itemId);
+        const nextCheckedIds = exists
+          ? state.checkedIds.filter((id) => id !== itemId)
+          : state.checkedIds.concat(itemId);
+
+        // Optimistic UI update
+        state.checkedIds = nextCheckedIds;
+        const myVersion = ++state.checklistSaveVersion;
+
+        renderChecklistFolder();
+        renderFoldersGrid();
+        setSaveStatusPill('saving', 'در حال ذخیره...');
+
+        try {
+          await saveChecklistToServer(nextCheckedIds);
+          if (myVersion === state.checklistSaveVersion) {
+            state.lastConfirmedCheckedIds = nextCheckedIds.slice();
+            updateLocalChecklistCache(nextCheckedIds);
+            setSaveStatusPill('saved', 'ذخیره شد ✓');
+          }
+        } catch (_) {
+          if (myVersion === state.checklistSaveVersion) {
+            // Rollback optimistic change on network/server failure
+            state.checkedIds = state.lastConfirmedCheckedIds.slice();
+            renderChecklistFolder();
+            renderFoldersGrid();
+            setSaveStatusPill('error', 'خطا در ذخیره');
+            showToast('خطا در ذخیره تیک؛ اتصال اینترنت را بررسی کن.', true);
+          }
+        }
+      }
+
+      /* ============ Event Listeners ============ */
+      els.classCodeInput.addEventListener('input', () => {
+        const normalized = normalizeCodeInput(els.classCodeInput.value);
+        if (els.classCodeInput.value !== normalized) {
+          els.classCodeInput.value = normalized;
+        }
+        if (els.classCodeError.textContent) {
+          els.classCodeError.textContent = '';
+        }
+      });
+
+      els.classCodeForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const code = normalizeCodeInput(els.classCodeInput.value);
+        els.classCodeInput.value = code;
+        if (!code) {
+          els.classCodeError.textContent = 'لطفاً کد کلاس را وارد کن.';
+          els.classCodeInput.focus();
+          return;
+        }
+        els.classCodeError.textContent = '';
+        setUrlClassParam(code);
+        loadClass(code);
+      });
+
+      els.retryBtn.addEventListener('click', () => {
+        if (state.classId) {
+          loadClass(state.classId);
+        } else {
+          setUrlClassParam('');
+          showEntryScreen('');
+        }
+      });
+
+      function handleSwitchClass() {
+        setUrlClassParam('');
+        showEntryScreen('');
+      }
+
+      els.changeClassFromErrorBtn.addEventListener('click', handleSwitchClass);
+      els.switchClassFromIdentityBtn.addEventListener('click', handleSwitchClass);
+      els.switchClassFooterBtn.addEventListener('click', handleSwitchClass);
+
+      els.cancelIdentityBtn.addEventListener('click', () => {
+        if (state.student) {
+          showView('hall');
+        }
+      });
+
+      els.studentsListGrid.addEventListener('click', (e) => {
+        const tile = e.target.closest('.student-tile');
+        if (!tile) return;
+        const sid = tile.getAttribute('data-sid');
+        const sname = tile.getAttribute('data-sname');
+        if (!sid || !sname) return;
+        selectStudent(sid, sname);
+      });
+
+      els.toggleGuestBtn.addEventListener('click', () => {
+        const isNowOpen = els.guestPanel.classList.toggle('hidden') === false;
+        if (isNowOpen) {
+          setTimeout(() => els.guestNameInput.focus(), 40);
+        }
+      });
+
+      els.guestForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const guestName = els.guestNameInput.value.trim();
+        if (guestName.length < 2) {
+          els.guestError.textContent = 'لطفاً نام خود را کامل‌تر بنویس (حداقل ۲ حرف).';
+          els.guestNameInput.focus();
+          return;
+        }
+        els.guestError.textContent = '';
+        // Compatible guest studentId format
+        const guestId = 'g_' + Date.now();
+        selectStudent(guestId, guestName);
+      });
+
+      els.changeNameBtn.addEventListener('click', () => {
+        openIdentityScreen(Boolean(state.student));
+      });
+
+      els.refreshHallBtn.addEventListener('click', () => {
+        refreshHallData(true);
+      });
+
+      els.foldersGrid.addEventListener('click', (e) => {
+        const card = e.target.closest('[data-open-folder]');
+        if (!card) return;
+        const folderId = card.getAttribute('data-open-folder');
+        if (folderId === 'games' || folderId === 'checklist') {
+          openFolder(folderId);
+        }
+      });
+
+      document.querySelectorAll('[data-back-to="hub"]').forEach((btn) => {
+        btn.addEventListener('click', () => openFolder('hub'));
+      });
+
+      els.checklistBody.addEventListener('click', (e) => {
+        const card = e.target.closest('.check-card[data-item-id]');
+        if (!card) return;
+        const itemId = card.getAttribute('data-item-id');
+        if (!itemId) return;
+        handleChecklistToggle(itemId);
+      });
+
+      window.addEventListener('popstate', () => {
+        const code = getClassIdFromUrl();
+        if (code) {
+          loadClass(code);
+        } else {
+          showEntryScreen('');
+        }
+      });
+
+      // Auto-refresh progress when returning from games/saleh or games/noah
+      window.addEventListener('pageshow', (event) => {
+        if (!state.classId) return;
+        if (event.persisted) {
+          refreshHallData(false);
+        } else if (state.hasLoadedClass) {
+          refreshHallData(false);
+        }
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && state.classId && state.hasLoadedClass) {
+          refreshHallData(false);
+        }
+      });
+
+      /* ============ Boot ============ */
+      function init() {
+        applyBranding();
+        const initialCode = getClassIdFromUrl();
+        if (initialCode) {
+          loadClass(initialCode);
+        } else {
+          showEntryScreen('');
+        }
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
+```
