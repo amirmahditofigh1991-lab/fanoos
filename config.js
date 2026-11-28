@@ -1,12 +1,12 @@
 /**
  * پیکربندی مرکزی پلتفرم «فانوس یادگیری» - نسخهٔ نهایی فاز ۲
  * سازگاری ۱۰۰٪ با نسخه‌های قبلی (camelCase) و نسخهٔ جدید (UPPER_CASE)
- * نکته امنیتی: هیچ رمز عبور، کلید محرمانه یا کد دعوتی در این فایل نگهداری نمی‌شود.
+ * نکتهٔ امنیتی: هیچ رمز عبور، کلید محرمانه یا کد دعوتی در این فایل قرار ندارد.
  */
-(function (global) {
+(function () {
   "use strict";
 
-  // مقادیر پایه و ثابت‌های اصلی فاز ۲
+  // ثابت‌های پایه و آدرس سرور Apps Script
   const API_URL =
     "https://script.google.com/macros/s/AKfycbwboCEekU4zGr72srK-QyXyIc_MOwqdnE_a7px05KCMfj3lBSjCGp3LtDB2lheXkoo/exec";
   const APP_VERSION = "2.1";
@@ -193,56 +193,36 @@
     }
   }
 
-  // ثبت آبجکت اصلی با پشتیبانی هم‌زمان از کلیدهای camelCase و UPPER_CASE
-  global.FANOOS_CONFIG = {
-    // آدرس سرور Apps Script (هر دو کلید به یک رشتهٔ دقیق اشاره می‌کنند)
-    apiUrl: API_URL,
+  // ثبت نهایی آبجکت روی window.FANOOS_CONFIG با پوشش کامل کلیدهای جدید و قدیمی
+  window.FANOOS_CONFIG = {
+    // کلیدهای اصلی فاز ۲ (UPPER_CASE)
     API_URL: API_URL,
-
-    // نسخهٔ تنظیمات
-    appVersion: APP_VERSION,
     APP_VERSION: APP_VERSION,
-
-    // حد نصاب کلاس (به همراه نام قبلی targetClassSize)
-    classQuota: CLASS_QUOTA,
     CLASS_QUOTA: CLASS_QUOTA,
-    targetClassSize: CLASS_QUOTA,
-
-    // طول پیش‌فرض دوره (روز)
-    defaultCycleDays: DEFAULT_CYCLE_DAYS,
     DEFAULT_CYCLE_DAYS: DEFAULT_CYCLE_DAYS,
-
-    // مشخصات ظاهری پلتفرم
-    platformName: "فانوس یادگیری",
-    platformSubtitle: "کلاس هوشمند، بازی و یادگیری تعاملی",
-
-    // پایه‌های تحصیلی (و ageGroups معادل آن برای سازگاری عقب‌رو)
-    grades: GRADES,
     GRADES: GRADES,
-    ageGroups: AGE_GROUPS,
-
-    // توابع کمکی یکسان‌سازی پایه/رده سنی
-    normalizeGrade: normalizeGrade,
-    normalizeAgeGroup: normalizeAgeGroup,
-
-    // سیستم رونمایی و اطلاع‌رسانی سه‌لایه
-    announcement: ANNOUNCEMENT,
-    ANNOUNCEMENT: ANNOUNCEMENT,
-
-    // پوشه‌های تالار دانش‌آموز (به همراه نام قبلی modules)
-    folders: FOLDERS,
     FOLDERS: FOLDERS,
-    modules: FOLDERS,
-
-    // موارد پیش‌فرض چک‌لیست
-    checklistPresets: CHECKLIST_PRESETS,
-
-    // فهرست همه‌کارهٔ بازی‌ها
-    games: GAMES,
+    ANNOUNCEMENT: ANNOUNCEMENT,
+    CHECKLIST_PRESETS: CHECKLIST_PRESETS,
     GAMES: GAMES,
 
-    // تابع جستجوی بازی
+    // کلیدهای نسخهٔ قبلی و معادل‌های camelCase برای سازگاری ۱۰۰٪
+    apiUrl: API_URL,
+    appVersion: APP_VERSION,
+    classQuota: CLASS_QUOTA,
+    targetClassSize: CLASS_QUOTA,
+    defaultCycleDays: DEFAULT_CYCLE_DAYS,
+    platformName: "فانوس یادگیری",
+    platformSubtitle: "کلاس هوشمند، بازی و یادگیری تعاملی",
+    grades: GRADES,
+    ageGroups: AGE_GROUPS,
+    normalizeGrade: normalizeGrade,
+    normalizeAgeGroup: normalizeAgeGroup,
+    folders: FOLDERS,
+    modules: FOLDERS,
+    announcement: ANNOUNCEMENT,
+    checklistPresets: CHECKLIST_PRESETS,
+    games: GAMES,
     getGameById: getGameById
   };
-})(window);
-```
+})();
