@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#070d1a" />
+  <meta name="theme-color" content="#0b1120" />
   <title>میز مربیان — فانوس یادگیری</title>
 
   <!-- Load platform configuration with cache-busting -->
@@ -30,12 +30,49 @@
           },
           colors: {
             fanoos: {
-              bg: "#070d1a",
-              surface: "#0d1629",
-              card: "#111c33",
-              elevated: "#172542",
-              border: "#223354"
+              bg: "#0b1120",
+              surface: "#111827",
+              card: "#151f33",
+              elevated: "#1b2840",
+              border: "#25344f"
             }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html, body {
+      background-color: #0b1120;
+      color: #e2e8f0;
+      font-family: "Vazirmatn", system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-image:
+        radial-gradient(ellipse 75% 42% at 50% -8%, rgba(245, 158, 11, 0.12), transparent 65%),
+        radial-gradient(ellipse 65% 38% at 85% 8%, rgba(14, 116, 144, 0.11), transparent 62%);
+      background-attachment: fixed;
+    }
+
+    /* Subtle dark scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b1120;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #283858;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3a507a;
+    }
           }
         }
       }
@@ -122,7 +159,8 @@
       width: 14px;
       height: 14px;
       border: 2px solid rgba(255, 255, 255, 0.3);
-      border-top-color: #ffffff;
+      border-color: color-mix(in srgb, currentColor 28%, transparent);
+      border-top-color: currentColor;
       border-radius: 50%;
       animation: spinFast 0.65s linear infinite;
       display: inline-block;
@@ -131,8 +169,7 @@
   </style>
 </head>
 
-<body class="min-h-screen flex flex-col selection:bg-teal-500/30 selection:text-teal-100">
-
+<body class="min-h-screen flex flex-col selection:bg-amber-500/30 selection:text-amber-100">
   <!-- =========================================================================
        READONLY MODE SLIM BANNER (Shown only when accessMode === "readonly")
   ========================================================================= -->
@@ -156,10 +193,10 @@
     id="bootOverlay"
     class="hidden fixed inset-0 z-50 bg-fanoos-bg/95 backdrop-blur-sm flex flex-col items-center justify-center gap-3 p-6 text-center"
   >
-    <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-400/35 flex items-center justify-center">
-      <span class="btn-spinner" style="width:24px;height:24px;border-width:2.5px;border-top-color:#2dd4bf;"></span>
+    <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/35 flex items-center justify-center">
+      <span class="btn-spinner" style="width:24px;height:24px;border-width:2.5px;border-top-color:#fbbf24;"></span>
     </div>
-    <p class="text-sm font-semibold text-slate-200">در حال بارگذاری میز کلاس...</p>
+    <p class="text-sm font-semibold text-amber-100">در حال بارگذاری میز کلاس...</p>
     <p id="bootSubtext" class="text-xs text-slate-400">لطفاً لحظه‌ای صبر کنید</p>
   </div>
 
@@ -170,12 +207,10 @@
     <main class="w-full max-w-md mx-auto my-auto">
       <!-- Brand Header -->
       <div class="text-center mb-6">
-        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500/20 via-cyan-500/15 to-indigo-500/20 border border-teal-400/30 shadow-lg shadow-teal-950/40 mb-3">
-          <svg class="w-7 h-7 text-teal-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5m0 15V21m7.5-9h-1.5M6 12H4.5m12.364-5.364l-1.06 1.06M8.197 15.803l-1.061 1.061m0-9.728l1.06 1.06m7.607 7.607l1.06 1.06M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
-          </svg>
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/20 via-amber-400/10 to-orange-500/15 border border-amber-400/35 shadow-lg shadow-amber-950/40 mb-3 text-3xl leading-none select-none">
+          🏮
         </div>
-        <h1 class="text-2xl font-extrabold text-slate-100 tracking-tight">میز مربیان</h1>
+        <h1 class="text-2xl font-extrabold text-amber-100 tracking-tight">میز مربیان</h1>
         <p class="text-xs text-slate-400 mt-1">فانوس یادگیری — مدیریت کلاس، چک‌لیست و رصد پیشرفت</p>
       </div>
 
@@ -186,14 +221,14 @@
           <button
             id="authTabLogin"
             type="button"
-            class="py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition bg-teal-600 text-white shadow-md shadow-teal-950/50 cursor-pointer"
+            class="py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition bg-amber-500/15 border border-amber-400/45 text-amber-200 shadow-sm shadow-amber-950/30 cursor-pointer"
           >
             ورود به میز کلاس
           </button>
           <button
             id="authTabCreate"
             type="button"
-            class="py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition text-slate-400 hover:text-slate-200 cursor-pointer"
+            class="py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition border border-transparent text-slate-400 hover:text-slate-200 cursor-pointer"
           >
             ساخت کلاس جدید
           </button>
@@ -212,7 +247,7 @@
               dir="ltr"
               autocomplete="username"
               placeholder="مثلاً k5742"
-              class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 text-left font-medium transition"
+              class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 text-left font-medium transition"
             />
           </div>
 
@@ -226,7 +261,7 @@
                 dir="ltr"
                 autocomplete="current-password"
                 placeholder="رمز اختصاصی کلاس"
-                class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-3 pl-11 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 text-left font-medium transition"
+                class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-3 pl-11 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 text-left font-medium transition"
               />
               <button
                 type="button"
@@ -248,7 +283,7 @@
           <button
             id="btnLoginSubmit"
             type="submit"
-            class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-l from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white text-sm font-bold shadow-lg shadow-teal-950/60 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
+            class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-950/50 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>ورود به میز کلاس</span>
           </button>
@@ -266,7 +301,7 @@
               type="text"
               dir="ltr"
               placeholder="کد عضویت مربیان"
-              class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 text-left uppercase transition"
+              class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 text-left uppercase transition"
             />
           </div>
 
@@ -279,7 +314,7 @@
               id="createClassName"
               type="text"
               placeholder="مثلاً کلاس ستارگان پنج‌شنبه"
-              class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 transition"
+              class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 transition"
             />
           </div>
 
@@ -293,8 +328,76 @@
                 id="createTeacherName"
                 type="text"
                 placeholder="مثلاً فانی و شربلو یا محمد رضایی"
-                class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 transition"
+                class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 transition"
               />
+            </div>
+            <div>
+              <label for="createNeighborhood" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                محله یا محدوده کلاس <span class="text-rose-400">*</span>
+              </label>
+              <input
+                id="createNeighborhood"
+                type="text"
+                placeholder="مثلاً منیریه، یوسف‌آباد، پیروزی"
+                class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 transition"
+              />
+            </div>
+          </div>
+
+          <!-- 5. Grades Multi-Select (5 horizontal pills) -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs font-semibold text-slate-300">
+                پایه تحصیلی <span class="text-rose-400">*</span>
+              </label>
+              <span id="createGradePreview" class="text-[11px] font-semibold text-amber-300">انتخاب کنید</span>
+            </div>
+            <div id="createGradesRow" class="grid grid-cols-5 gap-1.5">
+              <!-- Populated dynamically from config GRADES -->
+            </div>
+          </div>
+
+          <!-- 6. Class Start Time (3-mode selector) -->
+          <div class="p-3.5 rounded-2xl bg-fanoos-bg/80 border border-fanoos-border space-y-3">
+            <label class="block text-xs font-semibold text-slate-300">زمان شروع کلاس</label>
+            <div class="grid grid-cols-3 gap-1.5" id="startModeGroup">
+              <button
+                type="button"
+                data-start-mode="new"
+                class="start-mode-btn py-2 px-1.5 rounded-xl text-[11.5px] font-bold border transition cursor-pointer bg-amber-500/15 border-amber-400/55 text-amber-200"
+              >
+                تازه شروع شده
+              </button>
+              <button
+                type="button"
+                data-start-mode="past"
+                class="start-mode-btn py-2 px-1.5 rounded-xl text-[11.5px] font-semibold border transition cursor-pointer bg-fanoos-surface border-fanoos-border text-slate-400 hover:text-slate-200"
+              >
+                قبلاً شروع شده
+              </button>
+              <button
+                type="button"
+                data-start-mode="extended"
+                class="start-mode-btn py-2 px-1.5 rounded-xl text-[11.5px] font-semibold border transition cursor-pointer bg-fanoos-surface border-fanoos-border text-slate-400 hover:text-slate-200"
+              >
+                در دورهٔ تمدید
+              </button>
+            </div>
+
+            <!-- Past sub-controls -->
+            <div id="startModePastBox" class="hidden space-y-2.5 pt-1">
+              <p class="text-[11px] text-slate-400">چه مدت از شروع این دوره گذشته است؟</p>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label for="pastMonths" class="block text-[11px] text-slate-400 mb-1">ماه (۰ تا ۵)</label>
+                  <select id="pastMonths" class="fanoos-select w-full rounded-xl bg-fanoos-surface border border-fanoos-border px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400/75"></select>
+                </div>
+                <div>
+                  <label for="pastWeeks" class="block text-[11px] text-slate-400 mb-1">هفته (۰ تا ۳)</label>
+                  <select id="pastWeeks" class="fanoos-select w-full rounded-xl bg-fanoos-surface border border-fanoos-border px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400/75"></select>
+                </div>
+              </div>
+              <div id="pastCalcPreview" class="text-[11.5px] font-medium text-amber-200 bg-amber-500/10 border border-amber-400/25 rounded-xl px-3 py-2"></div>
             </div>
             <div>
               <label for="createNeighborhood" class="block text-xs font-semibold text-slate-300 mb-1.5">
@@ -395,7 +498,7 @@
                 dir="ltr"
                 autocomplete="new-password"
                 placeholder="مثلاً 0520 یا 4829"
-                class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 pl-11 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 text-left transition"
+                class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 pl-11 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 text-left transition"
               />
               <button
                 type="button"
@@ -424,14 +527,14 @@
               id="createStudents"
               rows="3"
               placeholder="علی محمدی&#10;حسین رضایی&#10;مهدی کریمی"
-              class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 resize-y transition"
+              class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 resize-y transition"
             ></textarea>
           </div>
 
           <button
             id="btnCreateSubmit"
             type="submit"
-            class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-l from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white text-sm font-bold shadow-lg shadow-teal-950/60 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
+            class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-950/50 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>ساخت کلاس و ورود به میز مربیان</span>
           </button>
@@ -443,7 +546,7 @@
     <footer class="mt-8 pb-3 text-center">
       <a
         href="index.html"
-        class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-teal-300 transition px-3 py-2 rounded-xl"
+        class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-amber-300 transition px-3 py-2 rounded-xl"
       >
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -463,11 +566,11 @@
       <!-- Line 1: Class Name + Code + Compact Action Buttons -->
       <div class="flex items-center justify-between gap-2">
         <div class="flex items-center gap-2 min-w-0">
-          <h1 id="hdrClassName" class="text-sm sm:text-base font-extrabold text-slate-100 truncate">...</h1>
+          <h1 id="hdrClassName" class="text-sm sm:text-base font-extrabold text-amber-50 truncate">...</h1>
           <span
             id="hdrClassCode"
             dir="ltr"
-            class="shrink-0 px-2 py-0.5 rounded-lg bg-fanoos-elevated border border-fanoos-border text-[11px] font-bold text-teal-300 tracking-wide"
+            class="shrink-0 px-2 py-0.5 rounded-lg bg-amber-500/15 border border-amber-400/35 text-[11px] font-bold text-amber-200 tracking-wide"
           >...</span>
         </div>
 
@@ -535,7 +638,7 @@
           id="navTabChecklist"
           type="button"
           data-tab="checklist"
-          class="dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer bg-teal-600 text-white shadow-sm"
+          class="dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer bg-amber-500/15 border border-amber-400/45 text-amber-200 shadow-sm shadow-amber-950/30"
         >
           <span>✅</span>
           <span>چک‌لیست</span>
@@ -544,7 +647,7 @@
           id="navTabGames"
           type="button"
           data-tab="games"
-          class="dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-slate-400 hover:text-slate-200"
+          class="dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer border border-transparent text-slate-400 hover:text-slate-200"
         >
           <span>🎮</span>
           <span>رصد بازی‌ها</span>
@@ -553,7 +656,7 @@
           id="navTabClass"
           type="button"
           data-tab="class"
-          class="dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-slate-400 hover:text-slate-200"
+          class="dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer border border-transparent text-slate-400 hover:text-slate-200"
         >
           <span>⚙️</span>
           <span>کلاس و اعضا</span>
@@ -568,14 +671,8 @@
       <!-- Mission Editor Card -->
       <div class="bg-fanoos-surface/95 border border-fanoos-border rounded-3xl p-4 sm:p-5 space-y-4">
         <div class="flex items-center justify-between gap-2">
-          <h2 class="text-sm font-bold text-slate-100">تنظیم مأموریت چک‌لیست</h2>
+          <h2 class="text-sm font-bold text-amber-100">تنظیم مأموریت چک‌لیست</h2>
           <span id="checklistUpdatedBadge" class="text-[11px] text-slate-400"></span>
-        </div>
-
-        <!-- Compact Presets Chips -->
-        <div id="checklistPresetsWrap" class="hidden space-y-1.5">
-          <span class="block text-[11px] font-medium text-slate-400">پیشنهادهای آماده:</span>
-          <div id="checklistPresetsChips" class="flex flex-wrap gap-1.5"></div>
         </div>
 
         <!-- Mission Title -->
@@ -585,8 +682,14 @@
             id="chkTitleInput"
             type="text"
             placeholder="مثلاً مأموریت هفتگی نماز و مطالعه"
-            class="editable-ctrl w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 transition"
+            class="editable-ctrl w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 transition"
           />
+        </div>
+
+        <!-- Compact Presets Chips (Directly above Checklist Items) -->
+        <div id="checklistPresetsWrap" class="space-y-1.5">
+          <span class="block text-[11px] font-medium text-slate-400">پیشنهادهای آماده <span class="text-slate-500">(با یک لمس به لیست اضافه می‌شود)</span>:</span>
+          <div id="checklistPresetsChips" class="flex flex-wrap gap-1.5"></div>
         </div>
 
         <!-- Items List -->
@@ -605,12 +708,12 @@
               id="chkNewItemInput"
               type="text"
               placeholder="افزودن مورد جدید به چک‌لیست..."
-              class="editable-ctrl flex-1 rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 transition"
+              class="editable-ctrl flex-1 rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 transition"
             />
             <button
               id="btnAddChkItem"
               type="button"
-              class="editable-ctrl shrink-0 px-3.5 py-2.5 rounded-2xl bg-fanoos-elevated hover:bg-teal-600/25 border border-fanoos-border hover:border-teal-500/40 text-teal-200 text-xs font-bold active:scale-95 transition cursor-pointer"
+              class="editable-ctrl shrink-0 px-3.5 py-2.5 rounded-2xl bg-fanoos-elevated hover:bg-amber-500/20 border border-fanoos-border hover:border-amber-400/45 text-amber-200 text-xs font-bold active:scale-95 transition cursor-pointer"
             >
               + افزودن
             </button>
@@ -622,7 +725,7 @@
           <button
             id="btnSaveChecklist"
             type="button"
-            class="editable-ctrl w-full py-3 px-4 rounded-2xl bg-gradient-to-l from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white text-sm font-bold shadow-lg shadow-teal-950/50 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
+            class="editable-ctrl w-full py-3 px-4 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-950/50 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>💾 ذخیره تغییرات مأموریت</span>
           </button>
@@ -630,7 +733,7 @@
           <button
             id="btnCopyMissionBale"
             type="button"
-            class="w-full py-2.5 px-4 rounded-2xl bg-fanoos-elevated hover:bg-indigo-600/25 border border-fanoos-border hover:border-indigo-400/50 text-indigo-200 text-xs sm:text-sm font-semibold active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
+            class="w-full py-2.5 px-4 rounded-2xl bg-teal-500/12 hover:bg-teal-500/20 border border-teal-500/30 hover:border-teal-400/45 text-teal-200 text-xs sm:text-sm font-semibold active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>📋 کپی پیام مأموریت برای بله</span>
           </button>
@@ -658,7 +761,7 @@
             <h3 class="text-sm font-bold text-slate-100">رصد انجام چک‌لیست دانش‌آموزان</h3>
             <p id="chkStatsSummary" class="text-[11px] text-slate-400 mt-0.5">...</p>
           </div>
-          <span id="chkMissionBadge" class="text-[11px] font-semibold px-2.5 py-1 rounded-xl bg-fanoos-bg border border-fanoos-border text-teal-300"></span>
+          <span id="chkMissionBadge" class="text-[11px] font-semibold px-2.5 py-1 rounded-xl bg-amber-500/12 border border-amber-400/30 text-amber-200"></span>
         </div>
 
         <div id="chkStudentsProgressList" class="space-y-2">
@@ -683,7 +786,7 @@
           <label for="gameSelectDropdown" class="block text-xs font-semibold text-slate-300">انتخاب بازی برای رصد پیشرفت</label>
           <select
             id="gameSelectDropdown"
-            class="fanoos-select w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-3 text-sm font-bold text-slate-100 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 transition cursor-pointer"
+            class="fanoos-select w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-3 text-sm font-bold text-slate-100 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 transition cursor-pointer"
           >
             <!-- Populated dynamically from FANOOS_CONFIG & server data -->
           </select>
@@ -692,7 +795,7 @@
         <!-- Live Dynamic Game Stats -->
         <div id="gameStatsGrid" class="grid grid-cols-3 gap-2">
           <div class="rounded-2xl bg-fanoos-bg/80 border border-fanoos-border p-2.5 text-center">
-            <div id="statGameParticipants" class="text-base sm:text-lg font-extrabold text-teal-300">۰</div>
+            <div id="statGameParticipants" class="text-base sm:text-lg font-extrabold text-amber-300">۰</div>
             <div class="text-[10.5px] text-slate-400 mt-0.5">شروع کرده‌اند</div>
           </div>
           <div class="rounded-2xl bg-fanoos-bg/80 border border-fanoos-border p-2.5 text-center">
@@ -700,14 +803,14 @@
             <div class="text-[10.5px] text-slate-400 mt-0.5">تکمیل کرده‌اند</div>
           </div>
           <div class="rounded-2xl bg-fanoos-bg/80 border border-fanoos-border p-2.5 text-center">
-            <div id="statGameAvg" class="text-base sm:text-lg font-extrabold text-sky-300">۰٪</div>
+            <div id="statGameAvg" class="text-base sm:text-lg font-extrabold text-teal-300">۰٪</div>
             <div id="statGameAvgLabel" class="text-[10.5px] text-slate-400 mt-0.5">میانگین پیشرفت</div>
           </div>
         </div>
 
         <!-- Filter Pills -->
         <div class="flex flex-wrap items-center gap-1.5 pt-0.5" id="gameFilterBar">
-          <button type="button" data-gfilter="all" class="gfilter-btn px-3 py-1.5 rounded-xl text-[11px] font-bold bg-teal-500/20 border border-teal-400/50 text-teal-200 cursor-pointer">همه</button>
+          <button type="button" data-gfilter="all" class="gfilter-btn px-3 py-1.5 rounded-xl text-[11px] font-bold bg-amber-500/15 border border-amber-400/45 text-amber-200 cursor-pointer">همه</button>
           <button type="button" data-gfilter="active" class="gfilter-btn px-3 py-1.5 rounded-xl text-[11px] font-semibold bg-fanoos-bg border border-fanoos-border text-slate-400 hover:text-slate-200 cursor-pointer">دارای پیشرفت</button>
           <button type="button" data-gfilter="done" class="gfilter-btn px-3 py-1.5 rounded-xl text-[11px] font-semibold bg-fanoos-bg border border-fanoos-border text-slate-400 hover:text-slate-200 cursor-pointer">تکمیل‌شده</button>
           <button type="button" data-gfilter="notstarted" class="gfilter-btn px-3 py-1.5 rounded-xl text-[11px] font-semibold bg-fanoos-bg border border-fanoos-border text-slate-400 hover:text-slate-200 cursor-pointer">شروع‌نشده</button>
@@ -764,13 +867,13 @@
       <div class="bg-fanoos-surface/95 border border-fanoos-border rounded-3xl p-4 sm:p-5 space-y-4">
         <div class="flex items-center justify-between gap-2">
           <div>
-            <h2 class="text-sm font-bold text-slate-100">اعضای رسمی کلاس</h2>
+            <h2 class="text-sm font-bold text-amber-100">اعضای رسمی کلاس</h2>
             <p id="membersQuotaSub" class="text-[11px] text-slate-400 mt-0.5">...</p>
           </div>
           <button
             id="btnToggleBulkAdd"
             type="button"
-            class="editable-ctrl text-[11px] font-semibold px-2.5 py-1.5 rounded-xl bg-fanoos-elevated hover:bg-teal-500/20 border border-fanoos-border text-slate-300 hover:text-teal-200 transition cursor-pointer"
+            class="editable-ctrl text-[11px] font-semibold px-2.5 py-1.5 rounded-xl bg-fanoos-elevated hover:bg-amber-500/15 border border-fanoos-border hover:border-amber-400/40 text-slate-300 hover:text-amber-200 transition cursor-pointer"
           >
             افزودن گروهی
           </button>
@@ -782,12 +885,12 @@
             id="newStudentNameInput"
             type="text"
             placeholder="نام و نام خانوادگی دانش‌آموز جدید..."
-            class="editable-ctrl flex-1 rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 transition"
+            class="editable-ctrl flex-1 rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 transition"
           />
           <button
             id="btnAddStudent"
             type="button"
-            class="editable-ctrl shrink-0 px-4 py-2.5 rounded-2xl bg-teal-600 hover:bg-teal-500 text-white text-xs sm:text-sm font-bold active:scale-95 transition cursor-pointer"
+            class="editable-ctrl shrink-0 px-4 py-2.5 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs sm:text-sm font-extrabold active:scale-95 transition cursor-pointer"
           >
             + افزودن
           </button>
@@ -800,7 +903,7 @@
             id="bulkStudentsTextarea"
             rows="3"
             placeholder="علی محمدی&#10;حسین رضایی&#10;مهدی کریمی"
-            class="editable-ctrl w-full rounded-xl bg-fanoos-surface border border-fanoos-border px-3 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400"
+            class="editable-ctrl w-full rounded-xl bg-fanoos-surface border border-fanoos-border px-3 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75"
           ></textarea>
           <div class="flex justify-end gap-2">
             <button
@@ -813,7 +916,7 @@
             <button
               id="btnSaveBulkAdd"
               type="button"
-              class="editable-ctrl px-4 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold transition cursor-pointer"
+              class="editable-ctrl px-4 py-1.5 rounded-xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-extrabold transition cursor-pointer"
             >
               ثبت اسامی جدید
             </button>
@@ -852,7 +955,7 @@
 
       <!-- Card 2: Class Settings -->
       <form id="classSettingsForm" class="bg-fanoos-surface/95 border border-fanoos-border rounded-3xl p-4 sm:p-5 space-y-4" novalidate>
-        <h2 class="text-sm font-bold text-slate-100">تنظیمات مشخصات و محتوای کلاس</h2>
+        <h2 class="text-sm font-bold text-amber-100">تنظیمات مشخصات و محتوای کلاس</h2>
 
         <!-- Class Name -->
         <div>
@@ -860,7 +963,7 @@
           <input
             id="editClassName"
             type="text"
-            class="editable-ctrl w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 transition"
+            class="editable-ctrl w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 transition"
           />
         </div>
 
@@ -872,7 +975,70 @@
               id="editTeacherName"
               type="text"
               placeholder="مثلاً فانی و شربلو"
-              class="editable-ctrl w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-400 transition"
+              class="editable-ctrl w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 transition"
+            />
+          </div>
+          <div>
+            <label for="editNeighborhood" class="block text-xs font-semibold text-slate-300 mb-1.5">محله یا محدوده کلاس</label>
+            <input
+              id="editNeighborhood"
+              type="text"
+              placeholder="مثلاً منیریه، یوسف‌آباد، پیروزی"
+              class="editable-ctrl w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 transition"
+            />
+          </div>
+        </div>
+
+        <!-- Grades Multi-Select (Edit) -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="text-xs font-semibold text-slate-300">پایه تحصیلی</label>
+            <span id="editGradePreview" class="text-[11px] font-semibold text-amber-300">...</span>
+          </div>
+          <div id="editGradesRow" class="grid grid-cols-5 gap-1.5">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Active Modules -->
+        <div class="space-y-2">
+          <label class="block text-xs font-semibold text-slate-300">بخش‌های فعال در تالار دانش‌آموز</label>
+          <div id="editModulesGrid" class="grid grid-cols-2 gap-2">
+            <!-- Populated dynamically from config FOLDERS / modules -->
+          </div>
+        </div>
+
+        <!-- Active Games -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-semibold text-slate-300">بازی‌های فعال برای این کلاس</label>
+            <button
+              id="btnSelectAllGames"
+              type="button"
+              class="editable-ctrl text-[11px] font-semibold text-amber-300 hover:text-amber-200 cursor-pointer"
+            >
+              انتخاب همه بازی‌ها
+            </button>
+          </div>
+          <div id="editGamesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <!-- Populated dynamically from config GAMES -->
+          </div>
+        </div>
+
+        <!-- Optional Change PIN -->
+        <div class="pt-2 border-t border-fanoos-border/70">
+          <label for="editNewPin" class="block text-xs font-semibold text-slate-300 mb-1.5">
+            تغییر رمز اختصاصی کلاس <span class="text-slate-500 font-normal">(اختیاری — در صورت عدم تغییر خالی بگذارید)</span>
+          </label>
+          <div class="relative">
+            <input
+              id="editNewPin"
+              type="password"
+              inputmode="numeric"
+              dir="ltr"
+              autocomplete="new-password"
+              placeholder="رمز جدید (حداقل ۴ رقم)"
+              class="editable-ctrl w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-2.5 pl-11 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 text-left transition"
             />
           </div>
           <div>
@@ -957,7 +1123,7 @@
         <button
           id="btnSaveClassSettings"
           type="submit"
-          class="editable-ctrl w-full py-3 px-4 rounded-2xl bg-gradient-to-l from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white text-sm font-bold shadow-lg shadow-teal-950/50 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
+          class="editable-ctrl w-full py-3 px-4 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-950/50 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer"
         >
           <span>💾 ذخیره تنظیمات کلاس</span>
         </button>
@@ -1000,7 +1166,7 @@
         <button
           id="btnModalConfirm"
           type="button"
-          class="px-4 py-2.5 rounded-2xl bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+          class="px-4 py-2.5 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-extrabold transition flex items-center gap-1.5 cursor-pointer"
         >
           <span>تایید</span>
         </button>
@@ -1120,47 +1286,47 @@
               modules.push({ id: k, title: m, icon: "📁" });
             } else if (m && typeof m === "object") {
               modules.push({
-                id: String(m.id || k).trim(),
-                title: String(m.title || m.name || m.label || k).trim(),
-                icon: String(m.icon || m.emoji || "📁").trim()
-              });
-            }
-          });
-        }
-        const finalModules = modules.length ? modules : fallbackMods;
-
-        // Normalize CHECKLIST_PRESETS / checklistPresets
+        // Normalize CHECKLIST_PRESETS / checklistPresets (supports strings, single-item objects, and bundle objects)
         const rawPresets = raw.CHECKLIST_PRESETS || raw.checklistPresets;
         const fallbackPresets = [
-          {
-            label: "نماز و ارتباط با خدا",
-            title: "مأموریت هفتگی ارتباط با خدا",
-            items: ["خواندن نماز صبح اول وقت", "تلاوت روزی یک صفحه قرآن", "یک کار خوب پنهانی در هفته"]
-          },
-          {
-            label: "احترام به والدین",
-            title: "مأموریت هفتگی نیکی به پدر و مادر",
-            items: ["کمک داوطلبانه در کار خانه", "قدردانی صمیمی از پدر و مادر", "خوش‌اخلاقی در جمع خانواده"]
-          },
-          {
-            label: "نظم و مطالعه",
-            title: "مأموریت هفتگی نظم و رشد علمی",
-            items: ["مرور درس‌های روزانه", "مطالعهٔ ۱۵ دقیقه کتاب غیردرسی", "مرتب کردن میز و وسایل شخصی"]
-          }
+          { type: "item", label: "نماز اول وقت", text: "خواندن نماز صبح اول وقت" },
+          { type: "item", label: "تلاوت روزانه قرآن", text: "تلاوت روزی یک صفحه قرآن" },
+          { type: "item", label: "کمک به پدر و مادر", text: "کمک داوطلبانه به پدر و مادر در کار خانه" },
+          { type: "item", label: "مطالعه کتاب", text: "۱۵ دقیقه مطالعه کتاب غیردرسی" },
+          { type: "item", label: "مرور درس‌ها", text: "مرور مرتب درس‌های هفته" },
+          { type: "item", label: "کار خوب پنهانی", text: "انجام یک کار خوب پنهانی در هفته" }
         ];
         const presets = [];
         if (Array.isArray(rawPresets) && rawPresets.length) {
           rawPresets.forEach((p, idx) => {
+            if (typeof p === "string") {
+              const txt = p.trim();
+              if (txt) presets.push({ type: "item", label: txt, text: txt });
+              return;
+            }
             if (!p || typeof p !== "object") return;
-            const rawItems = Array.isArray(p.items) ? p.items : [];
-            const items = rawItems
-              .map((it) => (typeof it === "string" ? it.trim() : String((it && it.text) || "").trim()))
-              .filter(Boolean);
-            presets.push({
-              label: String(p.label || p.shortTitle || p.title || ("پیشنهاد " + (idx + 1))).trim(),
-              title: String(p.title || p.label || "").trim(),
-              items
-            });
+            if (Array.isArray(p.items) && p.items.length) {
+              const items = p.items
+                .map((it) => (typeof it === "string" ? it.trim() : String((it && it.text) || "").trim()))
+                .filter(Boolean);
+              if (items.length) {
+                presets.push({
+                  type: "bundle",
+                  label: String(p.label || p.shortTitle || p.title || ("پیشنهاد " + (idx + 1))).trim(),
+                  title: String(p.title || p.label || "").trim(),
+                  items
+                });
+              }
+              return;
+            }
+            const singleTxt = String(p.text || p.title || p.label || "").trim();
+            if (singleTxt) {
+              presets.push({
+                type: "item",
+                label: String(p.label || p.shortTitle || singleTxt).trim(),
+                text: singleTxt
+              });
+            }
           });
         }
         const finalPresets = presets.length ? presets : fallbackPresets;
@@ -1172,7 +1338,7 @@
           grades,
           games: finalGames,
           modules: finalModules,
-          presets
+          presets: finalPresets
         };
       }
 
@@ -1424,11 +1590,11 @@
           card.className = "flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-rose-500/50 text-rose-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md";
           icon.innerHTML = '<svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>';
         } else if (type === "info") {
-          card.className = "flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-indigo-400/50 text-indigo-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md";
-          icon.innerHTML = '<svg class="w-4 h-4 text-indigo-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>';
+          card.className = "flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-amber-400/45 text-amber-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md";
+          icon.innerHTML = '<svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>';
         } else {
-          card.className = "flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-teal-500/50 text-slate-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md";
-          icon.innerHTML = '<svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
+          card.className = "flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-emerald-500/45 text-slate-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md";
+          icon.innerHTML = '<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
         }
 
         container.classList.remove("opacity-0", "translate-y-3", "pointer-events-none");
@@ -1458,9 +1624,9 @@
         if (opts.variant === "danger") {
           confirmBtn.className = "px-4 py-2.5 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer";
         } else if (opts.variant === "warning") {
-          confirmBtn.className = "px-4 py-2.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer";
+          confirmBtn.className = "px-4 py-2.5 rounded-2xl bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer";
         } else {
-          confirmBtn.className = "px-4 py-2.5 rounded-2xl bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer";
+          confirmBtn.className = "px-4 py-2.5 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-extrabold transition flex items-center gap-1.5 cursor-pointer";
         }
 
         modalConfirmHandler = opts.onConfirm || null;
@@ -1914,9 +2080,9 @@
           const active = k === tabName;
           panel.classList.toggle("hidden", !active);
           if (active) {
-            btn.className = "dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer bg-teal-600 text-white shadow-sm";
+            btn.className = "dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer bg-amber-500/15 border border-amber-400/45 text-amber-200 shadow-sm shadow-amber-950/30";
           } else {
-            btn.className = "dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-slate-400 hover:text-slate-200";
+            btn.className = "dash-tab-btn py-2.5 px-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer border border-transparent text-slate-400 hover:text-slate-200";
           }
         });
       }
@@ -1944,8 +2110,9 @@
         }
         wrap.classList.remove("hidden");
         chips.innerHTML = CFG.presets.map((p, idx) =>
-          '<button type="button" data-preset-idx="' + idx + '" class="editable-ctrl px-2.5 py-1 rounded-full text-[11px] font-semibold bg-fanoos-bg hover:bg-teal-500/15 border border-fanoos-border hover:border-teal-400/45 text-slate-300 hover:text-teal-200 transition cursor-pointer">' +
-          escHtml(p.label) +
+          '<button type="button" data-preset-idx="' + idx + '" class="editable-ctrl inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/30 hover:border-amber-400/55 text-amber-200 active:scale-95 transition cursor-pointer">' +
+          '<span class="text-amber-400 font-bold leading-none">+</span>' +
+          '<span>' + escHtml(p.label) + '</span>' +
           "</button>"
         ).join("");
       }
@@ -2444,7 +2611,7 @@
             (isEditableCheck ? "editable-ctrl " : "") +
             'py-2 px-1 rounded-xl text-xs font-bold border transition cursor-pointer ' +
             (selected
-              ? "bg-teal-500/20 border-teal-400/70 text-teal-200 shadow-sm shadow-teal-950/50"
+              ? "bg-amber-500/18 border-amber-400/60 text-amber-200 shadow-sm shadow-amber-950/40"
               : "bg-fanoos-bg border-fanoos-border text-slate-400 hover:text-slate-200") +
             '">' + escHtml(g) + "</button>"
           );
@@ -2458,12 +2625,12 @@
           return (
             '<button type="button" data-toggle-mod="' + escHtml(m.id) + '" class="editable-ctrl flex items-center justify-between gap-2 p-3 rounded-2xl border text-right transition cursor-pointer ' +
             (on
-              ? "bg-teal-500/15 border-teal-400/50 text-teal-100"
+              ? "bg-emerald-500/12 border-emerald-400/45 text-emerald-100"
               : "bg-fanoos-bg border-fanoos-border text-slate-400") +
             '">' +
               '<span class="text-xs font-bold truncate">' + escHtml((m.icon ? m.icon + " " : "") + m.title) + "</span>" +
               '<span class="w-4 h-4 rounded-md flex items-center justify-center text-[10px] font-extrabold shrink-0 ' +
-              (on ? "bg-teal-500 text-slate-950" : "bg-slate-800 text-slate-500") + '">' + (on ? "✓" : "") + "</span>" +
+              (on ? "bg-emerald-400 text-slate-950" : "bg-slate-800 text-slate-500") + '">' + (on ? "✓" : "") + "</span>" +
             "</button>"
           );
         }).join("");
@@ -2474,12 +2641,12 @@
           return (
             '<button type="button" data-toggle-game="' + escHtml(g.id) + '" class="editable-ctrl flex items-center justify-between gap-2 p-3 rounded-2xl border text-right transition cursor-pointer ' +
             (on
-              ? "bg-cyan-500/15 border-cyan-400/50 text-cyan-100"
+              ? "bg-amber-500/12 border-amber-400/45 text-amber-100"
               : "bg-fanoos-bg border-fanoos-border text-slate-400") +
             '">' +
               '<span class="text-xs font-bold truncate">' + escHtml((g.icon ? g.icon + " " : "") + g.title) + "</span>" +
               '<span class="w-4 h-4 rounded-md flex items-center justify-center text-[10px] font-extrabold shrink-0 ' +
-              (on ? "bg-cyan-400 text-slate-950" : "bg-slate-800 text-slate-500") + '">' + (on ? "✓" : "") + "</span>" +
+              (on ? "bg-amber-400 text-slate-950" : "bg-slate-800 text-slate-500") + '">' + (on ? "✓" : "") + "</span>" +
             "</button>"
           );
         }).join("");
@@ -2825,13 +2992,13 @@
         const createForm = document.getElementById("createForm");
 
         if (mode === "create") {
-          createTab.className = "py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition bg-teal-600 text-white shadow-md shadow-teal-950/50 cursor-pointer";
-          loginTab.className = "py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition text-slate-400 hover:text-slate-200 cursor-pointer";
+          createTab.className = "py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition bg-amber-500/15 border border-amber-400/45 text-amber-200 shadow-sm shadow-amber-950/30 cursor-pointer";
+          loginTab.className = "py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition border border-transparent text-slate-400 hover:text-slate-200 cursor-pointer";
           loginForm.classList.add("hidden");
           createForm.classList.remove("hidden");
         } else {
-          loginTab.className = "py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition bg-teal-600 text-white shadow-md shadow-teal-950/50 cursor-pointer";
-          createTab.className = "py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition text-slate-400 hover:text-slate-200 cursor-pointer";
+          loginTab.className = "py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition bg-amber-500/15 border border-amber-400/45 text-amber-200 shadow-sm shadow-amber-950/30 cursor-pointer";
+          createTab.className = "py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition border border-transparent text-slate-400 hover:text-slate-200 cursor-pointer";
           createForm.classList.add("hidden");
           loginForm.classList.remove("hidden");
         }
@@ -2934,7 +3101,7 @@
             btn.className = "start-mode-btn py-2 px-1.5 rounded-xl text-[11.5px] font-bold border transition cursor-pointer " +
               (mode === "extended"
                 ? "bg-indigo-500/20 border-indigo-400/60 text-indigo-200"
-                : "bg-teal-500/20 border-teal-400/60 text-teal-200");
+                : "bg-amber-500/15 border-amber-400/55 text-amber-200");
           } else {
             btn.className = "start-mode-btn py-2 px-1.5 rounded-xl text-[11.5px] font-semibold border transition cursor-pointer bg-fanoos-surface border-fanoos-border text-slate-400 hover:text-slate-200";
           }
@@ -3206,49 +3373,46 @@
           if (!btn) return;
           const preset = CFG.presets[Number(btn.dataset.presetIdx)];
           if (!preset) return;
-          document.getElementById("chkTitleInput").value = preset.title;
-          state.draftChecklistItems = preset.items.map((txt, idx) => ({
-            id: "it_" + (idx + 1) + "_" + Date.now().toString(36) + "_" + Math.floor(Math.random() * 90 + 10),
-            text: txt
-          }));
-          renderChecklistItemsEditor();
-          showToast("پیشنهاد آماده جایگذاری شد؛ برای اعمال دکمه ذخیره را بزنید.", "info");
-        });
 
-        document.getElementById("chkItemsList").addEventListener("input", (e) => {
-          const input = e.target.closest("[data-chk-edit-idx]");
-          if (!input) return;
-          const idx = Number(input.dataset.chkEditIdx);
-          if (state.draftChecklistItems[idx]) state.draftChecklistItems[idx].text = input.value;
-        });
+          const titleEl = document.getElementById("chkTitleInput");
+          const existingKeys = new Set(state.draftChecklistItems.map((it) => normFaKey(it.text)));
 
-        document.getElementById("chkItemsList").addEventListener("click", (e) => {
-          if (isReadonly()) return;
-          const btn = e.target.closest("[data-chk-del-idx]");
-          if (!btn) return;
-          const idx = Number(btn.dataset.chkDelIdx);
-          state.draftChecklistItems.splice(idx, 1);
-          renderChecklistItemsEditor();
-        });
+          const appendTexts = (texts) => {
+            let added = 0;
+            texts.forEach((rawTxt) => {
+              const txt = normFa(rawTxt);
+              if (!txt) return;
+              const k = normFaKey(txt);
+              if (existingKeys.has(k)) return;
+              existingKeys.add(k);
+              state.draftChecklistItems.push({
+                id: "it_" + (state.draftChecklistItems.length + 1) + "_" + Date.now().toString(36) + "_" + Math.floor(Math.random() * 90 + 10),
+                text: txt
+              });
+              added++;
+            });
+            return added;
+          };
 
-        const addNewChkItem = () => {
-          if (isReadonly()) return;
-          const input = document.getElementById("chkNewItemInput");
-          const txt = normFa(input.value);
-          if (!txt) return;
-          state.draftChecklistItems.push({
-            id: "it_" + (state.draftChecklistItems.length + 1) + "_" + Date.now().toString(36) + "_" + Math.floor(Math.random() * 90 + 10),
-            text: txt
-          });
-          input.value = "";
-          renderChecklistItemsEditor();
-          input.focus();
-        };
-        document.getElementById("btnAddChkItem").addEventListener("click", addNewChkItem);
-        document.getElementById("chkNewItemInput").addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            addNewChkItem();
+          if (preset.type === "bundle" && Array.isArray(preset.items)) {
+            if (!normFa(titleEl.value) && preset.title) {
+              titleEl.value = preset.title;
+            }
+            const added = appendTexts(preset.items);
+            renderChecklistItemsEditor();
+            if (added > 0) {
+              showToast(toFa(added) + " مورد به چک‌لیست اضافه شد؛ برای ثبت دکمه ذخیره را بزنید.", "info");
+            } else {
+              showToast("موارد این پیشنهاد قبلاً در لیست وجود دارند.", "info");
+            }
+          } else if (preset.text) {
+            const added = appendTexts([preset.text]);
+            renderChecklistItemsEditor();
+            if (added > 0) {
+              showToast("«" + preset.label + "» به لیست اضافه شد.", "info");
+            } else {
+              showToast("این مورد قبلاً در لیست چک‌لیست وجود دارد.", "info");
+            }
           }
         });
 
@@ -3295,7 +3459,7 @@
           document.querySelectorAll(".gfilter-btn").forEach((b) => {
             const active = b.dataset.gfilter === state.gameFilter;
             b.className = active
-              ? "gfilter-btn px-3 py-1.5 rounded-xl text-[11px] font-bold bg-teal-500/20 border border-teal-400/50 text-teal-200 cursor-pointer"
+              ? "gfilter-btn px-3 py-1.5 rounded-xl text-[11px] font-bold bg-amber-500/15 border border-amber-400/45 text-amber-200 cursor-pointer"
               : "gfilter-btn px-3 py-1.5 rounded-xl text-[11px] font-semibold bg-fanoos-bg border border-fanoos-border text-slate-400 hover:text-slate-200 cursor-pointer";
           });
           renderGamesTab();
