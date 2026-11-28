@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0b1120" />
+  <title>میز هماهنگی و رصد — فانوس یادگیری</title>
+  <script src="config.js?v=2"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Vazirmatn", "system-ui", "-apple-system", "sans-serif"] },
+          colors: {
+            fanoos: {
+              bg: "#0b1120",
+              surface: "#111827",
+              card: "#151f33",
+              elevated: "#1b2840",
+              border: "#25344f"
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html, body {
+      background-color: #0b1120;
+      color: #e2e8f0;
+      font-family: "Vazirmatn", system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    body {
+      background-image:
+        radial-gradient(ellipse 75% 42% at 50% -8%, rgba(245, 158, 11, 0.12), transparent 65%),
+        radial-gradient(ellipse 65% 38% at 85% 8%, rgba(14, 116, 144, 0.11), transparent 62%);
+      background-attachment: fixed;
+    }
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: #0b1120; }
+    ::-webkit-scrollbar-thumb { background: #283858; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3a507a; }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-panel { animation: fadeSlideUp 0.2s ease-out; }
+    .timeline-track {
+      direction: rtl;
+      overflow: hidden;
+      border-radius: 9999px;
+      height: 6px;
+      background-color: rgba(148, 163, 184, 0.16);
+    }
+    .timeline-fill {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    select.fanoos-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 0.7rem center;
+      background-size: 1rem;
+      padding-left: 2.15rem;
+    }
+    @keyframes spinFast { to { transform: rotate(360deg); } }
+    .btn-spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-color: color-mix(in srgb, currentColor 28%, transparent);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spinFast 0.65s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    #printReportArea { display: none; }
+    @media print {
+      @page { size: A4 portrait; margin: 12mm; }
+      html, body {
+        background: #ffffff !important;
+        background-image: none !important;
+        color: #000000 !important;
+        font-size: 11px !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .no-print, #authView, #dashboardView, #manageModalBackdrop, #toastContainer, #bootOverlay {
+        display: none !important;
+      }
+      #printReportArea {
+        display: block !important;
+        width: 100% !important;
+        color: #000000 !important;
+        direction: rtl;
+      }
+      .print-header {
+        border-bottom: 2px solid #111827;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .print-stats {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 12px;
+        font-size: 10.5px;
+      }
+      .print-stat-box {
+        border: 1px solid #9ca3af;
+        border-radius: 6px;
+        padding: 4px 10px;
+        background: #f9fafb;
+      }
+      table.print-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10px;
+      }
+      table.print-table thead { display: table-header-group; }
+      table.print-table tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      table.print-table th, table.print-table td {
+        border: 1px solid #6b7280;
+        padding: 5px 6px;
+        text-align: right;
+        vertical-align: middle;
+        color: #000000 !important;
+      }
+      table.print-table th {
+        background: #e5e7eb !important;
+        font-weight: 700;
+      }
+      table.print-table tbody tr:nth-child(even) {
+        background: #f9fafb !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-amber-500/30 selection:text-amber-100">
+  <div id="bootOverlay" class="hidden fixed inset-0 z-50 bg-fanoos-bg/95 backdrop-blur-sm flex flex-col items-center justify-center gap-3 p-6 text-center no-print">
+    <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/35 flex items-center justify-center">
+      <span class="btn-spinner" style="width:24px;height:24px;border-width:2.5px;border-top-color:#fbbf24;"></span>
+    </div>
+    <p class="text-sm font-semibold text-amber-100">در حال بارگذاری اطلاعات کلاس‌ها...</p>
+  </div>
+
+  <!-- LOGIN VIEW -->
+  <div id="authView" class="flex-1 flex flex-col justify-between px-4 py-8 sm:py-12 no-print">
+    <main class="w-full max-w-sm mx-auto my-auto">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/20 via-amber-400/10 to-orange-500/15 border border-amber-400/35 shadow-lg shadow-amber-950/40 mb-3 text-3xl leading-none select-none">🏮</div>
+        <h1 class="text-2xl font-extrabold text-amber-100 tracking-tight">میز هماهنگی و رصد</h1>
+        <p class="text-xs text-slate-400 mt-1">فانوس یادگیری</p>
+      </div>
+
+      <div class="bg-fanoos-surface/95 border border-fanoos-border rounded-3xl shadow-2xl shadow-black/50 p-5 space-y-4 animate-panel">
+        <div id="authErrorBox" class="hidden p-3 rounded-2xl bg-rose-500/15 border border-rose-500/35 text-rose-200 text-xs leading-relaxed"></div>
+        <form id="rasadLoginForm" class="space-y-4" novalidate>
+          <div>
+            <label for="rasadPassInput" class="block text-xs font-semibold text-slate-300 mb-1.5">رمز ورود</label>
+            <div class="relative">
+              <input id="rasadPassInput" type="password" inputmode="numeric" dir="ltr" autocomplete="current-password" placeholder="رمز ورود را وارد کنید" class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-4 py-3 pl-11 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 focus:ring-2 focus:ring-amber-500/20 text-left font-medium transition" />
+              <button type="button" data-toggle-pass="rasadPassInput" aria-label="نمایش یا مخفی کردن رمز" class="absolute inset-y-0 left-0 px-3.5 flex items-center text-slate-400 hover:text-slate-200 transition cursor-pointer">
+                <svg class="w-4 h-4 eye-open" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <svg class="w-4 h-4 eye-closed hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" /></svg>
+              </button>
+            </div>
+          </div>
+          <button id="btnRasadLogin" type="submit" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-950/50 active:scale-[0.99] transition flex items-center justify-center gap-2 cursor-pointer">
+            <span>ورود به میز هماهنگی</span>
+          </button>
+        </form>
+      </div>
+    </main>
+    <footer class="mt-6 pb-2 text-center">
+      <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-amber-300 transition px-3 py-2 rounded-xl">
+        <span>بازگشت به تالار فانوس</span>
+      </a>
+    </footer>
+  </div>
+
+  <!-- MAIN DASHBOARD VIEW -->
+  <div id="dashboardView" class="hidden flex-1 flex flex-col max-w-4xl w-full mx-auto pb-12 no-print">
+    <!-- Compact Sticky Header -->
+    <header class="sticky top-0 z-30 bg-fanoos-bg/92 backdrop-blur-lg border-b border-fanoos-border/90 px-3.5 sm:px-5 py-2.5">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="text-lg leading-none select-none">🏮</span>
+          <h1 class="text-sm sm:text-base font-extrabold text-amber-50 truncate">رصد کلاس‌های فانوس</h1>
+          <span id="hdrRoleBadge" class="shrink-0 px-2 py-0.5 rounded-lg bg-amber-500/15 border border-amber-400/35 text-[10.5px] font-bold text-amber-200">...</span>
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button id="btnRefreshAll" type="button" title="بروزرسانی از سرور" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-fanoos-surface hover:bg-fanoos-elevated border border-fanoos-border text-slate-300 hover:text-white text-[11.5px] font-semibold active:scale-95 transition cursor-pointer">
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>
+            <span class="hidden sm:inline">بروزرسانی</span>
+          </button>
+          <button id="btnLogout" type="button" title="خروج" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-fanoos-surface hover:bg-rose-500/15 border border-fanoos-border hover:border-rose-500/35 text-slate-400 hover:text-rose-300 text-[11.5px] font-semibold active:scale-95 transition cursor-pointer">
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+            <span class="hidden sm:inline">خروج</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="px-3.5 sm:px-5 pt-3.5 space-y-3.5">
+      <!-- 4 Quick Stat Cards -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-2" aria-label="آمار سریع">
+        <button type="button" data-stat-filter="active" class="text-right rounded-2xl bg-fanoos-surface/95 border border-fanoos-border hover:border-amber-400/40 p-3 transition cursor-pointer">
+          <div class="text-[11px] text-slate-400">کلاس‌های فعال</div>
+          <div id="statActiveClasses" class="text-xl font-extrabold text-amber-200 mt-0.5">۰</div>
+        </button>
+        <div class="rounded-2xl bg-fanoos-surface/95 border border-fanoos-border p-3">
+          <div class="text-[11px] text-slate-400">مجموع دانش‌آموزان فعال</div>
+          <div id="statActiveStudents" class="text-xl font-extrabold text-teal-300 mt-0.5">۰</div>
+        </div>
+        <button type="button" data-stat-filter="attention" class="text-right rounded-2xl bg-fanoos-surface/95 border border-fanoos-border hover:border-orange-400/45 p-3 transition cursor-pointer">
+          <div class="text-[11px] text-slate-400">نیازمند توجه</div>
+          <div id="statAttention" class="text-xl font-extrabold text-orange-300 mt-0.5">۰</div>
+        </button>
+        <button type="button" data-stat-filter="extended" class="text-right rounded-2xl bg-fanoos-surface/95 border border-fanoos-border hover:border-indigo-400/45 p-3 transition cursor-pointer">
+          <div class="text-[11px] text-slate-400">فرصت تمدید / بایگانی</div>
+          <div class="flex items-baseline gap-1.5 mt-0.5">
+            <span id="statExtArchive" class="text-xl font-extrabold text-indigo-300">۰</span>
+            <span id="statExtArchiveSub" class="text-[10px] text-slate-400 truncate"></span>
+          </div>
+        </button>
+      </section>
+
+      <!-- Search, Filter Chips & Sort -->
+      <section class="bg-fanoos-surface/95 border border-fanoos-border rounded-3xl p-3.5 space-y-3">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <div class="relative flex-1">
+            <svg class="w-4 h-4 text-slate-500 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+            <input id="searchInput" type="search" placeholder="جست‌وجو در نام کلاس، محله، مربی یا کد کلاس..." class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border pr-10 pl-3 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 transition" />
+          </div>
+          <div class="sm:w-52 shrink-0">
+            <select id="sortSelect" aria-label="مرتب‌سازی" class="fanoos-select w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-200 focus:outline-none focus:border-amber-400/75 cursor-pointer">
+              <option value="daysAsc">کمترین زمان باقی‌مانده</option>
+              <option value="studentsAsc">کمترین تعداد دانش‌آموز</option>
+              <option value="studentsDesc">بیشترین تعداد دانش‌آموز</option>
+              <option value="newest">جدیدترین کلاس‌ها</option>
+            </select>
+          </div>
+        </div>
+        <div id="filterChipsBar" class="flex flex-wrap items-center gap-1.5">
+          <button type="button" data-filter="active" class="filter-chip px-3 py-1.5 rounded-xl text-[11.5px] font-bold border transition cursor-pointer bg-amber-500/15 border-amber-400/50 text-amber-200">همه فعال‌ها</button>
+          <button type="button" data-filter="attention" class="filter-chip px-3 py-1.5 rounded-xl text-[11.5px] font-semibold border transition cursor-pointer bg-fanoos-bg border-fanoos-border text-slate-400 hover:text-slate-200">نیازمند توجه</button>
+          <button type="button" data-filter="extended" class="filter-chip px-3 py-1.5 rounded-xl text-[11.5px] font-semibold border transition cursor-pointer bg-fanoos-bg border-fanoos-border text-slate-400 hover:text-slate-200">فرصت تمدید</button>
+          <button type="button" data-filter="archived" class="filter-chip px-3 py-1.5 rounded-xl text-[11.5px] font-semibold border transition cursor-pointer bg-fanoos-bg border-fanoos-border text-slate-400 hover:text-slate-200">منتقل به مقدماتی / بایگانی</button>
+        </div>
+      </section>
+
+      <!-- Reporting Toolbar -->
+      <section class="bg-fanoos-surface/90 border border-fanoos-border rounded-3xl p-3 space-y-2">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex flex-wrap items-center gap-1.5 flex-1">
+            <button id="btnCopyReport" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-teal-500/15 hover:bg-teal-500/25 border border-teal-500/35 text-teal-200 text-xs font-bold active:scale-95 transition cursor-pointer">
+              <span>📋 کپی گزارش برای بله/تلگرام</span>
+            </button>
+            <button id="btnPrintPdf" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/35 text-amber-200 text-xs font-bold active:scale-95 transition cursor-pointer">
+              <span>🖨️ خروجی PDF / چاپ A4</span>
+            </button>
+            <button id="btnExportCsv" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-fanoos-elevated hover:bg-slate-700/80 border border-fanoos-border text-slate-200 text-xs font-bold active:scale-95 transition cursor-pointer">
+              <span>📊 خروجی اکسل (CSV)</span>
+            </button>
+          </div>
+          <span id="filteredCountLabel" class="text-[11px] font-semibold text-slate-400 px-1">نمایش ۰ کلاس</span>
+        </div>
+        <p class="text-[10.5px] text-slate-400/90 leading-relaxed">💡 راهنما: برای ذخیرهٔ خروجی PDF روی گوشی، صفحه را در مرورگر کروم (Chrome) باز کنید و گزینهٔ «ذخیره به‌عنوان PDF» را بزنید.</p>
+      </section>
+
+      <!-- Classes Cards Container -->
+      <section id="classesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3" aria-label="فهرست کلاس‌ها"></section>
+    </main>
+  </div>
+
+  <!-- MANAGEMENT MODAL -->
+  <div id="manageModalBackdrop" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 no-print" role="dialog" aria-modal="true">
+    <div class="w-full sm:max-w-lg max-h-[92vh] flex flex-col bg-fanoos-surface border-t sm:border border-fanoos-border rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden animate-panel">
+      <!-- Modal Header -->
+      <div class="px-4 sm:px-5 pt-4 pb-3 border-b border-fanoos-border flex items-center justify-between gap-2 shrink-0">
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <h2 id="modalClsName" class="text-sm sm:text-base font-extrabold text-amber-100 truncate">...</h2>
+            <span id="modalClsCode" dir="ltr" class="shrink-0 px-2 py-0.5 rounded-lg bg-amber-500/15 border border-amber-400/35 text-[11px] font-bold text-amber-200">...</span>
+          </div>
+          <p id="modalClsSub" class="text-[11px] text-slate-400 truncate mt-0.5">...</p>
+        </div>
+        <button id="btnCloseManageModal" type="button" aria-label="بستن" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-fanoos-elevated transition cursor-pointer shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+      <!-- Modal Tabs -->
+      <div class="px-4 sm:px-5 pt-3 pb-1 shrink-0">
+        <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-fanoos-bg border border-fanoos-border">
+          <button type="button" data-mtab="time" class="mtab-btn py-2 px-2 rounded-xl text-xs font-bold transition cursor-pointer bg-amber-500/15 border border-amber-400/45 text-amber-200">⏱️ زمان دوره</button>
+          <button type="button" data-mtab="status" class="mtab-btn py-2 px-2 rounded-xl text-xs font-bold transition cursor-pointer border border-transparent text-slate-400 hover:text-slate-200">🏷️ وضعیت</button>
+          <button type="button" data-mtab="security" class="mtab-btn py-2 px-2 rounded-xl text-xs font-bold transition cursor-pointer border border-transparent text-slate-400 hover:text-slate-200">🔑 رمز و امنیت</button>
+        </div>
+      </div>
+
+      <!-- Modal Scrollable Body -->
+      <div class="flex-1 overflow-y-auto px-4 sm:px-5 py-3.5 space-y-4">
+        <!-- TAB 1: TIME MANAGEMENT -->
+        <div id="mPanelTime" class="space-y-4">
+          <div id="modalTimingSummary" class="rounded-2xl bg-fanoos-bg/85 border border-fanoos-border p-3 space-y-2"></div>
+
+          <!-- Mark Extended Checkbox -->
+          <label class="flex items-center gap-2.5 p-3 rounded-2xl bg-indigo-500/10 border border-indigo-400/30 cursor-pointer select-none">
+            <input id="chkMarkExtended" type="checkbox" class="w-4 h-4 rounded accent-indigo-500 cursor-pointer" />
+            <div class="min-w-0">
+              <div class="text-xs font-bold text-indigo-200">ثبت به‌عنوان «فرصت تمدید»</div>
+              <div class="text-[10.5px] text-slate-400">در صورت فعال بودن، نوار کلاس با برچسب رسمی فرصت تمدید نمایش داده می‌شود.</div>
+            </div>
+          </label>
+
+          <!-- Quick Shortcuts -->
+          <div class="space-y-2">
+            <div class="text-xs font-bold text-slate-300">تمدید سریع (افزودن به مهلت فعلی)</div>
+            <div class="grid grid-cols-4 gap-1.5">
+              <button type="button" data-quick-add="7" class="py-2 px-1 rounded-xl bg-fanoos-bg hover:bg-indigo-500/20 border border-fanoos-border hover:border-indigo-400/50 text-xs font-bold text-slate-200 transition cursor-pointer">+۱ هفته</button>
+              <button type="button" data-quick-add="14" class="py-2 px-1 rounded-xl bg-fanoos-bg hover:bg-indigo-500/20 border border-fanoos-border hover:border-indigo-400/50 text-xs font-bold text-slate-200 transition cursor-pointer">+۲ هفته</button>
+              <button type="button" data-quick-add="30" class="py-2 px-1 rounded-xl bg-fanoos-bg hover:bg-indigo-500/20 border border-fanoos-border hover:border-indigo-400/50 text-xs font-bold text-slate-200 transition cursor-pointer">+۱ ماه</button>
+              <button type="button" data-quick-add="90" class="py-2 px-1 rounded-xl bg-fanoos-bg hover:bg-indigo-500/20 border border-fanoos-border hover:border-indigo-400/50 text-xs font-bold text-slate-200 transition cursor-pointer">+۳ ماه</button>
+            </div>
+          </div>
+
+          <!-- Free Tool A: Add or Subtract Time -->
+          <div class="rounded-2xl bg-fanoos-bg/80 border border-fanoos-border p-3.5 space-y-2.5">
+            <div class="text-xs font-bold text-amber-100">افزودن یا کم کردن زمان (آزاد و بدون سقف)</div>
+            <div class="grid grid-cols-3 gap-2">
+              <select id="adjAddDir" class="fanoos-select rounded-xl bg-fanoos-surface border border-fanoos-border px-2.5 py-2 text-xs font-semibold text-slate-100 focus:outline-none focus:border-amber-400/75">
+                <option value="1">افزودن (+)</option>
+                <option value="-1">کاستن (-)</option>
+              </select>
+              <input id="adjAddVal" type="number" min="1" inputmode="numeric" dir="ltr" value="30" placeholder="عدد" class="rounded-xl bg-fanoos-surface border border-fanoos-border px-3 py-2 text-xs text-center text-slate-100 focus:outline-none focus:border-amber-400/75" />
+              <select id="adjAddUnit" class="fanoos-select rounded-xl bg-fanoos-surface border border-fanoos-border px-2.5 py-2 text-xs font-semibold text-slate-100 focus:outline-none focus:border-amber-400/75">
+                <option value="1">روز</option>
+                <option value="7">هفته</option>
+                <option value="30">ماه (۳۰ روز)</option>
+              </select>
+            </div>
+            <button id="btnApplyAddTime" type="button" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-extrabold transition flex items-center justify-center gap-2 cursor-pointer">
+              <span>اعمال تغییر روی مهلت فعلی</span>
+            </button>
+          </div>
+
+          <!-- Free Tool B: Set Direct Remaining Time from Today -->
+          <div class="rounded-2xl bg-fanoos-bg/80 border border-fanoos-border p-3.5 space-y-2.5">
+            <div class="text-xs font-bold text-teal-200">تنظیم مستقیم زمان باقی‌مانده از امروز</div>
+            <p class="text-[11px] text-slate-400">مناسب هماهنگی دقیق کلاس‌های قدیمی (عدد ۰ یعنی پایان مهلت از امروز).</p>
+            <div class="grid grid-cols-2 gap-2">
+              <input id="adjSetVal" type="number" min="0" inputmode="numeric" dir="ltr" value="60" placeholder="تعداد" class="rounded-xl bg-fanoos-surface border border-fanoos-border px-3 py-2 text-xs text-center text-slate-100 focus:outline-none focus:border-teal-400/75" />
+              <select id="adjSetUnit" class="fanoos-select rounded-xl bg-fanoos-surface border border-fanoos-border px-2.5 py-2 text-xs font-semibold text-slate-100 focus:outline-none focus:border-teal-400/75">
+                <option value="1">روز</option>
+                <option value="7">هفته</option>
+                <option value="30">ماه (۳۰ روز)</option>
+              </select>
+            </div>
+            <button id="btnApplySetTime" type="button" class="w-full py-2.5 px-3 rounded-xl bg-teal-500/20 hover:bg-teal-500/30 border border-teal-500/45 text-teal-200 text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer">
+              <span>تنظیم دقیق مهلت باقی‌مانده</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 2: STATUS & ACCESS -->
+        <div id="mPanelStatus" class="hidden space-y-4">
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-slate-300">وضعیت دوره کلاس</label>
+            <div id="statusRadioGrid" class="grid grid-cols-2 gap-2">
+              <button type="button" data-status-val="active" class="status-opt-btn p-3 rounded-2xl border text-right transition cursor-pointer">
+                <div class="text-xs font-bold">فعال</div>
+                <div class="text-[10.5px] text-slate-400 mt-0.5">کلاس در حال برگزاری است</div>
+              </button>
+              <button type="button" data-status-val="graduated" class="status-opt-btn p-3 rounded-2xl border text-right transition cursor-pointer">
+                <div class="text-xs font-bold">🎓 منتقل به مقدماتی</div>
+                <div class="text-[10.5px] text-slate-400 mt-0.5">اتمام موفق و انتقال دوره</div>
+              </button>
+              <button type="button" data-status-val="completed" class="status-opt-btn p-3 rounded-2xl border text-right transition cursor-pointer">
+                <div class="text-xs font-bold">پایان دوره</div>
+                <div class="text-[10.5px] text-slate-400 mt-0.5">دوره به پایان رسیده است</div>
+              </button>
+              <button type="button" data-status-val="archived" class="status-opt-btn p-3 rounded-2xl border text-right transition cursor-pointer">
+                <div class="text-xs font-bold">بایگانی / ادغام</div>
+                <div class="text-[10.5px] text-slate-400 mt-0.5">کلاس متوقف یا ادغام شده</div>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label for="statusNoteInput" class="block text-xs font-bold text-slate-300 mb-1.5">یادداشت کوتاه مدیریتی</label>
+            <textarea id="statusNoteInput" rows="2" placeholder="مثلاً: هماهنگ شد تا پایان ماه جذب تکمیل شود..." class="w-full rounded-2xl bg-fanoos-bg border border-fanoos-border px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75 resize-y"></textarea>
+          </div>
+
+          <label class="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-fanoos-bg/85 border border-fanoos-border cursor-pointer select-none">
+            <div class="min-w-0">
+              <div class="text-xs font-bold text-slate-100">دسترسی تالار برای دانش‌آموزان باز بماند</div>
+              <div class="text-[10.5px] text-slate-400 mt-0.5">حتی در حالت منتقل‌شده یا بایگانی، بچه‌ها به بازی‌ها دسترسی دارند مگر این گزینه بسته شود.</div>
+            </div>
+            <input id="chkStudentAccessOpen" type="checkbox" class="w-5 h-5 rounded accent-teal-500 shrink-0 cursor-pointer" />
+          </label>
+
+          <button id="btnSaveStatus" type="button" class="w-full py-3 px-4 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-sm font-extrabold shadow-lg shadow-amber-950/50 transition flex items-center justify-center gap-2 cursor-pointer">
+            <span>💾 ذخیره وضعیت و دسترسی</span>
+          </button>
+        </div>
+
+        <!-- TAB 3: PASSWORD & CREATOR DANGER ZONE -->
+        <div id="mPanelSecurity" class="space-y-4">
+          <div class="rounded-2xl bg-fanoos-bg/85 border border-fanoos-border p-3.5 space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-xs font-bold text-amber-100">مشاهده رمز فعلی کلاس</div>
+                <div class="text-[10.5px] text-slate-400 mt-0.5">برای راهنمایی مربیانی که رمز کلاس را فراموش کرده‌اند.</div>
+              </div>
+              <button id="btnShowClassPass" type="button" class="shrink-0 px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 text-amber-200 text-xs font-bold transition cursor-pointer">نمایش رمز</button>
+            </div>
+            <div id="revealedPassBox" class="hidden flex items-center justify-between gap-2 rounded-xl bg-fanoos-surface border border-amber-400/35 px-3.5 py-2.5">
+              <span id="revealedPassValue" dir="ltr" class="font-mono text-base font-extrabold tracking-widest text-amber-200"></span>
+              <button id="btnCopyRevealedPass" type="button" class="px-2.5 py-1 rounded-lg bg-teal-500/15 hover:bg-teal-500/25 border border-teal-500/35 text-teal-200 text-[11px] font-bold transition cursor-pointer">کپی رمز</button>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-fanoos-bg/85 border border-fanoos-border p-3.5 space-y-2.5">
+            <label for="newClassPassInput" class="block text-xs font-bold text-slate-200">تنظیم رمز جدید برای کلاس</label>
+            <input id="newClassPassInput" type="text" inputmode="numeric" dir="ltr" placeholder="رمز جدید (حداقل ۴ رقم، مثلاً 0520)" class="w-full rounded-xl bg-fanoos-surface border border-fanoos-border px-3.5 py-2.5 text-sm text-left text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400/75" />
+            <p class="text-[10.5px] text-slate-500">صفر ابتدای رمز (مثل 0520) به‌صورت متن خالص حفظ می‌شود.</p>
+            <button id="btnResetClassPass" type="button" class="w-full py-2.5 px-4 rounded-xl bg-teal-500/20 hover:bg-teal-500/30 border border-teal-500/45 text-teal-200 text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer">
+              <span>تنظیم رمز جدید کلاس</span>
+            </button>
+          </div>
+
+          <!-- CREATOR ONLY DANGER ZONE -->
+          <div id="creatorDangerZone" class="hidden rounded-2xl bg-rose-950/35 border border-rose-500/40 p-3.5 space-y-3">
+            <div>
+              <div class="text-xs font-extrabold text-rose-300">منطقه ویژه سازنده — حذف همیشگی</div>
+              <p class="text-[11px] text-rose-200/75 mt-1 leading-relaxed">این عملیات کلاس و تمام سوابق پیشرفت و چک‌لیست آن را برای همیشه پاک می‌کند (مخصوص کلاس‌های تستی).</p>
+            </div>
+            <button id="btnStartDeleteClass" type="button" class="w-full py-2.5 px-4 rounded-xl bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/50 text-rose-200 text-xs font-bold transition cursor-pointer">🗑️ حذف همیشگی این کلاس تستی</button>
+            <div id="deleteConfirmBox" class="hidden space-y-2.5 pt-2 border-t border-rose-500/30">
+              <p class="text-[11px] text-rose-200">برای تایید نهایی، کد کلاس (<strong id="deleteTargetCodeHint" dir="ltr" class="text-amber-200"></strong>) را دقیقاً تایپ کنید:</p>
+              <input id="deleteConfirmInput" type="text" dir="ltr" placeholder="کد کلاس را تایپ کنید" class="w-full rounded-xl bg-fanoos-bg border border-rose-500/50 px-3 py-2 text-xs text-left text-slate-100 focus:outline-none focus:border-rose-400" />
+              <div class="flex items-center gap-2">
+                <button id="btnCancelDeleteClass" type="button" class="flex-1 py-2 rounded-xl bg-fanoos-elevated text-slate-300 text-xs font-bold cursor-pointer">انصراف</button>
+                <button id="btnFinalDeleteClass" type="button" disabled class="flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-extrabold transition flex items-center justify-center gap-1.5 cursor-pointer">حذف نهایی</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFICIAL A4 PRINT REPORT AREA (Visible only in @media print) -->
+  <section id="printReportArea" aria-hidden="true"></section>
+
+  <!-- TOAST -->
+  <div id="toastContainer" role="status" aria-live="polite" class="fixed bottom-5 inset-x-4 z-50 pointer-events-none flex justify-center opacity-0 translate-y-3 transition-all duration-200 ease-out no-print">
+    <div id="toastCard" class="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-emerald-500/45 text-slate-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md">
+      <span id="toastIcon" class="shrink-0"></span>
+      <span id="toastText"></span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+      const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
+
+      const rawCfg = (window && window.FANOOS_CONFIG && typeof window.FANOOS_CONFIG === "object") ? window.FANOOS_CONFIG : {};
+      const CFG = {
+        apiUrl: String(rawCfg.API_URL || rawCfg.apiUrl || "").trim(),
+        classQuota: Number(rawCfg.CLASS_QUOTA || rawCfg.targetClassSize || 14) || 14
+      };
+
+      const SESSION_KEY = "fanoos_rasad_session_v2";
+      const HANDOFF_KEY = "fanoos_rasad_open";
+
+      const state = {
+        adminPass: "",
+        role: "",
+        serverDate: "",
+        classes: [],
+        filter: "active",
+        sort: "daysAsc",
+        search: "",
+        modalClassCode: "",
+        modalTab: "time",
+        modalStatusDraft: "active"
+      };
+
+      function toEn(s) {
+        const t = String(s === null || s === undefined ? "" : s), fa = "۰۱۲۳۴۵۶۷۸۹", ar = "٠١٢٣٤٥٦٧٨٩";
+        let out = "";
+        for (let i = 0; i < t.length; i++) {
+          const ch = t.charAt(i);
+          let idx = fa.indexOf(ch);
+          if (idx > -1) { out += String(idx); continue; }
+          idx = ar.indexOf(ch);
+          if (idx > -1) { out += String(idx); continue; }
+          out += ch;
+        }
+        return out.trim();
+      }
+
+      function toFa(n) {
+        const str = String(n === null || n === undefined ? "" : n), fa = "۰۱۲۳۴۵۶۷۸۹";
+        let out = "";
+        for (let i = 0; i < str.length; i++) {
+          const code = str.charCodeAt(i);
+          out += (code >= 48 && code <= 57) ? fa.charAt(code - 48) : str.charAt(i);
+        }
+        return out;
+      }
+
+      function normFa(s) {
+        const raw = toEn(s);
+        let res = "", ps = false, pz = false;
+        for (let i = 0; i < raw.length; i++) {
+          let ch = raw.charAt(i);
+          const code = raw.charCodeAt(i);
+          if (ch === "\u064A" || ch === "\u0649") ch = "\u06CC";
+          else if (ch === "\u0643") ch = "\u06A9";
+          else if (code === 0x0640 || code === 0x200D || code === 0xFEFF) continue;
+          if (ch === " " || ch === "\t" || ch === "\n" || ch === "\r" || code === 0x00A0 || code === 0x2000 || code === 0x2001 || code === 0x2002 || code === 0x2003 || code === 0x2009) {
+            if (pz && res.length > 0) { res = res.slice(0, -1); pz = false; }
+            if (!ps && res.length > 0) { res += " "; ps = true; }
+            continue;
+          }
+          if (code === 0x200C) {
+            if (!pz && !ps && res.length > 0) { res += "\u200C"; pz = true; }
+            continue;
+          }
+          res += ch;
+          ps = false;
+          pz = false;
+        }
+        while (res.length > 0) {
+          const last = res.charCodeAt(res.length - 1);
+          if (last === 32 || last === 0x200C) res = res.slice(0, -1);
+          else break;
+        }
+        return res;
+      }
+
+      const normFaKey = (s) => normFa(s).toLowerCase();
+      const escHtml = (str) => String(str === null || str === undefined ? "" : str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
+      function splitTeacherAndNeighborhood(raw) {
+        const text = String(raw || "").trim();
+        if (!text) return { teacher: "", neighborhood: "" };
+        const idx = text.indexOf("|");
+        if (idx === -1) return { teacher: normFa(text), neighborhood: "" };
+        return { teacher: normFa(text.slice(0, idx)), neighborhood: normFa(text.slice(idx + 1)) };
+      }
+
+      function formatFaDate(iso) {
+        const raw = String(iso || state.serverDate || "").trim();
+        if (!raw) {
+          try { return new Intl.DateTimeFormat("fa-IR", { year: "numeric", month: "long", day: "numeric" }).format(new Date()); }
+          catch (e) { return ""; }
+        }
+        const dt = new Date(raw.length === 10 ? raw + "T12:00:00Z" : raw);
+        if (isNaN(dt.getTime())) return toFa(raw);
+        try { return new Intl.DateTimeFormat("fa-IR", { year: "numeric", month: "long", day: "numeric" }).format(dt); }
+        catch (e) { return toFa(raw); }
+      }
+
+      function statusFaLabel(cls) {
+        if (cls.status === "graduated") return "منتقل به مقدماتی";
+        if (cls.status === "completed") return "پایان موفق دوره";
+        if (cls.status === "archived") return "بایگانی / ادغام";
+        if (cls.daysLeft <= 0) return "پایان مهلت (نیازمند هماهنگی)";
+        if (cls.isExtended) return "فعال (فرصت تمدید)";
+        return "فعال";
+      }
+
+      function filterFaLabel(f) {
+        if (f === "attention") return "کلاس‌های نیازمند توجه";
+        if (f === "extended") return "کلاس‌های در فرصت تمدید";
+        if (f === "archived") return "کلاس‌های منتقل‌شده / بایگانی";
+        return "همه کلاس‌های فعال";
+      }
+
+      function isNeedsAttention(cls) {
+        return cls.status === "active" && (Number(cls.daysLeft || 0) < 30 || Number(cls.activeStudentsCount || 0) < CFG.classQuota);
+      }
+
+      let toastTimer = null;
+      function showToast(message, type) {
+        const container = $("toastContainer"), card = $("toastCard"), icon = $("toastIcon"), text = $("toastText");
+        if (!container || !card || !icon || !text) return;
+        text.textContent = message;
+        if (type === "error") {
+          card.className = "flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-rose-500/50 text-rose-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md";
+          icon.innerHTML = '<svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>';
+        } else if (type === "info") {
+          card.className = "flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-amber-400/45 text-amber-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md";
+          icon.innerHTML = '<svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>';
+        } else {
+          card.className = "flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 border border-emerald-500/45 text-slate-100 shadow-2xl shadow-black/70 backdrop-blur-md text-xs sm:text-sm font-semibold max-w-md";
+          icon.innerHTML = '<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
+        }
+        container.classList.remove("opacity-0", "translate-y-3", "pointer-events-none");
+        container.classList.add("opacity-100", "translate-y-0");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          container.classList.remove("opacity-100", "translate-y-0");
+          container.classList.add("opacity-0", "translate-y-3", "pointer-events-none");
+        }, 3000);
+      }
+
+      function copyTextSafe(text, successMsg) {
+        const value = String(text || "");
+        if (!value) return;
+        const legacyCopy = () => {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = value;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.top = "-9999px";
+            ta.style.left = "-9999px";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            ta.setSelectionRange(0, ta.value.length);
+            const ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+            return ok;
+          } catch (e) { return false; }
+        };
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+          navigator.clipboard.writeText(value)
+            .then(() => showToast(successMsg || "کپی شد", "success"))
+            .catch(() => {
+              const ok = legacyCopy();
+              showToast(ok ? (successMsg || "کپی شد") : "امکان کپی خودکار نبود.", ok ? "success" : "error");
+            });
+        } else {
+          const ok = legacyCopy();
+          showToast(ok ? (successMsg || "کپی شد") : "امکان کپی خودکار نبود.", ok ? "success" : "error");
+        }
+      }
+
+      async function withButtonLock(btn, label, fn) {
+        if (!btn) return fn();
+        if (btn.dataset.busy === "1") return;
+        btn.dataset.busy = "1";
+        const prevHtml = btn.innerHTML;
+        const prevDisabled = btn.disabled;
+        btn.disabled = true;
+        btn.classList.add("opacity-70", "cursor-not-allowed");
+        btn.innerHTML = '<span class="btn-spinner"></span><span>' + escHtml(label || "در حال انجام...") + "</span>";
+        try { return await fn(); }
+        finally {
+          btn.dataset.busy = "0";
+          btn.innerHTML = prevHtml;
+          btn.disabled = prevDisabled;
+          btn.classList.remove("opacity-70", "cursor-not-allowed");
+        }
+      }
+
+      async function apiPost(payload) {
+        if (!CFG.apiUrl) throw new Error("نشانی سرور (API_URL) در config.js تنظیم نشده است.");
+        const body = Object.assign({ adminPass: state.adminPass }, payload);
+        const res = await fetch(CFG.apiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) throw new Error("خطا در ارتباط با سرور (کد " + res.status + ")");
+        const txt = await res.text();
+        let data;
+        try { data = JSON.parse(txt); } catch (e) { throw new Error("پاسخ سرور نامعتبر بود."); }
+        if (!data || data.ok !== true) throw new Error((data && data.error) ? data.error : "عملیات با خطا مواجه شد.");
+        return data;
+      }
+
+      function saveRasadSession() {
+        try { sessionStorage.setItem(SESSION_KEY, JSON.stringify({ adminPass: state.adminPass })); } catch (e) {}
+      }
+      function clearRasadSession() {
+        try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
+      }
+
+      function normalizeClassItem(c) {
+        const code = toEn(c.classCode || c.classId || "");
+        const split = splitTeacherAndNeighborhood(c.teacherName || "");
+        const daysLeft = Math.max(0, Number(c.daysLeft !== undefined ? c.daysLeft : (c.daysRemaining || 0)));
+        const sessionsLeft = c.sessionsLeft !== undefined ? Number(c.sessionsLeft) : Math.ceil(daysLeft / 7);
+        const cycleDays = Math.max(1, Number(c.cycleDays || (c.meta && c.meta.cycleDays) || 180));
+        const pct = Math.max(0, Math.min(100, Number(c.progressPercent !== undefined ? c.progressPercent : Math.round(((cycleDays - daysLeft) / cycleDays) * 100))));
+        const status = String(c.status || (c.meta && c.meta.status) || "active").trim();
+        const studentAccessOpen = c.studentAccessOpen !== undefined ? Boolean(c.studentAccessOpen) : (c.meta && c.meta.studentAccessOpen !== undefined ? Boolean(c.meta.studentAccessOpen) : true);
+        const item = {
+          classCode: code,
+          className: normFa(c.className || "کلاس بدون نام"),
+          teacherNameRaw: String(c.teacherName || "").trim(),
+          teacher: split.teacher,
+          neighborhood: split.neighborhood,
+          ageGroup: normFa(c.ageGroup || ""),
+          activeStudentsCount: Number(c.activeStudentsCount !== undefined ? c.activeStudentsCount : (c.officialActiveCount || 0)) || 0,
+          withdrawnCount: Number(c.withdrawnCount !== undefined ? c.withdrawnCount : (c.droppedCount || 0)) || 0,
+          status,
+          statusNote: normFa(c.statusNote || (c.meta && c.meta.statusNote) || ""),
+          studentAccessOpen,
+          isExtended: Boolean(c.isExtended !== undefined ? c.isExtended : (c.meta && c.meta.isExtended)),
+          startDate: String(c.startDate || (c.meta && c.meta.startDate) || ""),
+          endDate: String(c.endDate || (c.meta && c.meta.endDate) || ""),
+          cycleDays,
+          daysLeft,
+          sessionsLeft,
+          progressPercent: daysLeft <= 0 ? 100 : pct,
+          createdAt: String(c.createdAt || ""),
+          updatedAt: String(c.updatedAt || c.lastActivityAt || "")
+        };
+        item.searchBlob = normFaKey([item.className, item.classCode, item.teacher, item.neighborhood, item.ageGroup, item.statusNote].join(" "));
+        return item;
+      }
+
+      function getFilteredClasses() {
+        const q = normFaKey(state.search);
+        const list = state.classes.filter((cls) => {
+          if (state.filter === "active" && cls.status !== "active") return false;
+          if (state.filter === "attention" && !isNeedsAttention(cls)) return false;
+          if (state.filter === "extended" && !(cls.status === "active" && cls.isExtended)) return false;
+          if (state.filter === "archived" && cls.status === "active") return false;
+          if (q && cls.searchBlob.indexOf(q) === -1) return false;
+          return true;
+        });
+
+        list.sort((a, b) => {
+          if (state.sort === "studentsAsc") return a.activeStudentsCount - b.activeStudentsCount || a.daysLeft - b.daysLeft;
+          if (state.sort === "studentsDesc") return b.activeStudentsCount - a.activeStudentsCount || a.daysLeft - b.daysLeft;
+          if (state.sort === "newest") return String(b.createdAt || "").localeCompare(String(a.createdAt || ""));
+          return a.daysLeft - b.daysLeft || a.activeStudentsCount - b.activeStudentsCount;
+        });
+        return list;
+      }
+
+      function buildTimelineHtml(cls) {
+        if (cls.status === "graduated") {
+          return '<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/35 text-emerald-200 text-[11px] font-bold"><span>🎓 منتقل به مقدماتی</span></div>';
+        }
+        if (cls.status === "completed") {
+          return '<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-teal-500/15 border border-teal-500/35 text-teal-200 text-[11px] font-bold"><span>پایان موفق دوره</span></div>';
+        }
+        if (cls.status === "archived") {
+          return '<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-700/45 border border-slate-600/55 text-slate-300 text-[11px] font-bold"><span>بایگانی / ادغام شده</span></div>';
+        }
+        let barColor = "bg-teal-400", textColor = "text-slate-300", fillWidth = cls.progressPercent;
+        let label = toFa(cls.daysLeft) + " روز (حدود " + toFa(cls.sessionsLeft) + " جلسه) مانده", extBadge = "";
+        if (cls.daysLeft <= 0) {
+          barColor = "bg-rose-700";
+          textColor = "text-rose-300 font-semibold";
+          fillWidth = 100;
+          label = "زمان دوره به پایان رسید — نیازمند هماهنگی";
+          if (cls.isExtended) extBadge = '<span class="px-1.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/35 text-indigo-200 text-[10px] font-semibold shrink-0">فرصت تمدید</span>';
+        } else if (cls.isExtended) {
+          barColor = "bg-indigo-500";
+          textColor = "text-indigo-200";
+          extBadge = '<span class="px-1.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/40 text-indigo-200 text-[10px] font-semibold shrink-0">فرصت تمدید</span>';
+        } else if (cls.daysLeft <= 45) {
+          barColor = "bg-orange-400";
+          textColor = "text-orange-200";
+        }
+        return '<div class="space-y-1.5"><div class="flex items-center gap-1.5 text-[11px] leading-tight ' + textColor + '">' + extBadge +
+          '<span class="truncate">' + escHtml(label) + '</span></div><div class="timeline-track w-full"><div class="timeline-fill ' + barColor + '" style="width:' + fillWidth + '%"></div></div></div>';
+      }
+
+      function renderStats() {
+        let activeCls = 0, activeStd = 0, attention = 0, extActive = 0, nonActive = 0;
+        for (let i = 0; i < state.classes.length; i++) {
+          const c = state.classes[i];
+          if (c.status === "active") {
+            activeCls++;
+            activeStd += c.activeStudentsCount;
+            if (isNeedsAttention(c)) attention++;
+            if (c.isExtended) extActive++;
+          } else {
+            nonActive++;
+          }
+        }
+        if ($("statActiveClasses")) $("statActiveClasses").textContent = toFa(activeCls);
+        if ($("statActiveStudents")) $("statActiveStudents").textContent = toFa(activeStd);
+        if ($("statAttention")) $("statAttention").textContent = toFa(attention);
+        if ($("statExtArchive")) $("statExtArchive").textContent = toFa(extActive + nonActive);
+        if ($("statExtArchiveSub")) $("statExtArchiveSub").textContent = "(" + toFa(extActive) + " تمدید / " + toFa(nonActive) + " غیرفعال)";
+      }
+
+      function renderFilterChipsUI() {
+        document.querySelectorAll(".filter-chip").forEach((btn) => {
+          const on = btn.dataset.filter === state.filter;
+          btn.className = on
+            ? "filter-chip px-3 py-1.5 rounded-xl text-[11.5px] font-bold border transition cursor-pointer bg-amber-500/15 border-amber-400/50 text-amber-200"
+            : "filter-chip px-3 py-1.5 rounded-xl text-[11.5px] font-semibold border transition cursor-pointer bg-fanoos-bg border-fanoos-border text-slate-400 hover:text-slate-200";
+        });
+      }
+
+      function renderPrintReport(list) {
+        const area = $("printReportArea");
+        if (!area) return;
+        const totalStd = list.reduce((acc, c) => acc + c.activeStudentsCount, 0);
+        const attentionCnt = list.filter(isNeedsAttention).length;
+        const dateStr = formatFaDate(state.serverDate);
+        const rowsHtml = list.length
+          ? list.map((c, idx) =>
+              "<tr>" +
+                "<td style='text-align:center;width:28px;'>" + toFa(idx + 1) + "</td>" +
+                "<td><strong>" + escHtml(c.className) + "</strong><div style='font-size:9px;color:#374151;'>کد: " + escHtml(c.classCode) + "</div></td>" +
+                "<td>" + escHtml(c.neighborhood || "—") + "</td>" +
+                "<td>" + escHtml(c.teacher || "—") + "</td>" +
+                "<td>" + escHtml(c.ageGroup || "—") + "</td>" +
+                "<td style='text-align:center;white-space:nowrap;'>" + toFa(c.activeStudentsCount) + " از " + toFa(CFG.classQuota) + "</td>" +
+                "<td style='white-space:nowrap;'>" + (c.status === "active" ? (c.daysLeft > 0 ? (toFa(c.daysLeft) + " روز (" + toFa(c.sessionsLeft) + " جلسه)") : "پایان مهلت") : "—") + "</td>" +
+                "<td>" + escHtml(statusFaLabel(c)) + (c.studentAccessOpen === false ? " (تالار بسته)" : "") + "</td>" +
+                "<td>" + escHtml(c.statusNote || "—") + "</td>" +
+              "</tr>"
+            ).join("")
+          : '<tr><td colspan="9" style="text-align:center;padding:16px;">کلاسی مطابق فیلتر فعلی یافت نشد.</td></tr>';
+
+        area.innerHTML =
+          '<div class="print-header">' +
+            '<div><div style="font-size:16px;font-weight:800;">گزارش هماهنگی و رصد کلاس‌های فانوس یادگیری</div>' +
+            '<div style="font-size:11px;margin-top:3px;">بخش گزارش: ' + escHtml(filterFaLabel(state.filter)) + (state.search ? (' — جست‌وجو: «' + escHtml(state.search) + '»') : "") + "</div></div>" +
+            '<div style="text-align:left;font-size:11px;"><div>تاریخ گزارش: ' + escHtml(dateStr) + "</div>" +
+            '<div>تعداد در جدول: ' + toFa(list.length) + " کلاس</div></div>" +
+          "</div>" +
+          '<div class="print-stats">' +
+            '<div class="print-stat-box">تعداد کلاس‌ها: <strong>' + toFa(list.length) + "</strong></div>" +
+            '<div class="print-stat-box">مجموع دانش‌آموزان فعال: <strong>' + toFa(totalStd) + " نفر</strong></div>" +
+            '<div class="print-stat-box">نیازمند توجه: <strong>' + toFa(attentionCnt) + " کلاس</strong></div>" +
+            '<div class="print-stat-box">حد نصاب مصوب: <strong>' + toFa(CFG.classQuota) + " نفر</strong></div>" +
+          "</div>" +
+          '<table class="print-table"><thead><tr>' +
+            "<th>#</th><th>نام و کد کلاس</th><th>محله</th><th>مربی</th><th>پایه</th><th>جمعیت</th><th>زمان مانده</th><th>وضعیت</th><th>یادداشت مدیر</th>" +
+          "</tr></thead><tbody>" + rowsHtml + "</tbody></table>";
+      }
+
+      function renderClassesGrid() {
+        const list = getFilteredClasses();
+        if ($("filteredCountLabel")) $("filteredCountLabel").textContent = "نمایش " + toFa(list.length) + " کلاس";
+        const grid = $("classesGrid");
+        if (!grid) return;
+        renderPrintReport(list);
+
+        if (!list.length) {
+          grid.innerHTML = '<div class="md:col-span-2 text-center py-10 px-4 rounded-3xl bg-fanoos-surface/80 border border-dashed border-fanoos-border text-xs sm:text-sm text-slate-400">کلاسی با این فیلتر یا عبارت جست‌وجو یافت نشد.</div>';
+          return;
+        }
+
+        const htmlParts = [];
+        for (let i = 0; i < list.length; i++) {
+          const c = list[i];
+          const reachedQuota = c.activeStudentsCount >= CFG.classQuota;
+          const quotaCls = reachedQuota
+            ? "bg-emerald-500/15 border-emerald-500/35 text-emerald-300"
+            : (c.status === "active" ? "bg-orange-500/12 border-orange-400/35 text-orange-200" : "bg-fanoos-bg border-fanoos-border text-slate-400");
+          const metaLine = [
+            c.teacher ? ("مربی: " + c.teacher) : "",
+            c.neighborhood ? ("محله: " + c.neighborhood) : "",
+            c.ageGroup || ""
+          ].filter(Boolean).join(" • ");
+
+          htmlParts.push(
+            '<article class="bg-fanoos-surface/95 border border-fanoos-border hover:border-amber-400/30 rounded-3xl p-4 flex flex-col justify-between gap-3 transition">' +
+              '<div class="space-y-2.5">' +
+                '<div class="flex items-start justify-between gap-2">' +
+                  '<div class="min-w-0">' +
+                    '<div class="flex items-center gap-2 flex-wrap">' +
+                      '<h3 class="text-sm font-extrabold text-amber-50 truncate">' + escHtml(c.className) + "</h3>" +
+                      '<span dir="ltr" class="px-2 py-0.5 rounded-lg bg-amber-500/15 border border-amber-400/35 text-[10.5px] font-bold text-amber-200 shrink-0">' + escHtml(c.classCode) + "</span>" +
+                      (c.studentAccessOpen === false ? '<span class="px-2 py-0.5 rounded-lg bg-rose-500/20 border border-rose-500/40 text-[10px] font-bold text-rose-200 shrink-0">تالار بسته</span>' : "") +
+                    "</div>" +
+                    '<p class="text-[11px] text-slate-400 mt-1 leading-relaxed">' + escHtml(metaLine || "مشخصات مربی ثبت نشده") + "</p>" +
+                  "</div>" +
+                  '<span class="shrink-0 inline-flex items-center gap-1 px-2 py-1 rounded-xl border text-[11px] font-bold whitespace-nowrap ' + quotaCls + '">👥 ' + toFa(c.activeStudentsCount) + " از " + toFa(CFG.classQuota) + " نفر</span>" +
+                "</div>" +
+                buildTimelineHtml(c) +
+                (c.statusNote ? '<div class="text-[11px] text-amber-100/90 bg-amber-500/10 border border-amber-400/25 rounded-xl px-2.5 py-1.5 leading-relaxed"><span class="text-amber-300/80 ml-1">یادداشت:</span>' + escHtml(c.statusNote) + "</div>" : "") +
+              "</div>" +
+              '<div class="grid grid-cols-2 gap-2 pt-2 border-t border-fanoos-border/70">' +
+                '<button type="button" data-open-teacher="' + escHtml(c.classCode) + '" class="py-2 px-2.5 rounded-xl bg-teal-500/15 hover:bg-teal-500/25 border border-teal-500/35 text-teal-200 text-xs font-bold active:scale-[0.98] transition cursor-pointer">👁️ مشاهده میز کلاس</button>' +
+                '<button type="button" data-manage-cls="' + escHtml(c.classCode) + '" class="py-2 px-2.5 rounded-xl bg-fanoos-elevated hover:bg-amber-500/20 border border-fanoos-border hover:border-amber-400/45 text-amber-100 text-xs font-bold active:scale-[0.98] transition cursor-pointer">⚙️ مدیریت کلاس</button>' +
+              "</div>" +
+            "</article>"
+          );
+        }
+        grid.innerHTML = htmlParts.join("");
+      }
+
+      function renderAll() {
+        if ($("hdrRoleBadge")) $("hdrRoleBadge").textContent = state.role === "creator" ? "سازنده" : "مدیر جلسه";
+        renderStats();
+        renderFilterChipsUI();
+        renderClassesGrid();
+      }
+
+      function copyReportForBale() {
+        const list = getFilteredClasses();
+        if (!list.length) { showToast("کلاسی در لیست فعلی برای گزارش وجود ندارد.", "info"); return; }
+        const totalStd = list.reduce((a, c) => a + c.activeStudentsCount, 0);
+        const att = list.filter(isNeedsAttention).length;
+        const lines = [
+          "🏮 گزارش رصد کلاس‌های فانوس یادگیری",
+          "📅 تاریخ: " + formatFaDate(state.serverDate),
+          "🔎 بخش: " + filterFaLabel(state.filter),
+          "📊 خلاصه: " + toFa(list.length) + " کلاس | " + toFa(totalStd) + " دانش‌آموز فعال | " + toFa(att) + " کلاس نیازمند توجه",
+          "───────────────"
+        ];
+        list.forEach((c, idx) => {
+          const timeTxt = c.status === "active"
+            ? (c.daysLeft > 0 ? (toFa(c.daysLeft) + " روز (" + toFa(c.sessionsLeft) + " جلسه) مانده") : "پایان مهلت!")
+            : statusFaLabel(c);
+          const loc = [c.neighborhood, c.teacher].filter(Boolean).join(" — ");
+          lines.push(
+            toFa(idx + 1) + ". " + c.className + " (" + c.classCode + ")" +
+            (loc ? ("\n   👤 " + loc) : "") +
+            "\n   👥 " + toFa(c.activeStudentsCount) + " از " + toFa(CFG.classQuota) + " نفر | ⏱️ " + timeTxt +
+            (c.isExtended && c.status === "active" ? " [فرصت تمدید]" : "") +
+            (c.studentAccessOpen === false ? " [تالار بسته]" : "") +
+            (c.statusNote ? ("\n   📝 " + c.statusNote) : "")
+          );
+        });
+        copyTextSafe(lines.join("\n"), "گزارش متنی برای بله/تلگرام کپی شد!");
+      }
+
+      function exportCsv() {
+        const list = getFilteredClasses();
+        if (!list.length) { showToast("کلاسی برای خروجی اکسل وجود ندارد.", "info"); return; }
+        const escCsv = (v) => '"' + String(v === null || v === undefined ? "" : v).replace(/"/g, '""') + '"';
+        const header = ["ردیف", "کد کلاس", "نام کلاس", "محله", "مربی", "پایه تحصیلی", "دانش‌آموز فعال", "حد نصاب", "روز باقی‌مانده", "جلسه باقی‌مانده", "وضعیت", "فرصت تمدید", "تالار باز", "تاریخ شروع", "تاریخ پایان", "یادداشت مدیر"];
+        const rows = [header.map(escCsv).join(",")];
+        list.forEach((c, idx) => {
+          rows.push([
+            idx + 1, c.classCode, c.className, c.neighborhood, c.teacher, c.ageGroup,
+            c.activeStudentsCount, CFG.classQuota, c.status === "active" ? c.daysLeft : 0,
+            c.status === "active" ? c.sessionsLeft : 0, statusFaLabel(c),
+            c.isExtended ? "بله" : "خیر", c.studentAccessOpen ? "باز" : "بسته",
+            c.startDate, c.endDate, c.statusNote
+          ].map(escCsv).join(","));
+        });
+        try {
+          const blob = new Blob(["\uFEFF" + rows.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "fanoos-rasad-" + (state.serverDate || "report") + ".csv";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+          showToast("فایل اکسل (CSV) با پشتیبانی کامل فارسی دانلود شد.", "success");
+        } catch (err) {
+          showToast("خطا در دانلود فایل CSV.", "error");
+        }
+      }
+
+      function openClassInTeacherView(classCode) {
+        const code = toEn(classCode);
+        if (!code) return;
+        try {
+          sessionStorage.setItem(HANDOFF_KEY, JSON.stringify({ classCode: code, pin: state.adminPass }));
+        } catch (e) {}
+        window.location.href = "teacher.html?c=" + encodeURIComponent(code);
+      }
+
+      /* ===== MANAGEMENT MODAL ===== */
+      function getModalClass() {
+        return state.classes.find((c) => c.classCode === state.modalClassCode) || null;
+      }
+
+      function switchModalTab(tab) {
+        state.modalTab = tab;
+        const map = { time: "mPanelTime", status: "mPanelStatus", security: "mPanelSecurity" };
+        Object.keys(map).forEach((k) => {
+          const el = $(map[k]);
+          if (el) el.classList.toggle("hidden", k !== tab);
+        });
+        document.querySelectorAll(".mtab-btn").forEach((btn) => {
+          const on = btn.dataset.mtab === tab;
+          btn.className = on
+            ? "mtab-btn py-2 px-2 rounded-xl text-xs font-bold transition cursor-pointer bg-amber-500/15 border border-amber-400/45 text-amber-200"
+            : "mtab-btn py-2 px-2 rounded-xl text-xs font-bold transition cursor-pointer border border-transparent text-slate-400 hover:text-slate-200";
+        });
+      }
+
+      function renderModalStatusButtons() {
+        document.querySelectorAll(".status-opt-btn").forEach((btn) => {
+          const val = btn.dataset.statusVal, on = val === state.modalStatusDraft;
+          let activeCls = "bg-amber-500/15 border-amber-400/60 text-amber-100";
+          if (val === "graduated") activeCls = "bg-emerald-500/15 border-emerald-400/60 text-emerald-100";
+          else if (val === "completed") activeCls = "bg-teal-500/15 border-teal-400/60 text-teal-100";
+          else if (val === "archived") activeCls = "bg-slate-600/30 border-slate-400/60 text-slate-100";
+          btn.className = "status-opt-btn p-3 rounded-2xl border text-right transition cursor-pointer " + (on ? activeCls : "bg-fanoos-bg border-fanoos-border text-slate-300 hover:border-slate-500");
+        });
+      }
+
+      function hydrateModalContent() {
+        const cls = getModalClass();
+        if (!cls) return;
+        if ($("modalClsName")) $("modalClsName").textContent = cls.className;
+        if ($("modalClsCode")) $("modalClsCode").textContent = cls.classCode;
+        if ($("modalClsSub")) $("modalClsSub").textContent = [cls.teacher, cls.neighborhood, cls.ageGroup].filter(Boolean).join(" • ") || "مشخصات تکمیلی ثبت نشده";
+        if ($("modalTimingSummary")) {
+          $("modalTimingSummary").innerHTML =
+            '<div class="flex items-center justify-between text-[11px] text-slate-400">' +
+              '<span>شروع: <strong class="text-slate-200">' + escHtml(formatFaDate(cls.startDate)) + "</strong></span>" +
+              '<span>پایان: <strong class="text-slate-200">' + escHtml(formatFaDate(cls.endDate)) + "</strong></span>" +
+            "</div>" + buildTimelineHtml(cls);
+        }
+        if ($("chkMarkExtended")) $("chkMarkExtended").checked = Boolean(cls.isExtended);
+        state.modalStatusDraft = cls.status || "active";
+        renderModalStatusButtons();
+        if ($("statusNoteInput")) $("statusNoteInput").value = cls.statusNote || "";
+        if ($("chkStudentAccessOpen")) $("chkStudentAccessOpen").checked = cls.studentAccessOpen !== false;
+        if ($("revealedPassBox")) $("revealedPassBox").classList.add("hidden");
+        if ($("revealedPassValue")) $("revealedPassValue").textContent = "";
+        if ($("newClassPassInput")) $("newClassPassInput").value = "";
+
+        const danger = $("creatorDangerZone");
+        if (danger) {
+          const isCreator = state.role === "creator";
+          danger.classList.toggle("hidden", !isCreator);
+          if (isCreator) {
+            if ($("deleteConfirmBox")) $("deleteConfirmBox").classList.add("hidden");
+            if ($("deleteTargetCodeHint")) $("deleteTargetCodeHint").textContent = cls.classCode;
+            if ($("deleteConfirmInput")) $("deleteConfirmInput").value = "";
+            if ($("btnFinalDeleteClass")) $("btnFinalDeleteClass").disabled = true;
+          }
+        }
+      }
+
+      function openManageModal(classCode) {
+        state.modalClassCode = toEn(classCode);
+        if (!getModalClass()) return;
+        hydrateModalContent();
+        switchModalTab("time");
+        if ($("manageModalBackdrop")) $("manageModalBackdrop").classList.remove("hidden");
+      }
+
+      function closeManageModal() {
+        if ($("manageModalBackdrop")) $("manageModalBackdrop").classList.add("hidden");
+        state.modalClassCode = "";
+      }
+
+      async function handleAdjustTime(mode, days, triggerBtn) {
+        const cls = getModalClass();
+        if (!cls) return;
+        const markExtended = $("chkMarkExtended") ? $("chkMarkExtended").checked : cls.isExtended;
+        await withButtonLock(triggerBtn, "در حال انجام...", async () => {
+          const res = await apiPost({
+            action: "adjustClassTime",
+            classCode: cls.classCode,
+            mode,
+            days,
+            markExtended
+          });
+          cls.startDate = res.startDate || cls.startDate;
+          cls.endDate = res.endDate || cls.endDate;
+          cls.cycleDays = Number(res.cycleDays || cls.cycleDays);
+          cls.isExtended = Boolean(res.isExtended);
+          cls.daysLeft = Math.max(0, Number(res.daysLeft !== undefined ? res.daysLeft : cls.daysLeft));
+          cls.sessionsLeft = Number(res.sessionsLeft !== undefined ? res.sessionsLeft : Math.ceil(cls.daysLeft / 7));
+          cls.progressPercent = Number(res.progressPercent !== undefined ? res.progressPercent : cls.progressPercent);
+          if (res.serverDate) state.serverDate = res.serverDate;
+          hydrateModalContent();
+          renderAll();
+          showToast("زمان دوره با موفقیت بروزرسانی شد.", "success");
+        });
+      }
+
+      async function fetchAllClasses() {
+        const data = await apiPost({ action: "getAllClasses" });
+        if (data.role) state.role = data.role;
+        if (data.serverDate) state.serverDate = data.serverDate;
+        state.classes = Array.isArray(data.classes) ? data.classes.map(normalizeClassItem) : [];
+        renderAll();
+      }
+
+      function showAuthError(msg) {
+        const box = $("authErrorBox");
+        if (!box) return;
+        box.textContent = msg || "";
+        box.classList.toggle("hidden", !msg);
+      }
+
+      async function performRasadLogin(passRaw, save) {
+        const pass = toEn(passRaw);
+        if (!pass) throw new Error("لطفاً رمز ورود را وارد کنید.");
+        state.adminPass = pass;
+        const ver = await apiPost({ action: "verifyRasad", adminPass: pass });
+        state.role = ver.role || "manager";
+        if (ver.serverDate) state.serverDate = ver.serverDate;
+        await fetchAllClasses();
+        if (save) saveRasadSession();
+        if ($("authView")) $("authView").classList.add("hidden");
+        if ($("dashboardView")) $("dashboardView").classList.remove("hidden");
+      }
+
+      function logoutRasad() {
+        clearRasadSession();
+        state.adminPass = "";
+        state.role = "";
+        state.classes = [];
+        closeManageModal();
+        if ($("dashboardView")) $("dashboardView").classList.add("hidden");
+        if ($("authView")) $("authView").classList.remove("hidden");
+        if ($("rasadPassInput")) $("rasadPassInput").value = "";
+        showAuthError("");
+      }
+
+      async function tryRestoreSession() {
+        let saved = null;
+        try { saved = JSON.parse(sessionStorage.getItem(SESSION_KEY) || "null"); } catch (e) {}
+        if (!saved || !saved.adminPass) return;
+        if ($("bootOverlay")) $("bootOverlay").classList.remove("hidden");
+        try { await performRasadLogin(saved.adminPass, true); }
+        catch (err) { clearRasadSession(); state.adminPass = ""; }
+        finally { if ($("bootOverlay")) $("bootOverlay").classList.add("hidden"); }
+      }
+
+      function bindEvents() {
+        document.querySelectorAll("[data-toggle-pass]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const inp = $(btn.dataset.togglePass);
+            if (!inp) return;
+            const show = inp.type === "password";
+            inp.type = show ? "text" : "password";
+            const eo = btn.querySelector(".eye-open"), ec = btn.querySelector(".eye-closed");
+            if (eo) eo.classList.toggle("hidden", show);
+            if (ec) ec.classList.toggle("hidden", !show);
+          });
+        });
+
+        on("rasadLoginForm", "submit", async (e) => {
+          e.preventDefault();
+          showAuthError("");
+          const pass = $("rasadPassInput") ? $("rasadPassInput").value : "";
+          await withButtonLock($("btnRasadLogin"), "در حال بررسی...", async () => {
+            try { await performRasadLogin(pass, true); showToast("خوش آمدید!", "success"); }
+            catch (err) { state.adminPass = ""; showAuthError(err && err.message ? err.message : "خطا در ورود"); }
+          });
+        });
+
+        on("btnRefreshAll", "click", async (e) => {
+          await withButtonLock(e.currentTarget, "...", async () => {
+            try { await fetchAllClasses(); showToast("لیست کلاس‌ها بروزرسانی شد.", "success"); }
+            catch (err) { showToast(err && err.message ? err.message : "خطا در بروزرسانی", "error"); }
+          });
+        });
+        on("btnLogout", "click", logoutRasad);
+
+        document.querySelectorAll("[data-stat-filter]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            state.filter = btn.dataset.statFilter;
+            renderFilterChipsUI();
+            renderClassesGrid();
+          });
+        });
+
+        on("filterChipsBar", "click", (e) => {
+          const btn = e.target.closest("[data-filter]");
+          if (!btn) return;
+          state.filter = btn.dataset.filter;
+          renderFilterChipsUI();
+          renderClassesGrid();
+        });
+
+        let searchTimer = null;
+        on("searchInput", "input", (e) => {
+          clearTimeout(searchTimer);
+          const val = e.target.value;
+          searchTimer = setTimeout(() => { state.search = val; renderClassesGrid(); }, 100);
+        });
+
+        on("sortSelect", "change", (e) => { state.sort = e.target.value; renderClassesGrid(); });
+
+        on("btnCopyReport", "click", copyReportForBale);
+        on("btnPrintPdf", "click", () => { renderPrintReport(getFilteredClasses()); window.print(); });
+        on("btnExportCsv", "click", exportCsv);
+
+        on("classesGrid", "click", (e) => {
+          const openBtn = e.target.closest("[data-open-teacher]");
+          if (openBtn) { openClassInTeacherView(openBtn.dataset.openTeacher); return; }
+          const mngBtn = e.target.closest("[data-manage-cls]");
+          if (mngBtn) openManageModal(mngBtn.dataset.manageCls);
+        });
+
+        on("btnCloseManageModal", "click", closeManageModal);
+        on("manageModalBackdrop", "click", (e) => { if (e.target === e.currentTarget) closeManageModal(); });
+        document.querySelectorAll(".mtab-btn").forEach((btn) => btn.addEventListener("click", () => switchModalTab(btn.dataset.mtab)));
+
+        document.querySelectorAll("[data-quick-add]").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const days = Number(btn.dataset.quickAdd);
+            try { await handleAdjustTime("add", days, btn); }
+            catch (err) { showToast(err && err.message ? err.message : "خطا در تغییر زمان", "error"); }
+          });
+        });
+
+        on("btnApplyAddTime", "click", async (e) => {
+          const dir = Number($("adjAddDir") ? $("adjAddDir").value : 1) || 1;
+          const val = Math.round(Number(toEn($("adjAddVal") ? $("adjAddVal").value : "")));
+          const unit = Number($("adjAddUnit") ? $("adjAddUnit").value : 1) || 1;
+          if (!val || isNaN(val) || val < 1) { showToast("لطفاً یک عدد معتبر بزرگ‌تر از صفر وارد کنید.", "error"); return; }
+          try { await handleAdjustTime("add", dir * val * unit, e.currentTarget); }
+          catch (err) { showToast(err && err.message ? err.message : "خطا در تغییر زمان", "error"); }
+        });
+
+        on("btnApplySetTime", "click", async (e) => {
+          const raw = toEn($("adjSetVal") ? $("adjSetVal").value : "");
+          const val = Math.round(Number(raw));
+          const unit = Number($("adjSetUnit") ? $("adjSetUnit").value : 1) || 1;
+          if (raw === "" || isNaN(val) || val < 0) { showToast("لطفاً یک عدد نامنفی معتبر وارد کنید.", "error"); return; }
+          try { await handleAdjustTime("setRemaining", val * unit, e.currentTarget); }
+          catch (err) { showToast(err && err.message ? err.message : "خطا در تنظیم زمان", "error"); }
+        });
+
+        on("statusRadioGrid", "click", (e) => {
+          const btn = e.target.closest("[data-status-val]");
+          if (!btn) return;
+          state.modalStatusDraft = btn.dataset.statusVal;
+          renderModalStatusButtons();
+        });
+
+        on("btnSaveStatus", "click", async (e) => {
+          const cls = getModalClass();
+          if (!cls) return;
+          const statusNote = normFa($("statusNoteInput") ? $("statusNoteInput").value : "");
+          const studentAccessOpen = $("chkStudentAccessOpen") ? $("chkStudentAccessOpen").checked : true;
+          await withButtonLock(e.currentTarget, "در حال انجام...", async () => {
+            try {
+              const res = await apiPost({
+                action: "updateClassStatus",
+                classCode: cls.classCode,
+                status: state.modalStatusDraft,
+                statusNote,
+                studentAccessOpen
+              });
+              cls.status = res.status || state.modalStatusDraft;
+              cls.statusNote = res.statusNote !== undefined ? res.statusNote : statusNote;
+              cls.studentAccessOpen = res.studentAccessOpen !== undefined ? Boolean(res.studentAccessOpen) : studentAccessOpen;
+              cls.searchBlob = normFaKey([cls.className, cls.classCode, cls.teacher, cls.neighborhood, cls.ageGroup, cls.statusNote].join(" "));
+              hydrateModalContent();
+              renderAll();
+              showToast("وضعیت و دسترسی کلاس ذخیره شد.", "success");
+            } catch (err) { showToast(err && err.message ? err.message : "خطا در ذخیره وضعیت", "error"); }
+          });
+        });
+
+        on("btnShowClassPass", "click", async (e) => {
+          const cls = getModalClass();
+          if (!cls) return;
+          await withButtonLock(e.currentTarget, "در حال دریافت...", async () => {
+            try {
+              const res = await apiPost({ action: "getClassPassword", classCode: cls.classCode });
+              if ($("revealedPassValue")) $("revealedPassValue").textContent = String(res.password || res.teacherPin || "");
+              if ($("revealedPassBox")) $("revealedPassBox").classList.remove("hidden");
+            } catch (err) { showToast(err && err.message ? err.message : "خطا در دریافت رمز", "error"); }
+          });
+        });
+
+        on("btnCopyRevealedPass", "click", () => {
+          const val = $("revealedPassValue") ? $("revealedPassValue").textContent : "";
+          if (val) copyTextSafe(val, "رمز کلاس کپی شد!");
+        });
+
+        on("btnResetClassPass", "click", async (e) => {
+          const cls = getModalClass();
+          if (!cls) return;
+          const np = toEn($("newClassPassInput") ? $("newClassPassInput").value : "");
+          if (np.length < 4) { showToast("رمز جدید کلاس باید حداقل ۴ رقم باشد.", "error"); return; }
+          await withButtonLock(e.currentTarget, "در حال انجام...", async () => {
+            try {
+              const res = await apiPost({ action: "resetClassPassword", classCode: cls.classCode, newPassword: np });
+              if ($("newClassPassInput")) $("newClassPassInput").value = "";
+              if ($("revealedPassValue")) $("revealedPassValue").textContent = String(res.password || np);
+              if ($("revealedPassBox")) $("revealedPassBox").classList.remove("hidden");
+              showToast("رمز جدید کلاس با موفقیت ثبت شد.", "success");
+            } catch (err) { showToast(err && err.message ? err.message : "خطا در تغییر رمز", "error"); }
+          });
+        });
+
+        on("btnStartDeleteClass", "click", () => {
+          if (state.role !== "creator") return;
+          if ($("deleteConfirmBox")) $("deleteConfirmBox").classList.remove("hidden");
+          if ($("deleteConfirmInput")) { $("deleteConfirmInput").value = ""; $("deleteConfirmInput").focus(); }
+          if ($("btnFinalDeleteClass")) $("btnFinalDeleteClass").disabled = true;
+        });
+
+        on("btnCancelDeleteClass", "click", () => {
+          if ($("deleteConfirmBox")) $("deleteConfirmBox").classList.add("hidden");
+          if ($("deleteConfirmInput")) $("deleteConfirmInput").value = "";
+        });
+
+        on("deleteConfirmInput", "input", (e) => {
+          const cls = getModalClass();
+          const typed = toEn(e.target.value).toLowerCase();
+          const match = Boolean(cls && typed === toEn(cls.classCode).toLowerCase());
+          if ($("btnFinalDeleteClass")) $("btnFinalDeleteClass").disabled = !match;
+        });
+
+        on("btnFinalDeleteClass", "click", async (e) => {
+          const cls = getModalClass();
+          if (!cls || state.role !== "creator") return;
+          const typed = toEn($("deleteConfirmInput") ? $("deleteConfirmInput").value : "").toLowerCase();
+          if (typed !== toEn(cls.classCode).toLowerCase()) { showToast("کد کلاس مطابقت ندارد.", "error"); return; }
+          await withButtonLock(e.currentTarget, "در حال حذف...", async () => {
+            try {
+              await apiPost({ action: "deleteClass", classCode: cls.classCode });
+              state.classes = state.classes.filter((x) => x.classCode !== cls.classCode);
+              closeManageModal();
+              renderAll();
+              showToast("کلاس تستی «" + cls.className + "» برای همیشه حذف شد.", "success");
+            } catch (err) { showToast(err && err.message ? err.message : "خطا در حذف کلاس", "error"); }
+          });
+        });
+      }
+
+      bindEvents();
+      tryRestoreSession();
+    })();
+  </script>
+</body>
+</html>
