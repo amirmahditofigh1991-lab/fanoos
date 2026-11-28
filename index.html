@@ -8,30 +8,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="config.js"></script>
+  <script src="config.js?v=2"></script>
   <style>
     :root {
       --bg-base: #0b1120;
       --bg-elevated: #111827;
       --bg-glass: rgba(17, 24, 39, 0.76);
       --bg-glass-strong: rgba(17, 24, 39, 0.92);
-      --bg-surface: rgba(15, 23, 42, 0.62);
       --border-subtle: rgba(148, 163, 184, 0.14);
       --border-strong: rgba(148, 163, 184, 0.26);
-
-      /* Lantern Gold (Games) */
       --gold: #f59e0b;
       --gold-light: #fbbf24;
       --gold-soft: rgba(245, 158, 11, 0.14);
       --gold-border: rgba(245, 158, 11, 0.34);
-
-      /* Teal / Turquoise (Checklist) */
       --teal: #14b8a6;
       --teal-light: #2dd4bf;
       --teal-soft: rgba(20, 184, 166, 0.14);
       --teal-border: rgba(20, 184, 166, 0.34);
-
-      /* Semantic */
       --emerald: #34d399;
       --rose: #fb7185;
       --rose-soft: rgba(251, 113, 133, 0.14);
@@ -39,7 +32,6 @@
       --text-secondary: #cbd5e1;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
-
       --radius-xl: 22px;
       --radius-lg: 16px;
       --radius-md: 12px;
@@ -47,14 +39,7 @@
       --shadow-card: 0 16px 38px -14px rgba(0, 0, 0, 0.6);
       --ease: 0.22s cubic-bezier(0.22, 1, 0.36, 1);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html, body {
       min-height: 100%;
       font-family: 'Vazirmatn', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -64,7 +49,6 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-
     body {
       background-image:
         radial-gradient(ellipse 75% 48% at 85% -8%, rgba(245, 158, 11, 0.12), transparent 60%),
@@ -72,41 +56,12 @@
         linear-gradient(180deg, #0b1120 0%, #0f172a 55%, #111827 100%);
       background-attachment: fixed;
     }
-
-    button, input {
-      font-family: inherit;
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      background: none;
-      color: inherit;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .app-shell {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    /* ============ Shared Components ============ */
+    button, input { font-family: inherit; }
+    button { cursor: pointer; border: none; background: none; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    .hidden { display: none !important; }
+    .app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+    .container { width: 100%; max-width: 960px; margin: 0 auto; padding: 0 16px; }
     .glass-card {
       background: var(--bg-glass);
       backdrop-filter: blur(16px);
@@ -115,1390 +70,390 @@
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-card);
     }
-
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 46px;
-      padding: 10px 18px;
-      border-radius: var(--radius-md);
-      font-weight: 700;
-      font-size: 0.94rem;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 46px; padding: 10px 18px; border-radius: var(--radius-md);
+      font-weight: 700; font-size: 0.94rem; white-space: nowrap;
       transition: transform var(--ease), background var(--ease), border-color var(--ease), box-shadow var(--ease), opacity var(--ease);
-      white-space: nowrap;
     }
-
-    .btn:active {
-      transform: scale(0.97);
-    }
-
-    .btn:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-      transform: none;
-    }
-
+    .btn:active { transform: scale(0.97); }
+    .btn:disabled { opacity: 0.58; cursor: not-allowed; transform: none; }
     .btn-gold {
       background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
       color: #0b1120;
       box-shadow: 0 8px 24px -8px rgba(245, 158, 11, 0.45);
     }
-
-    .btn-gold:hover:not(:disabled) {
-      background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%);
-      transform: translateY(-1px);
-    }
-
+    .btn-gold:hover:not(:disabled) { background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%); transform: translateY(-1px); }
     .btn-teal {
       background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
       color: #042f2e;
       box-shadow: 0 8px 24px -8px rgba(20, 184, 166, 0.45);
     }
-
-    .btn-teal:hover:not(:disabled) {
-      background: linear-gradient(135deg, #5eead4 0%, #2dd4bf 100%);
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-secondary);
-    }
-
-    .btn-ghost:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.09);
-      border-color: var(--border-strong);
-      color: var(--text-main);
-    }
-
-    .btn-sm {
-      min-height: 36px;
-      padding: 6px 12px;
-      font-size: 0.82rem;
-      border-radius: var(--radius-sm);
-    }
-
-    .btn-icon {
-      width: 36px;
-      height: 36px;
-      min-height: 36px;
-      padding: 0;
-      border-radius: var(--radius-sm);
-      flex-shrink: 0;
-    }
-
+    .btn-teal:hover:not(:disabled) { background: linear-gradient(135deg, #5eead4 0%, #2dd4bf 100%); transform: translateY(-1px); }
+    .btn-ghost { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); color: var(--text-secondary); }
+    .btn-ghost:hover:not(:disabled) { background: rgba(255, 255, 255, 0.09); border-color: var(--border-strong); color: var(--text-main); }
+    .btn-sm { min-height: 36px; padding: 6px 12px; font-size: 0.82rem; border-radius: var(--radius-sm); }
+    .btn-icon { width: 36px; height: 36px; min-height: 36px; padding: 0; border-radius: var(--radius-sm); flex-shrink: 0; position: relative; }
     .input-field {
-      width: 100%;
-      min-height: 48px;
-      padding: 11px 15px;
-      border-radius: var(--radius-md);
-      border: 1.5px solid rgba(148, 163, 184, 0.22);
-      background: rgba(11, 17, 32, 0.78);
-      color: var(--text-main);
-      font-size: 0.98rem;
-      outline: none;
+      width: 100%; min-height: 48px; padding: 11px 15px; border-radius: var(--radius-md);
+      border: 1.5px solid rgba(148, 163, 184, 0.22); background: rgba(11, 17, 32, 0.78);
+      color: var(--text-main); font-size: 0.98rem; outline: none;
       transition: border-color var(--ease), box-shadow var(--ease);
     }
+    .input-field::placeholder { color: var(--text-dim); }
+    .input-field:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.14); }
+    .input-field.teal-focus:focus { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.14); }
+    .center-screen { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px; gap: 18px; }
+    .fade-in { animation: fadeSlide 0.24s cubic-bezier(0.22, 1, 0.36, 1); }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.75); } }
+    .spinning { display: inline-block; animation: spin 0.8s linear infinite; }
 
-    .input-field::placeholder {
-      color: var(--text-dim);
-    }
-
-    .input-field:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.14);
-    }
-
-    .input-field.teal-focus:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.14);
-    }
-
-    .center-screen {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
-      gap: 18px;
-    }
-
-    .fade-in {
-      animation: fadeSlide 0.26s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    @keyframes fadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .spinning {
-      display: inline-block;
-      animation: spin 0.8s linear infinite;
-    }
-
-    /* ============ 1. Class Code Entry Screen ============ */
-    .entry-card {
-      width: 100%;
-      max-width: 420px;
-      padding: 32px 24px 26px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .entry-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      inset-inline: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--gold), var(--teal), transparent);
-    }
-
+    /* Entry / Closed / Loading / Error */
+    .entry-card { width: 100%; max-width: 420px; padding: 32px 24px 26px; text-align: center; position: relative; overflow: hidden; }
+    .entry-card::before { content: ""; position: absolute; top: 0; inset-inline: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), var(--teal), transparent); }
     .lantern-badge {
-      width: 68px;
-      height: 68px;
-      margin: 0 auto 16px;
-      border-radius: 20px;
+      width: 68px; height: 68px; margin: 0 auto 16px; border-radius: 20px;
       background: linear-gradient(145deg, rgba(245, 158, 11, 0.2), rgba(20, 184, 166, 0.14));
-      border: 1px solid rgba(245, 158, 11, 0.36);
-      display: grid;
-      place-items: center;
-      font-size: 2rem;
-      box-shadow: 0 0 32px rgba(245, 158, 11, 0.18);
+      border: 1px solid rgba(245, 158, 11, 0.36); display: grid; place-items: center;
+      font-size: 2rem; box-shadow: 0 0 32px rgba(245, 158, 11, 0.18);
     }
-
     .entry-title {
-      font-size: 1.55rem;
-      font-weight: 900;
-      letter-spacing: -0.02em;
+      font-size: 1.55rem; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 6px;
       background: linear-gradient(135deg, #ffffff 15%, #fde68a 60%, #5eead4 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-
-    .entry-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
-    .entry-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      text-align: right;
-    }
-
-    .field-label {
-      display: block;
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .code-input {
-      direction: ltr;
-      text-align: center;
-      font-weight: 800;
-      font-size: 1.15rem;
-      letter-spacing: 0.1em;
-    }
-
-    .code-input::placeholder {
-      font-weight: 400;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-    }
-
-    .form-error {
-      min-height: 20px;
-      font-size: 0.82rem;
-      color: var(--rose);
-      text-align: center;
-      font-weight: 500;
-    }
-
-    .teacher-subtle-link {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      padding: 8px 14px;
-      border-radius: 999px;
-      transition: color var(--ease), background var(--ease);
-    }
-
-    .teacher-subtle-link:hover {
-      color: var(--text-secondary);
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    /* ============ Loading & Error States ============ */
-    .state-card {
-      width: 100%;
-      max-width: 400px;
-      padding: 34px 24px;
-      text-align: center;
-    }
-
-    .loader-ring {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 18px;
-      position: relative;
-      display: grid;
-      place-items: center;
-    }
-
+    .entry-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; }
+    .entry-form { display: flex; flex-direction: column; gap: 12px; text-align: right; }
+    .field-label { display: block; font-size: 0.84rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+    .code-input { direction: ltr; text-align: center; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.1em; }
+    .code-input::placeholder { font-weight: 400; font-size: 0.95rem; letter-spacing: 0.02em; }
+    .form-error { min-height: 20px; font-size: 0.82rem; color: var(--rose); text-align: center; font-weight: 500; }
+    .teacher-subtle-link { font-size: 0.82rem; color: var(--text-dim); padding: 8px 14px; border-radius: 999px; transition: color var(--ease), background var(--ease); }
+    .teacher-subtle-link:hover { color: var(--text-secondary); background: rgba(255, 255, 255, 0.04); }
+    .state-card { width: 100%; max-width: 410px; padding: 34px 24px; text-align: center; position: relative; overflow: hidden; }
+    .closed-card::before { content: ""; position: absolute; top: 0; inset-inline: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .loader-ring { width: 56px; height: 56px; margin: 0 auto 18px; position: relative; display: grid; place-items: center; }
     .loader-ring::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 3px solid rgba(148, 163, 184, 0.16);
-      border-top-color: var(--gold);
-      border-right-color: var(--teal);
+      content: ""; position: absolute; inset: 0; border-radius: 50%;
+      border: 3px solid rgba(148, 163, 184, 0.16); border-top-color: var(--gold); border-right-color: var(--teal);
       animation: spin 0.9s linear infinite;
     }
+    .loader-ring span { font-size: 1.35rem; }
+    .state-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+    .state-desc { font-size: 0.89rem; color: var(--text-muted); margin-bottom: 22px; line-height: 1.75; }
+    .state-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
-    .loader-ring span {
-      font-size: 1.35rem;
-    }
-
-    .state-title {
-      font-size: 1.08rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    .state-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .state-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    /* ============ 2. Student Identity Picker View ============ */
-    .identity-card {
-      width: 100%;
-      max-width: 560px;
-      padding: 26px 20px 22px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .identity-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      inset-inline: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--teal), var(--gold));
-    }
-
-    .identity-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .identity-class-title {
-      font-size: 1.25rem;
-      font-weight: 900;
-      color: var(--text-main);
-      line-height: 1.35;
-    }
-
-    .identity-teacher {
-      font-size: 0.84rem;
-      color: var(--teal-light);
-      font-weight: 600;
-      margin-top: 3px;
-    }
-
-    .identity-prompt {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .students-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      max-height: 46vh;
-      overflow-y: auto;
-      padding: 2px;
-      margin-bottom: 18px;
-    }
-
+    /* Identity Picker */
+    .identity-card { width: 100%; max-width: 560px; padding: 26px 20px 22px; position: relative; overflow: hidden; }
+    .identity-card::before { content: ""; position: absolute; top: 0; inset-inline: 0; height: 3px; background: linear-gradient(90deg, var(--teal), var(--gold)); }
+    .identity-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .identity-class-title { font-size: 1.25rem; font-weight: 900; color: var(--text-main); line-height: 1.35; }
+    .identity-teacher { font-size: 0.84rem; color: var(--teal-light); font-weight: 600; margin-top: 3px; }
+    .identity-prompt { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px; }
+    .students-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-height: 46vh; overflow-y: auto; padding: 2px; margin-bottom: 18px; }
     .student-tile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 13px;
-      border-radius: var(--radius-md);
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid var(--border-subtle);
-      text-align: right;
+      display: flex; align-items: center; gap: 10px; padding: 12px 13px; border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.72); border: 1px solid var(--border-subtle); text-align: right; min-height: 54px;
       transition: transform var(--ease), border-color var(--ease), background var(--ease);
-      min-height: 54px;
     }
-
-    .student-tile:hover {
-      background: rgba(245, 158, 11, 0.1);
-      border-color: var(--gold-border);
-      transform: translateY(-1px);
-    }
-
-    .student-tile:active {
-      transform: scale(0.98);
-    }
-
+    .student-tile:hover { background: rgba(245, 158, 11, 0.1); border-color: var(--gold-border); transform: translateY(-1px); }
+    .student-tile:active { transform: scale(0.98); }
     .student-avatar {
-      width: 34px;
-      height: 34px;
-      flex-shrink: 0;
-      border-radius: 10px;
+      width: 34px; height: 34px; flex-shrink: 0; border-radius: 10px;
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(20, 184, 166, 0.18));
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 0.88rem;
-      color: var(--gold-light);
+      border: 1px solid rgba(245, 158, 11, 0.3); display: grid; place-items: center;
+      font-weight: 800; font-size: 0.88rem; color: var(--gold-light);
     }
+    .student-tile-name { font-size: 0.92rem; font-weight: 700; color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .empty-roster-note { grid-column: 1 / -1; text-align: center; padding: 16px; border-radius: var(--radius-md); background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--border-subtle); color: var(--text-muted); font-size: 0.86rem; }
+    .guest-section { padding-top: 16px; border-top: 1px solid var(--border-subtle); }
+    .guest-toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .guest-panel { margin-top: 12px; padding: 14px; border-radius: var(--radius-lg); background: rgba(11, 17, 32, 0.62); border: 1px solid var(--border-subtle); }
+    .guest-form { display: flex; gap: 8px; }
+    .guest-form .input-field { min-height: 44px; font-size: 0.92rem; }
+    .guest-error { font-size: 0.8rem; color: var(--rose); margin-top: 6px; min-height: 18px; }
 
-    .student-tile-name {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text-main);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .empty-roster-note {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 16px;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px dashed var(--border-subtle);
-      color: var(--text-muted);
-      font-size: 0.86rem;
-    }
-
-    .guest-section {
-      padding-top: 16px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .guest-toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .guest-panel {
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: var(--radius-lg);
-      background: rgba(11, 17, 32, 0.62);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .guest-form {
-      display: flex;
-      gap: 8px;
-    }
-
-    .guest-form .input-field {
-      min-height: 44px;
-      font-size: 0.92rem;
-    }
-
-    .guest-error {
-      font-size: 0.8rem;
-      color: var(--rose);
-      margin-top: 6px;
-      min-height: 18px;
-    }
-
-    /* ============ 3. Hall Header (Clean Mobile-First Flexbox) ============ */
+    /* Hall Header */
     .hall-header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: rgba(11, 17, 32, 0.86);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 12px 0;
+      position: sticky; top: 0; z-index: 30; background: rgba(11, 17, 32, 0.86);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-subtle); padding: 12px 0;
     }
-
-    .header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px 14px;
-      flex-wrap: wrap;
-    }
-
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      flex: 1 1 180px;
-    }
-
+    .header-row { display: flex; align-items: center; justify-content: space-between; gap: 10px 14px; flex-wrap: wrap; }
+    .header-brand { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1 1 180px; }
     .header-logo {
-      width: 38px;
-      height: 38px;
-      flex-shrink: 0;
-      border-radius: 11px;
+      width: 38px; height: 38px; flex-shrink: 0; border-radius: 11px;
       background: linear-gradient(145deg, rgba(245, 158, 11, 0.22), rgba(20, 184, 166, 0.16));
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      display: grid;
-      place-items: center;
-      font-size: 1.2rem;
+      border: 1px solid rgba(245, 158, 11, 0.35); display: grid; place-items: center; font-size: 1.2rem;
     }
-
-    .header-class-wrap {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .header-class-name {
-      font-size: 0.98rem;
-      font-weight: 800;
-      color: var(--text-main);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      line-height: 1.3;
-    }
-
-    .header-platform-sub {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .header-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-      max-width: 100%;
-    }
-
+    .header-class-wrap { min-width: 0; display: flex; flex-direction: column; }
+    .header-class-name { font-size: 0.98rem; font-weight: 800; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+    .header-platform-sub { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .header-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; max-width: 100%; }
     .student-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      height: 36px;
-      padding: 0 11px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-subtle);
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-main);
-      max-width: 148px;
+      display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 11px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle);
+      font-size: 0.82rem; font-weight: 700; color: var(--text-main); max-width: 148px;
     }
-
-    .student-badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--teal-light);
-      flex-shrink: 0;
+    .student-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-light); flex-shrink: 0; }
+    .student-badge-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sync-indicator {
+      display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 600;
+      color: var(--gold-light); padding: 0 6px; opacity: 0; pointer-events: none;
+      transition: opacity 0.2s ease;
     }
+    .sync-indicator.active { opacity: 1; }
+    .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-light); animation: pulseDot 1.1s ease-in-out infinite; }
 
-    .student-badge-name {
-      overflow: hidden;
-      text-overflow: ellipsis;
+    /* Hall Body & 3-Layer System */
+    .hall-main { flex: 1; padding: 20px 0 42px; }
+    .greeting-block { margin-bottom: 16px; }
+    .greeting-title { font-size: 1.2rem; font-weight: 800; color: var(--text-main); line-height: 1.5; }
+    .greeting-title .name-highlight { color: var(--gold-light); }
+    .greeting-sub { font-size: 0.86rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* Layer 1: Announcement Banner */
+    .announcement-banner {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 15px; margin-bottom: 14px; border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(20, 184, 166, 0.12));
+      border: 1px solid rgba(245, 158, 11, 0.34); box-shadow: 0 10px 26px -14px rgba(245, 158, 11, 0.35);
+    }
+    .announcement-content { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .announcement-icon {
+      width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.35);
+      display: grid; place-items: center; font-size: 1.05rem;
+    }
+    .announcement-text-wrap { min-width: 0; }
+    .announcement-title { font-size: 0.88rem; font-weight: 800; color: #fef3c7; line-height: 1.4; }
+    .announcement-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+    .announcement-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .announcement-close {
+      width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
+      color: var(--text-muted); background: rgba(11, 17, 32, 0.35); border: 1px solid var(--border-subtle);
+      font-size: 1rem; transition: color var(--ease), background var(--ease);
+    }
+    .announcement-close:hover { color: var(--text-main); background: rgba(11, 17, 32, 0.65); }
+
+    /* Layer 2: Smart "Suggested Now" Card */
+    .suggest-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      padding: 15px 18px; margin-bottom: 18px; border-radius: var(--radius-xl);
+      background: var(--bg-glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); position: relative; overflow: hidden;
+    }
+    .suggest-card::before { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 4px; }
+    .suggest-card.suggest-checklist { border-color: rgba(20, 184, 166, 0.34); background: linear-gradient(135deg, rgba(20, 184, 166, 0.12), rgba(17, 24, 39, 0.84)); }
+    .suggest-card.suggest-checklist::before { background: linear-gradient(180deg, var(--teal-light), var(--teal)); }
+    .suggest-card.suggest-game { border-color: rgba(245, 158, 11, 0.36); background: linear-gradient(135deg, rgba(245, 158, 11, 0.13), rgba(17, 24, 39, 0.84)); }
+    .suggest-card.suggest-game::before { background: linear-gradient(180deg, var(--gold-light), var(--gold)); }
+    .suggest-card.suggest-done { border-color: rgba(52, 211, 153, 0.36); background: linear-gradient(135deg, rgba(52, 211, 153, 0.13), rgba(20, 184, 166, 0.08)); }
+    .suggest-card.suggest-done::before { background: linear-gradient(180deg, var(--emerald), var(--teal)); }
+    .suggest-info { min-width: 0; flex: 1 1 200px; }
+    .suggest-kicker { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); margin-bottom: 2px; }
+    .suggest-title { font-size: 0.98rem; font-weight: 800; color: var(--text-main); line-height: 1.45; }
+    .suggest-sub { font-size: 0.81rem; color: var(--text-secondary); margin-top: 2px; }
+
+    /* Layer 3: New Badge */
+    .new-badge {
+      display: inline-flex; align-items: center; gap: 3px; padding: 3px 9px; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 800; color: #fef3c7;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(251, 191, 36, 0.2));
+      border: 1px solid rgba(251, 191, 36, 0.55);
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.28);
       white-space: nowrap;
     }
 
-    /* ============ Hall Main Body ============ */
-    .hall-main {
-      flex: 1;
-      padding: 22px 0 42px;
-    }
-
-    /* Greeting Banner */
-    .greeting-block {
-      margin-bottom: 22px;
-    }
-
-    .greeting-title {
-      font-size: 1.22rem;
-      font-weight: 800;
-      color: var(--text-main);
-      line-height: 1.5;
-    }
-
-    .greeting-title .name-highlight {
-      color: var(--gold-light);
-    }
-
-    .greeting-sub {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* ============ Folder Cards (Phase 2 Hub) ============ */
-    .folders-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
+    /* Folders Grid */
+    .folders-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
     .folder-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      text-align: right;
-      width: 100%;
-      padding: 22px 20px 18px;
-      background: var(--bg-glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
+      position: relative; display: flex; flex-direction: column; text-align: right; width: 100%;
+      padding: 22px 20px 18px; background: var(--bg-glass);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle); border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card); overflow: hidden;
       transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
     }
-
-    .folder-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      inset-inline: 0;
-      height: 3px;
-      opacity: 0.9;
-    }
-
-    .folder-card::after {
-      content: "";
-      position: absolute;
-      top: -50px;
-      left: -50px;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0.55;
-      transition: opacity var(--ease);
-    }
-
-    .folder-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .folder-card:active {
-      transform: scale(0.985);
-    }
-
-    /* Gold Theme - Games Folder */
-    .folder-card.theme-games::before {
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    }
-
-    .folder-card.theme-games::after {
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.16), transparent 68%);
-    }
-
-    .folder-card.theme-games:hover {
-      border-color: var(--gold-border);
-      box-shadow: 0 20px 42px -14px rgba(0, 0, 0, 0.7), 0 0 26px -10px rgba(245, 158, 11, 0.35);
-    }
-
-    /* Teal Theme - Checklist Folder */
-    .folder-card.theme-checklist::before {
-      background: linear-gradient(90deg, var(--teal), var(--teal-light));
-    }
-
-    .folder-card.theme-checklist::after {
-      background: radial-gradient(circle, rgba(20, 184, 166, 0.16), transparent 68%);
-    }
-
-    .folder-card.theme-checklist:hover {
-      border-color: var(--teal-border);
-      box-shadow: 0 20px 42px -14px rgba(0, 0, 0, 0.7), 0 0 26px -10px rgba(20, 184, 166, 0.35);
-    }
-
-    .folder-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .folder-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      font-size: 1.75rem;
-      flex-shrink: 0;
-    }
-
-    .theme-games .folder-icon {
-      background: var(--gold-soft);
-      border: 1px solid var(--gold-border);
-    }
-
-    .theme-checklist .folder-icon {
-      background: var(--teal-soft);
-      border: 1px solid var(--teal-border);
-    }
-
+    .folder-card::before { content: ""; position: absolute; top: 0; inset-inline: 0; height: 3px; opacity: 0.9; }
+    .folder-card::after { content: ""; position: absolute; top: -50px; left: -50px; width: 180px; height: 180px; border-radius: 50%; pointer-events: none; opacity: 0.55; }
+    .folder-card:hover { transform: translateY(-3px); }
+    .folder-card:active { transform: scale(0.985); }
+    .folder-card.theme-games::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+    .folder-card.theme-games::after { background: radial-gradient(circle, rgba(245, 158, 11, 0.16), transparent 68%); }
+    .folder-card.theme-games:hover { border-color: var(--gold-border); box-shadow: 0 20px 42px -14px rgba(0, 0, 0, 0.7), 0 0 26px -10px rgba(245, 158, 11, 0.35); }
+    .folder-card.theme-checklist::before { background: linear-gradient(90deg, var(--teal), var(--teal-light)); }
+    .folder-card.theme-checklist::after { background: radial-gradient(circle, rgba(20, 184, 166, 0.16), transparent 68%); }
+    .folder-card.theme-checklist:hover { border-color: var(--teal-border); box-shadow: 0 20px 42px -14px rgba(0, 0, 0, 0.7), 0 0 26px -10px rgba(20, 184, 166, 0.35); }
+    .folder-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; position: relative; z-index: 1; }
+    .folder-top-left { display: flex; align-items: center; gap: 8px; }
+    .folder-icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 1.75rem; flex-shrink: 0; }
+    .theme-games .folder-icon { background: var(--gold-soft); border: 1px solid var(--gold-border); }
+    .theme-checklist .folder-icon { background: var(--teal-soft); border: 1px solid var(--teal-border); }
     .folder-arrow {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-subtle);
-      display: grid;
-      place-items: center;
-      color: var(--text-muted);
-      font-size: 1rem;
-      transition: transform var(--ease), color var(--ease), border-color var(--ease);
+      width: 34px; height: 34px; border-radius: 10px; background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle); display: grid; place-items: center;
+      color: var(--text-muted); font-size: 1rem; transition: transform var(--ease), color var(--ease);
     }
+    .folder-card:hover .folder-arrow { transform: translateX(-3px); color: var(--text-main); }
+    .folder-title { font-size: 1.16rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px; position: relative; z-index: 1; }
+    .folder-subtitle { font-size: 0.87rem; color: var(--text-muted); margin-bottom: 18px; position: relative; z-index: 1; }
+    .folder-badges { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-top: 14px; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
+    .live-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+    .live-pill.gold { background: var(--gold-soft); color: var(--gold-light); border: 1px solid rgba(245, 158, 11, 0.28); }
+    .live-pill.teal { background: var(--teal-soft); color: var(--teal-light); border: 1px solid rgba(20, 184, 166, 0.28); }
+    .live-pill.neutral { background: rgba(148, 163, 184, 0.1); color: var(--text-secondary); border: 1px solid rgba(148, 163, 184, 0.18); }
+    .live-pill.emerald { background: rgba(52, 211, 153, 0.14); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
 
-    .folder-card:hover .folder-arrow {
-      transform: translateX(-3px);
-      color: var(--text-main);
-    }
-
-    .folder-title {
-      font-size: 1.16rem;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 4px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .folder-subtitle {
-      font-size: 0.87rem;
-      color: var(--text-muted);
-      margin-bottom: 18px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .folder-badges {
-      margin-top: auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border-subtle);
-      position: relative;
-      z-index: 1;
-    }
-
-    .live-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 11px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
-    .live-pill.gold {
-      background: var(--gold-soft);
-      color: var(--gold-light);
-      border: 1px solid rgba(245, 158, 11, 0.28);
-    }
-
-    .live-pill.teal {
-      background: var(--teal-soft);
-      color: var(--teal-light);
-      border: 1px solid rgba(20, 184, 166, 0.28);
-    }
-
-    .live-pill.neutral {
-      background: rgba(148, 163, 184, 0.1);
-      color: var(--text-secondary);
-      border: 1px solid rgba(148, 163, 184, 0.18);
-    }
-
-    .live-pill.emerald {
-      background: rgba(52, 211, 153, 0.14);
-      color: var(--emerald);
-      border: 1px solid rgba(52, 211, 153, 0.3);
-    }
-
-    /* ============ Inner Folder Navigation Bar ============ */
-    .folder-nav-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
+    /* Inner Views */
+    .folder-nav-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
     .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 40px;
-      padding: 7px 14px;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      font-size: 0.88rem;
-      font-weight: 700;
+      display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 7px 14px;
+      border-radius: var(--radius-md); background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle); color: var(--text-main); font-size: 0.88rem; font-weight: 700;
       transition: background var(--ease), border-color var(--ease), transform var(--ease);
     }
+    .back-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--border-strong); }
+    .back-btn:active { transform: scale(0.97); }
+    .folder-view-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .folder-view-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 1.45rem; flex-shrink: 0; }
+    .folder-view-icon.gold { background: var(--gold-soft); border: 1px solid var(--gold-border); }
+    .folder-view-icon.teal { background: var(--teal-soft); border: 1px solid var(--teal-border); }
+    .folder-view-title { font-size: 1.18rem; font-weight: 900; line-height: 1.3; }
+    .folder-view-desc { font-size: 0.84rem; color: var(--text-muted); }
 
-    .back-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--border-strong);
-    }
-
-    .back-btn:active {
-      transform: scale(0.97);
-    }
-
-    .folder-view-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .folder-view-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-size: 1.45rem;
-      flex-shrink: 0;
-    }
-
-    .folder-view-icon.gold {
-      background: var(--gold-soft);
-      border: 1px solid var(--gold-border);
-    }
-
-    .folder-view-icon.teal {
-      background: var(--teal-soft);
-      border: 1px solid var(--teal-border);
-    }
-
-    .folder-view-title {
-      font-size: 1.18rem;
-      font-weight: 900;
-      line-height: 1.3;
-    }
-
-    .folder-view-desc {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-
-    /* ============ Games Inner View ============ */
-    .games-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
+    /* Games Grid */
+    .games-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
     .game-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-      background: var(--bg-glass);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      transition: transform var(--ease), border-color var(--ease);
+      position: relative; display: flex; flex-direction: column; padding: 20px;
+      background: var(--bg-glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle); border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card); overflow: hidden; transition: transform var(--ease), border-color var(--ease);
     }
-
-    .game-card.active-game::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      inset-inline: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    }
-
-    .game-card.completed-game {
-      border-color: rgba(245, 158, 11, 0.42);
-    }
-
-    .game-card.completed-game::before {
-      background: linear-gradient(90deg, var(--emerald), var(--gold-light));
-    }
-
-    .game-card.active-game:hover {
-      transform: translateY(-3px);
-      border-color: var(--gold-border);
-    }
-
-    .game-card.soon-game {
-      background: rgba(15, 23, 42, 0.56);
-      border-style: dashed;
-      opacity: 0.82;
-    }
-
-    .game-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
+    .game-card.active-game::before { content: ""; position: absolute; top: 0; inset-inline: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+    .game-card.completed-game { border-color: rgba(245, 158, 11, 0.42); }
+    .game-card.completed-game::before { background: linear-gradient(90deg, var(--emerald), var(--gold-light)); }
+    .game-card.active-game:hover { transform: translateY(-3px); border-color: var(--gold-border); }
+    .game-card.soon-game { background: rgba(15, 23, 42, 0.56); border-style: dashed; opacity: 0.82; }
+    .game-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
     .game-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
+      width: 50px; height: 50px; border-radius: 14px;
       background: linear-gradient(145deg, rgba(245, 158, 11, 0.18), rgba(20, 184, 166, 0.1));
-      border: 1px solid rgba(245, 158, 11, 0.28);
-      display: grid;
-      place-items: center;
-      font-size: 1.55rem;
-      flex-shrink: 0;
+      border: 1px solid rgba(245, 158, 11, 0.28); display: grid; place-items: center; font-size: 1.55rem; flex-shrink: 0;
     }
-
-    .soon-game .game-icon {
-      background: rgba(148, 163, 184, 0.08);
-      border-color: rgba(148, 163, 184, 0.18);
-      filter: grayscale(0.5);
-    }
-
-    .game-badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 6px;
-    }
-
-    .cat-tag {
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      font-weight: 700;
-      background: rgba(148, 163, 184, 0.12);
-      color: var(--text-secondary);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-    }
-
-    .done-tag {
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.74rem;
-      font-weight: 800;
-      background: var(--gold-soft);
-      color: var(--gold-light);
-      border: 1px solid var(--gold-border);
-    }
-
-    .game-title {
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 5px;
-      color: var(--text-main);
-    }
-
-    .game-desc {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      flex: 1;
-    }
-
+    .soon-game .game-icon { background: rgba(148, 163, 184, 0.08); border-color: rgba(148, 163, 184, 0.18); filter: grayscale(0.5); }
+    .game-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+    .cat-tag { padding: 4px 10px; border-radius: 999px; font-size: 0.73rem; font-weight: 700; background: rgba(148, 163, 184, 0.12); color: var(--text-secondary); border: 1px solid rgba(148, 163, 184, 0.2); }
+    .done-tag { padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 800; background: var(--gold-soft); color: var(--gold-light); border: 1px solid var(--gold-border); }
+    .game-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 5px; color: var(--text-main); }
+    .game-desc { font-size: 0.86rem; color: var(--text-muted); margin-bottom: 14px; flex: 1; }
     .teacher-challenge-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      align-self: flex-start;
-      margin-bottom: 12px;
-      padding: 3px 9px;
-      border-radius: 8px;
-      font-size: 0.74rem;
-      font-weight: 600;
-      color: #a7f3d0;
-      background: rgba(52, 211, 153, 0.1);
-      border: 1px solid rgba(52, 211, 153, 0.25);
+      display: inline-flex; align-items: center; gap: 5px; align-self: flex-start; margin-bottom: 12px;
+      padding: 3px 9px; border-radius: 8px; font-size: 0.74rem; font-weight: 600;
+      color: #a7f3d0; background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.25);
     }
-
-    .game-progress-box {
-      padding: 11px 12px;
-      border-radius: var(--radius-md);
-      background: rgba(11, 17, 32, 0.6);
-      border: 1px solid var(--border-subtle);
-      margin-bottom: 14px;
-    }
-
-    .progress-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 0.8rem;
-      margin-bottom: 8px;
-    }
-
-    .progress-count {
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .progress-pct {
-      font-weight: 800;
-      color: var(--gold-light);
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.16);
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #f59e0b, #fbbf24);
-      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .completed-game .progress-fill {
-      background: linear-gradient(90deg, var(--teal), var(--emerald));
-    }
-
+    .game-progress-box { padding: 11px 12px; border-radius: var(--radius-md); background: rgba(11, 17, 32, 0.6); border: 1px solid var(--border-subtle); margin-bottom: 14px; }
+    .progress-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 0.8rem; margin-bottom: 8px; }
+    .progress-header.no-bar { margin-bottom: 0; }
+    .progress-count { font-weight: 700; color: var(--text-main); }
+    .progress-pct { font-weight: 800; color: var(--gold-light); }
+    .progress-track { width: 100%; height: 8px; border-radius: 999px; background: rgba(148, 163, 184, 0.16); overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #f59e0b, #fbbf24); transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+    .completed-game .progress-fill { background: linear-gradient(90deg, var(--teal), var(--emerald)); }
     .soon-locked-pill {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      min-height: 44px;
-      border-radius: var(--radius-md);
-      background: rgba(148, 163, 184, 0.08);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      font-size: 0.86rem;
-      font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px;
+      border-radius: var(--radius-md); background: rgba(148, 163, 184, 0.08);
+      border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.86rem; font-weight: 700;
     }
 
-    /* ============ Checklist Inner View ============ */
-    .checklist-shell {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .mission-summary-card {
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mission-summary-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      inset-inline: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--teal), var(--teal-light));
-    }
-
-    .mission-title-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .mission-title {
-      font-size: 1.12rem;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-
-    .mission-desc {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin-top: 3px;
-    }
-
+    /* Checklist View */
+    .checklist-shell { display: flex; flex-direction: column; gap: 16px; }
+    .mission-summary-card { padding: 20px; position: relative; overflow: hidden; }
+    .mission-summary-card::before { content: ""; position: absolute; top: 0; inset-inline: 0; height: 3px; background: linear-gradient(90deg, var(--teal), var(--teal-light)); }
+    .mission-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+    .mission-title { font-size: 1.12rem; font-weight: 800; color: var(--text-main); }
+    .mission-desc { font-size: 0.86rem; color: var(--text-muted); margin-top: 3px; }
     .save-status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: opacity var(--ease), background var(--ease), color var(--ease);
+      display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px;
+      font-size: 0.75rem; font-weight: 700; border: 1px solid transparent; transition: opacity var(--ease);
     }
-
-    .save-status-pill.idle {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .save-status-pill.saving {
-      opacity: 1;
-      background: rgba(245, 158, 11, 0.14);
-      color: var(--gold-light);
-      border-color: rgba(245, 158, 11, 0.28);
-    }
-
-    .save-status-pill.saved {
-      opacity: 1;
-      background: rgba(20, 184, 166, 0.16);
-      color: var(--teal-light);
-      border-color: rgba(20, 184, 166, 0.32);
-    }
-
-    .save-status-pill.error {
-      opacity: 1;
-      background: var(--rose-soft);
-      color: var(--rose);
-      border-color: rgba(251, 113, 133, 0.32);
-    }
-
-    .mission-progress-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.84rem;
-      margin-bottom: 8px;
-    }
-
-    .mission-progress-label {
-      color: var(--text-secondary);
-      font-weight: 700;
-    }
-
-    .mission-progress-pct {
-      color: var(--teal-light);
-      font-weight: 800;
-    }
-
-    .mission-progress-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--teal), var(--emerald));
-      transition: width 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
+    .save-status-pill.idle { opacity: 0; pointer-events: none; }
+    .save-status-pill.saving { opacity: 1; background: rgba(245, 158, 11, 0.14); color: var(--gold-light); border-color: rgba(245, 158, 11, 0.28); }
+    .save-status-pill.saved { opacity: 1; background: rgba(20, 184, 166, 0.16); color: var(--teal-light); border-color: rgba(20, 184, 166, 0.32); }
+    .save-status-pill.error { opacity: 1; background: var(--rose-soft); color: var(--rose); border-color: rgba(251, 113, 133, 0.32); }
+    .mission-progress-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.84rem; margin-bottom: 8px; }
+    .mission-progress-label { color: var(--text-secondary); font-weight: 700; }
+    .mission-progress-pct { color: var(--teal-light); font-weight: 800; }
+    .mission-progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--teal), var(--emerald)); transition: width 0.38s cubic-bezier(0.22, 1, 0.36, 1); }
     .all-done-banner {
-      padding: 16px 18px;
-      border-radius: var(--radius-lg);
+      padding: 16px 18px; border-radius: var(--radius-lg);
       background: linear-gradient(135deg, rgba(20, 184, 166, 0.18), rgba(52, 211, 153, 0.12));
-      border: 1px solid rgba(45, 212, 191, 0.38);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      animation: fadeSlide 0.3s ease;
+      border: 1px solid rgba(45, 212, 191, 0.38); display: flex; align-items: center; gap: 12px; animation: fadeSlide 0.3s ease;
     }
-
-    .all-done-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: rgba(45, 212, 191, 0.18);
-      display: grid;
-      place-items: center;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-    }
-
-    .all-done-text strong {
-      display: block;
-      font-size: 0.96rem;
-      color: #ccfbf1;
-    }
-
-    .all-done-text span {
-      font-size: 0.83rem;
-      color: #99f6e4;
-    }
-
-    .checklist-items {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .all-done-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(45, 212, 191, 0.18); display: grid; place-items: center; font-size: 1.3rem; flex-shrink: 0; }
+    .all-done-text strong { display: block; font-size: 0.96rem; color: #ccfbf1; }
+    .all-done-text span { font-size: 0.83rem; color: #99f6e4; }
+    .checklist-items { display: flex; flex-direction: column; gap: 10px; }
     .check-card {
-      width: 100%;
-      min-height: 64px;
-      padding: 15px 16px;
-      border-radius: var(--radius-lg);
-      background: var(--bg-glass);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-align: right;
-      transition: transform var(--ease), background var(--ease), border-color var(--ease);
+      width: 100%; min-height: 64px; padding: 15px 16px; border-radius: var(--radius-lg);
+      background: var(--bg-glass); border: 1px solid var(--border-subtle);
+      display: flex; align-items: center; gap: 14px; text-align: right;
+      transition: transform var(--ease), background var(--ease), border-color var(--ease), opacity var(--ease);
     }
-
-    .check-card:hover {
-      border-color: rgba(20, 184, 166, 0.32);
-      background: rgba(17, 24, 39, 0.88);
-    }
-
-    .check-card:active {
-      transform: scale(0.99);
-    }
-
-    .check-card.is-checked {
-      background: rgba(20, 184, 166, 0.11);
-      border-color: rgba(20, 184, 166, 0.4);
-    }
-
+    .check-card:hover:not(:disabled) { border-color: rgba(20, 184, 166, 0.32); background: rgba(17, 24, 39, 0.88); }
+    .check-card:active:not(:disabled) { transform: scale(0.99); }
+    .check-card:disabled { opacity: 0.72; cursor: wait; }
+    .check-card.is-checked { background: rgba(20, 184, 166, 0.11); border-color: rgba(20, 184, 166, 0.4); }
     .check-box {
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
-      border: 2px solid rgba(148, 163, 184, 0.45);
-      background: rgba(11, 17, 32, 0.65);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
+      width: 26px; height: 26px; border-radius: 8px; border: 2px solid rgba(148, 163, 184, 0.45);
+      background: rgba(11, 17, 32, 0.65); display: grid; place-items: center; flex-shrink: 0;
       transition: background var(--ease), border-color var(--ease), transform var(--ease);
     }
-
-    .check-card.is-checked .check-box {
-      background: linear-gradient(135deg, var(--teal), var(--emerald));
-      border-color: transparent;
-      transform: scale(1.04);
-    }
-
+    .check-card.is-checked .check-box { background: linear-gradient(135deg, var(--teal), var(--emerald)); border-color: transparent; transform: scale(1.04); }
     .check-box svg {
-      width: 15px;
-      height: 15px;
-      stroke: #042f2e;
-      stroke-width: 3;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: 0;
-      transform: scale(0.6);
+      width: 15px; height: 15px; stroke: #042f2e; stroke-width: 3; fill: none;
+      stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.6);
       transition: opacity 0.18s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    .check-card.is-checked .check-box svg { opacity: 1; transform: scale(1); }
+    .check-text { font-size: 0.96rem; font-weight: 600; color: var(--text-main); line-height: 1.55; transition: color var(--ease); }
+    .check-card.is-checked .check-text { color: var(--text-muted); text-decoration: line-through; text-decoration-color: rgba(45, 212, 191, 0.55); }
+    .empty-state-card { padding: 40px 22px; text-align: center; }
+    .empty-state-icon { width: 62px; height: 62px; margin: 0 auto 14px; border-radius: 18px; background: var(--teal-soft); border: 1px solid var(--teal-border); display: grid; place-items: center; font-size: 1.7rem; }
+    .empty-state-title { font-size: 1rem; font-weight: 700; color: var(--text-secondary); max-width: 380px; margin: 0 auto; line-height: 1.75; }
 
-    .check-card.is-checked .check-box svg {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .check-text {
-      font-size: 0.96rem;
-      font-weight: 600;
-      color: var(--text-main);
-      line-height: 1.55;
-      transition: color var(--ease);
-    }
-
-    .check-card.is-checked .check-text {
-      color: var(--text-muted);
-      text-decoration: line-through;
-      text-decoration-color: rgba(45, 212, 191, 0.55);
-    }
-
-    .empty-state-card {
-      padding: 40px 22px;
-      text-align: center;
-    }
-
-    .empty-state-icon {
-      width: 62px;
-      height: 62px;
-      margin: 0 auto 14px;
-      border-radius: 18px;
-      background: var(--teal-soft);
-      border: 1px solid var(--teal-border);
-      display: grid;
-      place-items: center;
-      font-size: 1.7rem;
-    }
-
-    .empty-state-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-secondary);
-      max-width: 380px;
-      margin: 0 auto;
-      line-height: 1.75;
-    }
-
-    /* ============ Footer ============ */
-    .hall-footer {
-      padding: 16px 0 24px;
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      border-top: 1px solid rgba(148, 163, 184, 0.08);
-    }
-
-    .hall-footer-links {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .hall-footer a,
-    .hall-footer button {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      transition: color var(--ease);
-    }
-
-    .hall-footer a:hover,
-    .hall-footer button:hover {
-      color: var(--gold-light);
-    }
-
-    /* ============ Toast Notification ============ */
+    /* Footer & Toast */
+    .hall-footer { padding: 16px 0 24px; text-align: center; font-size: 0.78rem; color: var(--text-dim); border-top: 1px solid rgba(148, 163, 184, 0.08); }
+    .hall-footer-links { display: inline-flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .hall-footer a, .hall-footer button { font-size: 0.78rem; color: var(--text-muted); transition: color var(--ease); }
+    .hall-footer a:hover, .hall-footer button:hover { color: var(--gold-light); }
     .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      z-index: 80;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: #1e293b;
-      border: 1px solid var(--border-strong);
-      color: var(--text-main);
-      font-size: 0.84rem;
-      font-weight: 600;
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.22s ease, transform 0.22s ease;
-      max-width: calc(100vw - 32px);
-      text-align: center;
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px); z-index: 80;
+      padding: 10px 16px; border-radius: 999px; background: #1e293b; border: 1px solid var(--border-strong);
+      color: var(--text-main); font-size: 0.84rem; font-weight: 600; box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+      opacity: 0; pointer-events: none; transition: opacity 0.22s ease, transform 0.22s ease; max-width: calc(100vw - 32px); text-align: center;
     }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.error { border-color: rgba(251, 113, 133, 0.45); background: #2b1620; color: #fecdd3; }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .toast.error {
-      border-color: rgba(251, 113, 133, 0.45);
-      background: #2b1620;
-      color: #fecdd3;
-    }
-
-    /* ============ Responsive ============ */
     @media (min-width: 640px) {
-      .container {
-        padding: 0 22px;
-      }
-
-      .folders-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .games-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .students-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .entry-card {
-        padding: 36px 32px 28px;
-      }
-
-      .identity-card {
-        padding: 30px 26px 26px;
-      }
+      .container { padding: 0 22px; }
+      .folders-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .students-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .entry-card { padding: 36px 32px 28px; }
+      .identity-card { padding: 30px 26px 26px; }
     }
-
     @media (max-width: 440px) {
-      .students-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .guest-form {
-        flex-direction: column;
-      }
-
-      .header-brand {
-        flex-basis: 100%;
-      }
-
-      .header-controls {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .student-badge {
-        flex: 1 1 auto;
-        max-width: none;
-      }
+      .students-grid { grid-template-columns: 1fr; }
+      .guest-form { flex-direction: column; }
+      .header-brand { flex-basis: 100%; }
+      .header-controls { width: 100%; justify-content: space-between; }
+      .student-badge { flex: 1 1 auto; max-width: none; }
+      .suggest-card { flex-direction: column; align-items: stretch; }
+      .suggest-card .btn { width: 100%; }
     }
   </style>
 </head>
@@ -1510,38 +465,39 @@
         <div class="lantern-badge" aria-hidden="true">🏮</div>
         <h1 class="entry-title" id="entryPlatformName">فانوس یادگیری</h1>
         <p class="entry-subtitle" id="entryPlatformSubtitle">تالار یادگیری و ماجراجویی کلاس</p>
-
         <form id="classCodeForm" class="entry-form" novalidate>
           <div>
             <label for="classCodeInput" class="field-label">کد کلاس</label>
-            <input
-              id="classCodeInput"
-              class="input-field code-input"
-              type="text"
-              inputmode="text"
-              autocomplete="off"
-              spellcheck="false"
-              placeholder="مثلاً k5742"
-              required
-            />
+            <input id="classCodeInput" class="input-field code-input" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="مثلاً k5742" required />
           </div>
           <div id="classCodeError" class="form-error" role="alert"></div>
-          <button type="submit" class="btn btn-gold">
+          <button id="entrySubmitBtn" type="submit" class="btn btn-gold">
             <span>ورود به کلاس</span>
             <span aria-hidden="true">←</span>
           </button>
         </form>
       </div>
-
       <a href="teacher.html" class="teacher-subtle-link">ورود مربی به میز معلم</a>
     </section>
 
-    <!-- Loading Screen -->
+    <!-- Loading Screen (First visit without cache only) -->
     <section id="viewLoading" class="center-screen hidden" aria-live="polite">
       <div class="glass-card state-card fade-in">
         <div class="loader-ring" aria-hidden="true"><span>🏮</span></div>
         <h2 class="state-title">در حال اتصال به کلاس...</h2>
         <p class="state-desc" id="loadingMessage">در حال دریافت اطلاعات تالار</p>
+      </div>
+    </section>
+
+    <!-- Closed Class Screen (studentAccessOpen === false) -->
+    <section id="viewClosed" class="center-screen hidden" aria-live="polite">
+      <div class="glass-card state-card closed-card fade-in">
+        <div class="lantern-badge" aria-hidden="true" style="width:62px;height:62px;font-size:1.75rem;">🌙</div>
+        <h2 class="state-title" id="closedClassTitle">تالار این کلاس بسته شده است</h2>
+        <p class="state-desc">دورهٔ این کلاس به پایان رسیده و دسترسی تالار توسط هماهنگی بسته شده است.</p>
+        <div class="state-actions">
+          <button type="button" id="changeClassFromClosedBtn" class="btn btn-gold">تغییر کد کلاس</button>
+        </div>
       </div>
     </section>
 
@@ -1558,7 +514,7 @@
       </div>
     </section>
 
-    <!-- 2. Student Identity Picker Screen -->
+    <!-- 2. Student Identity Picker -->
     <section id="viewIdentity" class="center-screen hidden" aria-label="انتخاب هویت دانش‌آموز">
       <div class="glass-card identity-card fade-in">
         <div class="identity-head">
@@ -1568,32 +524,17 @@
           </div>
           <button type="button" id="cancelIdentityBtn" class="btn btn-ghost btn-sm hidden">انصراف</button>
         </div>
-
         <p class="identity-prompt">نام خود را انتخاب کن تا وارد تالار کلاس شوی:</p>
-
         <div id="studentsListGrid" class="students-grid"></div>
-
         <div class="guest-section">
           <div class="guest-toggle-row">
-            <button type="button" id="toggleGuestBtn" class="btn btn-ghost btn-sm">
-              <span>ورود به‌عنوان مهمان</span>
-            </button>
-            <button type="button" id="switchClassFromIdentityBtn" class="btn btn-ghost btn-sm">
-              تغییر کد کلاس
-            </button>
+            <button type="button" id="toggleGuestBtn" class="btn btn-ghost btn-sm"><span>ورود به‌عنوان مهمان</span></button>
+            <button type="button" id="switchClassFromIdentityBtn" class="btn btn-ghost btn-sm">تغییر کد کلاس</button>
           </div>
-
           <div id="guestPanel" class="guest-panel hidden">
             <form id="guestForm" class="guest-form" novalidate>
-              <input
-                id="guestNameInput"
-                class="input-field teal-focus"
-                type="text"
-                maxlength="40"
-                autocomplete="name"
-                placeholder="نام و نام خانوادگی خود را بنویس..."
-              />
-              <button type="submit" class="btn btn-teal">ورود</button>
+              <input id="guestNameInput" class="input-field teal-focus" type="text" maxlength="40" autocomplete="name" placeholder="نام و نام خانوادگی خود را بنویس..." />
+              <button id="guestSubmitBtn" type="submit" class="btn btn-teal">ورود</button>
             </form>
             <div id="guestError" class="guest-error" role="alert"></div>
           </div>
@@ -1612,20 +553,16 @@
               <div class="header-platform-sub" id="headerPlatformName">فانوس یادگیری</div>
             </div>
           </div>
-
           <div class="header-controls">
             <div class="student-badge" title="نام دانش‌آموز">
               <span class="student-badge-dot" aria-hidden="true"></span>
               <span class="student-badge-name" id="headerStudentName">—</span>
             </div>
             <button type="button" id="changeNameBtn" class="btn btn-ghost btn-sm">تغییر نام</button>
-            <button
-              type="button"
-              id="refreshHallBtn"
-              class="btn btn-ghost btn-icon"
-              title="بروزرسانی اطلاعات"
-              aria-label="بروزرسانی اطلاعات"
-            >
+            <span id="bgSyncIndicator" class="sync-indicator" aria-live="polite" title="در حال همگام‌سازی پس‌زمینه">
+              <span class="sync-dot" aria-hidden="true"></span>
+            </span>
+            <button type="button" id="refreshHallBtn" class="btn btn-ghost btn-icon" title="بروزرسانی اطلاعات" aria-label="بروزرسانی اطلاعات">
               <span id="refreshIcon" aria-hidden="true">↻</span>
             </button>
           </div>
@@ -1634,49 +571,39 @@
 
       <main class="hall-main">
         <div class="container">
-          <!-- Home Hub (Folders) -->
+          <!-- Hub View -->
           <section id="sectionHub" class="fade-in" aria-label="تالار اصلی">
             <div class="greeting-block">
-              <h1 class="greeting-title">
-                سلام <span class="name-highlight" id="greetingStudentName">دوست من</span> 👋 | کدام بخش را باز کنیم؟
-              </h1>
+              <h1 class="greeting-title">سلام <span class="name-highlight" id="greetingStudentName">دوست من</span> 👋 | کدام بخش را باز کنیم؟</h1>
               <p class="greeting-sub hidden" id="greetingTeacherLine"></p>
             </div>
-
+            <div id="announcementSlot"></div>
+            <div id="suggestNowSlot"></div>
             <div id="foldersGrid" class="folders-grid"></div>
           </section>
 
           <!-- Games Folder Inner View -->
           <section id="sectionGames" class="hidden fade-in" aria-label="بازی‌ها و داستان‌ها">
             <div class="folder-nav-bar">
-              <button type="button" class="back-btn" data-back-to="hub">
-                <span aria-hidden="true">→</span>
-                <span>بازگشت به تالار</span>
-              </button>
+              <button type="button" class="back-btn" data-back-to="hub"><span aria-hidden="true">→</span><span>بازگشت به تالار</span></button>
               <span class="live-pill gold" id="gamesInnerCountPill">۰ بازی فعال</span>
             </div>
-
             <div class="folder-view-head">
               <div class="folder-view-icon gold" id="gamesInnerIcon" aria-hidden="true">🎮</div>
               <div>
                 <h2 class="folder-view-title" id="gamesInnerTitle">بازی‌ها و داستان‌ها</h2>
-                <p class="folder-view-desc" id="gamesInnerDesc">مسیرت را انتخاب کن و ایستگاه‌ها را کامل کن</p>
+                <p class="folder-view-desc" id="gamesInnerDesc">ماجراجویی خود را انتخاب کن و مسیر را کامل کن</p>
               </div>
             </div>
-
             <div id="gamesGrid" class="games-grid"></div>
           </section>
 
           <!-- Checklist Folder Inner View -->
           <section id="sectionChecklist" class="hidden fade-in" aria-label="چک‌لیست و مأموریت هفته">
             <div class="folder-nav-bar">
-              <button type="button" class="back-btn" data-back-to="hub">
-                <span aria-hidden="true">→</span>
-                <span>بازگشت به تالار</span>
-              </button>
+              <button type="button" class="back-btn" data-back-to="hub"><span aria-hidden="true">→</span><span>بازگشت به تالار</span></button>
               <span id="checklistSavePill" class="save-status-pill idle" aria-live="polite"></span>
             </div>
-
             <div class="folder-view-head">
               <div class="folder-view-icon teal" id="checklistInnerIcon" aria-hidden="true">✅</div>
               <div>
@@ -1684,7 +611,6 @@
                 <p class="folder-view-desc" id="checklistInnerDesc">کارهایی که انجام می‌دهی را تیک بزن تا ثبت شوند</p>
               </div>
             </div>
-
             <div id="checklistBody" class="checklist-shell"></div>
           </section>
         </div>
@@ -1711,81 +637,150 @@
       'use strict';
 
       const FA_DIGITS = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+      const CACHE_PREFIX = 'fanoos_class_cache_v2_';
+      const ANN_DISMISS_PREFIX = 'fanoos_dismissed_ann_';
 
       const DEFAULT_MODULES = [
-        {
-          id: 'games',
-          title: 'بازی‌ها و داستان‌ها',
-          subtitle: 'ماجراجویی‌های تعاملی و ایستگاه‌های یادگیری کلاس',
-          icon: '🎮'
-        },
-        {
-          id: 'checklist',
-          title: 'چک‌لیست و مأموریت هفته',
-          subtitle: 'مأموریت‌های هفتگی و ثبت کارهای انجام‌شده',
-          icon: '📋'
-        }
+        { id: 'games', title: 'بازی‌ها و داستان‌ها', subtitle: 'ماجراجویی‌های تعاملی و مسیرهای یادگیری کلاس', icon: '🎮', isNew: false },
+        { id: 'checklist', title: 'چک‌لیست و مأموریت هفته', subtitle: 'مأموریت‌های هفتگی و ثبت کارهای انجام‌شده', icon: '📋', isNew: false }
       ];
 
       function toFa(val) {
         return String(val ?? '').replace(/\d/g, (d) => FA_DIGITS[Number(d)]);
       }
 
-      function normalizeCodeInput(raw) {
+      function toEn(raw) {
         return String(raw ?? '')
           .replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 0x06f0))
           .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 0x0660))
-          .replace(/\s+/g, '')
           .trim();
+      }
+
+      function normalizeCodeInput(raw) {
+        return toEn(raw).replace(/\s+/g, '');
+      }
+
+      function normFa(s) {
+        const raw = toEn(s);
+        let res = '', ps = false, pz = false;
+        for (let i = 0; i < raw.length; i++) {
+          let ch = raw.charAt(i);
+          const code = raw.charCodeAt(i);
+          if (ch === '\u064A' || ch === '\u0649') ch = '\u06CC';
+          else if (ch === '\u0643') ch = '\u06A9';
+          else if (code === 0x0640 || code === 0x200D || code === 0xFEFF) continue;
+          if (ch === ' ' || ch === '\t' || ch === '\n' || ch === '\r' || code === 0x00A0 || code === 0x2000 || code === 0x2001 || code === 0x2002 || code === 0x2003 || code === 0x2009) {
+            if (pz && res.length > 0) { res = res.slice(0, -1); pz = false; }
+            if (!ps && res.length > 0) { res += ' '; ps = true; }
+            continue;
+          }
+          if (code === 0x200C) {
+            if (!pz && !ps && res.length > 0) { res += '\u200C'; pz = true; }
+            continue;
+          }
+          res += ch;
+          ps = false;
+          pz = false;
+        }
+        while (res.length > 0) {
+          const last = res.charCodeAt(res.length - 1);
+          if (last === 32 || last === 0x200C) res = res.slice(0, -1);
+          else break;
+        }
+        return res;
+      }
+
+      function normFaKey(s) {
+        return normFa(s).toLowerCase();
+      }
+
+      function extractCleanTeacherName(rawTeacherName) {
+        const txt = String(rawTeacherName || '').trim();
+        if (!txt) return '';
+        const pipeIdx = txt.indexOf('|');
+        return normFa(pipeIdx === -1 ? txt : txt.slice(0, pipeIdx));
       }
 
       function escapeHtml(str) {
         return String(str ?? '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       }
 
       function normalizeModulesConfig(rawModules) {
+        const mapOne = (m, fallbackId) => {
+          const id = String((m && m.id) || fallbackId || '').trim();
+          if (!id) return null;
+          const fb = DEFAULT_MODULES.find((d) => d.id === id) || {};
+          return {
+            id,
+            title: String((m && (m.title || m.name)) || fb.title || id).trim(),
+            subtitle: String((m && (m.subtitle || m.description || m.desc)) || fb.subtitle || '').trim(),
+            icon: String((m && (m.icon || m.emoji)) || fb.icon || '📁').trim(),
+            isNew: Boolean(m && m.isNew),
+            path: String((m && (m.path || m.url)) || '').trim()
+          };
+        };
         if (Array.isArray(rawModules) && rawModules.length > 0) {
-          return rawModules
-            .filter((m) => m && m.id)
-            .map((m) => {
-              const fallback = DEFAULT_MODULES.find((d) => d.id === String(m.id)) || {};
-              return {
-                id: String(m.id),
-                title: m.title || m.name || fallback.title || String(m.id),
-                subtitle: m.subtitle || m.description || m.desc || fallback.subtitle || '',
-                icon: m.icon || fallback.icon || '📁'
-              };
-            });
-        }
-        if (rawModules && typeof rawModules === 'object') {
-          const entries = Object.keys(rawModules).map((key) => {
-            const m = rawModules[key] || {};
-            const fallback = DEFAULT_MODULES.find((d) => d.id === key) || {};
-            return {
-              id: String(m.id || key),
-              title: m.title || m.name || fallback.title || key,
-              subtitle: m.subtitle || m.description || m.desc || fallback.subtitle || '',
-              icon: m.icon || fallback.icon || '📁'
-            };
-          });
-          if (entries.length > 0) return entries;
+          const list = rawModules.map((m) => (typeof m === 'string' ? mapOne({ id: m }, m) : mapOne(m, ''))).filter(Boolean);
+          if (list.length > 0) return list;
+        } else if (rawModules && typeof rawModules === 'object') {
+          const list = Object.keys(rawModules).map((k) => {
+            const v = rawModules[k];
+            return typeof v === 'string' ? mapOne({ id: k, title: v }, k) : mapOne(v, k);
+          }).filter(Boolean);
+          if (list.length > 0) return list;
         }
         return DEFAULT_MODULES.slice();
       }
 
-      function getConfig() {
-        const raw = window.FANOOS_CONFIG || {};
+      function normalizeGamesConfig(rawGames) {
+        const list = [];
+        const pushOne = (g, fbId) => {
+          if (!g || typeof g !== 'object') return;
+          const id = String(g.id || g.gameId || fbId || '').trim();
+          if (!id) return;
+          list.push(Object.assign({}, g, {
+            id,
+            title: String(g.title || g.name || id).trim(),
+            description: String(g.description || g.desc || '').trim(),
+            category: String(g.category || 'داستان تعاملی').trim(),
+            icon: String(g.icon || g.emoji || (g.status === 'soon' ? '🔒' : '🧭')).trim(),
+            path: String(g.path || g.url || '#').trim(),
+            mode: String(g.mode || 'units').trim().toLowerCase(),
+            unitLabel: String(g.unitLabel || g.unit || '').trim(),
+            totalUnits: Math.max(0, Number(g.totalUnits || g.totalStations || g.stationsCount || g.stations || 0) || 0),
+            isNew: Boolean(g.isNew)
+          }));
+        };
+        if (Array.isArray(rawGames)) rawGames.forEach((g) => pushOne(g, ''));
+        else if (rawGames && typeof rawGames === 'object') Object.keys(rawGames).forEach((k) => pushOne(rawGames[k], k));
+        return list;
+      }
+
+      function normalizeAnnouncement(rawAnn) {
+        if (!rawAnn || typeof rawAnn !== 'object' || rawAnn.active !== true) return null;
         return {
-          platformName: raw.platformName || raw.name || raw.title || 'فانوس یادگیری',
-          subtitle: raw.subtitle || raw.tagline || raw.description || 'تالار یادگیری و ماجراجویی کلاس',
-          apiUrl: raw.apiUrl || raw.API_URL || '',
-          games: Array.isArray(raw.games) ? raw.games : [],
-          modules: normalizeModulesConfig(raw.modules)
+          active: true,
+          id: String(rawAnn.id || rawAnn.key || 'ann_v2').trim(),
+          title: String(rawAnn.title || rawAnn.heading || '').trim(),
+          text: String(rawAnn.text || rawAnn.message || rawAnn.description || '').trim(),
+          icon: String(rawAnn.icon || '✨').trim(),
+          ctaText: String(rawAnn.ctaText || rawAnn.buttonText || '').trim(),
+          folder: String(rawAnn.folder || '').trim(),
+          link: String(rawAnn.link || rawAnn.url || '').trim()
+        };
+      }
+
+      function getConfig() {
+        const raw = (window && window.FANOOS_CONFIG && typeof window.FANOOS_CONFIG === 'object') ? window.FANOOS_CONFIG : {};
+        return {
+          platformName: String(raw.PLATFORM_NAME || raw.platformName || raw.name || raw.title || 'فانوس یادگیری').trim(),
+          subtitle: String(raw.SUBTITLE || raw.subtitle || raw.tagline || raw.description || 'تالار یادگیری و ماجراجویی کلاس').trim(),
+          apiUrl: String(raw.API_URL || raw.apiUrl || '').trim(),
+          games: normalizeGamesConfig(raw.GAMES || raw.games),
+          modules: normalizeModulesConfig(raw.FOLDERS || raw.modules),
+          announcement: normalizeAnnouncement(raw.ANNOUNCEMENT || raw.announcement)
         };
       }
 
@@ -1794,83 +789,85 @@
       const state = {
         classId: '',
         classInfo: null,
+        studentAccessOpen: true,
         progress: [],
         questions: [],
         checklist: null,
         checklistProgress: [],
         student: null,
-        activeFolder: 'hub', // 'hub' | 'games' | 'checklist'
+        activeFolder: 'hub',
         hasLoadedClass: false,
         isRefreshing: false,
+        isLoadingEntry: false,
         lastFetchAt: 0,
-        // Checklist Optimistic UI state
         checkedIds: [],
         lastConfirmedCheckedIds: [],
+        checklistBusy: false,
         checklistSaveVersion: 0,
         savePillTimer: null
       };
 
+      const $ = (id) => document.getElementById(id);
       const els = {
-        viewEntry: document.getElementById('viewEntry'),
-        viewLoading: document.getElementById('viewLoading'),
-        viewError: document.getElementById('viewError'),
-        viewIdentity: document.getElementById('viewIdentity'),
-        viewHall: document.getElementById('viewHall'),
-
-        entryPlatformName: document.getElementById('entryPlatformName'),
-        entryPlatformSubtitle: document.getElementById('entryPlatformSubtitle'),
-        classCodeForm: document.getElementById('classCodeForm'),
-        classCodeInput: document.getElementById('classCodeInput'),
-        classCodeError: document.getElementById('classCodeError'),
-
-        loadingMessage: document.getElementById('loadingMessage'),
-        errorTitle: document.getElementById('errorTitle'),
-        errorMessage: document.getElementById('errorMessage'),
-        retryBtn: document.getElementById('retryBtn'),
-        changeClassFromErrorBtn: document.getElementById('changeClassFromErrorBtn'),
-
-        identityClassName: document.getElementById('identityClassName'),
-        identityTeacherName: document.getElementById('identityTeacherName'),
-        cancelIdentityBtn: document.getElementById('cancelIdentityBtn'),
-        studentsListGrid: document.getElementById('studentsListGrid'),
-        toggleGuestBtn: document.getElementById('toggleGuestBtn'),
-        switchClassFromIdentityBtn: document.getElementById('switchClassFromIdentityBtn'),
-        guestPanel: document.getElementById('guestPanel'),
-        guestForm: document.getElementById('guestForm'),
-        guestNameInput: document.getElementById('guestNameInput'),
-        guestError: document.getElementById('guestError'),
-
-        headerClassName: document.getElementById('headerClassName'),
-        headerPlatformName: document.getElementById('headerPlatformName'),
-        headerStudentName: document.getElementById('headerStudentName'),
-        changeNameBtn: document.getElementById('changeNameBtn'),
-        refreshHallBtn: document.getElementById('refreshHallBtn'),
-        refreshIcon: document.getElementById('refreshIcon'),
-
-        sectionHub: document.getElementById('sectionHub'),
-        sectionGames: document.getElementById('sectionGames'),
-        sectionChecklist: document.getElementById('sectionChecklist'),
-
-        greetingStudentName: document.getElementById('greetingStudentName'),
-        greetingTeacherLine: document.getElementById('greetingTeacherLine'),
-        foldersGrid: document.getElementById('foldersGrid'),
-
-        gamesInnerCountPill: document.getElementById('gamesInnerCountPill'),
-        gamesInnerIcon: document.getElementById('gamesInnerIcon'),
-        gamesInnerTitle: document.getElementById('gamesInnerTitle'),
-        gamesInnerDesc: document.getElementById('gamesInnerDesc'),
-        gamesGrid: document.getElementById('gamesGrid'),
-
-        checklistSavePill: document.getElementById('checklistSavePill'),
-        checklistInnerIcon: document.getElementById('checklistInnerIcon'),
-        checklistInnerTitle: document.getElementById('checklistInnerTitle'),
-        checklistInnerDesc: document.getElementById('checklistInnerDesc'),
-        checklistBody: document.getElementById('checklistBody'),
-
-        footerPlatformName: document.getElementById('footerPlatformName'),
-        footerTeacherLink: document.getElementById('footerTeacherLink'),
-        switchClassFooterBtn: document.getElementById('switchClassFooterBtn'),
-        toast: document.getElementById('toast')
+        viewEntry: $('viewEntry'),
+        viewLoading: $('viewLoading'),
+        viewClosed: $('viewClosed'),
+        viewError: $('viewError'),
+        viewIdentity: $('viewIdentity'),
+        viewHall: $('viewHall'),
+        entryPlatformName: $('entryPlatformName'),
+        entryPlatformSubtitle: $('entryPlatformSubtitle'),
+        classCodeForm: $('classCodeForm'),
+        classCodeInput: $('classCodeInput'),
+        classCodeError: $('classCodeError'),
+        entrySubmitBtn: $('entrySubmitBtn'),
+        loadingMessage: $('loadingMessage'),
+        closedClassTitle: $('closedClassTitle'),
+        changeClassFromClosedBtn: $('changeClassFromClosedBtn'),
+        errorTitle: $('errorTitle'),
+        errorMessage: $('errorMessage'),
+        retryBtn: $('retryBtn'),
+        changeClassFromErrorBtn: $('changeClassFromErrorBtn'),
+        identityClassName: $('identityClassName'),
+        identityTeacherName: $('identityTeacherName'),
+        cancelIdentityBtn: $('cancelIdentityBtn'),
+        studentsListGrid: $('studentsListGrid'),
+        toggleGuestBtn: $('toggleGuestBtn'),
+        switchClassFromIdentityBtn: $('switchClassFromIdentityBtn'),
+        guestPanel: $('guestPanel'),
+        guestForm: $('guestForm'),
+        guestNameInput: $('guestNameInput'),
+        guestSubmitBtn: $('guestSubmitBtn'),
+        guestError: $('guestError'),
+        headerClassName: $('headerClassName'),
+        headerPlatformName: $('headerPlatformName'),
+        headerStudentName: $('headerStudentName'),
+        changeNameBtn: $('changeNameBtn'),
+        bgSyncIndicator: $('bgSyncIndicator'),
+        refreshHallBtn: $('refreshHallBtn'),
+        refreshIcon: $('refreshIcon'),
+        sectionHub: $('sectionHub'),
+        sectionGames: $('sectionGames'),
+        sectionChecklist: $('sectionChecklist'),
+        greetingStudentName: $('greetingStudentName'),
+        greetingTeacherLine: $('greetingTeacherLine'),
+        announcementSlot: $('announcementSlot'),
+        suggestNowSlot: $('suggestNowSlot'),
+        foldersGrid: $('foldersGrid'),
+        gamesInnerCountPill: $('gamesInnerCountPill'),
+        gamesInnerIcon: $('gamesInnerIcon'),
+        gamesInnerTitle: $('gamesInnerTitle'),
+        gamesInnerDesc: $('gamesInnerDesc'),
+        gamesGrid: $('gamesGrid'),
+        checklistSavePill: $('checklistSavePill'),
+        checklistInnerIcon: $('checklistInnerIcon'),
+        checklistInnerTitle: $('checklistInnerTitle'),
+        checklistInnerDesc: $('checklistInnerDesc'),
+        checklistBody: $('checklistBody'),
+        footerPlatformName: $('footerPlatformName'),
+        footerTeacherLink: $('footerTeacherLink'),
+        switchClassFooterBtn: $('switchClassFooterBtn'),
+        toast: $('toast')
       };
 
       let toastTimer = null;
@@ -1879,9 +876,7 @@
         clearTimeout(toastTimer);
         els.toast.textContent = message;
         els.toast.className = 'toast show' + (isError ? ' error' : '');
-        toastTimer = setTimeout(() => {
-          els.toast.classList.remove('show');
-        }, 3000);
+        toastTimer = setTimeout(() => els.toast.classList.remove('show'), 3000);
       }
 
       function applyBranding() {
@@ -1895,43 +890,69 @@
       function showView(viewName) {
         els.viewEntry.classList.toggle('hidden', viewName !== 'entry');
         els.viewLoading.classList.toggle('hidden', viewName !== 'loading');
+        els.viewClosed.classList.toggle('hidden', viewName !== 'closed');
         els.viewError.classList.toggle('hidden', viewName !== 'error');
         els.viewIdentity.classList.toggle('hidden', viewName !== 'identity');
         els.viewHall.classList.toggle('hidden', viewName !== 'hall');
       }
 
+      function setBgSyncActive(active) {
+        if (els.bgSyncIndicator) els.bgSyncIndicator.classList.toggle('active', Boolean(active));
+      }
+
       function getClassIdFromUrl() {
         const params = new URLSearchParams(window.location.search);
-        const raw = params.get('class') || params.get('c') || params.get('classId') || '';
-        return normalizeCodeInput(raw);
+        return normalizeCodeInput(params.get('class') || params.get('c') || params.get('classId') || '');
       }
 
       function setUrlClassParam(code) {
         const url = new URL(window.location.href);
         url.searchParams.delete('c');
         url.searchParams.delete('classId');
-        if (code) {
-          url.searchParams.set('class', code);
-        } else {
-          url.searchParams.delete('class');
-        }
+        if (code) url.searchParams.set('class', code);
+        else url.searchParams.delete('class');
         window.history.pushState({ classId: code || '' }, '', url.toString());
       }
 
-      /* ============ LocalStorage Identity (100% Compatible) ============ */
+      /* Smart SWR Cache per classCode */
+      function cacheKey(classId) {
+        return CACHE_PREFIX + normalizeCodeInput(classId).toLowerCase();
+      }
+
+      function loadClassCache(classId) {
+        try {
+          const raw = localStorage.getItem(cacheKey(classId));
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.classInfo && typeof parsed.classInfo === 'object') return parsed;
+        } catch (_) {}
+        return null;
+      }
+
+      function saveClassCache(classId, dataObj) {
+        if (!classId || !dataObj || !dataObj.classInfo) return;
+        try {
+          localStorage.setItem(cacheKey(classId), JSON.stringify({
+            savedAt: Date.now(),
+            studentAccessOpen: dataObj.studentAccessOpen !== false,
+            classInfo: dataObj.classInfo,
+            progress: Array.isArray(dataObj.progress) ? dataObj.progress : [],
+            questions: dataObj.questions || [],
+            checklist: dataObj.checklist || null,
+            checklistProgress: dataObj.checklistProgress ?? []
+          }));
+        } catch (_) {}
+      }
+
+      /* 100% Compatible Student Identity Storage */
       function storageKey(classId) {
         return 'fanoos_student_' + classId;
       }
 
       function makeStudentObj(id, name) {
         const cleanId = String(id ?? '').trim();
-        const cleanName = String(name ?? '').trim();
-        return {
-          id: cleanId,
-          name: cleanName,
-          studentId: cleanId,
-          studentName: cleanName
-        };
+        const cleanName = normFa(name ?? '');
+        return { id: cleanId, name: cleanName, studentId: cleanId, studentName: cleanName };
       }
 
       function loadSavedStudent(classId) {
@@ -1941,9 +962,7 @@
           const parsed = JSON.parse(raw);
           const sid = String(parsed.studentId ?? parsed.id ?? '').trim();
           const sname = String(parsed.studentName ?? parsed.name ?? '').trim();
-          if (sid && sname) {
-            return makeStudentObj(sid, sname);
-          }
+          if (sid && sname) return makeStudentObj(sid, sname);
         } catch (_) {}
         return null;
       }
@@ -1951,51 +970,45 @@
       function saveStudent(classId, student) {
         if (!student || !student.studentId || !student.studentName) return;
         try {
-          localStorage.setItem(
-            storageKey(classId),
-            JSON.stringify({
-              studentId: student.studentId,
-              studentName: student.studentName
-            })
-          );
+          localStorage.setItem(storageKey(classId), JSON.stringify({
+            studentId: student.studentId,
+            studentName: student.studentName
+          }));
         } catch (_) {}
       }
 
       function normalizeStudents(rawStudents) {
         if (!Array.isArray(rawStudents)) return [];
-        return rawStudents
-          .map((item, idx) => {
-            if (typeof item === 'string') {
-              const trimmed = item.trim();
-              if (!trimmed) return null;
-              return { id: 's' + (idx + 1), name: trimmed };
-            }
-            if (item && typeof item === 'object') {
-              if (item.active === false || item.isActive === false) return null;
-              const status = String(item.status || '').trim().toLowerCase();
-              if (status === 'inactive' || status === 'removed') return null;
-              const name = String(item.name || item.studentName || item.fullName || '').trim();
-              const id = String(item.id || item.studentId || item.sid || ('s' + (idx + 1))).trim();
-              if (!name) return null;
-              return { id, name };
-            }
-            return null;
-          })
-          .filter(Boolean);
+        return rawStudents.map((item, idx) => {
+          if (typeof item === 'string') {
+            const trimmed = normFa(item);
+            return trimmed ? { id: 's' + (idx + 1), name: trimmed } : null;
+          }
+          if (item && typeof item === 'object') {
+            if (item.active === false || item.isActive === false) return null;
+            const st = String(item.status || '').trim().toLowerCase();
+            if (st === 'inactive' || st === 'removed' || st === 'withdrawn' || st === 'dropped') return null;
+            const name = normFa(item.name || item.studentName || item.fullName || '');
+            const id = String(item.studentId || item.id || item.sid || ('s' + (idx + 1))).trim();
+            return name ? { id, name } : null;
+          }
+          return null;
+        }).filter(Boolean);
       }
 
       function reconcileSavedStudent(saved, classInfo) {
         if (!saved) return null;
         const roster = normalizeStudents(classInfo && classInfo.students);
         if (roster.length === 0) return saved;
-
         const byId = roster.find((st) => String(st.id).trim() === String(saved.id).trim());
         if (byId) {
-          return makeStudentObj(byId.id, byId.name || saved.name);
+          const updated = makeStudentObj(byId.id, byId.name || saved.name);
+          if (updated.studentName !== saved.studentName) saveStudent(state.classId, updated);
+          return updated;
         }
-
         if (!String(saved.id).startsWith('g_')) {
-          const byName = roster.find((st) => String(st.name).trim() === String(saved.name).trim());
+          const savedKey = normFaKey(saved.name);
+          const byName = roster.find((st) => normFaKey(st.name) === savedKey);
           if (byName) {
             const updated = makeStudentObj(byName.id, byName.name);
             saveStudent(state.classId, updated);
@@ -2005,7 +1018,6 @@
         return saved;
       }
 
-      /* ============ Parsing Helpers (Games & Modules) ============ */
       function normalizeStringList(rawValue, fallbackList) {
         if (rawValue == null) return fallbackList;
         if (Array.isArray(rawValue)) {
@@ -2029,25 +1041,18 @@
       }
 
       function getEnabledModules() {
-        const enabledIds = normalizeStringList(
-          state.classInfo && state.classInfo.enabledModules,
-          ['ALL']
-        );
+        const enabledIds = normalizeStringList(state.classInfo && (state.classInfo.enabledModules || state.classInfo.activeModules), ['ALL']);
         const allowAll = enabledIds.some((x) => x.toUpperCase() === 'ALL');
         return CONFIG.modules.filter((mod) => allowAll || enabledIds.includes(mod.id));
       }
 
       function getVisibleGames() {
-        const enabled = normalizeStringList(
-          state.classInfo && state.classInfo.enabledGames,
-          ['ALL']
-        );
+        const enabled = normalizeStringList(state.classInfo && (state.classInfo.enabledGames || state.classInfo.activeGames), ['ALL']);
         const allowAll = enabled.some((item) => item.toUpperCase() === 'ALL');
         return CONFIG.games.filter((game) => {
           if (!game || !game.id) return false;
           if (game.status === 'soon') return allowAll || enabled.includes(String(game.id));
-          if (allowAll) return true;
-          return enabled.includes(String(game.id));
+          return allowAll || enabled.includes(String(game.id));
         });
       }
 
@@ -2059,7 +1064,7 @@
         if (val === true || val === 1) return true;
         if (typeof val === 'string') {
           const s = val.trim().toLowerCase();
-          return s === 'true' || s === '1' || s === 'yes' || s === 'done' || s === 'finished';
+          return s === 'true' || s === '1' || s === 'yes' || s === 'done' || s === 'finished' || s === 'completed';
         }
         return false;
       }
@@ -2076,24 +1081,14 @@
               const parsed = JSON.parse(trimmed);
               if (parsed && typeof parsed === 'object') return parsed;
             } catch (_) {}
-          } else if (typeof src === 'object') {
-            return src;
-          }
+          } else if (typeof src === 'object') return src;
         }
         return {};
       }
 
-      function extractRowStudentId(row) {
-        return String(row.studentId ?? row.sid ?? row.userId ?? '').trim();
-      }
-
-      function extractRowStudentName(row) {
-        return String(row.studentName ?? row.sname ?? row.name ?? '').trim();
-      }
-
-      function extractRowGameId(row) {
-        return String(row.gameId ?? row.gid ?? row.game ?? '').trim();
-      }
+      function extractRowStudentId(row) { return String(row.studentId ?? row.sid ?? row.userId ?? '').trim(); }
+      function extractRowStudentName(row) { return String(row.studentName ?? row.sname ?? row.name ?? '').trim(); }
+      function extractRowGameId(row) { return String(row.gameId ?? row.gid ?? row.game ?? '').trim(); }
 
       function getArrayLen(val) {
         if (Array.isArray(val)) return val.length;
@@ -2105,24 +1100,28 @@
             if (Array.isArray(parsed)) return parsed.length;
           } catch (_) {}
         }
-        if (typeof val === 'number' && Number.isFinite(val)) {
-          return Math.max(0, Math.floor(val));
-        }
+        if (typeof val === 'number' && Number.isFinite(val)) return Math.max(0, Math.floor(val));
         return 0;
+      }
+
+      function getNormalizedGameMode(game) {
+        const m = String((game && game.mode) || 'units').trim().toLowerCase();
+        if (m === 'score' || m === 'quiz' || m === 'points') return 'score';
+        if (m === 'completion' || m === 'complete' || m === 'single') return 'completion';
+        return 'units';
       }
 
       function computeStudentGameStats(student, game) {
         const currentId = String((student && (student.id ?? student.studentId)) ?? '').trim();
-        const currentName = String((student && (student.name ?? student.studentName)) ?? '').trim();
-        const gid = String(game.id ?? '').trim();
-        const totalUnits = Math.max(
-          0,
-          Number(game.totalUnits || game.totalStations || game.stationsCount || game.stations || 0)
-        );
-        const unitLabel = String(game.unitLabel || 'ایستگاه').trim();
+        const currentNameKey = normFaKey((student && (student.name ?? student.studentName)) ?? '');
+        const gid = String(game.id ?? '').trim().toLowerCase();
+        const mode = getNormalizedGameMode(game);
+        const totalUnits = Math.max(0, Number(game.totalUnits || game.totalStations || game.stationsCount || game.stations || 0) || 0);
+        const defaultUnitLabel = mode === 'score' ? 'امتیاز' : 'بخش';
+        const unitLabel = String(game.unitLabel || defaultUnitLabel).trim();
 
         const allRows = Array.isArray(state.progress) ? state.progress : [];
-        const rowsForGame = allRows.filter((p) => p && typeof p === 'object' && extractRowGameId(p) === gid);
+        const rowsForGame = allRows.filter((p) => p && typeof p === 'object' && extractRowGameId(p).toLowerCase() === gid);
 
         let matchedRows = [];
         if (currentId) {
@@ -2131,74 +1130,70 @@
             return pSid !== '' && pSid === currentId;
           });
         }
-        if (matchedRows.length === 0 && currentName) {
+        if (matchedRows.length === 0 && currentNameKey) {
           matchedRows = rowsForGame.filter((p) => {
-            const pSid = extractRowStudentId(p);
-            const pName = extractRowStudentName(p);
-            if (!pName || pName !== currentName) return false;
-            return !currentId || !pSid || pSid === currentId;
+            const pNameKey = normFaKey(extractRowStudentName(p));
+            const pSidKey = normFaKey(extractRowStudentId(p));
+            return (pNameKey && pNameKey === currentNameKey) || (pSidKey && pSidKey === currentNameKey);
           });
         }
 
-        let completedStations = 0;
+        let completedUnits = 0;
+        let score = 0;
         let finishedGame = false;
+        let hasRecord = matchedRows.length > 0;
 
         if (matchedRows.length > 0) {
-          const sorted = matchedRows.slice().sort((a, b) => {
-            const ta = Date.parse(a.updatedAt || '') || 0;
-            const tb = Date.parse(b.updatedAt || '') || 0;
-            return tb - ta;
-          });
-
+          const sorted = matchedRows.slice().sort((a, b) => (Date.parse(b.updatedAt || '') || 0) - (Date.parse(a.updatedAt || '') || 0));
           for (const p of sorted) {
-            const parsedState = parseRowState(p);
-            if (
-              parseTruthyBool(parsedState.finishedGame) ||
-              parseTruthyBool(parsedState.isFinished) ||
-              parseTruthyBool(parsedState.completedGame) ||
-              parseTruthyBool(parsedState.finished) ||
-              parseTruthyBool(p.finishedGame)
-            ) {
+            const ps = parseRowState(p);
+            if (parseTruthyBool(ps.finishedGame) || parseTruthyBool(ps.isFinished) || parseTruthyBool(ps.completedGame) || parseTruthyBool(ps.finished) || parseTruthyBool(ps.completed) || parseTruthyBool(p.finishedGame)) {
               finishedGame = true;
             }
-            const stCount = Math.max(
-              getArrayLen(parsedState.completedStations),
-              getArrayLen(parsedState.completedUnits),
-              getArrayLen(p.completedStations)
+            const stCount = Math.max(getArrayLen(ps.completedStations), getArrayLen(ps.completedUnits), getArrayLen(p.completedStations));
+            if (stCount > completedUnits) completedUnits = stCount;
+            const rowScore = Math.max(
+              Number(ps.highScore) || 0,
+              Number(ps.bestScore) || 0,
+              Number(ps.score) || 0,
+              Number(ps.points) || 0,
+              Number(p.score) || 0
             );
-            if (stCount > completedStations) {
-              completedStations = stCount;
-            }
+            if (rowScore > score) score = rowScore;
           }
         }
 
-        if (totalUnits > 0 && completedStations >= totalUnits) {
-          completedStations = totalUnits;
+        if (mode === 'units' && totalUnits > 0 && completedUnits >= totalUnits) {
+          completedUnits = totalUnits;
+          finishedGame = true;
+        }
+        if (mode === 'score' && totalUnits > 0 && score >= totalUnits) {
           finishedGame = true;
         }
 
-        const pct =
-          totalUnits > 0
-            ? Math.min(100, Math.round((completedStations / totalUnits) * 100))
-            : finishedGame
-            ? 100
-            : 0;
+        let pct = 0;
+        if (mode === 'completion') pct = finishedGame ? 100 : 0;
+        else if (mode === 'score') pct = finishedGame ? 100 : (totalUnits > 0 ? Math.min(100, Math.round((score / totalUnits) * 100)) : (score > 0 ? 100 : 0));
+        else pct = totalUnits > 0 ? Math.min(100, Math.round((completedUnits / totalUnits) * 100)) : (finishedGame ? 100 : 0);
 
-        return {
-          completedStations,
-          totalUnits,
-          unitLabel,
-          finishedGame,
-          pct
-        };
+        const started = hasRecord && (completedUnits > 0 || score > 0 || finishedGame);
+        return { mode, completedUnits, totalUnits, score, unitLabel, finishedGame, started, pct };
+      }
+
+      function buildGameUrl(game) {
+        const ageGroup = (state.classInfo && state.classInfo.ageGroup) || '12-15';
+        return String(game.path || '#') +
+          '?class=' + encodeURIComponent(state.classId) +
+          '&sid=' + encodeURIComponent(state.student.studentId) +
+          '&sname=' + encodeURIComponent(state.student.studentName) +
+          '&gid=' + encodeURIComponent(game.id) +
+          '&age=' + encodeURIComponent(ageGroup);
       }
 
       function hasCustomQuestionsForGame(gameId) {
         const q = state.questions;
         if (!q) return false;
-        if (Array.isArray(q)) {
-          return q.some((item) => item && String(item.gameId ?? item.gid ?? '') === String(gameId));
-        }
+        if (Array.isArray(q)) return q.some((item) => item && String(item.gameId ?? item.gid ?? '') === String(gameId));
         if (typeof q === 'object') {
           const entry = q[gameId];
           return Array.isArray(entry) ? entry.length > 0 : Boolean(entry);
@@ -2206,54 +1201,39 @@
         return false;
       }
 
-      /* ============ Checklist Helpers ============ */
+      /* Checklist Helpers */
       function normalizeChecklist(rawChecklist) {
         if (!rawChecklist || typeof rawChecklist !== 'object') return null;
-        const rawItems = Array.isArray(rawChecklist.items)
-          ? rawChecklist.items
-          : Array.isArray(rawChecklist.tasks)
-          ? rawChecklist.tasks
-          : [];
-
-        const items = rawItems
-          .map((item, idx) => {
-            if (typeof item === 'string') {
-              const text = item.trim();
-              if (!text) return null;
-              return { id: 'item_' + (idx + 1), text };
-            }
-            if (item && typeof item === 'object') {
-              const text = String(item.text || item.title || item.label || '').trim();
-              const id = String(item.id ?? item.itemId ?? ('item_' + (idx + 1))).trim();
-              if (!text) return null;
-              return { id, text };
-            }
-            return null;
-          })
-          .filter(Boolean);
-
+        const rawItems = Array.isArray(rawChecklist.items) ? rawChecklist.items : (Array.isArray(rawChecklist.tasks) ? rawChecklist.tasks : []);
+        const items = rawItems.map((item, idx) => {
+          if (typeof item === 'string') {
+            const text = normFa(item);
+            return text ? { id: 'item_' + (idx + 1), text } : null;
+          }
+          if (item && typeof item === 'object') {
+            const text = normFa(item.text || item.title || item.label || '');
+            const id = String(item.id ?? item.itemId ?? ('item_' + (idx + 1))).trim();
+            return text ? { id, text } : null;
+          }
+          return null;
+        }).filter(Boolean);
         if (items.length === 0) return null;
-
         return {
           missionId: String(rawChecklist.missionId || rawChecklist.id || '').trim(),
-          title: String(rawChecklist.title || rawChecklist.name || 'مأموریت این هفته').trim(),
-          description: String(rawChecklist.description || rawChecklist.subtitle || '').trim(),
+          title: normFa(rawChecklist.title || rawChecklist.name || 'مأموریت این هفته'),
+          description: normFa(rawChecklist.description || rawChecklist.subtitle || ''),
           items
         };
       }
 
       function parseCheckedIdsArray(rawVal) {
-        if (Array.isArray(rawVal)) {
-          return rawVal.map((x) => String(x).trim()).filter(Boolean);
-        }
+        if (Array.isArray(rawVal)) return rawVal.map((x) => String(x).trim()).filter(Boolean);
         if (typeof rawVal === 'string') {
           const trimmed = rawVal.trim();
           if (!trimmed) return [];
           try {
             const parsed = JSON.parse(trimmed);
-            if (Array.isArray(parsed)) {
-              return parsed.map((x) => String(x).trim()).filter(Boolean);
-            }
+            if (Array.isArray(parsed)) return parsed.map((x) => String(x).trim()).filter(Boolean);
           } catch (_) {}
           return trimmed.split(',').map((x) => x.trim()).filter(Boolean);
         }
@@ -2263,30 +1243,27 @@
       function extractStudentCheckedIds(student, checklist, checklistProgress) {
         if (!student || !checklist) return [];
         const sid = String(student.studentId || student.id || '').trim();
-        const sname = String(student.studentName || student.name || '').trim();
+        const snameKey = normFaKey(student.studentName || student.name || '');
         const mid = checklist.missionId;
         const validIds = new Set(checklist.items.map((i) => i.id));
-
         let rawIds = [];
 
         if (Array.isArray(checklistProgress)) {
           let rows = checklistProgress.filter((r) => r && typeof r === 'object');
           if (mid) {
-            const missionMatched = rows.filter((r) => {
+            rows = rows.filter((r) => {
               const rMid = String(r.missionId ?? r.checklistId ?? '').trim();
               return !rMid || rMid === mid;
             });
-            rows = missionMatched;
           }
-
           let studentRows = rows.filter((r) => extractRowStudentId(r) === sid);
-          if (studentRows.length === 0 && sname) {
+          if (studentRows.length === 0 && snameKey) {
             studentRows = rows.filter((r) => {
-              const rSid = extractRowStudentId(r);
-              return !rSid && extractRowStudentName(r) === sname;
+              const rNk = normFaKey(extractRowStudentName(r));
+              const rSk = normFaKey(extractRowStudentId(r));
+              return (rNk && rNk === snameKey) || (rSk && rSk === snameKey);
             });
           }
-
           if (studentRows.length > 0) {
             studentRows.sort((a, b) => (Date.parse(b.updatedAt || '') || 0) - (Date.parse(a.updatedAt || '') || 0));
             const latest = studentRows[0];
@@ -2294,21 +1271,12 @@
           }
         } else if (checklistProgress && typeof checklistProgress === 'object') {
           const entry = checklistProgress[sid];
-          if (entry) {
-            if (Array.isArray(entry) || typeof entry === 'string') {
-              rawIds = parseCheckedIdsArray(entry);
-            } else if (typeof entry === 'object') {
-              rawIds = parseCheckedIdsArray(entry.checkedIds ?? entry.completedIds ?? entry.items);
-            }
-          }
+          if (entry) rawIds = parseCheckedIdsArray(typeof entry === 'object' && !Array.isArray(entry) ? (entry.checkedIds ?? entry.completedIds ?? entry.items) : entry);
         }
 
-        // Deduplicate & keep only valid item IDs of current checklist
         const unique = [];
         for (const id of rawIds) {
-          if (validIds.has(id) && !unique.includes(id)) {
-            unique.push(id);
-          }
+          if (validIds.has(id) && !unique.includes(id)) unique.push(id);
         }
         return unique;
       }
@@ -2319,51 +1287,58 @@
         state.lastConfirmedCheckedIds = ids.slice();
       }
 
-      /* ============ API Calls ============ */
+      function updateLocalChecklistCache(checkedIds) {
+        if (!state.student || !state.checklist) return;
+        const sid = state.student.studentId;
+        const sname = state.student.studentName;
+        const mid = state.checklist.missionId;
+        if (Array.isArray(state.checklistProgress)) {
+          const idx = state.checklistProgress.findIndex((r) => {
+            if (!r || typeof r !== 'object') return false;
+            const rMid = String(r.missionId ?? r.checklistId ?? '').trim();
+            return extractRowStudentId(r) === sid && (!mid || !rMid || rMid === mid);
+          });
+          const updatedRow = { classId: state.classId, missionId: mid, studentId: sid, studentName: sname, checkedIds: checkedIds.slice(), updatedAt: new Date().toISOString() };
+          if (idx >= 0) state.checklistProgress[idx] = updatedRow;
+          else state.checklistProgress.push(updatedRow);
+        } else if (state.checklistProgress && typeof state.checklistProgress === 'object') {
+          state.checklistProgress[sid] = { missionId: mid, studentId: sid, studentName: sname, checkedIds: checkedIds.slice(), updatedAt: new Date().toISOString() };
+        }
+        saveClassCache(state.classId, {
+          studentAccessOpen: state.studentAccessOpen,
+          classInfo: state.classInfo,
+          progress: state.progress,
+          questions: state.questions,
+          checklist: state.checklist,
+          checklistProgress: state.checklistProgress
+        });
+      }
+
+      /* API Calls */
       async function fetchClassData(classId) {
-        if (!CONFIG.apiUrl) {
-          throw new Error('آدرس سرور در فایل config.js تنظیم نشده است.');
-        }
-
+        if (!CONFIG.apiUrl) throw new Error('آدرس سرور در فایل config.js تنظیم نشده است.');
         const sep = CONFIG.apiUrl.includes('?') ? '&' : '?';
-        const url =
-          CONFIG.apiUrl +
-          sep +
-          'action=getClass&classId=' +
-          encodeURIComponent(classId) +
-          '&t=' +
-          Date.now();
-
+        const url = CONFIG.apiUrl + sep + 'action=getClass&classId=' + encodeURIComponent(classId) + '&t=' + Date.now();
         const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) {
-          throw new Error('خطا در پاسخ سرور (کد ' + toFa(res.status) + ')');
-        }
-
+        if (!res.ok) throw new Error('خطا در پاسخ سرور (کد ' + toFa(res.status) + ')');
         let data;
-        try {
-          data = await res.json();
-        } catch (_) {
-          throw new Error('پاسخ دریافتی از سرور معتبر نیست.');
-        }
-
+        try { data = await res.json(); } catch (_) { throw new Error('پاسخ دریافتی از سرور معتبر نیست.'); }
         if (!data || data.ok === false || data.success === false || data.error) {
           const err = new Error(data && data.error ? String(data.error) : 'کلاسی با این کد پیدا نشد.');
           err.notFound = true;
           throw err;
         }
-
         const payload = data.data && typeof data.data === 'object' ? data.data : data;
         const classInfo = payload.classInfo || payload.class || null;
-
         if (!classInfo) {
           const err = new Error('کلاسی با این کد پیدا نشد.');
           err.notFound = true;
           throw err;
         }
-
+        const accessOpen = (payload.studentAccessOpen === false || classInfo.studentAccessOpen === false) ? false : true;
         state.lastFetchAt = Date.now();
-
         return {
+          studentAccessOpen: accessOpen,
           classInfo,
           progress: Array.isArray(payload.progress) ? payload.progress : [],
           questions: payload.questions || [],
@@ -2373,170 +1348,149 @@
       }
 
       async function saveChecklistToServer(checkedIdsToSave) {
-        if (!CONFIG.apiUrl || !state.classId || !state.student || !state.checklist) {
-          throw new Error('اطلاعات لازم برای ذخیره کامل نیست.');
-        }
-
-        const payload = {
-          action: 'saveChecklistProgress',
-          classId: state.classId,
-          missionId: state.checklist.missionId,
-          studentId: state.student.studentId,
-          studentName: state.student.studentName,
-          checkedIds: checkedIdsToSave
-        };
-
+        if (!CONFIG.apiUrl || !state.classId || !state.student || !state.checklist) throw new Error('اطلاعات لازم برای ذخیره کامل نیست.');
         const res = await fetch(CONFIG.apiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            action: 'saveChecklistProgress',
+            classId: state.classId,
+            missionId: state.checklist.missionId,
+            studentId: state.student.studentId,
+            studentName: state.student.studentName,
+            checkedIds: checkedIdsToSave
+          })
         });
-
-        if (!res.ok) {
-          throw new Error('خطای سرور هنگام ذخیره');
-        }
-
+        if (!res.ok) throw new Error('خطای سرور هنگام ذخیره');
         let data = null;
-        try {
-          data = await res.json();
-        } catch (_) {
-          // Some GAS responses may return plain text OK
-        }
-
+        try { data = await res.json(); } catch (_) {}
         if (data && (data.ok === false || data.success === false || data.error)) {
           throw new Error(data.error ? String(data.error) : 'ذخیره انجام نشد.');
         }
-
         return data;
       }
 
-      function updateLocalChecklistCache(checkedIds) {
-        if (!state.student || !state.checklist) return;
-        const sid = state.student.studentId;
-        const sname = state.student.studentName;
-        const mid = state.checklist.missionId;
+      /* Apply Class Data & SWR Flow */
+      function applyClassPayload(result, isBackgroundUpdate) {
+        state.studentAccessOpen = result.studentAccessOpen !== false;
+        state.classInfo = result.classInfo;
+        state.progress = result.progress;
+        state.questions = result.questions;
+        state.checklist = result.checklist;
+        state.checklistProgress = result.checklistProgress;
+        state.hasLoadedClass = true;
 
-        if (Array.isArray(state.checklistProgress)) {
-          const idx = state.checklistProgress.findIndex((r) => {
-            if (!r || typeof r !== 'object') return false;
-            const rMid = String(r.missionId ?? r.checklistId ?? '').trim();
-            return extractRowStudentId(r) === sid && (!mid || !rMid || rMid === mid);
-          });
-          const updatedRow = {
-            classId: state.classId,
-            missionId: mid,
-            studentId: sid,
-            studentName: sname,
-            checkedIds: checkedIds.slice(),
-            updatedAt: new Date().toISOString()
-          };
-          if (idx >= 0) {
-            state.checklistProgress[idx] = updatedRow;
-          } else {
-            state.checklistProgress.push(updatedRow);
-          }
-        } else if (state.checklistProgress && typeof state.checklistProgress === 'object') {
-          state.checklistProgress[sid] = {
-            missionId: mid,
-            studentId: sid,
-            studentName: sname,
-            checkedIds: checkedIds.slice(),
-            updatedAt: new Date().toISOString()
-          };
-        }
-      }
-
-      /* ============ Flow & Rendering ============ */
-      async function loadClass(classId) {
-        const cleanCode = normalizeCodeInput(classId);
-        if (!cleanCode) {
-          showEntryScreen('');
+        if (state.studentAccessOpen === false) {
+          const cname = (state.classInfo && (state.classInfo.className || state.classInfo.name)) || state.classId;
+          els.closedClassTitle.textContent = 'تالار «' + cname + '» بسته شده است';
+          showView('closed');
           return;
         }
 
-        state.classId = cleanCode;
-        state.hasLoadedClass = false;
-        state.activeFolder = 'hub';
-        els.loadingMessage.textContent = 'در حال دریافت اطلاعات کلاس ' + cleanCode + '...';
-        showView('loading');
-
-        try {
-          const result = await fetchClassData(cleanCode);
-          state.classInfo = result.classInfo;
-          state.progress = result.progress;
-          state.questions = result.questions;
-          state.checklist = result.checklist;
-          state.checklistProgress = result.checklistProgress;
-          state.hasLoadedClass = true;
-
-          const saved = reconcileSavedStudent(loadSavedStudent(cleanCode), state.classInfo);
-          if (saved) {
-            state.student = saved;
-            syncStudentChecklistState();
-            renderHallAll();
-            openFolder('hub');
+        const saved = reconcileSavedStudent(state.student || loadSavedStudent(state.classId), state.classInfo);
+        if (saved) {
+          state.student = saved;
+          if (!state.checklistBusy) syncStudentChecklistState();
+          renderHallAll();
+          if (!isBackgroundUpdate) {
+            openFolder(state.activeFolder || 'hub', false);
             showView('hall');
           } else {
-            state.student = null;
-            openIdentityScreen(false);
+            if (!els.viewHall.classList.contains('hidden')) {
+              if (state.activeFolder === 'hub') renderHub();
+              else if (state.activeFolder === 'games') renderGamesFolder();
+              else if (state.activeFolder === 'checklist') renderChecklistFolder();
+            }
           }
+        } else {
+          state.student = null;
+          openIdentityScreen(false);
+        }
+      }
+
+      async function loadClass(classId) {
+        const cleanCode = normalizeCodeInput(classId);
+        if (!cleanCode) { showEntryScreen(''); return; }
+        state.classId = cleanCode;
+        state.student = null;
+        state.activeFolder = 'hub';
+
+        const cached = loadClassCache(cleanCode);
+        if (cached) {
+          applyClassPayload({
+            studentAccessOpen: cached.studentAccessOpen !== false,
+            classInfo: cached.classInfo,
+            progress: cached.progress || [],
+            questions: cached.questions || [],
+            checklist: normalizeChecklist(cached.checklist),
+            checklistProgress: cached.checklistProgress ?? []
+          }, false);
+          refreshHallData(false, true);
+          return;
+        }
+
+        state.hasLoadedClass = false;
+        els.loadingMessage.textContent = 'در حال دریافت اطلاعات کلاس ' + cleanCode + '...';
+        showView('loading');
+        try {
+          const result = await fetchClassData(cleanCode);
+          saveClassCache(cleanCode, result);
+          applyClassPayload(result, false);
         } catch (err) {
           if (err && err.notFound) {
             showEntryScreen(err.message || 'کلاسی با این کد پیدا نشد.', cleanCode);
           } else {
             els.errorTitle.textContent = 'اتصال به کلاس برقرار نشد';
-            els.errorMessage.textContent =
-              err && err.message ? err.message : 'لطفاً اینترنت خود را بررسی کن و دوباره تلاش کن.';
+            els.errorMessage.textContent = (err && err.message) ? err.message : 'لطفاً اینترنت خود را بررسی کن و دوباره تلاش کن.';
             showView('error');
           }
         }
       }
 
-      async function refreshHallData(isManual) {
+      async function refreshHallData(isManual, forceImmediate) {
         if (!state.classId || !state.hasLoadedClass || state.isRefreshing) return;
-        if (!isManual && Date.now() - state.lastFetchAt < 1800) return;
+        if (!isManual && !forceImmediate && Date.now() - state.lastFetchAt < 2000) return;
 
         state.isRefreshing = true;
-        els.refreshHallBtn.disabled = true;
-        els.refreshIcon.classList.add('spinning');
+        if (isManual) {
+          els.refreshHallBtn.disabled = true;
+          els.refreshIcon.classList.add('spinning');
+        } else {
+          setBgSyncActive(true);
+        }
 
+        const targetCode = state.classId;
         try {
-          const fresh = await fetchClassData(state.classId);
-          state.classInfo = fresh.classInfo;
-          state.progress = fresh.progress;
-          state.questions = fresh.questions;
-          state.checklist = fresh.checklist;
-          state.checklistProgress = fresh.checklistProgress;
-
-          if (state.student) {
-            state.student = reconcileSavedStudent(state.student, state.classInfo);
-            syncStudentChecklistState();
-            renderHallAll();
-          }
-          if (isManual) {
-            showToast('اطلاعات تالار بروزرسانی شد ✓', false);
-          }
-        } catch (_) {
-          if (isManual) {
-            showToast('بروزرسانی انجام نشد؛ اینترنت را بررسی کن.', true);
+          const fresh = await fetchClassData(targetCode);
+          if (state.classId !== targetCode) return;
+          saveClassCache(targetCode, fresh);
+          applyClassPayload(fresh, true);
+          if (isManual) showToast('اطلاعات تالار بروزرسانی شد ✓', false);
+        } catch (err) {
+          if (isManual) showToast('بروزرسانی انجام نشد؛ اینترنت را بررسی کن.', true);
+          else if (err && err.notFound && state.classId === targetCode) {
+            try { localStorage.removeItem(cacheKey(targetCode)); } catch (_) {}
           }
         } finally {
           state.isRefreshing = false;
-          els.refreshHallBtn.disabled = false;
-          els.refreshIcon.classList.remove('spinning');
+          setBgSyncActive(false);
+          if (isManual) {
+            els.refreshHallBtn.disabled = false;
+            els.refreshIcon.classList.remove('spinning');
+          }
         }
       }
 
       function showEntryScreen(errorMsg, prefillCode) {
         state.classId = '';
         state.classInfo = null;
+        state.studentAccessOpen = true;
         state.progress = [];
         state.questions = [];
         state.checklist = null;
         state.checklistProgress = [];
         state.student = null;
         state.hasLoadedClass = false;
-
         els.classCodeInput.value = prefillCode || '';
         els.classCodeError.textContent = errorMsg || '';
         showView('entry');
@@ -2545,11 +1499,11 @@
 
       function openIdentityScreen(allowCancel) {
         const className = (state.classInfo && (state.classInfo.className || state.classInfo.name)) || state.classId;
-        const teacherName = String((state.classInfo && state.classInfo.teacherName) || '').trim();
+        const cleanTeacher = extractCleanTeacherName(state.classInfo && state.classInfo.teacherName);
 
         els.identityClassName.textContent = className;
-        if (teacherName) {
-          els.identityTeacherName.textContent = 'با همراهی ' + teacherName;
+        if (cleanTeacher) {
+          els.identityTeacherName.textContent = 'با همراهی ' + cleanTeacher;
           els.identityTeacherName.classList.remove('hidden');
         } else {
           els.identityTeacherName.classList.add('hidden');
@@ -2562,28 +1516,14 @@
 
         const students = normalizeStudents(state.classInfo && state.classInfo.students);
         if (students.length === 0) {
-          els.studentsListGrid.innerHTML =
-            '<div class="empty-roster-note">نام دانش‌آموزان هنوز ثبت نشده است. می‌توانی از «ورود به‌عنوان مهمان» استفاده کنی.</div>';
+          els.studentsListGrid.innerHTML = '<div class="empty-roster-note">نام دانش‌آموزان هنوز ثبت نشده است. می‌توانی از «ورود به‌عنوان مهمان» استفاده کنی.</div>';
           els.guestPanel.classList.remove('hidden');
         } else {
-          els.studentsListGrid.innerHTML = students
-            .map((st) => {
-              const initial = escapeHtml(st.name.charAt(0) || 'د');
-              return `
-                <button
-                  type="button"
-                  class="student-tile"
-                  data-sid="${escapeHtml(st.id)}"
-                  data-sname="${escapeHtml(st.name)}"
-                >
-                  <span class="student-avatar" aria-hidden="true">${initial}</span>
-                  <span class="student-tile-name">${escapeHtml(st.name)}</span>
-                </button>
-              `;
-            })
-            .join('');
+          els.studentsListGrid.innerHTML = students.map((st) => {
+            const initial = escapeHtml(st.name.charAt(0) || 'د');
+            return '<button type="button" class="student-tile" data-sid="' + escapeHtml(st.id) + '" data-sname="' + escapeHtml(st.name) + '"><span class="student-avatar" aria-hidden="true">' + initial + '</span><span class="student-tile-name">' + escapeHtml(st.name) + '</span></button>';
+          }).join('');
         }
-
         showView('identity');
       }
 
@@ -2592,133 +1532,267 @@
         saveStudent(state.classId, state.student);
         syncStudentChecklistState();
         renderHallAll();
-        openFolder('hub');
+        openFolder('hub', false);
         showView('hall');
       }
 
-      function openFolder(folderName) {
+      function openFolder(folderName, shouldScroll) {
         state.activeFolder = folderName;
         els.sectionHub.classList.toggle('hidden', folderName !== 'hub');
         els.sectionGames.classList.toggle('hidden', folderName !== 'games');
         els.sectionChecklist.classList.toggle('hidden', folderName !== 'checklist');
-
-        if (folderName === 'hub') {
-          renderFoldersGrid();
-        } else if (folderName === 'games') {
-          renderGamesFolder();
-        } else if (folderName === 'checklist') {
-          renderChecklistFolder();
-        }
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (folderName === 'hub') renderHub();
+        else if (folderName === 'games') renderGamesFolder();
+        else if (folderName === 'checklist') renderChecklistFolder();
+        if (shouldScroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
       function renderHallAll() {
         if (!state.classInfo || !state.student) return;
-
         const className = state.classInfo.className || state.classInfo.name || state.classId;
-        const teacherName = String(state.classInfo.teacherName || '').trim();
-        const teacherHref = 'teacher.html?class=' + encodeURIComponent(state.classId);
-
+        const cleanTeacher = extractCleanTeacherName(state.classInfo.teacherName);
         els.headerClassName.textContent = className;
         els.headerStudentName.textContent = state.student.studentName;
         els.greetingStudentName.textContent = state.student.studentName;
-        els.footerTeacherLink.href = teacherHref;
-
-        if (teacherName) {
-          els.greetingTeacherLine.textContent = 'با همراهی ' + teacherName;
+        els.footerTeacherLink.href = 'teacher.html?c=' + encodeURIComponent(state.classId);
+        if (cleanTeacher) {
+          els.greetingTeacherLine.textContent = 'با همراهی ' + cleanTeacher;
           els.greetingTeacherLine.classList.remove('hidden');
         } else {
           els.greetingTeacherLine.classList.add('hidden');
         }
-
-        renderFoldersGrid();
+        renderHub();
         renderGamesFolder();
         renderChecklistFolder();
+      }
+
+      /* Layer 1: Announcement Banner */
+      function renderAnnouncementBanner() {
+        const ann = CONFIG.announcement;
+        if (!ann || !ann.active) { els.announcementSlot.innerHTML = ''; return; }
+        let dismissed = false;
+        try { dismissed = localStorage.getItem(ANN_DISMISS_PREFIX + ann.id) === '1'; } catch (_) {}
+        if (dismissed) { els.announcementSlot.innerHTML = ''; return; }
+
+        let ctaHtml = '';
+        if (ann.ctaText && ann.folder) {
+          ctaHtml = '<button type="button" class="btn btn-gold btn-sm" data-open-folder="' + escapeHtml(ann.folder) + '">' + escapeHtml(ann.ctaText) + '</button>';
+        } else if (ann.ctaText && ann.link) {
+          ctaHtml = '<a href="' + escapeHtml(ann.link) + '" class="btn btn-gold btn-sm">' + escapeHtml(ann.ctaText) + '</a>';
+        }
+
+        els.announcementSlot.innerHTML =
+          '<div class="announcement-banner fade-in" role="region" aria-label="اطلاعیه جدید">' +
+            '<div class="announcement-content">' +
+              '<div class="announcement-icon" aria-hidden="true">' + escapeHtml(ann.icon) + '</div>' +
+              '<div class="announcement-text-wrap">' +
+                (ann.title ? '<div class="announcement-title">' + escapeHtml(ann.title) + '</div>' : '') +
+                (ann.text ? '<div class="announcement-desc">' + escapeHtml(ann.text) + '</div>' : '') +
+              '</div>' +
+            '</div>' +
+            '<div class="announcement-actions">' +
+              ctaHtml +
+              '<button type="button" class="announcement-close" data-dismiss-ann="' + escapeHtml(ann.id) + '" aria-label="بستن اطلاعیه">×</button>' +
+            '</div>' +
+          '</div>';
+      }
+
+      /* Layer 2: Smart "Suggested Now" Card */
+      function renderSuggestNowCard() {
+        const enabledMods = getEnabledModules();
+        const hasChecklistMod = enabledMods.some((m) => m.id === 'checklist');
+        const hasGamesMod = enabledMods.some((m) => m.id === 'games');
+        const hasChecklist = hasChecklistMod && Boolean(state.checklist && state.checklist.items.length > 0);
+        const totalChecklist = hasChecklist ? state.checklist.items.length : 0;
+        const checkedCount = hasChecklist ? state.checkedIds.length : 0;
+
+        if (hasChecklist && checkedCount < totalChecklist) {
+          const remaining = totalChecklist - checkedCount;
+          els.suggestNowSlot.innerHTML =
+            '<div class="suggest-card suggest-checklist fade-in">' +
+              '<div class="suggest-info">' +
+                '<div class="suggest-kicker">پیشنهاد الان</div>' +
+                '<div class="suggest-title">🎯 مأموریت این هفته منتظر توئه</div>' +
+                '<div class="suggest-sub">' + toFa(remaining) + ' مورد باقی مانده از «' + escapeHtml(state.checklist.title) + '»</div>' +
+              '</div>' +
+              '<button type="button" class="btn btn-teal btn-sm" data-open-folder="checklist">ورود به چک‌لیست ←</button>' +
+            '</div>';
+          return;
+        }
+
+        const activeGames = hasGamesMod ? getActiveVisibleGames() : [];
+        const gameEntries = activeGames.map((g) => ({ game: g, stats: computeStudentGameStats(state.student, g) }));
+        const inProgress = gameEntries.find((x) => x.stats.started && !x.stats.finishedGame);
+        const notFinished = inProgress || gameEntries.find((x) => !x.stats.finishedGame);
+
+        if (notFinished) {
+          const g = notFinished.game, st = notFinished.stats;
+          let subText = 'آمادهٔ شروع ماجراجویی';
+          if (st.mode === 'units' && st.totalUnits > 0) subText = toFa(st.completedUnits) + ' از ' + toFa(st.totalUnits) + ' ' + st.unitLabel + ' انجام شده';
+          else if (st.mode === 'score' && st.score > 0) subText = 'رکورد فعلی: ' + toFa(st.score) + ' ' + st.unitLabel;
+          els.suggestNowSlot.innerHTML =
+            '<div class="suggest-card suggest-game fade-in">' +
+              '<div class="suggest-info">' +
+                '<div class="suggest-kicker">پیشنهاد الان</div>' +
+                '<div class="suggest-title">🚀 ادامه ماجراجویی: ' + escapeHtml(g.title) + '</div>' +
+                '<div class="suggest-sub">' + escapeHtml(subText) + '</div>' +
+              '</div>' +
+              '<a href="' + escapeHtml(buildGameUrl(g)) + '" class="btn btn-gold btn-sm">ادامه بازی ←</a>' +
+            '</div>';
+          return;
+        }
+
+        if (hasChecklist || activeGames.length > 0) {
+          els.suggestNowSlot.innerHTML =
+            '<div class="suggest-card suggest-done fade-in">' +
+              '<div class="suggest-info">' +
+                '<div class="suggest-title">🏆 عالیه! همهٔ برنامه‌های این هفته را کامل کردی</div>' +
+                '<div class="suggest-sub">می‌توانی بازی‌ها را دوباره مرور کنی یا منتظر مأموریت بعدی بمانی.</div>' +
+              '</div>' +
+            '</div>';
+          return;
+        }
+
+        els.suggestNowSlot.innerHTML = '';
+      }
+
+      function renderHub() {
+        renderAnnouncementBanner();
+        renderSuggestNowCard();
+        renderFoldersGrid();
       }
 
       function renderFoldersGrid() {
         const modules = getEnabledModules();
         const activeGames = getActiveVisibleGames();
 
-        // Compute Games live summary
-        let completedStationsSum = 0;
-        let totalUnitsSum = 0;
+        let completedGamesCount = 0;
+        let pctTotal = 0;
         for (const g of activeGames) {
           const st = computeStudentGameStats(state.student, g);
-          completedStationsSum += st.completedStations;
-          totalUnitsSum += st.totalUnits;
+          if (st.finishedGame) completedGamesCount++;
+          pctTotal += st.pct;
         }
+        const avgPct = activeGames.length > 0 ? Math.round(pctTotal / activeGames.length) : 0;
 
-        // Compute Checklist live summary
         const hasChecklist = Boolean(state.checklist && state.checklist.items.length > 0);
         const totalChecklistItems = hasChecklist ? state.checklist.items.length : 0;
         const checkedCount = hasChecklist ? state.checkedIds.length : 0;
 
         if (modules.length === 0) {
-          els.foldersGrid.innerHTML =
-            '<div class="glass-card empty-state-card" style="grid-column: 1 / -1;"><p class="empty-state-title">هنوز بخشی برای این کلاس فعال نشده است.</p></div>';
+          els.foldersGrid.innerHTML = '<div class="glass-card empty-state-card" style="grid-column:1/-1;"><p class="empty-state-title">هنوز بخشی برای این کلاس فعال نشده است.</p></div>';
           return;
         }
 
-        els.foldersGrid.innerHTML = modules
-          .map((mod) => {
-            if (mod.id === 'games') {
-              const stationsBadge =
-                totalUnitsSum > 0
-                  ? `${toFa(completedStationsSum)} از ${toFa(totalUnitsSum)} ایستگاه تکمیل‌شده`
-                  : `${toFa(completedStationsSum)} ایستگاه تکمیل‌شده`;
+        els.foldersGrid.innerHTML = modules.map((mod) => {
+          const newBadgeHtml = mod.isNew ? '<span class="new-badge">✨ جدید</span>' : '';
 
-              return `
-                <button type="button" class="folder-card theme-games" data-open-folder="games">
-                  <div class="folder-top">
-                    <div class="folder-icon" aria-hidden="true">${escapeHtml(mod.icon)}</div>
-                    <div class="folder-arrow" aria-hidden="true">←</div>
-                  </div>
-                  <h2 class="folder-title">${escapeHtml(mod.title)}</h2>
-                  <p class="folder-subtitle">${escapeHtml(mod.subtitle)}</p>
-                  <div class="folder-badges">
-                    <span class="live-pill gold">${toFa(activeGames.length)} بازی فعال</span>
-                    <span class="live-pill neutral">${stationsBadge}</span>
-                  </div>
-                </button>
-              `;
-            }
+          if (mod.id === 'games') {
+            const progressPill = activeGames.length > 0
+              ? (completedGamesCount >= activeGames.length
+                ? '<span class="live-pill emerald">همه بازی‌ها تکمیل شد 🏆</span>'
+                : '<span class="live-pill neutral">پیشرفت کل: ' + toFa(avgPct) + '٪</span>')
+              : '<span class="live-pill neutral">در انتظار بازی</span>';
 
-            if (mod.id === 'checklist') {
-              let statusPillHtml = '<span class="live-pill neutral">بدون مأموریت فعال</span>';
-              let secondaryPillHtml = '';
+            return (
+              '<button type="button" class="folder-card theme-games" data-open-folder="games">' +
+                '<div class="folder-top">' +
+                  '<div class="folder-icon" aria-hidden="true">' + escapeHtml(mod.icon) + '</div>' +
+                  '<div class="folder-top-left">' + newBadgeHtml + '<div class="folder-arrow" aria-hidden="true">←</div></div>' +
+                '</div>' +
+                '<h2 class="folder-title">' + escapeHtml(mod.title) + '</h2>' +
+                '<p class="folder-subtitle">' + escapeHtml(mod.subtitle) + '</p>' +
+                '<div class="folder-badges">' +
+                  '<span class="live-pill gold">' + toFa(activeGames.length) + ' بازی فعال</span>' +
+                  progressPill +
+                '</div>' +
+              '</button>'
+            );
+          }
 
-              if (hasChecklist) {
-                if (checkedCount === 0) {
-                  statusPillHtml = '<span class="live-pill teal">مأموریت جدید دارد ✨</span>';
-                  secondaryPillHtml = `<span class="live-pill neutral">${toFa(totalChecklistItems)} مورد</span>`;
-                } else if (checkedCount >= totalChecklistItems) {
-                  statusPillHtml = `<span class="live-pill emerald">${toFa(checkedCount)} از ${toFa(totalChecklistItems)} انجام شد ✓</span>`;
-                } else {
-                  statusPillHtml = `<span class="live-pill teal">${toFa(checkedCount)} از ${toFa(totalChecklistItems)} انجام شد</span>`;
-                }
+          if (mod.id === 'checklist') {
+            let statusPillHtml = '<span class="live-pill neutral">بدون مأموریت فعال</span>';
+            let secondaryPillHtml = '';
+            if (hasChecklist) {
+              if (checkedCount === 0) {
+                statusPillHtml = '<span class="live-pill teal">مأموریت جدید دارد ✨</span>';
+                secondaryPillHtml = '<span class="live-pill neutral">' + toFa(totalChecklistItems) + ' مورد</span>';
+              } else if (checkedCount >= totalChecklistItems) {
+                statusPillHtml = '<span class="live-pill emerald">' + toFa(checkedCount) + ' از ' + toFa(totalChecklistItems) + ' انجام شد ✓</span>';
+              } else {
+                statusPillHtml = '<span class="live-pill teal">' + toFa(checkedCount) + ' از ' + toFa(totalChecklistItems) + ' انجام شد</span>';
               }
-
-              return `
-                <button type="button" class="folder-card theme-checklist" data-open-folder="checklist">
-                  <div class="folder-top">
-                    <div class="folder-icon" aria-hidden="true">${escapeHtml(mod.icon)}</div>
-                    <div class="folder-arrow" aria-hidden="true">←</div>
-                  </div>
-                  <h2 class="folder-title">${escapeHtml(mod.title)}</h2>
-                  <p class="folder-subtitle">${escapeHtml(mod.subtitle)}</p>
-                  <div class="folder-badges">
-                    ${statusPillHtml}
-                    ${secondaryPillHtml}
-                  </div>
-                </button>
-              `;
             }
+            return (
+              '<button type="button" class="folder-card theme-checklist" data-open-folder="checklist">' +
+                '<div class="folder-top">' +
+                  '<div class="folder-icon" aria-hidden="true">' + escapeHtml(mod.icon) + '</div>' +
+                  '<div class="folder-top-left">' + newBadgeHtml + '<div class="folder-arrow" aria-hidden="true">←</div></div>' +
+                '</div>' +
+                '<h2 class="folder-title">' + escapeHtml(mod.title) + '</h2>' +
+                '<p class="folder-subtitle">' + escapeHtml(mod.subtitle) + '</p>' +
+                '<div class="folder-badges">' + statusPillHtml + secondaryPillHtml + '</div>' +
+              '</button>'
+            );
+          }
 
-            return '';
-          })
-          .join('');
+          if (mod.path) {
+            return (
+              '<a href="' + escapeHtml(mod.path) + '" class="folder-card theme-games">' +
+                '<div class="folder-top">' +
+                  '<div class="folder-icon" aria-hidden="true">' + escapeHtml(mod.icon) + '</div>' +
+                  '<div class="folder-top-left">' + newBadgeHtml + '<div class="folder-arrow" aria-hidden="true">←</div></div>' +
+                '</div>' +
+                '<h2 class="folder-title">' + escapeHtml(mod.title) + '</h2>' +
+                '<p class="folder-subtitle">' + escapeHtml(mod.subtitle) + '</p>' +
+              '</a>'
+            );
+          }
+          return '';
+        }).join('');
+      }
+
+      /* Universal Game Progress Renderer (units | score | completion) */
+      function buildGameProgressBoxHtml(stats) {
+        if (stats.mode === 'score') {
+          const scoreText = stats.score > 0 ? (toFa(stats.score) + ' ' + escapeHtml(stats.unitLabel)) : ('۰ ' + escapeHtml(stats.unitLabel));
+          const hasTarget = stats.totalUnits > 0;
+          return (
+            '<div class="game-progress-box">' +
+              '<div class="progress-header ' + (hasTarget ? '' : 'no-bar') + '">' +
+                '<span class="progress-count">رکورد فعلی: ' + scoreText + '</span>' +
+                (hasTarget ? '<span class="progress-pct">' + toFa(stats.pct) + '٪</span>' : '<span class="progress-pct">' + (stats.score > 0 ? 'ثبت شده' : 'آماده شروع') + '</span>') +
+              '</div>' +
+              (hasTarget ? '<div class="progress-track" role="progressbar" aria-valuenow="' + stats.pct + '" aria-valuemin="0" aria-valuemax="100"><div class="progress-fill" style="width:' + stats.pct + '%;"></div></div>' : '') +
+            '</div>'
+          );
+        }
+
+        if (stats.mode === 'completion') {
+          return (
+            '<div class="game-progress-box">' +
+              '<div class="progress-header no-bar">' +
+                '<span class="progress-count">وضعیت</span>' +
+                '<span class="' + (stats.finishedGame ? 'done-tag' : 'live-pill neutral') + '">' + (stats.finishedGame ? 'تکمیل شد 🏆' : 'آماده شروع') + '</span>' +
+              '</div>' +
+            '</div>'
+          );
+        }
+
+        const countText = stats.totalUnits > 0
+          ? (toFa(stats.completedUnits) + ' از ' + toFa(stats.totalUnits) + ' ' + escapeHtml(stats.unitLabel))
+          : (toFa(stats.completedUnits) + ' ' + escapeHtml(stats.unitLabel));
+        return (
+          '<div class="game-progress-box">' +
+            '<div class="progress-header">' +
+              '<span class="progress-count">' + countText + '</span>' +
+              '<span class="progress-pct">' + toFa(stats.pct) + '٪</span>' +
+            '</div>' +
+            '<div class="progress-track" role="progressbar" aria-valuenow="' + stats.pct + '" aria-valuemin="0" aria-valuemax="100">' +
+              '<div class="progress-fill" style="width:' + stats.pct + '%;"></div>' +
+            '</div>' +
+          '</div>'
+        );
       }
 
       function renderGamesFolder() {
@@ -2729,95 +1803,51 @@
 
         const visibleGames = getVisibleGames();
         const activeGames = getActiveVisibleGames();
-        const ageGroup = (state.classInfo && state.classInfo.ageGroup) || '12-15';
-
         els.gamesInnerCountPill.textContent = toFa(activeGames.length) + ' بازی فعال';
 
         if (visibleGames.length === 0) {
-          els.gamesGrid.innerHTML =
-            '<div class="glass-card empty-state-card" style="grid-column: 1 / -1;"><div class="empty-state-icon" style="background: var(--gold-soft); border-color: var(--gold-border);">🎮</div><p class="empty-state-title">هنوز بازی فعالی برای این کلاس باز نشده است.</p></div>';
+          els.gamesGrid.innerHTML = '<div class="glass-card empty-state-card" style="grid-column:1/-1;"><div class="empty-state-icon" style="background:var(--gold-soft);border-color:var(--gold-border);">🎮</div><p class="empty-state-title">هنوز بازی فعالی برای این کلاس باز نشده است.</p></div>';
           return;
         }
 
-        els.gamesGrid.innerHTML = visibleGames
-          .map((game) => {
-            const title = escapeHtml(game.title || game.name || 'بازی');
-            const desc = escapeHtml(game.description || game.desc || '');
-            const category = escapeHtml(game.category || 'داستان تعاملی');
-            const icon = escapeHtml(game.icon || (game.status === 'soon' ? '🔒' : '🧭'));
+        els.gamesGrid.innerHTML = visibleGames.map((game) => {
+          const title = escapeHtml(game.title || 'بازی');
+          const desc = escapeHtml(game.description || '');
+          const category = escapeHtml(game.category || 'داستان تعاملی');
+          const icon = escapeHtml(game.icon || (game.status === 'soon' ? '🔒' : '🧭'));
+          const newBadgeHtml = game.isNew ? '<span class="new-badge">✨ جدید</span>' : '';
 
-            if (game.status === 'soon') {
-              return `
-                <article class="game-card soon-game" aria-disabled="true">
-                  <div class="game-top">
-                    <div class="game-icon" aria-hidden="true">${icon}</div>
-                    <div class="game-badges">
-                      <span class="cat-tag">${category}</span>
-                    </div>
-                  </div>
-                  <h3 class="game-title">${title}</h3>
-                  <p class="game-desc">${desc || 'این بخش به‌زودی برای کلاس شما فعال می‌شود.'}</p>
-                  <div class="soon-locked-pill">🔒 به‌زودی باز می‌شود</div>
-                </article>
-              `;
-            }
+          if (game.status === 'soon') {
+            return (
+              '<article class="game-card soon-game" aria-disabled="true">' +
+                '<div class="game-top"><div class="game-icon" aria-hidden="true">' + icon + '</div><div class="game-badges">' + newBadgeHtml + '<span class="cat-tag">' + category + '</span></div></div>' +
+                '<h3 class="game-title">' + title + '</h3>' +
+                '<p class="game-desc">' + (desc || 'این بخش به‌زودی برای کلاس شما فعال می‌شود.') + '</p>' +
+                '<div class="soon-locked-pill">🔒 به‌زودی باز می‌شود</div>' +
+              '</article>'
+            );
+          }
 
-            const stats = computeStudentGameStats(state.student, game);
-            const hasTeacherQ = hasCustomQuestionsForGame(game.id);
+          const stats = computeStudentGameStats(state.student, game);
+          const hasTeacherQ = hasCustomQuestionsForGame(game.id);
+          const gameUrl = buildGameUrl(game);
+          const ctaText = stats.finishedGame ? 'مرور دوباره بازی' : (stats.started ? 'ادامه بازی ←' : 'شروع بازی ←');
+          const ctaClass = stats.finishedGame ? 'btn-teal' : 'btn-gold';
 
-            // Exact URL structure preserved for 100% compatibility with games/saleh & games/noah
-            const gameUrl =
-              String(game.path || '#') +
-              '?class=' + encodeURIComponent(state.classId) +
-              '&sid=' + encodeURIComponent(state.student.studentId) +
-              '&sname=' + encodeURIComponent(state.student.studentName) +
-              '&gid=' + encodeURIComponent(game.id) +
-              '&age=' + encodeURIComponent(ageGroup);
-
-            const countText =
-              stats.totalUnits > 0
-                ? `${toFa(stats.completedStations)} از ${toFa(stats.totalUnits)} ${escapeHtml(stats.unitLabel)}`
-                : `${toFa(stats.completedStations)} ${escapeHtml(stats.unitLabel)}`;
-
-            const ctaText = stats.finishedGame
-              ? 'مرور دوباره بازی'
-              : stats.completedStations > 0
-              ? 'ادامه بازی ←'
-              : 'شروع بازی ←';
-
-            const ctaClass = stats.finishedGame ? 'btn-teal' : 'btn-gold';
-
-            return `
-              <article class="game-card active-game ${stats.finishedGame ? 'completed-game' : ''}">
-                <div class="game-top">
-                  <div class="game-icon" aria-hidden="true">${icon}</div>
-                  <div class="game-badges">
-                    <span class="cat-tag">${category}</span>
-                    ${stats.finishedGame ? '<span class="done-tag">تکمیل شد 🏆</span>' : ''}
-                  </div>
-                </div>
-
-                <h3 class="game-title">${title}</h3>
-                <p class="game-desc">${desc}</p>
-                ${hasTeacherQ ? '<div class="teacher-challenge-tag">✨ همراه با پرسش اختصاصی مربی</div>' : ''}
-
-                <div class="game-progress-box">
-                  <div class="progress-header">
-                    <span class="progress-count">${countText}</span>
-                    <span class="progress-pct">${toFa(stats.pct)}٪</span>
-                  </div>
-                  <div class="progress-track" role="progressbar" aria-valuenow="${stats.pct}" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-fill" style="width: ${stats.pct}%;"></div>
-                  </div>
-                </div>
-
-                <a href="${escapeHtml(gameUrl)}" class="btn ${ctaClass}" style="width: 100%;">
-                  ${ctaText}
-                </a>
-              </article>
-            `;
-          })
-          .join('');
+          return (
+            '<article class="game-card active-game ' + (stats.finishedGame ? 'completed-game' : '') + '">' +
+              '<div class="game-top">' +
+                '<div class="game-icon" aria-hidden="true">' + icon + '</div>' +
+                '<div class="game-badges">' + newBadgeHtml + '<span class="cat-tag">' + category + '</span>' + (stats.finishedGame ? '<span class="done-tag">تکمیل شد 🏆</span>' : '') + '</div>' +
+              '</div>' +
+              '<h3 class="game-title">' + title + '</h3>' +
+              '<p class="game-desc">' + desc + '</p>' +
+              (hasTeacherQ ? '<div class="teacher-challenge-tag">✨ همراه با پرسش اختصاصی مربی</div>' : '') +
+              buildGameProgressBoxHtml(stats) +
+              '<a href="' + escapeHtml(gameUrl) + '" class="btn ' + ctaClass + '" style="width:100%;">' + ctaText + '</a>' +
+            '</article>'
+          );
+        }).join('');
       }
 
       function setSaveStatusPill(mode, text) {
@@ -2825,9 +1855,7 @@
         els.checklistSavePill.className = 'save-status-pill ' + mode;
         els.checklistSavePill.textContent = text || '';
         if (mode === 'saved') {
-          state.savePillTimer = setTimeout(() => {
-            els.checklistSavePill.className = 'save-status-pill idle';
-          }, 2600);
+          state.savePillTimer = setTimeout(() => { els.checklistSavePill.className = 'save-status-pill idle'; }, 2600);
         }
       }
 
@@ -2838,12 +1866,7 @@
         els.checklistInnerDesc.textContent = checklistMod.subtitle;
 
         if (!state.checklist || state.checklist.items.length === 0) {
-          els.checklistBody.innerHTML = `
-            <div class="glass-card empty-state-card">
-              <div class="empty-state-icon" aria-hidden="true">✨</div>
-              <p class="empty-state-title">هنوز مأموریتی برای این هفته ثبت نشده است؛ به‌زودی اینجا قرار می‌گیرد ✨</p>
-            </div>
-          `;
+          els.checklistBody.innerHTML = '<div class="glass-card empty-state-card"><div class="empty-state-icon" aria-hidden="true">✨</div><p class="empty-state-title">هنوز مأموریتی برای این هفته ثبت نشده است؛ به‌زودی اینجا قرار می‌گیرد ✨</p></div>';
           return;
         }
 
@@ -2853,78 +1876,39 @@
         const pct = total > 0 ? Math.round((doneCount / total) * 100) : 0;
         const allDone = total > 0 && doneCount === total;
 
-        const itemsHtml = state.checklist.items
-          .map((item) => {
-            const isChecked = checkedSet.has(item.id);
-            return `
-              <button
-                type="button"
-                class="check-card ${isChecked ? 'is-checked' : ''}"
-                role="checkbox"
-                aria-checked="${isChecked ? 'true' : 'false'}"
-                data-item-id="${escapeHtml(item.id)}"
-              >
-                <span class="check-box" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </span>
-                <span class="check-text">${escapeHtml(item.text)}</span>
-              </button>
-            `;
-          })
-          .join('');
+        const itemsHtml = state.checklist.items.map((item) => {
+          const isChecked = checkedSet.has(item.id);
+          return (
+            '<button type="button" class="check-card ' + (isChecked ? 'is-checked' : '') + '" role="checkbox" aria-checked="' + (isChecked ? 'true' : 'false') + '" data-item-id="' + escapeHtml(item.id) + '"' + (state.checklistBusy ? ' disabled' : '') + '>' +
+              '<span class="check-box" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>' +
+              '<span class="check-text">' + escapeHtml(item.text) + '</span>' +
+            '</button>'
+          );
+        }).join('');
 
-        els.checklistBody.innerHTML = `
-          <div class="glass-card mission-summary-card">
-            <div class="mission-title-row">
-              <div>
-                <h3 class="mission-title">${escapeHtml(state.checklist.title)}</h3>
-                ${state.checklist.description ? `<p class="mission-desc">${escapeHtml(state.checklist.description)}</p>` : ''}
-              </div>
-            </div>
-
-            <div class="mission-progress-meta">
-              <span class="mission-progress-label">${toFa(doneCount)} از ${toFa(total)} مورد انجام شد</span>
-              <span class="mission-progress-pct">${toFa(pct)}٪</span>
-            </div>
-            <div class="progress-track" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100">
-              <div class="mission-progress-fill" style="width: ${pct}%;"></div>
-            </div>
-          </div>
-
-          ${
-            allDone
-              ? `
-            <div class="all-done-banner" role="status">
-              <div class="all-done-icon" aria-hidden="true">🌟</div>
-              <div class="all-done-text">
-                <strong>آفرین! تمام موارد مأموریت این هفته را با موفقیت انجام دادی.</strong>
-                <span>پیشرفتت برای مربی ثبت شد؛ همین مسیر عالی را ادامه بده.</span>
-              </div>
-            </div>
-          `
-              : ''
-          }
-
-          <div class="checklist-items">
-            ${itemsHtml}
-          </div>
-        `;
+        els.checklistBody.innerHTML =
+          '<div class="glass-card mission-summary-card">' +
+            '<div class="mission-title-row"><div><h3 class="mission-title">' + escapeHtml(state.checklist.title) + '</h3>' +
+            (state.checklist.description ? '<p class="mission-desc">' + escapeHtml(state.checklist.description) + '</p>' : '') +
+            '</div></div>' +
+            '<div class="mission-progress-meta"><span class="mission-progress-label">' + toFa(doneCount) + ' از ' + toFa(total) + ' مورد انجام شد</span><span class="mission-progress-pct">' + toFa(pct) + '٪</span></div>' +
+            '<div class="progress-track" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100"><div class="mission-progress-fill" style="width:' + pct + '%;"></div></div>' +
+          '</div>' +
+          (allDone ? '<div class="all-done-banner" role="status"><div class="all-done-icon" aria-hidden="true">🌟</div><div class="all-done-text"><strong>آفرین! تمام موارد مأموریت این هفته را با موفقیت انجام دادی.</strong><span>پیشرفتت برای مربی ثبت شد؛ همین مسیر عالی را ادامه بده.</span></div></div>' : '') +
+          '<div class="checklist-items">' + itemsHtml + '</div>';
       }
 
       async function handleChecklistToggle(itemId) {
-        if (!state.checklist || !state.student) return;
-
+        if (!state.checklist || !state.student || state.checklistBusy) return;
         const exists = state.checkedIds.includes(itemId);
-        const nextCheckedIds = exists
-          ? state.checkedIds.filter((id) => id !== itemId)
-          : state.checkedIds.concat(itemId);
+        const nextCheckedIds = exists ? state.checkedIds.filter((id) => id !== itemId) : state.checkedIds.concat(itemId);
 
-        // Optimistic UI update
+        state.checklistBusy = true;
         state.checkedIds = nextCheckedIds;
         const myVersion = ++state.checklistSaveVersion;
 
         renderChecklistFolder();
-        renderFoldersGrid();
+        renderHub();
         setSaveStatusPill('saving', 'در حال ذخیره...');
 
         try {
@@ -2936,29 +1920,27 @@
           }
         } catch (_) {
           if (myVersion === state.checklistSaveVersion) {
-            // Rollback optimistic change on network/server failure
             state.checkedIds = state.lastConfirmedCheckedIds.slice();
-            renderChecklistFolder();
-            renderFoldersGrid();
             setSaveStatusPill('error', 'خطا در ذخیره');
             showToast('خطا در ذخیره تیک؛ اتصال اینترنت را بررسی کن.', true);
           }
+        } finally {
+          state.checklistBusy = false;
+          renderChecklistFolder();
+          renderHub();
         }
       }
 
-      /* ============ Event Listeners ============ */
+      /* Event Listeners */
       els.classCodeInput.addEventListener('input', () => {
         const normalized = normalizeCodeInput(els.classCodeInput.value);
-        if (els.classCodeInput.value !== normalized) {
-          els.classCodeInput.value = normalized;
-        }
-        if (els.classCodeError.textContent) {
-          els.classCodeError.textContent = '';
-        }
+        if (els.classCodeInput.value !== normalized) els.classCodeInput.value = normalized;
+        if (els.classCodeError.textContent) els.classCodeError.textContent = '';
       });
 
-      els.classCodeForm.addEventListener('submit', (e) => {
+      els.classCodeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        if (state.isLoadingEntry) return;
         const code = normalizeCodeInput(els.classCodeInput.value);
         els.classCodeInput.value = code;
         if (!code) {
@@ -2967,17 +1949,23 @@
           return;
         }
         els.classCodeError.textContent = '';
-        setUrlClassParam(code);
-        loadClass(code);
+        state.isLoadingEntry = true;
+        const prevBtnHtml = els.entrySubmitBtn.innerHTML;
+        els.entrySubmitBtn.disabled = true;
+        els.entrySubmitBtn.innerHTML = '<span>در حال ورود...</span>';
+        try {
+          setUrlClassParam(code);
+          await loadClass(code);
+        } finally {
+          state.isLoadingEntry = false;
+          els.entrySubmitBtn.disabled = false;
+          els.entrySubmitBtn.innerHTML = prevBtnHtml;
+        }
       });
 
       els.retryBtn.addEventListener('click', () => {
-        if (state.classId) {
-          loadClass(state.classId);
-        } else {
-          setUrlClassParam('');
-          showEntryScreen('');
-        }
+        if (state.classId) loadClass(state.classId);
+        else { setUrlClassParam(''); showEntryScreen(''); }
       });
 
       function handleSwitchClass() {
@@ -2985,112 +1973,87 @@
         showEntryScreen('');
       }
 
+      els.changeClassFromClosedBtn.addEventListener('click', handleSwitchClass);
       els.changeClassFromErrorBtn.addEventListener('click', handleSwitchClass);
       els.switchClassFromIdentityBtn.addEventListener('click', handleSwitchClass);
       els.switchClassFooterBtn.addEventListener('click', handleSwitchClass);
-
-      els.cancelIdentityBtn.addEventListener('click', () => {
-        if (state.student) {
-          showView('hall');
-        }
-      });
+      els.cancelIdentityBtn.addEventListener('click', () => { if (state.student) showView('hall'); });
 
       els.studentsListGrid.addEventListener('click', (e) => {
         const tile = e.target.closest('.student-tile');
         if (!tile) return;
-        const sid = tile.getAttribute('data-sid');
-        const sname = tile.getAttribute('data-sname');
-        if (!sid || !sname) return;
-        selectStudent(sid, sname);
+        const sid = tile.getAttribute('data-sid'), sname = tile.getAttribute('data-sname');
+        if (sid && sname) selectStudent(sid, sname);
       });
 
       els.toggleGuestBtn.addEventListener('click', () => {
         const isNowOpen = els.guestPanel.classList.toggle('hidden') === false;
-        if (isNowOpen) {
-          setTimeout(() => els.guestNameInput.focus(), 40);
-        }
+        if (isNowOpen) setTimeout(() => els.guestNameInput.focus(), 40);
       });
 
       els.guestForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const guestName = els.guestNameInput.value.trim();
+        const guestName = normFa(els.guestNameInput.value);
         if (guestName.length < 2) {
           els.guestError.textContent = 'لطفاً نام خود را کامل‌تر بنویس (حداقل ۲ حرف).';
           els.guestNameInput.focus();
           return;
         }
         els.guestError.textContent = '';
-        // Compatible guest studentId format
+        els.guestSubmitBtn.disabled = true;
         const guestId = 'g_' + Date.now();
         selectStudent(guestId, guestName);
+        els.guestSubmitBtn.disabled = false;
       });
 
-      els.changeNameBtn.addEventListener('click', () => {
-        openIdentityScreen(Boolean(state.student));
-      });
+      els.changeNameBtn.addEventListener('click', () => openIdentityScreen(Boolean(state.student)));
+      els.refreshHallBtn.addEventListener('click', () => refreshHallData(true, true));
 
-      els.refreshHallBtn.addEventListener('click', () => {
-        refreshHallData(true);
-      });
-
-      els.foldersGrid.addEventListener('click', (e) => {
-        const card = e.target.closest('[data-open-folder]');
-        if (!card) return;
-        const folderId = card.getAttribute('data-open-folder');
-        if (folderId === 'games' || folderId === 'checklist') {
-          openFolder(folderId);
+      els.sectionHub.addEventListener('click', (e) => {
+        const dismissBtn = e.target.closest('[data-dismiss-ann]');
+        if (dismissBtn) {
+          const annId = dismissBtn.getAttribute('data-dismiss-ann');
+          try { localStorage.setItem(ANN_DISMISS_PREFIX + annId, '1'); } catch (_) {}
+          renderAnnouncementBanner();
+          return;
+        }
+        const folderBtn = e.target.closest('[data-open-folder]');
+        if (folderBtn) {
+          const folderId = folderBtn.getAttribute('data-open-folder');
+          if (folderId === 'games' || folderId === 'checklist') openFolder(folderId, true);
         }
       });
 
       document.querySelectorAll('[data-back-to="hub"]').forEach((btn) => {
-        btn.addEventListener('click', () => openFolder('hub'));
+        btn.addEventListener('click', () => openFolder('hub', true));
       });
 
       els.checklistBody.addEventListener('click', (e) => {
         const card = e.target.closest('.check-card[data-item-id]');
-        if (!card) return;
+        if (!card || card.disabled) return;
         const itemId = card.getAttribute('data-item-id');
-        if (!itemId) return;
-        handleChecklistToggle(itemId);
+        if (itemId) handleChecklistToggle(itemId);
       });
 
       window.addEventListener('popstate', () => {
         const code = getClassIdFromUrl();
-        if (code) {
-          loadClass(code);
-        } else {
-          showEntryScreen('');
-        }
+        if (code) loadClass(code);
+        else showEntryScreen('');
       });
 
-      // Auto-refresh progress when returning from games/saleh or games/noah
       window.addEventListener('pageshow', (event) => {
         if (!state.classId) return;
-        if (event.persisted) {
-          refreshHallData(false);
-        } else if (state.hasLoadedClass) {
-          refreshHallData(false);
-        }
+        if (event.persisted || state.hasLoadedClass) refreshHallData(false, false);
       });
 
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && state.classId && state.hasLoadedClass) {
-          refreshHallData(false);
-        }
+        if (document.visibilityState === 'visible' && state.classId && state.hasLoadedClass) refreshHallData(false, false);
       });
 
-      /* ============ Boot ============ */
-      function init() {
-        applyBranding();
-        const initialCode = getClassIdFromUrl();
-        if (initialCode) {
-          loadClass(initialCode);
-        } else {
-          showEntryScreen('');
-        }
-      }
-
-      init();
+      applyBranding();
+      const initialCode = getClassIdFromUrl();
+      if (initialCode) loadClass(initialCode);
+      else showEntryScreen('');
     })();
   </script>
 </body>
